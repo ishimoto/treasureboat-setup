@@ -1,0 +1,963 @@
+//
+// ${entity.prefixClassNameWithoutPackage}.java
+//
+// DO NOT EDIT.
+// Make changes to ${entity.classNameWithOptionalPackage}.java instead.
+//
+// Version: 10.4
+//
+//   ╔╦╗┬─┐┌─┐┌─┐┌─┐┬ ┬┬─┐┌─┐╔╗ ┌─┐┌─┐┌┬┐
+//    ║ ├┬┘├┤ ├─┤└─┐│ │├┬┘├┤ ╠╩╗│ │├─┤ │
+//    ╩ ┴└─└─┘┴ ┴└─┘└─┘┴└─└─┘╚═╝└─┘┴ ┴ ┴
+//
+// 2008-2024 by TreasureBoat.org
+//
+// Thanks to : _plotters_, pyu13821, dochalliday, _fdonadio_, swklein, markgowdy, ishimoto
+// Thanks to : KiramRahim-Elemental, Daniel Ferguson, John Girvin, Martha Laundy-Blair
+// What a great Team.
+//
+
+//@formatter:off
+
+#if (!$entity.partialEntitySet)
+/*
+ * The following List is for Localization :
+ * ----------------------------------------
+
+  "Pages.Query${entity.classNameWithOptionalPackage}" = "Query ${entity.classNameWithOptionalPackage}";
+  "Pages.List${entity.classNameWithOptionalPackage}" = "List ${entity.classNameWithOptionalPackage}";
+  "Pages.Inspect${entity.classNameWithOptionalPackage}" = "Inspect ${entity.classNameWithOptionalPackage}";
+  "Pages.Edit${entity.classNameWithOptionalPackage}" = "Edit ${entity.classNameWithOptionalPackage}";
+  "Pages.Create${entity.classNameWithOptionalPackage}" = "Create ${entity.classNameWithOptionalPackage}";
+
+  "Pages.QueryEmbedded${entity.classNameWithOptionalPackage}" = "Query Embedded ${entity.classNameWithOptionalPackage}";
+  "Pages.ListEmbedded${entity.classNameWithOptionalPackage}" = "List Embedded ${entity.classNameWithOptionalPackage}";
+  "Pages.InspectEmbedded${entity.classNameWithOptionalPackage}" = "Inspect Embedded ${entity.classNameWithOptionalPackage}";
+  "Pages.EditEmbedded${entity.classNameWithOptionalPackage}" = "Edit Embedded ${entity.classNameWithOptionalPackage}";
+  "Pages.CreateEmbedded${entity.classNameWithOptionalPackage}" = "Create Embedded ${entity.classNameWithOptionalPackage}";
+
+#foreach ($attribute in $entity.sortedClassAttributes)
+  "PropertyKey.${entity.classNameWithOptionalPackage}.${attribute.name}" = "$attribute.name";
+#end
+
+#foreach ($relationship in $entity.sortedClassRelationships)
+  "PropertyKey.${entity.classNameWithOptionalPackage}.${relationship.name}" = "$relationship.name";
+#end
+ * ----------------------------------------
+ */
+
+/*
+ * The following List is for Sangria :
+ * ----------------------------------------
+
+  200 : EN = '#' => crud = "0100" [Assignment]
+  600 : PC = 'EditRelationshipEmbedded#' => cruds = "00001" [Assignment]
+
+  401 : PC = 'Query#' => DPK = ("[MainTab]", "(MainSection)"#foreach ($attribute in $entity.sortedClassAttributes), "$attribute.name"#end#foreach($relationship in $entity.sortedClassRelationships), "$relationship.name" #end) [Assignment]
+  402 : PC = 'List#' => DPK = ("[MainTab]", "(MainSection)"#foreach ($attribute in $entity.sortedClassAttributes), "$attribute.name"#end#foreach($relationship in $entity.sortedClassRelationships), "$relationship.name" #end) [Assignment]
+  403 : PC = 'Inspect#' => DPK = ("[MainTab]", "(MainSection)"#foreach ($attribute in $entity.sortedClassAttributes), "$attribute.name"#end#foreach($relationship in $entity.sortedClassRelationships), "$relationship.name" #end) [Assignment]
+  404 : PC = 'Edit#' => DPK = ("[MainTab]", "(MainSection)"#foreach ($attribute in $entity.sortedClassAttributes), "$attribute.name"#end#foreach($relationship in $entity.sortedClassRelationships), "$relationship.name" #end) [Assignment]
+  405 : PC = 'Create#' => DPK = ("[MainTab]", "(MainSection)"#foreach ($attribute in $entity.sortedClassAttributes), "$attribute.name"#end#foreach($relationship in $entity.sortedClassRelationships), "$relationship.name" #end) [Assignment]
+
+ * ----------------------------------------
+ */
+#end
+
+#if ($entity.superclassPackageName)
+package ${entity.superclassPackageName};
+
+#end
+import ${entity.superclassPackageName}.${entity.classNameWithOptionalPackage};
+
+import java.util.*;
+
+import org.treasureboat.enterprise.eof.TBEnterpriseSortOrdering;
+import org.treasureboat.enterprise.eof.convert.TBEnterpriseConverter;
+import org.treasureboat.enterprise.eof.ITBEnterpriseObject;
+import org.treasureboat.enterprise.eof.TBEnterpriseClassDescription;
+import org.treasureboat.enterprise.eof.TBEnterpriseExternalPrimaryKeyHelper;
+import org.treasureboat.enterprise.eof.TBEnterpriseGenericRecord;
+import org.treasureboat.enterprise.eof.ec.TBEnterpriseEditingContext;
+import org.treasureboat.enterprise.eof.fetch.TBEnterpriseFetchSpecification;
+import org.treasureboat.enterprise.eof.delete.ITBEnterpriseVirtualDeleteSupport;
+import org.treasureboat.enterprise.eof.gid.TBEnterpriseAbstractGlobalID;
+import org.treasureboat.enterprise.eof.qualifiers.TBEnterpriseQualifier;
+import org.treasureboat.enterprise.qualifiers.TBEnterpriseAndQualifier;
+import org.treasureboat.enterprise.validation.TBEnterpriseValidation;
+import org.treasureboat.foundation.TBFData;
+import org.treasureboat.foundation.TBFString;
+import org.treasureboat.foundation.array.TBFArray;
+import org.treasureboat.foundation.array.TBFMutableArray;
+import org.treasureboat.foundation.crypting.TBFStrongTextEncryptor;
+import org.treasureboat.foundation.date.TBFZonedDateTime;
+import org.treasureboat.foundation.exception.TBFIllegalStateException;
+import org.treasureboat.foundation.security.TBFAccessPermission;
+import org.treasureboat.webcore.appserver.TBSession;
+import org.treasureboat.webcore.concurrency.TBWConcurrencyUtilities;
+import org.treasureboat.webcore.markdown.TBWMarkdown;
+import org.treasureboat.webcore.override.core.TBWCoreQualifierBase;
+import org.treasureboat.webcore.security.TBWFieldEncryption;
+import org.treasureboat.webcore.security.domain.ITBWDomain;
+import org.treasureboat.webcore.security.domain.TBWMultiDomainSupport;
+import org.treasureboat.webcore.security.grant.TBWGrantAccess;
+
+// Logic : TBEnterpriseCopyable
+#set ($importClass = "")
+#if(${entity.copyType})
+import org.treasureboat.enterprise.eof.TBEnterpriseCopyable;
+#set ($importClass = "TBEnterpriseCopyable<${entity.classNameWithOptionalPackage}>")
+#end
+
+// Logic : TBTag
+#if(${entity.tag})
+import org.treasureboat.tag.TBTag;
+import org.treasureboat.tag.eo.TBTagConnection;
+import org.treasureboat.tag.eo.TBTagStore;
+import org.treasureboat.tag.eo._TBTagConnection;
+import org.treasureboat.enterprise.tag.ITBEnterpriseTagHelper;
+#if(${importClass} != "") #set ($importClass = $importClass + ", ITBEnterpriseTagHelper") #end
+#if(${importClass} == "") #set ($importClass = "ITBEnterpriseTagHelper") #end
+#end
+
+// Logic : ITBEnterpriseStampedEnterpriseObject Support
+#set ($stampedEO = "")
+#foreach ($attribute in $entity.sortedAttributes)
+#if(${attribute.name} == "created") #set ($stampedEO = $stampedEO + "x") #end
+#if(${attribute.name} == "lastModified") #set ($stampedEO = $stampedEO + "x") #end
+#if(${attribute.name} == "idCreatedBy") #set ($stampedEO = $stampedEO + "x") #end
+#if(${attribute.name} == "idLastModifiedBy") #set ($stampedEO = $stampedEO + "x") #end
+#end
+#foreach ($relationship in $entity.sortedClassRelationships)
+#if(${relationship.name} == "createdBy") #set ($stampedEO = $stampedEO + "x") #end
+#if(${relationship.name} == "lastModifiedBy") #set ($stampedEO = $stampedEO + "x") #end
+#end
+#if(${stampedEO} == "xxxxxx") 
+#if(${importClass} != "") #set ($importClass = $importClass + ", ITBEnterpriseStampedEnterpriseObject") #end
+#if(${importClass} == "") #set ($importClass = "ITBEnterpriseStampedEnterpriseObject") #end
+import org.treasureboat.enterprise.eof.stamp.ITBEnterpriseStampedEnterpriseObject;
+#end
+
+// Final Logic
+#if(${importClass} != "") #set ($importClass = "implements " + $importClass) #end
+
+// Imports
+import org.treasureboat.enterprise.foundation.TBEnterpriseUtilities;
+import org.treasureboat.enterprise.eof.gid.TBEnterpriseKeyGlobalID;
+import org.treasureboat.enterprise.model.TBEntity;
+import org.treasureboat.enterprise.model.TBKey;
+import org.treasureboat.enterprise.qualifiers.TBEnterpriseAndQualifier;
+import org.treasureboat.enterprise.qualifiers.TBEnterpriseKeyValueQualifier;
+import org.treasureboat.enterprise.validation.TBEnterpriseValidationException;
+import org.treasureboat.foundation.dic.TBFDictionary;
+import org.treasureboat.foundation.dic.TBFMutableDictionary;
+import org.treasureboat.foundation.validation.ITBFValidation;
+
+#if ($entity.parentSet)
+    #set ($parentClass = ${entity.parent.classNameWithDefault})
+    #set ($parentClazzClass = "${entity.parent.classNameWithDefault}.${entity.parent.classNameWithoutPackage}Clazz<T>")
+#else
+    #set ($parentClass = "TBEnterpriseGenericRecord")
+    #set ($parentClazzClass = "TBEnterpriseGenericRecord.TBEnterpriseGenericRecordClazz<T>")
+#end
+@SuppressWarnings("all")
+public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($entity.parentClassNameSet)${entity.parentClassName}#elseif ($entity.partialEntitySet)org.treasureboat.enterprise.partials.TBEnterprisePartial<${entity.partialEntity.className}>#elseif ($entity.parentSet)${entity.parent.classNameWithDefault}#else TBEnterpriseGenericRecord#end $importClass {
+
+  private static final long serialVersionUID = 1L;
+
+#if (!$entity.partialEntitySet)
+  //********************************************************************
+  //  Constructor : コンストラクター
+  //********************************************************************
+
+  public ${entity.prefixClassNameWithoutPackage}() {
+    addFetchSpecificationToEntity();
+  }
+
+  //********************************************************************
+  //  D2W Fetchspecification : D2W 用フェッチ・スペシフィケーション
+  //********************************************************************
+
+  /** 
+   * add FetchSpecifications that are coming from the EO Model<br>
+   * エンティティにフェッチ・スペシフィケーションを追加バインディングします 
+   */
+  public void addFetchSpecificationToEntity() {
+    if(_addFetchSpecificationToEntity == null) {
+      addFetchSpecification();
+      _addFetchSpecificationToEntity = Boolean.TRUE;
+    }
+  }
+  private static Boolean _addFetchSpecificationToEntity = null;
+  
+  protected void addFetchSpecification() {}
+ #end 
+  
+  //********************************************************************
+  //  Entity : エンティティ
+  //********************************************************************
+  
+#if ($entity.partialEntitySet)
+  /** Entity Name = $entity.partialEntity.name */
+  public static final String ENTITY_NAME = "$entity.partialEntity.name";
+#else
+  /** Entity Name = $entity.name */
+  public static final String ENTITY_NAME = "$entity.name";
+#end
+
+#if (!$entity.partialEntitySet)
+  //********************************************************************
+  //  Access Properties : アクセス・プロパティ
+  //********************************************************************
+  
+  protected static final String ACCSESS_CREATE = "${entity.name}.create";
+  protected static final String ACCSESS_READ = "${entity.name}.read";
+  protected static final String ACCSESS_UPDATE = "${entity.name}.update";
+  protected static final String ACCSESS_DELETE = "${entity.name}.delete";
+
+  /**
+   * you can override, TBWGrantAccess or use the role system
+   *
+   * @return true if it allowed to create Data
+   */
+  public static boolean canCreate() {
+    // Check Grant for Batch Processing
+    if(TBWGrantAccess.isEntityGrantForCreate(ENTITY_NAME)) {
+      return true;
+    }
+    return TBFAccessPermission.instance().can(ACCSESS_CREATE);
+  }
+
+  /**
+   * you can override or use the role system
+   *
+   * @return true if it allowed to read Data
+   */
+  public boolean canRead() {
+    return TBFAccessPermission.instance().can(ACCSESS_READ);
+  }
+  
+  /** 
+   * you can override, TBWGrantAccess or use the role system
+   *
+   * @return true if it allowed to update Data
+   */
+  @Override
+  public boolean canUpdate() {
+    // Check Grant for Batch Processing
+    if(TBWGrantAccess.isEntityGrantForUpdate(ENTITY_NAME)) {
+      return true;
+    }
+    return TBFAccessPermission.instance().can(ACCSESS_UPDATE);
+  }
+  
+  /** 
+   * you can override, TBWGrantAccess or use the role system
+   *
+   * @return true if it allowed to delete Data
+   */
+  @Override
+  public boolean canDelete() {
+    // Check Grant for Batch Processing
+    if(TBWGrantAccess.isEntityGrantForDelete(ENTITY_NAME)) {
+      return true;
+    } 
+    return TBFAccessPermission.instance().can(ACCSESS_DELETE);
+  }
+  
+  protected static final String BUTTON_INSPECT = "${entity.name}.hide.inspect";
+  protected static final String BUTTON_EDIT = "${entity.name}.hide.edit";
+  protected static final String BUTTON_DELETE = "${entity.name}.hide.delete";
+  protected static final String BUTTON_REMOVE = "${entity.name}.hide.remove";
+
+  /**
+   * this is a helper method that helps to decide to show the inspect button on a list page used in D3W, can be used in other places also
+   *
+   * @return usually return true except there is something with this object
+   */
+  @Override
+  public boolean canDisplayInspectButton() {
+    return !TBFAccessPermission.instance().can(BUTTON_INSPECT);
+  }
+
+  /**
+   * this is a helper method that helps to decide to show the edit button on a list page used in D3W, can be used in other places also
+   *
+   * @return usually returns true except there is something with this object
+   */
+  @Override
+  public boolean canDisplayEditButton() {
+    return !TBFAccessPermission.instance().can(BUTTON_EDIT);
+  }
+
+  /**
+   * this is a helper method that helps to decide to show the delete button on a list page used in D3W, can be used in other places also
+   *
+   * @return usually returns true except there is something with this object
+   */
+  @Override
+  public boolean canDisplayDeleteButton() {
+    return !TBFAccessPermission.instance().can(BUTTON_DELETE);
+  }
+
+  /**
+   * this is a helper method that helps to decide to show the remove button on a list page used in D3W, can be used in other places also
+   *
+   * @return usually returns true except there is something with this object
+   */
+  @Override
+  public boolean canDisplayRemoveButton() {
+    return !TBFAccessPermission.instance().can(BUTTON_REMOVE);
+  }
+#end
+
+  //********************************************************************
+  //  Attribute : アトリビュート
+  //********************************************************************
+
+  // Attribute Keys
+#foreach ($attribute in $entity.sortedClassAttributes)
+  public static final TBKey<$attribute.javaClassName> ${attribute.uppercaseUnderscoreName} = new TBKey<>("$attribute.name");
+#end
+
+  // Attributes
+#foreach ($attribute in $entity.sortedClassAttributes)
+  public static final String ${attribute.uppercaseUnderscoreName}_KEY = ${attribute.uppercaseUnderscoreName}.key();
+#end
+
+  //********************************************************************
+  //  Relationship : リレーションシップ
+  //********************************************************************
+
+  // Relationship Keys
+#foreach ($relationship in $entity.sortedClassRelationships)
+  public static final TBKey<$relationship.actualDestination.classNameWithDefault> ${relationship.uppercaseUnderscoreName} = new TBKey<>("$relationship.name");
+#end
+
+  // Relationships
+#foreach ($relationship in $entity.sortedClassRelationships)
+  public static final String ${relationship.uppercaseUnderscoreName}_KEY = ${relationship.uppercaseUnderscoreName}.key();
+#end
+
+#if (!$entity.partialEntitySet)
+  //********************************************************************
+  //  clazz methods : クラス・メソッド
+  //********************************************************************
+
+  public static class _${entity.classNameWithoutPackage}Clazz<T extends ${entity.classNameWithOptionalPackage}> extends ${parentClazzClass} {
+    /* more clazz methods here */
+  }
+
+	public ${entity.classNameWithOptionalPackage}.${entity.classNameWithoutPackage}Clazz clazz() {
+    return ${entity.classNameWithOptionalPackage}.clazz;
+  }
+#else
+  //********************************************************************
+  //  partial methods : 部分EOメソッド
+  //********************************************************************
+  
+  public static TBFArray<String> _partialAttributes = null;
+  public static TBFArray<String> _partialRelationships = null;
+  
+  public static TBFArray<String> partialAttributes() {
+    if ( _partialAttributes == null ) {
+      synchronized(ENTITY_NAME) {
+        TBFMutableArray<String> partialList = new TBFMutableArray<String>();
+#foreach ($attribute in $entity.sortedClassAttributes)
+        partialList.addObject( ${attribute.uppercaseUnderscoreName}_KEY );
+#end
+        _partialAttributes = partialList.immutableClone();
+      }
+    }
+    return _partialAttributes;
+  }
+
+  public static TBFArray<String> partialRelationships() {
+    if ( _partialRelationships == null ) {
+      synchronized(ENTITY_NAME) {
+        TBFMutableArray<String> partialList = new TBFMutableArray<String>();
+#foreach ($relationship in $entity.sortedClassRelationships)
+        partialList.addObject( ${relationship.uppercaseUnderscoreName}_KEY );
+#end
+        _partialRelationships = partialList.immutableClone();
+      }
+    }
+    return _partialRelationships;
+  }
+#end
+
+  //********************************************************************
+  //  Enterprise Object Override : エンタプライス・オブジェクトのオーバライド
+  //********************************************************************
+
+  @Override
+  public void willDelete() throws ITBFValidation.ValidationException {
+    super.willDelete();
+#if(${entity.tag})
+
+    /* ▼TBTag support▼ */
+    TBFArray<TBTagConnection> tagConnections = TBTag.selectedTagConnectionsForObject(editingContext(), this);
+    if (tagConnections != null || tagConnections.count() > 0) {
+      for (TBTagConnection oneTagConnection : tagConnections) {
+        oneTagConnection.delete();
+      }
+    }
+    /* ▲TBTag support▲ */
+#end
+  }
+
+  //********************************************************************
+  //  Attribute Accessor : アトリビュート・アクセス
+  //********************************************************************
+
+#foreach ($attribute in $entity.sortedClassAttributes)
+#if (!$attribute.inherited)
+#if ($attribute.userInfo.ERXConstantClassName)
+  public $attribute.userInfo.ERXConstantClassName ${attribute.name}() {
+    Number value = (Number)storedValueForKey(${attribute.uppercaseUnderscoreName}_KEY);
+    return ($attribute.userInfo.ERXConstantClassName)value;
+  }
+
+  public void set${attribute.capitalizedName}($attribute.userInfo.ERXConstantClassName value) {
+    takeStoredValueForKey(value, ${attribute.uppercaseUnderscoreName}_KEY);
+  }
+#else
+  public $attribute.javaClassName ${attribute.name}() { 
+#if(${attribute.encryption})
+    return ($attribute.javaClassName) TBWFieldEncryption.decrypt(($attribute.javaClassName) storedValueForKey(${attribute.uppercaseUnderscoreName}_KEY), ENTITY_NAME, ${attribute.uppercaseUnderscoreName}_KEY);
+#else
+    return ($attribute.javaClassName) storedValueForKey(${attribute.uppercaseUnderscoreName}_KEY);
+#end
+  }
+
+#if(${attribute.d2wType} == "markdown")
+  /*
+   * Helper for MarkDown access in JasperReports
+   */
+  public $attribute.javaClassName ${attribute.name}AsMarkup() { 
+	$attribute.javaClassName result = ${attribute.name}();
+	if(!TBFString.stringIsNullOrEmpty(result)) {
+		result = TBWMarkdown.simpleConvert(result);
+	}
+    return result;
+  }
+#end
+
+  public void set${attribute.capitalizedName}(final $attribute.javaClassName value) {
+    var key = ${attribute.uppercaseUnderscoreName}_KEY;
+    var convert = TBEnterpriseConverter.convertForModelSpecification(this, value, key);
+#if(${attribute.encryption})
+    var encrypt = TBWFieldEncryption.encrypt(convert, ENTITY_NAME, key);
+    takeStoredValueForKey(encrypt, key);
+#else
+    takeStoredValueForKey(convert, key);
+#end
+  }
+
+  protected $attribute.javaClassName validate${attribute.capitalizedName}(final $attribute.javaClassName value) throws ITBFValidation.ValidationException {
+    return ($attribute.javaClassName) TBEnterpriseValidation.validateForModelSpecification(this, value, ${attribute.uppercaseUnderscoreName}_KEY);
+  }
+#end
+
+#end
+#end
+  //********************************************************************
+  //  ToOne relationship : ToOne リレーションシップ
+  //********************************************************************
+
+#foreach ($relationship in $entity.sortedClassToOneRelationships)
+#if (!$relationship.inherited) 
+  public $relationship.actualDestination.classNameWithDefault ${relationship.name}() {
+    return ($relationship.actualDestination.classNameWithDefault)storedValueForKey(${relationship.uppercaseUnderscoreName}_KEY);
+  }
+  
+  public void set${relationship.capitalizedName}Relationship(final $relationship.actualDestination.classNameWithDefault value) {
+    if (TBEnterpriseGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+      takeStoredValueForKey(value, ${relationship.uppercaseUnderscoreName}_KEY);
+      
+    } else if (value == null) {
+      final var oldValue = ${relationship.name}();
+      if (oldValue != null) {
+        removeObjectFromBothSidesOfRelationshipWithKey(oldValue, ${relationship.uppercaseUnderscoreName}_KEY);
+      }
+      
+    } else {
+      addObjectToBothSidesOfRelationshipWithKey(value, ${relationship.uppercaseUnderscoreName}_KEY);
+    }
+  }
+  
+#end
+#end
+  //********************************************************************
+  //  Editing Context replacement : 編集コンテキスト入れ替え
+  //********************************************************************
+
+#if (!$entity.partialEntitySet)
+  @Override
+  public $entity.classNameWithOptionalPackage localInstanceIn(final TBEnterpriseEditingContext editingContext) {
+    final var localInstance = ($entity.classNameWithOptionalPackage)TBEnterpriseUtilities.localInstanceOfObject(editingContext, this);
+      if (localInstance == null) {
+        throw new TBFIllegalStateException("You attempted to localInstance {}, which has not yet committed.", this);
+      }
+      return localInstance;
+  }
+#end
+
+  //********************************************************************
+  //  toMany relationship : toMany リレーションシップ
+  //********************************************************************
+
+#foreach ($relationship in $entity.sortedClassToManyRelationships)
+#if (!$relationship.inherited) 
+  public TBFArray<${relationship.actualDestination.classNameWithDefault}> ${relationship.name}() {
+    return (TBFArray<${relationship.actualDestination.classNameWithDefault}>)storedValueForKey(${relationship.uppercaseUnderscoreName}_KEY);
+  }
+
+#if (!$relationship.inverseRelationship || $relationship.flattened || !$relationship.inverseRelationship.classProperty)
+  public TBFArray<${relationship.actualDestination.classNameWithDefault}> ${relationship.name}(final TBEnterpriseQualifier qualifier) {
+    return ${relationship.name}(qualifier, null);
+  }
+#else
+  public TBFArray<${relationship.actualDestination.classNameWithDefault}> ${relationship.name}(final TBEnterpriseQualifier qualifier) {
+    return ${relationship.name}(qualifier, null, false);
+  }
+
+  public TBFArray<${relationship.actualDestination.classNameWithDefault}> ${relationship.name}(final TBEnterpriseQualifier qualifier, final boolean fetch) {
+    return ${relationship.name}(qualifier, null, fetch);
+  }
+#end
+
+  public TBFArray<${relationship.actualDestination.classNameWithDefault}> ${relationship.name}(final TBEnterpriseQualifier qualifier, final TBFArray<TBEnterpriseSortOrdering> sortOrderings#if ($relationship.inverseRelationship && !$relationship.flattened && $relationship.inverseRelationship.classProperty), final boolean fetch#end) {
+    TBFArray<${relationship.actualDestination.classNameWithDefault}> results;
+#if ($relationship.inverseRelationship && !$relationship.flattened && $relationship.inverseRelationship.classProperty)
+    if (fetch) {
+      TBEnterpriseQualifier fullQualifier;
+#if (${relationship.actualDestination.genericRecord})
+  final TBEnterpriseQualifier inverseQualifier = new TBEnterpriseKeyValueQualifier("${relationship.inverseRelationship.name}", TBEnterpriseQualifier.QualifierOperatorEqual, this);
+#elseif ($relationship.destination.entity.partialEntitySet)
+  final TBEnterpriseQualifier inverseQualifier = new TBEnterpriseKeyValueQualifier(${relationship.destination.classNameWithDefault}.${relationship.inverseRelationship.uppercaseUnderscoreName}_KEY, TBEnterpriseQualifier.QualifierOperatorEqual, this);
+#else
+  final TBEnterpriseQualifier inverseQualifier = new TBEnterpriseKeyValueQualifier(${relationship.actualDestination.classNameWithDefault}.${relationship.inverseRelationship.uppercaseUnderscoreName}_KEY, TBEnterpriseQualifier.QualifierOperatorEqual, this);
+#end
+      
+          if (qualifier == null) {
+            fullQualifier = inverseQualifier;
+            
+          } else {
+            final var qualifiers = new TBFMutableArray(2);
+            qualifiers.addObject(qualifier);
+            qualifiers.addObject(inverseQualifier);
+            fullQualifier = new TBEnterpriseAndQualifier(qualifiers);
+          }
+
+#if (${relationship.actualDestination.genericRecord})
+          TBEntity relationshipEntity = TBEntity.entityNamed(editingContext(), ${relationship.actualDestination.name}.ENTITY_NAME);
+          fetchSpec.setIsDeep(true);
+          results = (TBFArray<${relationship.actualDestination.classNameWithDefault}>)editingContext().objectsWithFetchSpecification(fetchSpec);
+#else
+          results = ${relationship.actualDestination.classNameWithDefault}.fetch${relationship.actualDestination.pluralName}(editingContext(), fullQualifier, sortOrderings);
+#end
+    } else {
+#end
+      results = ${relationship.name}();
+      if (qualifier != null) {
+        results = TBEnterpriseQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = TBEnterpriseSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+#if ($relationship.inverseRelationship && !$relationship.flattened && $relationship.inverseRelationship.classProperty)
+    }
+#end
+      return results;
+  }
+  
+  public void addTo${relationship.capitalizedName}(final $relationship.actualDestination.classNameWithDefault object) {
+    includeObjectIntoPropertyWithKey(object, ${relationship.uppercaseUnderscoreName}_KEY);
+  }
+
+  public void removeFrom${relationship.capitalizedName}(final $relationship.actualDestination.classNameWithDefault object) {
+    excludeObjectFromPropertyWithKey(object, ${relationship.uppercaseUnderscoreName}_KEY);
+  }
+
+  public void addTo${relationship.capitalizedName}Relationship(final $relationship.actualDestination.classNameWithDefault object) {
+    if (TBEnterpriseGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+      addTo${relationship.capitalizedName}(object);
+    } else {
+      addObjectToBothSidesOfRelationshipWithKey(object, ${relationship.uppercaseUnderscoreName}_KEY);
+    }
+  }
+
+  public void removeFrom${relationship.capitalizedName}Relationship(final $relationship.actualDestination.classNameWithDefault object) {
+    if (TBEnterpriseGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+      removeFrom${relationship.capitalizedName}(object);
+    } else {
+      removeObjectFromBothSidesOfRelationshipWithKey(object, ${relationship.uppercaseUnderscoreName}_KEY);
+    }
+  }
+
+  public $relationship.actualDestination.classNameWithDefault create${relationship.capitalizedName}Relationship() {
+    final var eoClassDesc = TBEnterpriseClassDescription.classDescriptionForEntityName("${relationship.actualDestination.name}");
+    final var eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, ${relationship.uppercaseUnderscoreName}_KEY);
+    return ($relationship.actualDestination.classNameWithDefault) eo;
+  }
+
+  public void delete${relationship.capitalizedName}Relationship(final $relationship.actualDestination.classNameWithDefault object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, ${relationship.uppercaseUnderscoreName}_KEY);
+#if (!$relationship.ownsDestination)
+      editingContext().deleteObject(object);
+#end
+  }
+
+  public void deleteAll${relationship.capitalizedName}Relationships() {
+    final Enumeration objects = ${relationship.name}().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      delete${relationship.capitalizedName}Relationship(($relationship.actualDestination.classNameWithDefault)objects.nextElement());
+    }
+  }
+
+#end
+#end
+  //********************************************************************
+  //  Instance : インスタンス化
+  //********************************************************************
+
+  public #if (!$entity.partialEntitySet)static #end${entity.classNameWithOptionalPackage}#if (!$entity.partialEntitySet) create#else init#end${entity.name}(final TBEnterpriseEditingContext editingContext
+#foreach ($attribute in $entity.sortedClassAttributes)
+#if (!$attribute.allowsNull)
+#set ($restrictingQualifierKey = 'false')
+#foreach ($qualifierKey in $entity.restrictingQualifierKeys)#if ($attribute.name == $qualifierKey)#set ($restrictingQualifierKey = 'true')#end#end
+#if ($restrictingQualifierKey == 'false')
+#if ($attribute.userInfo.ERXConstantClassName)    , final ${attribute.userInfo.ERXConstantClassName}#else   , final ${attribute.javaClassName}#end ${attribute.name}
+#end
+#end
+#end
+#foreach ($relationship in $entity.sortedClassToOneRelationships)
+#if ($relationship.mandatory && !($relationship.ownsDestination && $relationship.propagatesPrimaryKey))   , final ${relationship.actualDestination.classNameWithDefault} ${relationship.name}
+#end
+#end
+    )
+  {
+    final var eo = (${entity.classNameWithOptionalPackage})#if ($entity.partialEntitySet)this;#else TBEnterpriseUtilities.createAndInsertInstance(editingContext, ${entity.prefixClassNameWithoutPackage}.ENTITY_NAME);#end
+
+#foreach ($attribute in $entity.sortedClassAttributes)
+#if (!$attribute.allowsNull)
+#set ($restrictingQualifierKey = 'false')
+#foreach ($qualifierKey in $entity.restrictingQualifierKeys) 
+#if ($attribute.name == $qualifierKey)
+#set ($restrictingQualifierKey = 'true')
+#end
+#end
+#if ($restrictingQualifierKey == 'false')
+    eo.set${attribute.capitalizedName}(${attribute.name});
+#end
+#end
+#end
+#foreach ($relationship in $entity.sortedClassToOneRelationships)
+#if ($relationship.mandatory && !($relationship.ownsDestination && $relationship.propagatesPrimaryKey))
+    eo.set${relationship.capitalizedName}Relationship(${relationship.name});
+#end
+#end
+    return eo;
+  }
+  
+  /* EO creation with Stamped EO Support */
+  public #if (!$entity.partialEntitySet)static #end${entity.classNameWithOptionalPackage}#if (!$entity.partialEntitySet) create#else init#end${entity.name}WithStampedSupport(final TBEnterpriseEditingContext editingContext
+#foreach ($attribute in $entity.sortedClassAttributes)
+#if (!$attribute.allowsNull)
+#set ($restrictingQualifierKey = 'false')
+#foreach ($qualifierKey in $entity.restrictingQualifierKeys)#if ($attribute.name == $qualifierKey)#set ($restrictingQualifierKey = 'true')#end#end
+#if ($restrictingQualifierKey == 'false' && $attribute.name != 'created' && $attribute.name != 'lastModified')
+#if ($attribute.userInfo.ERXConstantClassName)    , final ${attribute.userInfo.ERXConstantClassName}#else   , final ${attribute.javaClassName}#end ${attribute.name}
+#end
+#end
+#end
+#foreach ($relationship in $entity.sortedClassToOneRelationships)
+#if ($relationship.mandatory && !($relationship.ownsDestination && $relationship.propagatesPrimaryKey) && $relationship.name != 'createdBy' && $relationship.name != 'lastModifiedBy')   , final ${relationship.actualDestination.classNameWithDefault} ${relationship.name}
+#end
+#end
+    )
+  {
+    final var eo = (${entity.classNameWithOptionalPackage})#if ($entity.partialEntitySet)this;#else TBEnterpriseUtilities.createAndInsertInstance(editingContext, ${entity.prefixClassNameWithoutPackage}.ENTITY_NAME);#end
+
+#foreach ($attribute in $entity.sortedClassAttributes)
+#if (!$attribute.allowsNull)
+#set ($restrictingQualifierKey = 'false')
+#foreach ($qualifierKey in $entity.restrictingQualifierKeys) 
+#if ($attribute.name == $qualifierKey)
+#set ($restrictingQualifierKey = 'true')
+#end
+#end
+#if ($restrictingQualifierKey == 'false' && $attribute.name != 'created' && $attribute.name != 'lastModified')
+    eo.set${attribute.capitalizedName}(${attribute.name});
+#end
+#end
+#end
+#foreach ($relationship in $entity.sortedClassToOneRelationships)
+#if ($relationship.mandatory && !($relationship.ownsDestination && $relationship.propagatesPrimaryKey) && $relationship.name != 'createdBy' && $relationship.name != 'lastModifiedBy')
+    eo.set${relationship.capitalizedName}Relationship(${relationship.name});
+#end
+#end
+    return eo;
+  }
+
+#if (!$entity.partialEntitySet) 
+  public static ${entity.classNameWithOptionalPackage} createAndInsertInstance(final TBEnterpriseEditingContext editingContext) {
+    return (${entity.classNameWithOptionalPackage})TBEnterpriseUtilities.createAndInsertInstance(editingContext, ENTITY_NAME);
+  }
+#end
+
+  // ========== [検索関連] ==========
+#if (!$entity.partialEntitySet)
+  //********************************************************************
+  //  Fetch (TBFArray) : フェッチ (TBFArray)
+  //********************************************************************
+
+#if ($entity.parentSet)
+  public static TBEnterpriseFetchSpecification<${entity.classNameWithOptionalPackage}> fetchSpecFor${entity.name}() {
+    return new TBEnterpriseFetchSpecification<>(${entity.prefixClassNameWithoutPackage}.ENTITY_NAME, null, null, false, true, null);
+  }
+#else
+  public static TBEnterpriseFetchSpecification<${entity.classNameWithOptionalPackage}> fetchSpec() {
+    return new TBEnterpriseFetchSpecification<>(${entity.prefixClassNameWithoutPackage}.ENTITY_NAME, null, null, false, true, null);
+  }
+#end
+
+  /*
+   * standard fetch
+   */
+  public static TBFArray<${entity.classNameWithOptionalPackage}> fetchAll${entity.pluralName}(final TBEnterpriseEditingContext editingContext) {
+    return ${entity.prefixClassNameWithoutPackage}.fetchAll${entity.pluralName}(editingContext, null);
+  }
+
+  public static TBFArray<${entity.classNameWithOptionalPackage}> fetchAll${entity.pluralName}(final TBEnterpriseEditingContext editingContext, final TBFArray<TBEnterpriseSortOrdering> sortOrderings) {
+    return ${entity.prefixClassNameWithoutPackage}.fetch${entity.pluralName}(editingContext, null, sortOrderings);
+  }
+ 
+  public static TBFArray<${entity.classNameWithOptionalPackage}> fetch${entity.pluralName}(final TBEnterpriseEditingContext editingContext, final TBEnterpriseQualifier qualifier, final TBFArray<TBEnterpriseSortOrdering> sortOrderings) {
+    final var fetchSpec = new TBEnterpriseFetchSpecification<>(${entity.prefixClassNameWithoutPackage}.ENTITY_NAME, qualifier, sortOrderings);
+    fetchSpec.setIsDeep(true);
+    final TBFArray<${entity.classNameWithOptionalPackage}> eoObjects = editingContext.objectsWithFetchSpecification(fetchSpec);
+    return eoObjects;
+  }
+
+  /*
+   * coreQualifier fetch
+   */  
+  public static TBFArray<${entity.classNameWithOptionalPackage}> fetchAll${entity.pluralName}WithCoreQualifier(final TBEnterpriseEditingContext editingContext, final ITBWDomain domain) {
+    return ${entity.prefixClassNameWithoutPackage}.fetchAll${entity.pluralName}WithCoreQualifier(editingContext, domain, null);
+  }
+  
+  public static TBFArray<${entity.classNameWithOptionalPackage}> fetchAll${entity.pluralName}WithCoreQualifier(final TBEnterpriseEditingContext editingContext, final ITBWDomain domain, final TBFArray<TBEnterpriseSortOrdering> sortOrderings) {
+    final var entity = TBEntity.entityNamed(editingContext, ${entity.prefixClassNameWithoutPackage}.ENTITY_NAME);
+    return ${entity.prefixClassNameWithoutPackage}.fetch${entity.pluralName}(editingContext, TBWCoreQualifierBase.delegate().qualifier(entity, domain), sortOrderings);
+  }
+  
+  public static TBFArray<${entity.classNameWithOptionalPackage}> fetch${entity.pluralName}WithCoreQualifier(final TBEnterpriseEditingContext editingContext, final TBEnterpriseQualifier qualifier, final TBFArray<TBEnterpriseSortOrdering> sortOrderings) {
+    final var entity = TBEntity.entityNamed(editingContext, ${entity.prefixClassNameWithoutPackage}.ENTITY_NAME);
+
+    final var multiDomainSupport = TBSession.session().getMultiDomain();
+    final var domain = multiDomainSupport.currentDomain();
+
+    final var andQualifier = new TBEnterpriseAndQualifier(TBWCoreQualifierBase.delegate().qualifier(entity, domain), qualifier);
+
+    final TBEnterpriseFetchSpecification fetchSpec = new TBEnterpriseFetchSpecification<>(${entity.prefixClassNameWithoutPackage}.ENTITY_NAME, andQualifier, sortOrderings);
+    fetchSpec.setIsDeep(true);
+    final TBFArray<${entity.classNameWithOptionalPackage}> eoObjects = editingContext.objectsWithFetchSpecification(fetchSpec);
+    return eoObjects;
+  }  
+  
+  //********************************************************************
+  //  Fetch ($entity.name) :  フェッチ ($entity.name)
+  //********************************************************************
+  
+  public static ${entity.classNameWithOptionalPackage} fetch${entity.name}(final TBEnterpriseEditingContext editingContext, final String keyName, final Object value) {
+    return ${entity.prefixClassNameWithoutPackage}.fetch${entity.name}(editingContext, new TBEnterpriseKeyValueQualifier(keyName, TBEnterpriseQualifier.QualifierOperatorEqual, value));
+  }
+
+  public static ${entity.classNameWithOptionalPackage} fetch${entity.name}(final TBEnterpriseEditingContext editingContext, final TBEnterpriseQualifier qualifier) {
+    final var eoObjects = ${entity.prefixClassNameWithoutPackage}.fetch${entity.pluralName}(editingContext, qualifier, null);
+    ${entity.classNameWithOptionalPackage} eoObject;
+    final var count = eoObjects.count();
+    if (count == 0) {
+      eoObject = null;
+    } else if (count == 1) {
+      eoObject = eoObjects.firstObject();
+    } else {
+      throw new TBFIllegalStateException("There was more than one ${entity.name} that matched the qualifier '{}'.", qualifier);
+    }
+    return eoObject;
+  }
+
+  public static ${entity.classNameWithOptionalPackage} fetchRequired${entity.name}(final TBEnterpriseEditingContext editingContext, final String keyName, final Object value) {
+    return ${entity.prefixClassNameWithoutPackage}.fetchRequired${entity.name}(editingContext, new TBEnterpriseKeyValueQualifier(keyName, TBEnterpriseQualifier.QualifierOperatorEqual, value));
+  }
+
+  public static ${entity.classNameWithOptionalPackage} fetchRequired${entity.name}(final TBEnterpriseEditingContext editingContext, final TBEnterpriseQualifier qualifier) {
+    final var eoObject = ${entity.prefixClassNameWithoutPackage}.fetch${entity.name}(editingContext, qualifier);
+    if (eoObject == null) {
+      throw new NoSuchElementException("There was no ${entity.name} that matched the qualifier '" + qualifier + "'.");
+    }
+    return eoObject;
+  }
+
+  public static ${entity.name} fetch${entity.name}ByPrimaryKey(final TBEnterpriseEditingContext editingContext, final Object value) {
+    final var eo = TBEnterpriseExternalPrimaryKeyHelper.objectWithPrimaryKeyValue(editingContext, ENTITY_NAME, value);
+    return (${entity.name}) eo;
+  }
+
+  public static ${entity.name} fetch${entity.name}ByEncryptedPrimaryKey(final TBEnterpriseEditingContext editingContext, final String value) {
+    return _${entity.name}.fetch${entity.name}ByPrimaryKey(editingContext, TBFStrongTextEncryptor.of(value).decrypt());
+  }
+  
+  public static ${entity.classNameWithOptionalPackage} localInstanceIn(final TBEnterpriseEditingContext editingContext, final ${entity.classNameWithOptionalPackage} eo) {
+    final var localInstance = (eo == null) ? null : (${entity.classNameWithOptionalPackage})TBEnterpriseUtilities.localInstanceOfObject(editingContext, eo);
+    if (localInstance == null && eo != null) {
+      throw new TBFIllegalStateException("You attempted to localInstance {}, which has not yet committed.", eo);
+    }
+    return localInstance;
+  }
+#end
+
+  //********************************************************************
+  //  TBEnterpriseCopyable
+  //********************************************************************
+
+#if(${entity.copyType} == 'Model' || ${entity.copyType} == 'Default')
+  
+	@Override
+	public ${entity.classNameWithOptionalPackage} copy() {
+		return copy(new TBFMutableDictionary<TBEnterpriseAbstractGlobalID, TBEnterpriseCopyable<?>>());
+	}
+ 
+	@Override
+	public ${entity.classNameWithOptionalPackage} copy(TBFMutableDictionary<TBEnterpriseAbstractGlobalID, TBEnterpriseCopyable<?>> copiedObjects) {
+		return duplicate(copiedObjects);
+	}
+ 
+	@Override
+	public ${entity.classNameWithOptionalPackage} duplicate(TBFMutableDictionary<TBEnterpriseAbstractGlobalID, TBEnterpriseCopyable<?>> copiedObjects) {
+	#if(${entity.copyType} == 'Model')
+	return TBEnterpriseCopyable.Utility.modelCopy(copiedObjects, (${entity.classNameWithOptionalPackage}) this);
+	#elseif(${entity.copyType} == 'Default')
+	return TBEnterpriseCopyable.Utility.deepCopy(copiedObjects, (${entity.classNameWithOptionalPackage}) this);
+	#end}
+#end
+
+#if(${entity.tag})
+  //********************************************************************
+  //  TBTag
+  //********************************************************************
+
+	/* dummy for Sangria */
+	public TBTagStore tbTag() {
+		return null;
+	}
+	
+	@Override
+	protected TBFMutableDictionary<String, ITBEnterpriseObject> tbTagStoreDictionary() {
+		if (_tbTagStoreDictionary == null) {
+			_tbTagStoreDictionary = super.tbTagStoreDictionary();
+
+			for (TBTagStore tag : TBTag.selectedTagsForObject(editingContext(), this)) {
+				_tbTagStoreDictionary.setObjectForKey(tag, tag.primaryKey());
+			}
+		}
+		return _tbTagStoreDictionary;
+	}
+
+	@Override
+	protected void _saveTBTagChanges(ITBEnterpriseObject tagStore, TBEnterpriseKeyGlobalID globalID) {
+		TBTagStore store = (TBTagStore) tagStore;
+
+		TBFArray<TBTagConnection> tagConnections = _TBTagConnection.fetchTBTagConnections(editingContext(),
+				_TBTagConnection.STORAGE_GLOBAL_ID.eq(globalID).and(_TBTagConnection.TAG.eq(store)), null);
+
+		if (tagConnections.count() == 0) {
+			TBTagConnection connection = _TBTagConnection.createAndInsertInstance(editingContext());
+			connection.setTagRelationship(store.localInstanceIn(editingContext()));
+			connection.setStorageGlobalID(globalID);
+		}
+	}
+#end
+
+  //********************************************************************
+  //  Fetch specification : フェッチ・スペシフィケーション
+  //********************************************************************
+
+#foreach ($fetchSpecification in $entity.sortedFetchSpecs)
+#if (true || $fetchSpecification.distinctBindings.size() > 0)
+  public static TBFArray#if ($fetchSpecification.fetchEnterpriseObjects)<${entity.className}>#else<TBFDictionary>#end fetch${fetchSpecification.capitalizedName}(final TBEnterpriseEditingContext editingContext, final TBFDictionary<String, Object> bindings) {
+    TBEnterpriseFetchSpecification fetchSpec = TBEnterpriseFetchSpecification.fetchSpecificationNamed("${fetchSpecification.name}", "${entity.name}");
+    fetchSpec = fetchSpec.fetchSpecificationWithQualifierBindings(bindings);
+    return (TBFArray#if ($fetchSpecification.fetchEnterpriseObjects)<${entity.className}>#else<TBFDictionary>#end)editingContext.objectsWithFetchSpecification(fetchSpec);
+  }
+  
+#end
+  public static TBFArray#if ($fetchSpecification.fetchEnterpriseObjects)<${entity.className}>#else<TBFDictionary>#end fetch${fetchSpecification.capitalizedName}(final TBEnterpriseEditingContext editingContext#foreach ($binding in $fetchSpecification.distinctBindings),
+      ${binding.attributePath.childClassName} ${binding.name}Binding#end) {
+    TBEnterpriseFetchSpecification fetchSpec = TBEnterpriseFetchSpecification.fetchSpecificationNamed("${fetchSpecification.name}", "${entity.name}");
+#if ($fetchSpecification.distinctBindings.size() > 0)
+      TBFMutableDictionary<String, Object> bindings = new TBFMutableDictionary<String, Object>();
+#foreach ($binding in $fetchSpecification.distinctBindings)
+      bindings.takeValueForKey(${binding.name}Binding, "${binding.name}");
+#end
+    fetchSpec = fetchSpec.fetchSpecificationWithQualifierBindings(bindings);
+#end
+      return (TBFArray#if ($fetchSpecification.fetchEnterpriseObjects)<${entity.className}>#else<TBFDictionary>#end)editingContext.objectsWithFetchSpecification(fetchSpec);
+  }
+  
+#end
+
+  //********************************************************************
+  //  Test Interface : テスト・インタフェース
+  //********************************************************************
+
+  public interface _I${entity.classNameWithoutPackage} {
+
+#foreach ($attribute in $entity.sortedClassAttributes)
+#if (!$attribute.inherited)
+#if ($attribute.userInfo.ERXConstantClassName)
+	void set${attribute.capitalizedName}($attribute.userInfo.ERXConstantClassName value);
+	$attribute.userInfo.ERXConstantClassName ${attribute.name}();
+#else
+	void set${attribute.capitalizedName}($attribute.javaClassName value);
+	$attribute.javaClassName ${attribute.name}(); 
+	$attribute.javaClassName validate${attribute.capitalizedName}($attribute.javaClassName value) throws ITBFValidation.ValidationException;
+#end
+
+#end
+#end
+
+#foreach ($relationship in $entity.sortedClassToOneRelationships)
+#if (!$relationship.inherited) 
+	public void set${relationship.capitalizedName}Relationship($relationship.actualDestination.classNameWithDefault value);
+	public $relationship.actualDestination.classNameWithDefault ${relationship.name}();
+  
+#end
+#end
+
+#foreach ($relationship in $entity.sortedClassToManyRelationships)
+#if (!$relationship.inherited) 
+	public TBFArray<${relationship.actualDestination.classNameWithDefault}> ${relationship.name}();
+#if (!$relationship.inverseRelationship || $relationship.flattened || !$relationship.inverseRelationship.classProperty)
+	public TBFArray<${relationship.actualDestination.classNameWithDefault}> ${relationship.name}(TBEnterpriseQualifier qualifier);
+#else
+	public TBFArray<${relationship.actualDestination.classNameWithDefault}> ${relationship.name}(TBEnterpriseQualifier qualifier);
+	public TBFArray<${relationship.actualDestination.classNameWithDefault}> ${relationship.name}(TBEnterpriseQualifier qualifier, boolean fetch);
+#end
+	public TBFArray<${relationship.actualDestination.classNameWithDefault}> ${relationship.name}(TBEnterpriseQualifier qualifier, TBFArray<TBEnterpriseSortOrdering> sortOrderings#if ($relationship.inverseRelationship && !$relationship.flattened && $relationship.inverseRelationship.classProperty), boolean fetch#end);
+	public $relationship.actualDestination.classNameWithDefault create${relationship.capitalizedName}Relationship();
+	public void addTo${relationship.capitalizedName}($relationship.actualDestination.classNameWithDefault object);
+	public void addTo${relationship.capitalizedName}Relationship($relationship.actualDestination.classNameWithDefault object);
+	public void removeFrom${relationship.capitalizedName}($relationship.actualDestination.classNameWithDefault object);
+	public void removeFrom${relationship.capitalizedName}Relationship($relationship.actualDestination.classNameWithDefault object);
+	public void delete${relationship.capitalizedName}Relationship($relationship.actualDestination.classNameWithDefault object);
+	public void deleteAll${relationship.capitalizedName}Relationships();
+
+#end
+#end
+  }
+}
+//@formatter:on

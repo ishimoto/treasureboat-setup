@@ -1,0 +1,268 @@
+//
+// ${entity.classNameWithoutPackage}.java
+//
+// Version: 10.4
+// Created: $date
+//
+//   ╔╦╗┬─┐┌─┐┌─┐┌─┐┬ ┬┬─┐┌─┐╔╗ ┌─┐┌─┐┌┬┐
+//    ║ ├┬┘├┤ ├─┤└─┐│ │├┬┘├┤ ╠╩╗│ │├─┤ │ 
+//    ╩ ┴└─└─┘┴ ┴└─┘└─┘┴└─└─┘╚═╝└─┘┴ ┴ ┴ 
+//
+// 2008-2024 by TreasureBoat.org
+// This app can be executed from command line with './{appName} -Xmx1024M'
+//
+#if ($entity.packageName)
+package $entity.packageName;
+#end
+
+import org.treasureboat.enterprise.eof.ec.TBEnterpriseEditingContext;
+import org.treasureboat.foundation.validation.ITBFValidation;
+
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * This is the EO class for ${entity.classNameWithoutPackage}<br>
+ * before using it check all 'TO-DO' items first to improve and make an happy Application<br>
+ * wish you happy Developing with TreasureBoat<br>
+ * <br>
+ * HomePage :<br>
+ * http://www.treasureboat.org/
+ */
+@Slf4j 
+public class ${entity.classNameWithoutPackage} extends ${entity.prefixClassNameWithOptionalPackage} {
+
+  private static final long serialVersionUID = 1L;
+  
+  //********************************************************************
+  //  Properties : プロパティ
+  //********************************************************************
+
+#if (!$entity.partialEntitySet)
+  //********************************************************************
+  //  clazz methods
+  //********************************************************************
+
+  public static final ${entity.classNameWithoutPackage}Clazz<${entity.classNameWithoutPackage}> clazz = new ${entity.classNameWithoutPackage}Clazz<>();
+  public static class ${entity.classNameWithoutPackage}Clazz<T extends ${entity.classNameWithoutPackage}> extends ${entity.prefixClassNameWithOptionalPackage}.${entity.prefixClassNameWithoutPackage}Clazz<T>
+  /*
+  implements 
+  ITBEnterpriseVirtualDeleteSupport, // TODO Virtual Delete Support
+  ITBWMultiDomainSupport,  // TODO Multi Domain Support
+  ITBWSharedDomain,  // TODO Shared Domain Support
+  ITBRuleEngineEntitySupport // TODO Rule Engine Support
+  */
+  {
+      /* more clazz methods here */
+   
+    /* ITBWMultiDomainSupport */
+    //    @Override
+    //    public TBKey<?> keyForDomain() {
+    //      return null; // TODO return the relationship to Domain
+    //    }
+
+    /* ITBWSharedDomain */
+    //    @Override
+    //    public TBKey<?> keyForSharedDomain() {
+    //      return null; // TODO return the attribute for support the Shared Domain
+    //    }
+  }
+ 
+  //********************************************************************
+  //  setup configuration : セットアップ定義
+  //********************************************************************
+
+  //********************************************************************
+  //  Initializes the EO. This is called when an EO is created, not when it is 
+  //  inserted into an EC. This is the "best practice" method to place default EO initial
+  //  values
+  //********************************************************************  
+  
+  @Override
+  public void init(TBEnterpriseEditingContext anEditingContext) {
+    super.init(anEditingContext);
+    
+    // From Here : ここより書き込む
+  }
+  
+#end
+  //********************************************************************
+  //  Enterprise Object Override : エンタプライス・オブジェクトのオーバライド
+  //********************************************************************
+
+  @Override
+  public void willInsert() {
+    super.willInsert();
+
+    // From Here : ここより書き込む
+  }
+
+  @Override
+  public void didInsert() {
+    super.didInsert();
+  
+    // From Here : ここより書き込む
+  }
+  
+  @Override
+  public void willUpdate() {
+    super.willUpdate();
+  
+    // From Here : ここより書き込む
+  }
+  
+  @Override
+  public void didUpdate() {
+    super.didUpdate();
+  
+    // From Here : ここより書き込む
+  }
+  
+  @Override
+  public void mightDelete() {
+    super.mightDelete();
+  
+    // From Here : ここより書き込む
+  }
+  
+  @Override
+  public void willDelete() throws ITBFValidation.ValidationException {
+    super.willDelete();
+  
+    // From Here : ここより書き込む
+  }
+
+  @Override
+  public void didDelete(TBEnterpriseEditingContext editingContext) {  
+    super.didDelete(editingContext);
+  
+    // From Here : ここより書き込む
+  }
+
+
+//	@Override
+//	public void objectDidSelectRelationship(ITBEnterpriseObject obj) {
+//		super.objectDidSelectRelationship(obj);
+//
+//		// From Here : ここより書き込む
+//		if (obj != null && obj instanceof MyToOneEOClass) {
+//			System.err.print("\n objectDidSelectReleationship on MyToOneEOClass ");
+//
+//			// Do some work here!
+//		}
+//	}
+  
+  //@Override
+  //public void objectDidDeleteOrRemoveFromRelationship() {
+  // super call not need
+  // From Here : ここより書き込む
+  //}
+  
+  
+  //********************************************************************
+  //  D3W Button Callback Helper Methods : 
+  //  Un-comment the override and put logic in the return to dynamically
+  //  decide the display or not of the EO Action Buttons on the list page
+  //********************************************************************
+
+//   /**
+//    * this is a helper method that helps to decide to show the inspect button on a list page used in D3W, can be used in other places also
+//    * 
+//    * @return usually return true except there is something with this object
+//    */
+//   @Override
+//   public boolean canDisplayInspectButton() {
+//     return !TBFAccessPermission.instance().can(BUTTON_INSPECT);
+//   }
+
+//   /**
+//    * this is a helper method that helps to decide to show the edit button on a list page used in D3W, can be used in other places also
+//    * 
+//    * @return usually returns true except there is something with this object
+//    */
+//   @Override
+//   public boolean canDisplayEditButton() {
+//     return !TBFAccessPermission.instance().can(BUTTON_EDIT);
+//   }
+
+//   /**
+//    * this is a helper method that helps to decide to show the delete button on a list page used in D3W, can be used in other places also
+//    * 
+//    * @return usually returns true except there is something with this object
+//    */
+//   @Override
+//   public boolean canDisplayDeleteButton() {
+//     return !TBFAccessPermission.instance().can(BUTTON_DELETE);
+//   }
+
+//   /**
+//    * this is a helper method that helps to decide to show the remove button on a list page used in D3W, can be used in other places also
+//    * 
+//    * @return usually returns true except there is something with this object
+//    */
+//   @Override
+//   public boolean canDisplayRemoveButton() {
+//     return !TBFAccessPermission.instance().can(BUTTON_REMOVE);
+//   }
+
+
+  //********************************************************************
+  //  For REST interface
+  //********************************************************************
+	/**
+	* Note:  coreData now uses id as a key field internally for its client-side EOs, 
+	*  so this approach will not work.  Suggested new approach would be good
+	*
+	* @return primary key of the ${entity.classNameWithoutPackage} as id key
+	*/
+	public String id() {
+#if ($entity.partialEntitySet)
+		return primaryEO().primaryKey();
+#else
+		return primaryKey();
+#end
+	}
+
+
+  //********************************************************************
+  //  Database Custom Object : データベース・カスタム・オブジェクト用
+  //********************************************************************
+	
+	// Sample Custom Attributes
+	///**
+	//*  @return firstName and lastName combined into a new string
+	//*/
+	//	public String combinedName() {
+	//		return TBFString.initWithFormat("{} {}", firstName(), lastName()); 
+	//	}
+	
+  //********************************************************************
+  //  Validation : 検証ロジック
+  //********************************************************************
+
+	/**
+	*  Sample Validation on Attributes
+	*  @param value
+	*             the value to validate
+	*  @return validate value
+	*  @throws ITBFValidation.ValidationException
+	*             validation exception for the attribute
+	*/
+	//    protected String validateLastName(Object value) throws ITBFValidation.ValidationException {
+	//        String lastName = (String)value;
+	//        
+	//        TBFArray<TBPerson> tbPerson = _TBPerson.fetchTBPerson(editingContext(), _TBPerson.LAST_NAME.likeInsensitive(lastName)), null);
+	//        
+	//        if ((!tbPerson.isEmpty()) && (isNewObject())) {
+	//            throw new ITBFValidation.ValidationException("That last name is already in use.");
+	//        }
+	//        
+	//        return lastName;
+	//    }
+
+
+  //********************************************************************
+  //  Business Logic : ビジネス・ロジック
+  //********************************************************************
+  
+  // Methods to do real business processing here...
+}
