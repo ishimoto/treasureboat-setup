@@ -1,0 +1,2172 @@
+<project 	xmlns="http://maven.apache.org/POM/4.0.0" 
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.treasureboat</groupId>
+	<artifactId>super-pom</artifactId>
+    <!-- status code: 422, reason phrase: Unprocessable Entity (422)  Looks like the artifactId has to be all lowercase -->
+	<version>0.1</version>
+
+	<packaging>pom</packaging>
+
+	<name>TreasureBoat.org Maven Super POM</name>
+	
+	<properties>
+		<tb.lastmodified>2025/10/13</tb.lastmodified>
+
+		<tb.java10.snapshot>10.99.99-SNAPSHOT</tb.java10.snapshot>
+		<tb.java11.snapshot>11.99.99-SNAPSHOT</tb.java11.snapshot>
+
+		<tb.fw.content>10.1.4</tb.fw.content>
+		<tb.fw.core>10.1.9</tb.fw.core>
+		<tb.fw.db>10.1.7</tb.fw.db>
+		<tb.fw.inout>10.1.9</tb.fw.inout>
+		<tb.fw.archive>10.1.9</tb.fw.archive>
+		<tb.fw.features>10.1.10</tb.fw.features>
+		<tb.fw.extra>10.1.2</tb.fw.extra>
+		<tb.fw.template>10.1.3</tb.fw.template>
+		<tb.fw.sangria>10.1.4</tb.fw.sangria>
+		<tb.fw.pro>10.2.3</tb.fw.pro>
+		<tb.fw.prox>10.2.2</tb.fw.prox>
+		<tb.fw.template>11.0.2</tb.fw.template>
+		<tb.fw.elastic>10.5.1</tb.fw.elastic>
+		<tb.fw.opensearch>10.6.1</tb.fw.opensearch>
+		<tb.fw.ultra>10.1.4</tb.fw.ultra>
+
+		<tb.showDependencies>false</tb.showDependencies>
+	
+ 		<maven.compiler.source>10</maven.compiler.source>
+		<maven.compiler.target>10</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<github.global.server>github</github.global.server>
+
+		<!-- your Maven Build setup -->
+		<tb.version.maven.clean>3.5.0</tb.version.maven.clean>
+		<tb.version.maven.build-helper>3.6.1</tb.version.maven.build-helper>
+		<tb.version.maven.git-commit>9.0.2</tb.version.maven.git-commit>
+		<tb.version.maven.compiler>3.14.1</tb.version.maven.compiler>
+		<tb.version.maven.source>3.3.1</tb.version.maven.source>
+		<tb.version.maven.resources>3.3.1</tb.version.maven.resources>
+		<tb.version.maven.javadoc>3.12.0</tb.version.maven.javadoc>
+		<tb.version.maven.jar>3.4.2</tb.version.maven.jar>
+		<tb.version.maven.site>3.21.0</tb.version.maven.site>
+		<tb.version.maven.install>3.1.4</tb.version.maven.install>
+		<tb.version.maven.deploy>3.1.4</tb.version.maven.deploy>
+		<tb.version.maven.plugin>2.19.1</tb.version.maven.plugin>
+		<tb.version.maven.profile>3.5.1</tb.version.maven.profile>
+		<tb.version.maven.findbugs>3.0.5</tb.version.maven.findbugs>
+		<tb.version.maven.dependency>3.8.1</tb.version.maven.dependency>
+		<tb.version.maven.release>3.1.1</tb.version.maven.release>
+		<tb.version.maven.enforcer>3.6.1</tb.version.maven.enforcer>
+		<tb.version.maven.checksum>1.11</tb.version.maven.checksum>
+		<tb.version.maven.gpg>3.2.8</tb.version.maven.gpg>
+		
+		<!-- Core Utillities -->
+        <tb.logback>1.5.18</tb.logback>
+        <tb.slf4j-api>2.0.17</tb.slf4j-api>
+        <tb.lombok>1.18.42</tb.lombok>
+
+        <com.rollbar.version>2.0.0</com.rollbar.version>
+        <com.fasterxml.jackson.version>2.20.0</com.fasterxml.jackson.version>
+        <org.bouncycastle.version>1.81</org.bouncycastle.version>
+        <org.apache.poi.version>5.4.1</org.apache.poi.version>
+        <org.xhtmlrenderer.flying-saucer.version>9.12.1</org.xhtmlrenderer.flying-saucer.version>
+        <org.apache.pdfbox.version>3.0.5</org.apache.pdfbox.version>
+        <org.apache.avalon.framework.version>4.3.1</org.apache.avalon.framework.version>
+		
+		<!-- TB Build Information -->
+		<tb.maven>1.0.5</tb.maven>
+	</properties>
+
+    <profiles>
+	    <profile>
+	        <id>eclipse-dev</id>
+			<properties>
+				<tb.fw.content>${tb.java10.snapshot}</tb.fw.content>
+				<tb.fw.core>${tb.java10.snapshot}</tb.fw.core>
+				<tb.fw.db>${tb.java10.snapshot}</tb.fw.db>
+				<tb.fw.inout>${tb.java10.snapshot}</tb.fw.inout>
+				<tb.fw.archive>${tb.java10.snapshot}</tb.fw.archive>
+				<tb.fw.features>${tb.java10.snapshot}</tb.fw.features>
+				<tb.fw.extra>${tb.java10.snapshot}</tb.fw.extra>
+				<tb.fw.template>${tb.java11.snapshot>}</tb.fw.template>
+				<tb.fw.sangria>${tb.java10.snapshot}</tb.fw.sangria>
+				<tb.fw.pro>${tb.java10.snapshot}</tb.fw.pro>
+				<tb.fw.prox>${tb.java10.snapshot}</tb.fw.prox>
+				<tb.fw.elastic>${tb.java10.snapshot}</tb.fw.elastic>
+				<tb.fw.opensearch>${tb.java10.snapshot}</tb.fw.opensearch>
+				<tb.fw.ultra>${tb.java10.snapshot}</tb.fw.ultra>
+			</properties>
+		</profile>
+	    <profile>
+	        <id>deploy</id>
+			<properties>
+				<!-- ... -->
+			</properties>
+		</profile>
+	</profiles>
+
+<!--
+	<profiles>
+	    <profile>
+	        <id>frontbase</id>
+	 		<dependencies>
+				<dependency>
+					<groupId>org.treasureboat</groupId>
+					<artifactId>tb-db-frontbase</artifactId>
+					<version>${tb.fw.db}</version>
+				</dependency>
+	 		</dependencies>
+	   </profile>
+	    <profile>
+	        <id>postgresql</id>
+	        <activation>
+		        <activeByDefault>true</activeByDefault>
+	    	</activation>
+			<dependencies>
+				<dependency>
+					<groupId>org.treasureboat</groupId>
+					<artifactId>tb-db-postgresql</artifactId>
+					<version>${tb.fw.db}</version>
+				</dependency>
+	 		</dependencies>
+	    </profile>
+
+	    <profile>
+	        <id>sample</id>
+	    	<activation>
+	        		<activeByDefault>true</activeByDefault>
+	        		
+	        		<jdk>11</jdk>
+	        	
+	        		<os>
+	            		<name>windows 10</name>
+	            		<family>Windows</family>
+	            		<arch>amd64</arch>
+	            		<version>10.0</version>
+		        	</os>
+	
+	    		<file>
+	        			<missing>target/testreport.html</missing>
+			    	</file>
+	    	</activation>
+	    </profile>
+	</profiles>    
+-->
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${tb.lombok}</version>
+ 			<scope>provided</scope>
+ 			
+        </dependency>
+ 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${tb.slf4j-api}</version>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- 3th party Libraries -->
+			
+			<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+           		<version>${tb.logback}</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+           		<version>${tb.logback}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp/jakarta.servlet.jsp-api -->
+			<dependency>
+			    <groupId>jakarta.servlet.jsp</groupId>
+			    <artifactId>jakarta.servlet.jsp-api</artifactId>
+			    <version>2.3.6</version>
+			    <scope>provided</scope>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+			<dependency>
+			    <groupId>jakarta.servlet</groupId>
+			    <artifactId>jakarta.servlet-api</artifactId>
+			    <version>4.0.4</version>
+			    <scope>provided</scope>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.sun.mail/dsn -->
+			<dependency>
+			    <groupId>com.sun.mail</groupId>
+			    <artifactId>dsn</artifactId>
+			    <version>2.0.2</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.owasp.encoder/encoder -->
+			<dependency>
+			    <groupId>org.owasp.encoder</groupId>
+			    <artifactId>encoder</artifactId>
+			    <version>1.3.1</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.drewnoakes/metadata-extractor -->
+			<dependency>
+				<groupId>com.drewnoakes</groupId>
+				<artifactId>metadata-extractor</artifactId>
+				<version>2.19.0</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/com.adobe.xmp/xmpcore -->
+			<dependency>
+				<groupId>com.adobe.xmp</groupId>
+				<artifactId>xmpcore</artifactId>
+				<version>6.1.11</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.codehaus.janino/janino -->
+			<dependency>
+				<groupId>org.codehaus.janino</groupId>
+				<artifactId>janino</artifactId>
+				<version>3.1.12</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.codehaus.janino/commons-compiler -->
+			<dependency>
+				<groupId>org.codehaus.janino</groupId>
+				<artifactId>commons-compiler</artifactId>
+				<version>3.1.12</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-to-slf4j -->
+			<dependency>
+			    <groupId>org.apache.logging.log4j</groupId>
+			    <artifactId>log4j-to-slf4j</artifactId>
+			    <version>2.25.2</version>
+			</dependency>
+					
+			<!-- https://mvnrepository.com/artifact/com.rollbar/rollbar-java -->
+			<dependency>
+				<groupId>com.rollbar</groupId>
+				<artifactId>rollbar-java</artifactId>
+				<version>${com.rollbar.version}</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/com.rollbar/rollbar-api -->
+			<dependency>
+				<groupId>com.rollbar</groupId>
+				<artifactId>rollbar-api</artifactId>
+				<version>${com.rollbar.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${com.fasterxml.jackson.version}</version>
+			</dependency>
+		
+			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>2.20</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${com.fasterxml.jackson.version}</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-cbor -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.dataformat</groupId>
+				<artifactId>jackson-dataformat-cbor</artifactId>
+				<version>${com.fasterxml.jackson.version}</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-smile -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.dataformat</groupId>
+				<artifactId>jackson-dataformat-smile</artifactId>
+				<version>${com.fasterxml.jackson.version}</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.dataformat</groupId>
+				<artifactId>jackson-dataformat-yaml</artifactId>
+				<version>${com.fasterxml.jackson.version}</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
+			<dependency>
+			    <groupId>com.fasterxml.jackson.datatype</groupId>
+			    <artifactId>jackson-datatype-jsr310</artifactId>
+				<version>${com.fasterxml.jackson.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/fluent-hc -->
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>fluent-hc</artifactId>
+				<version>4.5.14</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient-cache -->
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient-cache</artifactId>
+				<version>4.5.14</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore-nio -->
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpcore-nio</artifactId>
+				<version>4.4.16</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents.client5/httpclient5 -->
+			<dependency>
+			    <groupId>org.apache.httpcomponents.client5</groupId>
+			    <artifactId>httpclient5</artifactId>
+			    <version>5.5</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents.core5/httpcore5 -->
+			<dependency>
+			    <groupId>org.apache.httpcomponents.core5</groupId>
+			    <artifactId>httpcore5</artifactId>
+			    <version>5.3.6</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-rng-simple -->
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-rng-simple</artifactId>
+			    <version>1.6</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.18.0</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-text -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-text</artifactId>
+				<version>1.14.0</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-compress -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-compress</artifactId>
+				<version>1.28.0</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>4.5.0</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-math3</artifactId>
+			    <version>3.6.1</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
+			<dependency>
+				<groupId>commons-cli</groupId>
+				<artifactId>commons-cli</artifactId>
+				<version>1.10.0</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>1.19.0</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.20.0</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>1.3.5</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcpg-jdk18on -->
+			<dependency>
+			    <groupId>org.bouncycastle</groupId>
+			    <artifactId>bcpg-jdk18on</artifactId>
+			    <version>${org.bouncycastle.version}</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcmail-jdk18on -->
+			<dependency>
+			    <groupId>org.bouncycastle</groupId>
+			    <artifactId>bcmail-jdk18on</artifactId>
+			    <version>${org.bouncycastle.version}</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk18on -->
+			<dependency>
+			    <groupId>org.bouncycastle</groupId>
+			    <artifactId>bcpkix-jdk18on</artifactId>
+			    <version>${org.bouncycastle.version}</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on -->
+			<dependency>
+			    <groupId>org.bouncycastle</groupId>
+			    <artifactId>bcprov-jdk18on</artifactId>
+			    <version>${org.bouncycastle.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt -->
+			<dependency>
+				<groupId>com.nimbusds</groupId>
+				<artifactId>nimbus-jose-jwt</artifactId>
+				<version>10.4.2</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/com.nimbusds/oauth2-oidc-sdk -->
+			<dependency>
+				<groupId>com.nimbusds</groupId>
+				<artifactId>oauth2-oidc-sdk</artifactId>
+				<version>11.27.1</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/com.nimbusds/lang-tag -->
+			<dependency>
+				<groupId>com.nimbusds</groupId>
+				<artifactId>lang-tag</artifactId>
+				<version>1.7</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/com.nimbusds/content-type -->
+			<dependency>
+				<groupId>com.nimbusds</groupId>
+				<artifactId>content-type</artifactId>
+				<version>2.3</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/com.github.stephenc.jcip/jcip-annotations -->
+			<dependency>
+				<groupId>com.github.stephenc.jcip</groupId>
+				<artifactId>jcip-annotations</artifactId>
+				<version>1.0-1</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.dmfs/lib-recur -->
+			<dependency>
+				<groupId>org.dmfs</groupId>
+				<artifactId>lib-recur</artifactId>
+				<version>0.17.1</version>
+			</dependency>
+								
+			<!-- https://mvnrepository.com/artifact/org.dmfs/rfc5545-datetime -->
+			<dependency>
+				<groupId>org.dmfs</groupId>
+				<artifactId>rfc5545-datetime</artifactId>
+				<version>0.3</version>
+			</dependency>
+									
+			<!-- https://mvnrepository.com/artifact/ognl/ognl -->
+			<dependency>
+				<groupId>ognl</groupId>
+				<artifactId>ognl</artifactId>
+				<version>3.4.7</version>
+			</dependency>
+											
+			<!-- https://mvnrepository.com/artifact/org.passay/passay -->
+			<dependency>
+				<groupId>org.passay</groupId>
+				<artifactId>passay</artifactId>
+				<version>1.6.6</version>
+			</dependency>
+											
+			<!-- https://mvnrepository.com/artifact/org.jasypt/jasypt -->
+			<dependency>
+				<groupId>org.jasypt</groupId>
+				<artifactId>jasypt</artifactId>
+				<version>1.9.3</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.j256.two-factor-auth/two-factor-auth -->
+			<dependency>
+				<groupId>com.j256.two-factor-auth</groupId>
+				<artifactId>two-factor-auth</artifactId>
+				<version>1.3</version>
+			</dependency>
+									
+			<!-- https://mvnrepository.com/artifact/net.minidev/json-smart -->
+			<dependency>
+				<groupId>net.minidev</groupId>
+				<artifactId>json-smart</artifactId>
+				<version>2.6.0</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/net.minidev/asm -->
+			<dependency>
+				<groupId>net.minidev</groupId>
+				<artifactId>asm</artifactId>
+				<version>1.0.2</version>
+			</dependency>
+								
+			<!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>3.30.2-GA</version>
+			</dependency>
+							
+			<!-- https://mvnrepository.com/artifact/org.jgroups/jgroups -->
+			<dependency>
+				<groupId>org.jgroups</groupId>
+				<artifactId>jgroups</artifactId>
+				<version>[4.2.21.Final]</version>
+			</dependency>
+					
+			<!-- https://mvnrepository.com/artifact/commons-discovery/commons-discovery -->
+			<dependency>
+				<groupId>commons-discovery</groupId>
+				<artifactId>commons-discovery</artifactId>
+				<version>0.5</version>
+			</dependency>
+							
+			<!-- https://mvnrepository.com/artifact/org.json/json -->
+			<dependency>
+				<groupId>org.json</groupId>
+				<artifactId>json</artifactId>
+				<version>20250517</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+			<dependency>
+			    <groupId>org.jsoup</groupId>
+			    <artifactId>jsoup</artifactId>
+			    <version>1.21.2</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
+			<dependency>
+				<groupId>org.reflections</groupId>
+				<artifactId>reflections</artifactId>
+				<version>0.10.2</version>
+				<exclusions>
+	            		<exclusion>
+	                		<groupId>xml-apis</groupId>
+	                		<artifactId>xml-apis</artifactId>
+	            		</exclusion>
+				</exclusions>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/com.googlecode.libphonenumber/libphonenumber -->
+			<dependency>
+			    <groupId>com.googlecode.libphonenumber</groupId>
+			    <artifactId>libphonenumber</artifactId>
+			    <version>9.0.14</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/net.sourceforge.cardme/cardme -->
+			<dependency>
+			    <groupId>net.sourceforge.cardme</groupId>
+			    <artifactId>cardme</artifactId>
+			    <version>0.4.0</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/junit/junit -->
+<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+			<dependency>
+			    <groupId>junit</groupId>
+			    <artifactId>junit</artifactId>
+			    <version>4.13.2</version>
+			</dependency>
+
+	 		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>1.11.0</version>
+				<!-- still relay on : commons-collections:commons-collections:3.2.2 -->
+			</dependency>
+				<!-- OLD : https://mvnrepository.com/artifact/commons-collections/commons-collections -->
+				<dependency>
+					<groupId>commons-collections</groupId>
+					<artifactId>commons-collections</artifactId>
+					<version>3.2.2</version>
+				</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+			<dependency>
+				<groupId>org.mariadb.jdbc</groupId>
+				<artifactId>mariadb-java-client</artifactId>
+				<version>3.5.6</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+			<dependency>
+				<groupId>com.microsoft.sqlserver</groupId>
+				<artifactId>mssql-jdbc</artifactId>
+				<version>7.0.0.jre8</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+			<dependency>
+				<groupId>com.mysql</groupId>
+				<artifactId>mysql-connector-j</artifactId>
+				<version>9.4.0</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+			<dependency>
+				<groupId>org.postgresql</groupId>
+				<artifactId>postgresql</artifactId>
+				<version>42.7.8</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/net.postgis/postgis-jdbc -->
+			<dependency>
+				<groupId>net.postgis</groupId>
+				<artifactId>postgis-jdbc</artifactId>
+				<version>2025.1.1</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>2.3.232</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.derby/derby -->
+			<dependency>
+				<groupId>org.apache.derby</groupId>
+				<artifactId>derby</artifactId>
+				<version>10.17.1.0</version>
+			</dependency>
+					
+			<!-- https://mvnrepository.com/artifact/org.apache.derby/derbytools -->
+			<dependency>
+				<groupId>org.apache.derby</groupId>
+				<artifactId>derbytools</artifactId>
+				<version>10.17.1.0</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.shredzone.acme4j/acme4j-client -->
+			<!-- UPDATE : BREAKS : https://mvnrepository.com/artifact/org.shredzone.acme4j/acme4j-client -->
+			<dependency>
+				<groupId>org.shredzone.acme4j</groupId>
+				<artifactId>acme4j-client</artifactId>
+				<version>2.16</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.shredzone.acme4j/acme4j-utils -->
+			<dependency>
+				<groupId>org.shredzone.acme4j</groupId>
+				<artifactId>acme4j-utils</artifactId>
+				<version>2.16</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.bitbucket.b_c/jose4j -->
+			<dependency>
+				<groupId>org.bitbucket.b_c</groupId>
+				<artifactId>jose4j</artifactId>
+				<version>0.9.2</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${org.apache.poi.version}</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-excelant -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-excelant</artifactId>
+				<version>${org.apache.poi.version}</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-scratchpad -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-scratchpad</artifactId>
+				<version>${org.apache.poi.version}</version>
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml</artifactId>
+				<version>${org.apache.poi.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml-schemas</artifactId>
+				<version>4.1.2</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+			<dependency>
+				<groupId>net.sf.jasperreports</groupId>
+				<artifactId>jasperreports</artifactId>
+				<version>6.20.1</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-fonts -->
+			<dependency>
+				<groupId>net.sf.jasperreports</groupId>
+				<artifactId>jasperreports-fonts</artifactId>
+				<version>6.21.3</version>
+			</dependency>
+		
+			<!-- https://mvnrepository.com/artifact/com.itextpdf/itext-asian -->
+			<dependency>
+				<groupId>com.itextpdf</groupId>
+				<artifactId>itext-asian</artifactId>
+				<version>5.2.0</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-all -->
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>batik-all</artifactId>
+				<version>1.19</version>
+				<exclusions>
+		            	<exclusion>
+		                	<groupId>xml-apis</groupId>
+		                	<artifactId>xml-apis</artifactId>
+		            	</exclusion>
+		        	</exclusions>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.olap4j/olap4j -->
+			<dependency>
+				<groupId>org.olap4j</groupId>
+				<artifactId>olap4j</artifactId>
+				<version>1.2.0</version>
+				<exclusions>
+		            	<exclusion>
+		                	<groupId>xerces</groupId>
+		                	<artifactId>xercesImpl</artifactId>
+		            	</exclusion>
+		        	</exclusions>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
+			<dependency>
+				<groupId>org.jfree</groupId>
+				<artifactId>jfreechart</artifactId>
+				<version>1.5.6</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/org.jfree/jcommon -->
+			<dependency>
+				<groupId>org.jfree</groupId>
+				<artifactId>jcommon</artifactId>
+				<version>1.0.24</version>
+			</dependency>
+		
+			<!-- https://mvnrepository.com/artifact/com.keypoint/png-encoder -->
+			<dependency>
+				<groupId>com.keypoint</groupId>
+				<artifactId>png-encoder</artifactId>
+				<version>1.5</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>2.14.0</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.xhtmlrenderer/flying-saucer-core -->
+			<dependency>
+				<groupId>org.xhtmlrenderer</groupId>
+				<artifactId>flying-saucer-core</artifactId>
+				<version>${org.xhtmlrenderer.flying-saucer.version}</version>
+			</dependency>
+		
+			<!-- https://mvnrepository.com/artifact/org.xhtmlrenderer/flying-saucer-pdf -->
+			<dependency>
+				<groupId>org.xhtmlrenderer</groupId>
+				<artifactId>flying-saucer-pdf</artifactId>
+				<version>${org.xhtmlrenderer.flying-saucer.version}</version>
+			</dependency>
+		
+			<!-- https://mvnrepository.com/artifact/org.xhtmlrenderer/flying-saucer-swt -->
+			<dependency>
+				<groupId>org.xhtmlrenderer</groupId>
+				<artifactId>flying-saucer-swt</artifactId>
+				<version>${org.xhtmlrenderer.flying-saucer.version}</version>
+			</dependency>
+		
+			<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+			<dependency>
+			    <groupId>org.apache.pdfbox</groupId>
+			    <artifactId>pdfbox</artifactId>
+				<version>${org.apache.pdfbox.version}</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox-app -->
+			<dependency>
+			    <groupId>org.apache.pdfbox</groupId>
+			    <artifactId>pdfbox-app</artifactId>
+				<version>${org.apache.pdfbox.version}</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox-tools -->
+			<dependency>
+			    <groupId>org.apache.pdfbox</groupId>
+			    <artifactId>pdfbox-tools</artifactId>
+				<version>${org.apache.pdfbox.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/fontbox -->
+			<dependency>
+			    <groupId>org.apache.pdfbox</groupId>
+			    <artifactId>fontbox</artifactId>
+				<version>${org.apache.pdfbox.version}</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/xmpbox -->
+			<dependency>
+			    <groupId>org.apache.pdfbox</groupId>
+			    <artifactId>xmpbox</artifactId>
+			    <version>${org.apache.pdfbox.version}</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/com.github.librepdf/openpdf -->
+			<dependency>
+				<groupId>com.github.librepdf</groupId>
+				<artifactId>openpdf</artifactId>
+<!-- The 2.1.x Branch requires Java 21 or later : We have to be sure that Dev / Compile and Runtime is Java21 : 2.2.3 -->
+				<version>2.0.5</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.googlecode.juniversalchardet/juniversalchardet -->
+			<dependency>
+				<groupId>com.googlecode.juniversalchardet</groupId>
+				<artifactId>juniversalchardet</artifactId>
+				<version>1.0.3</version>
+			</dependency>
+		
+			<!-- https://mvnrepository.com/artifact/net.sf.ujac/ujac -->
+			<dependency>
+				<groupId>net.sf.ujac</groupId>
+				<artifactId>ujac</artifactId>
+				<version>1.3.0</version>
+			</dependency>
+		
+			<!-- https://mvnrepository.com/artifact/org.apache.avalon.framework/avalon-framework-api -->
+			<dependency>
+				<groupId>org.apache.avalon.framework</groupId>
+				<artifactId>avalon-framework-api</artifactId>
+				<version>${org.apache.avalon.framework.version}</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.avalon.framework/avalon-framework-impl -->
+			<dependency>
+				<groupId>org.apache.avalon.framework</groupId>
+				<artifactId>avalon-framework-impl</artifactId>
+				<version>${org.apache.avalon.framework.version}</version>
+			</dependency>
+		
+			<!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/xmlgraphics-commons -->
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>xmlgraphics-commons</artifactId>
+				<version>2.11</version>
+			</dependency>
+		
+			<!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/fop -->
+			<dependency>
+				<groupId>org.apache.xmlgraphics</groupId>
+				<artifactId>fop</artifactId>
+				<version>2.11</version>
+				<exclusions>
+	            		<exclusion>
+	                		<groupId>xml-apis</groupId>
+	                		<artifactId>xml-apis</artifactId>
+	            		</exclusion>
+		        	</exclusions>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.github.iarellano/org.everit.json.schema -->
+			<dependency>
+				<groupId>com.github.iarellano</groupId>
+				<artifactId>org.everit.json.schema</artifactId>
+				<version>1.10.0</version>
+				<!-- still relay on : commons-collections:commons-collections:3.2.2 -->
+			</dependency>
+			
+			<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+			<dependency>
+			    <groupId>com.google.guava</groupId>
+			    <artifactId>guava</artifactId>
+			    <version>33.4.8-jre</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-annotations -->
+			<dependency>
+			    <groupId>io.swagger.core.v3</groupId>
+			    <artifactId>swagger-annotations</artifactId>
+			    <version>2.2.35</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+			<dependency>
+				<groupId>org.quartz-scheduler</groupId>
+				<artifactId>quartz</artifactId>
+				<version>2.5.0</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+			<dependency>
+			    <groupId>com.opencsv</groupId>
+			    <artifactId>opencsv</artifactId>
+			    <version>5.9</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-java</artifactId>
+				<version>4.32.0</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>2.11.0</version>
+			</dependency>
+		
+			<!-- SMS -->
+	
+			<!-- https://mvnrepository.com/artifact/com.nexmo/client -->
+			<dependency>
+				<groupId>com.nexmo</groupId>
+				<artifactId>client</artifactId>
+				<version>3.2.0</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/com.twilio.sdk/twilio -->
+			<dependency>
+				<groupId>com.twilio.sdk</groupId>
+				<artifactId>twilio</artifactId>
+				<version>7.55.3</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
+			<dependency>
+				<groupId>com.rabbitmq</groupId>
+				<artifactId>amqp-client</artifactId>
+				<version>4.12.0</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/net.interfax/api-client -->
+			<!--dependency>
+				<groupId>net.interfax</groupId>
+				<artifactId>api-client</artifactId>
+				<version>0.17</version>
+			</dependency-->
+			<!-- with JAVA 11 reimplement -->
+
+			<!-- https://mvnrepository.com/artifact/javax.xml/jaxrpc-api -->
+			<dependency>
+				<groupId>javax.xml</groupId>
+				<artifactId>jaxrpc-api</artifactId>
+				<version>1.1</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.jdom/jdom2 -->
+			<dependency>
+				<groupId>org.jdom</groupId>
+				<artifactId>jdom2</artifactId>
+				<version>2.0.6.1</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/com.rometools/rome -->
+			<dependency>
+				<groupId>com.rometools</groupId>
+				<artifactId>rome</artifactId>
+				<version>2.1.0</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/com.rometools/rome-opml -->
+			<dependency>
+				<groupId>com.rometools</groupId>
+				<artifactId>rome-opml</artifactId>
+				<version>2.1.0</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/com.pngencoder/pngencoder -->
+			<dependency>
+				<groupId>com.pngencoder</groupId>
+				<artifactId>pngencoder</artifactId>
+				<version>0.14.0</version>
+			</dependency>
+	
+			<!-- https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-high-level-client -->
+			<dependency>
+				<groupId>org.elasticsearch.client</groupId>
+				<artifactId>elasticsearch-rest-high-level-client</artifactId>
+				<version>7.17.29</version>
+			</dependency>
+						
+			<!-- treasureboat custom dependencies -->
+			<dependency>
+				<groupId>io.github.ishimoto</groupId>
+				<artifactId>core-parser</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.ishimoto</groupId>
+				<artifactId>db-frontbase</artifactId>
+				<version>2.5.10</version>
+			</dependency>	
+			<dependency>
+				<groupId>io.github.ishimoto</groupId>
+				<artifactId>db-maxdb</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.ishimoto</groupId>
+				<artifactId>db-db2</artifactId>
+				<version>10.1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.ishimoto</groupId>
+				<artifactId>db-openbase</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.ishimoto</groupId>
+				<artifactId>db-oracle</artifactId>
+				<version>7.1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.ishimoto</groupId>
+				<artifactId>custom_jofc2</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<!-- https://central.sonatype.com/artifact/org.treasureboat.libraries/custom-fonts -->
+			<dependency>
+				<groupId>org.treasureboat.libraries</groupId>
+				<artifactId>custom-fonts</artifactId>
+				<version>1.1.0</version>
+				<!-- 
+					This is the same jar as below, but hosted already on Maven Central
+					<groupId>io.github.ishimoto</groupId>
+					<artifactId>custom-fonts</artifactId>
+					<version>1.2.0</version>
+				-->
+			</dependency>
+			
+			<!-- treasureboat dependencies -->
+			
+			<!-- ==**== CONTENT ==**== -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-content-delivery</artifactId>
+				<version>${tb.fw.content}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-content-private</artifactId>
+				<version>${tb.fw.content}</version>
+			</dependency>
+			
+			<!-- ==**== CORE ==**== -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-core-ajax</artifactId>
+				<version>${tb.fw.core}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-core-commandline</artifactId>
+				<version>${tb.fw.core}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-core-enterprise</artifactId>
+				<version>${tb.fw.core}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-core-extensions</artifactId>
+				<version>${tb.fw.core}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-core-foundation</artifactId>
+				<version>${tb.fw.core}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-core-mail</artifactId>
+				<version>${tb.fw.core}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-core-skin-gumby</artifactId>
+				<version>${tb.fw.core}</version>
+			</dependency>			
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-core-web</artifactId>
+				<version>${tb.fw.core}</version>
+			</dependency>
+
+			<!-- ==**== DB ==**== -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-db-adaptor-fs</artifactId>
+				<version>${tb.fw.db}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-db-adaptor-memory</artifactId>
+				<version>${tb.fw.db}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-db-db2</artifactId>
+				<version>${tb.fw.db}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-db-derby</artifactId>
+				<version>${tb.fw.db}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-db-frontbase</artifactId>
+				<version>${tb.fw.db}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-db-h2</artifactId>
+				<version>${tb.fw.db}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-db-maria</artifactId>
+				<version>${tb.fw.db}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-db-max</artifactId>
+				<version>${tb.fw.db}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-db-microsoft</artifactId>
+				<version>${tb.fw.db}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-db-mysql</artifactId>
+				<version>${tb.fw.db}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-db-openbase</artifactId>
+				<version>${tb.fw.db}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-db-oracle</artifactId>
+				<version>${tb.fw.db}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-db-postgresql</artifactId>
+				<version>${tb.fw.db}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-db-prototypes</artifactId>
+				<version>${tb.fw.db}</version>
+			</dependency>
+			
+			<!-- ==**== INOUT ==**== -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-inout-excel-generator</artifactId>
+				<version>${tb.fw.inout}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-inout-jasper</artifactId>
+				<version>${tb.fw.inout}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-inout-pdf-generation</artifactId>
+				<version>${tb.fw.inout}</version>
+			</dependency>
+
+			<!-- ==**== ARCHIVE ==**== -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+    			<artifactId>tb-archive-ajax</artifactId>
+				<version>${tb.fw.archive}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+    			<artifactId>tb-archive-audit</artifactId>
+				<version>${tb.fw.archive}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+    			<artifactId>tb-archive-coolcomponents</artifactId>
+				<version>${tb.fw.archive}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+    			<artifactId>tb-archive-jqmobile</artifactId>
+				<version>${tb.fw.archive}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+    			<artifactId>tb-archive-jquery</artifactId>
+				<version>${tb.fw.archive}</version>
+			</dependency>
+
+			<!-- ==**== FEATURES ==**== -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+    			<artifactId>tb-features-attachment</artifactId>
+				<version>${tb.fw.features}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+    			<artifactId>tb-features-audit</artifactId>
+				<version>${tb.fw.features}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+    			<artifactId>tb-features-basemodel</artifactId>
+				<version>${tb.fw.features}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+    			<artifactId>tb-features-csv</artifactId>
+				<version>${tb.fw.features}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+    			<artifactId>tb-features-kvdatastorage</artifactId>
+				<version>${tb.fw.features}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+    			<artifactId>tb-features-quartz</artifactId>
+				<version>${tb.fw.features}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+    			<artifactId>tb-features-rest</artifactId>
+				<version>${tb.fw.features}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+    			<artifactId>tb-features-tag</artifactId>
+				<version>${tb.fw.features}</version>
+			</dependency>
+			
+			<!-- ==**== EXTRA ==**== -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-extra-acme</artifactId>
+				<version>${tb.fw.extra}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-extra-austrian-eps</artifactId>
+				<version>${tb.fw.extra}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-extra-calendar</artifactId>
+				<version>${tb.fw.extra}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-extra-chronic</artifactId>
+				<version>${tb.fw.extra}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-extra-ckeditor</artifactId>
+				<version>${tb.fw.extra}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-extra-grouping</artifactId>
+				<version>${tb.fw.extra}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-extra-monitor</artifactId>
+				<version>${tb.fw.extra}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-extra-paypal</artifactId>
+				<version>${tb.fw.extra}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-extra-persistent-session-storage</artifactId>
+				<version>${tb.fw.extra}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-extra-plot</artifactId>
+				<version>${tb.fw.extra}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-extra-reporting</artifactId>
+				<version>${tb.fw.extra}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-extra-snapshot-explorer</artifactId>
+				<version>${tb.fw.extra}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-extra-webdriver</artifactId>
+				<version>${tb.fw.extra}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-extra-xiss</artifactId>
+				<version>${tb.fw.extra}</version>
+			</dependency>
+
+			<!-- ==**== SANGRIA ==**== -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-sangria-corelogic-base</artifactId>
+				<version>${tb.fw.sangria}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-sangria-corelogic-high</artifactId>
+				<version>${tb.fw.sangria}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-sangria-excel</artifactId>
+				<version>${tb.fw.sangria}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-sangria-main</artifactId>
+				<version>${tb.fw.sangria}</version>
+			</dependency>
+
+			<!-- ==**== PRO ==**== -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-pro-basemodel-bridge</artifactId>
+				<version>${tb.fw.pro}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-pro-cms</artifactId>
+				<version>${tb.fw.pro}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-pro-feed</artifactId>
+				<version>${tb.fw.pro}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-pro-keen</artifactId>
+				<version>${tb.fw.pro}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-pro-news</artifactId>
+				<version>${tb.fw.pro}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-pro-notification-center</artifactId>
+				<version>${tb.fw.pro}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-pro-rule-engine</artifactId>
+				<version>${tb.fw.pro}</version>
+			</dependency>
+
+			<!-- ==**== PROX ==**== -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-prox-barcode</artifactId>
+				<version>${tb.fw.prox}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-prox-coredata</artifactId>
+				<version>${tb.fw.prox}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-prox-secure-browser</artifactId>
+				<version>${tb.fw.prox}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-prox-skin-bootstrap</artifactId>
+				<version>${tb.fw.prox}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-prox-skin-gumby</artifactId>
+				<version>${tb.fw.prox}</version>
+			</dependency>
+
+			<!-- ==**== ELASTIC ==**== -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-elastic-main</artifactId>
+				<version>${tb.fw.elastic}</version>
+			</dependency>
+
+			<!-- ==**== OPEN SEARCH ==**== -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-opensearch-main</artifactId>
+				<version>${tb.fw.opensearch}</version>
+			</dependency>
+
+			<!-- project dependencies -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-maven-plugin</artifactId>
+				<version>${tb.maven}</version>
+			</dependency>			
+
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<directory>${project.basedir}/target</directory>
+		<outputDirectory>${project.build.directory}/classes</outputDirectory>
+		<testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+		
+		<finalName>${project.artifactId}-${project.version}</finalName>
+ 
+ 		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<targetPath>${project.build.outputDirectory}/Resources</targetPath>
+				<includes>
+				</includes>
+				<excludes>
+					<exclude>.*</exclude>
+					<exclude>**/.*</exclude>
+					<exclude>**/.*/</exclude>
+					<exclude>**/EOTestMigration/**</exclude>
+					<exclude>**/*.eogen</exclude>
+				</excludes>
+			</resource>
+			
+<!-- Temporary Start -->							
+			<resource>
+				<directory>Resources</directory>
+				<targetPath>${project.build.outputDirectory}/Resources</targetPath>
+				<includes>
+				</includes>
+				<excludes>
+					<exclude>.*</exclude>
+					<exclude>**/.*</exclude>
+					<exclude>**/.*/</exclude>
+					<exclude>**/EOTestMigration/**</exclude>
+					<exclude>**/*.eogen</exclude>
+				</excludes>
+			</resource>				
+<!-- Temporary End -->
+
+		</resources>
+
+ 		<testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+		</testResources>
+   
+		<pluginManagement>
+			<!-- https://maven.apache.org/plugins/index.html -->
+			<plugins>
+				
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${tb.version.maven.clean}</version>
+				</plugin>
+				
+				<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/versions-maven-plugin -->
+				<!-- 
+					No change of POM : only report
+						[ Checking for new versions of plugins ]
+							mvn versions:display-plugin-updates : Display which plugins have newer versions
+						[ Checking for new versions of dependencies ]
+                            mvn versions:display-dependency-updates : Display which dependencies have newer versions
+						[ Checking for new versions of specified by properties ]
+							mvn versions:display-property-updates : Display which properties have newer versions
+						[ Create a report of new versions of dependencies ]
+                            mvn versions:dependency-updates-report : Generate a report and check `/target/reports` html result file
+					
+					Note: modifies pom.xml files
+						[ To restore your pom.xml files to their initial state, before you started modifying it with the versions-maven-plugin, invoke the revert goal. ]
+                        	mvn versions:revert : Revert changes made by the versions plugin to the pom.xml file
+                        	
+                        [ To update the versions of dependencies and plugins in your pom.xml files, invoke one of the use or update goals. ]
+                        	mvn -N versions:update-child-modules : Update the versions of child modules to match the parent
+                        	
+                        [ To set the project version to a specific version, just invoke the set goal.]	
+                        	mvn versions:set -DnewVersion=10.1.5 : Set the project version to a specific value
+                        	
+						[ To accept the modifications made to your pom.xml files by the versions-maven-plugin invoke the commit goal. ]
+                            mvn versions:commit : Commit changes made by the versions plugin to the pom.xml file
+
+				-->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>versions-maven-plugin</artifactId>
+    				<version>${tb.version.maven.plugin}</version>
+				</plugin>
+				
+				<plugin>
+        			<groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-enforcer-plugin</artifactId>
+					<version>${tb.version.maven.enforcer}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-help-plugin -->
+				<!-- 
+					Display the current active profile : mvn help:active-profiles
+					Make an profile active : mvn compile -P integration-tests 
+				-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-help-plugin</artifactId>
+            			<version>${tb.version.maven.profile}</version>
+					<executions>
+						<execution>
+							<id>show-profiles</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>active-profiles</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+								
+				<!-- https://mvnrepository.com/artifact/io.github.git-commit-id/git-commit-id-maven-plugin -->
+				<plugin>
+					<groupId>io.github.git-commit-id</groupId>
+					<artifactId>git-commit-id-maven-plugin</artifactId>
+					<version>${tb.version.maven.git-commit}</version>
+				</plugin>
+ 
+				<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/build-helper-maven-plugin -->
+				<!-- https://www.mojohaus.org/build-helper-maven-plugin/usage.html -->
+				<plugin>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${tb.version.maven.build-helper}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${tb.version.maven.compiler}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
+				<plugin>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${tb.version.maven.source}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${tb.version.maven.resources}</version>
+				</plugin>
+				
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
+				<plugin>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${tb.version.maven.javadoc}</version>
+				</plugin>
+				
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${tb.version.maven.jar}</version>
+				</plugin>
+				
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-site-plugin -->
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${tb.version.maven.site}</version>
+				</plugin>
+				
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${tb.version.maven.install}</version>
+				</plugin>
+				
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${tb.version.maven.deploy}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-dependency-plugin -->
+				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${tb.version.maven.dependency}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-release-plugin -->
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${tb.version.maven.release}</version>
+				</plugin>
+				
+				<!-- https://mvnrepository.com/artifact/net.nicoulaj.maven.plugins/checksum-maven-plugin -->
+				<plugin>
+					<groupId>net.nicoulaj.maven.plugins</groupId>
+					<artifactId>checksum-maven-plugin</artifactId>
+					<version>${tb.version.maven.checksum}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
+<!-- : Not used in Github 
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>${tb.version.maven.gpg}</version>
+				</plugin>
+-->
+
+				<plugin>
+					<groupId>org.treasureboat</groupId>
+					<artifactId>tb-maven-plugin</artifactId>
+					<version>${tb.maven}</version>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<!-- Configure the Goals of the plugin -->
+
+			<plugin>
+				<!-- This rule enforces certain Maven versions -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-maven</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>3.6.3</version>
+								</requireMavenVersion>
+							</rules>    
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+			</plugin>
+			
+ 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+          			<encoding>UTF-8</encoding>
+					<!-- 
+					<compilerArgument>-Xlint:all</compilerArgument>
+        			<showWarnings>true</showWarnings>
+        			<showDeprecation>true</showDeprecation>
+        			-->
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${tb.lombok}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>get-the-git-infos</id>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+						<phase>initialize</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<generateGitPropertiesFile>true</generateGitPropertiesFile>
+					<generateGitPropertiesFilename>${project.build.outputDirectory}/Resources/git.properties</generateGitPropertiesFilename>
+					<commitIdGenerationMode>full</commitIdGenerationMode>
+				</configuration>
+			</plugin>
+
+ 			<plugin>
+			 	<!-- mvn package -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Automatic-Module-Name>${project.name}</Automatic-Module-Name>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<!-- mvn source:jar -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<excludeResources>true</excludeResources>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<!-- mvn javadoc:jar -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<show>public</show>
+					<!-- Skip all Javadoc validation and continue build even with errors -->
+					<doclint>none</doclint>
+					<failOnError>false</failOnError>
+					<failOnWarnings>false</failOnWarnings>
+					<quiet>true</quiet>
+					<additionalJOptions>
+						<additionalJOption>-J-Xmx1024m</additionalJOption>
+						<additionalJOption>-Xdoclint:none</additionalJOption>
+					</additionalJOptions>
+					<excludePackageNames>
+						*.impl.*:*.internal.*:*.test.*
+					</excludePackageNames>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<addDefaultExcludes>true</addDefaultExcludes>
+				</configuration>
+			</plugin>
+
+<!-- Generate checksums for all JAR files : Not used in Github -->
+<!--
+			<plugin>
+				<groupId>net.nicoulaj.maven.plugins</groupId>
+				<artifactId>checksum-maven-plugin</artifactId>
+				<version>${tb.version.maven.checksum}</version>
+
+				<executions>
+					<execution>
+						<id>checksum-maven-plugin-files</id>
+						<phase>package</phase>
+						<goals>
+							<goal>files</goal>
+						</goals>
+						<configuration>
+							<fileSets>
+								<fileSet>
+									<directory>${project.build.directory}</directory>
+									<includes>
+										<include>*.jar</include>
+									</includes>
+								</fileSet>
+							</fileSets>
+							<algorithms>
+								<algorithm>MD5</algorithm>
+								<algorithm>SHA-1</algorithm>
+							</algorithms>
+							<csvSummary>true</csvSummary>
+							<csvSummaryFile>${project.build.directory}/checksums.csv</csvSummaryFile>
+							<xmlSummary>true</xmlSummary>
+							<xmlSummaryFile>${project.build.directory}/checksums.xml</xmlSummaryFile>
+							<individualFiles>true</individualFiles>
+							<appendFilename>true</appendFilename>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+-->
+<!-- : Not used in Github 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+-->			
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${tb.version.maven.build-helper}</version>
+				 <executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/main/generated</source>
+<!-- Temporary Start -->							
+								<source>Sources</source>
+								<source>GeneratedEOs</source>
+<!-- Temporary End -->							
+							</sources>
+						</configuration>
+					</execution>
+ 
+					<execution>
+						<id>add-resource</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>add-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource> 
+									<!-- This will create that folder but we have to NOT copy the components-->
+									<directory>src/main/components</directory>
+									<targetPath>${project.build.outputDirectory}/tmp</targetPath>
+									<excludes>
+										<exclude>**/*.html</exclude>
+										<exclude>**/*.wod</exclude>
+										<exclude>**/*.api</exclude>
+										<exclude>.*</exclude>
+										<exclude>**/.*</exclude>
+										<exclude>**/.*/</exclude>
+									</excludes>                                		
+								</resource>
+								<resource> 
+									<directory>src/main/webserver-resources</directory>
+									<targetPath>${project.build.outputDirectory}/WebServerResources</targetPath>
+									<excludes>
+										<exclude>.*</exclude>
+										<exclude>**/.*</exclude>
+										<exclude>**/.*/</exclude>
+									</excludes>                                		
+								</resource>
+<!-- Temporary Start -->							
+								<resource> 
+									<directory>WebServerResources</directory>
+									<targetPath>${project.build.outputDirectory}/WebServerResources</targetPath>
+									<excludes>
+										<exclude>.*</exclude>
+										<exclude>**/.*</exclude>
+										<exclude>**/.*/</exclude>
+									</excludes>                                		
+								</resource>
+<!-- Temporary End -->				
+							</resources>
+						</configuration>
+					</execution>
+					
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>dependency-counter</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>dependency-counter</goal>
+						</goals>
+						<configuration>
+							<showDependencies>${tb.showDependencies}</showDependencies>
+						</configuration>
+					</execution>
+					<execution>
+						<id>resource-copy</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>resource-copy</goal>
+						</goals>
+						<configuration>
+							<debug>false</debug>
+							<isApplication>false</isApplication>
+							<directories>
+								<directory>src/main/components</directory>
+							</directories>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<!-- mvn javadoc:javadoc -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${tb.version.maven.javadoc}</version>
+				<configuration>
+					<!-- 
+						これはJavaDocに公開するレベルをprotectedまで対象にする指定。
+						通常はpublicだけなので公開レベルを広げたければprotectedやprivateを指定する。
+					-->
+					<show>public</show>
+					
+					<!-- stylesheetfile>${basedir}/src/main/javadoc/stylesheet.css</stylesheetfile -->
+					
+					<!-- 
+						例ではコメントアウトしているが、コメントアウトを外すとJavaDoc生成時に doclintツールのチェックを行わないという意味になる。
+						（コメントアウトしているのでチェックが行われる）
+						Java 8以降、Javadoc ツールには doclint が導入され Javadoc コメントの HTML とドキュメント	タグに対する様々なチェックを行うが、 そのことにより標準に準拠した記載が必要となり、
+						特定のフォーマット違反があると Javadoc の生成が失敗する。標準に準拠した記載が望まれるが、どうしても準拠出来ない場合はチェックを無効にする
+					-->
+					<!-- <doclint>none</doclint> -->
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>${tb.version.maven.plugin}</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>dependency-updates-report</report>
+							<report>plugin-updates-report</report>
+							<report>property-updates-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			
+			<plugin>
+				<!-- mvn findbugs:gui -->
+            		<groupId>org.codehaus.mojo</groupId>
+           		<artifactId>findbugs-maven-plugin</artifactId>
+            		<version>${tb.version.maven.findbugs}</version>
+			</plugin>
+			
+		</plugins>
+	</reporting>
+
+    <organization>
+ 		<!-- Login via Github -->
+		<name>TreasureBoat</name>
+        <url>https://treasureboat.org</url>
+    </organization>
+
+  	<developers>
+		<developer>
+			<id>ishimoto</id>
+			<name>Ken Ishimoto</name>
+			<email>k.ishimoto@treasureboat.org</email>
+			<url>https://www.treasureboat.org</url>
+			<organization>Treasureboat.org</organization>
+			<organizationUrl>https://www.treasureboat.org</organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>designer</role>
+				<role>developer</role>
+			</roles>
+			<timezone>JST</timezone>
+			<properties>
+				<discord>Ken Ishimoto#1657</discord>
+			</properties>
+		</developer>
+	</developers>
+
+	<licenses>
+		<!-- For deploy this is needed FIXME for TB what kind of Licensess ? -->
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<!-- Download Information -->
+	<repositories>
+		<repository>
+			<id>github</id>
+			<name>ishimoto</name>
+			<url>https://maven.pkg.github.com/ishimoto/*</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>github</id>
+			<name>ishimoto</name>
+			<url>https://maven.pkg.github.com/ishimoto/treasureboat-maven</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<!-- Upload Information -->
+<!--
+	<distributionManagement>
+		<repository>
+			<!- https://www.baeldung.com/maven-publish-artifacts-github-packages ->
+			<!- `id` – set to `github` ->
+			<id>github</id>
+			<!- `name` – the name of the personal account or organization that owns the repository ->
+			<name>ishimoto</name>
+			<!- `url` – the URL for publishing packages, typically in the format `https://maven.pkg.github.com/{owner}/{repository}` ->
+			<url>https://maven.pkg.github.com/ishimoto/treasureboat-content</url>
+		</repository>
+		
+			Example of a Snapshot Repository:
+			<snapshotRepository>
+				<id>nexus</id>
+				<name>nexus-snapshot</name>
+				<url>http://localhost:8081/repository/maven-snapshots/</url>
+			</snapshotRepository>
+	</distributionManagement>
+-->
+
+	<!-- 
+			Build Lifecycle :
+			https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
+			
+			* clean - remove all files generated by the previous build
+			* validate - validate the project is correct and all necessary information is available
+			* compile - compile the source code of the project
+			* test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+			* package - take the compiled code and package it in its distributable format, such as a JAR.
+			* verify - run any checks on results of integration tests to ensure quality criteria are met
+			* install - install the package into the local repository, for use as a dependency in other projects locally
+			* deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+            * site - generate site documentation for this project
+	-->
+
+</project>
