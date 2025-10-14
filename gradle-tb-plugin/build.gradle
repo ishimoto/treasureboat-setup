@@ -1,0 +1,99 @@
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'maven'
+
+// version is defined here
+apply from: "../gradle/versioning.gradle"
+
+group = 'org.treasureboat.gradle'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    if (System.properties.containsKey('nexusUrl')) {
+        maven {
+            credentials {
+                username "${System.properties['nexusUsername']}"
+                password "${System.properties['nexusPassword']}"
+            }
+            def nurl = "${System.properties['nexusUrl']}"
+            if (tbVersion.contains("-SNAPSHOT")) {
+                url "${nurl}/repository/maven-snapshots/"
+            } else {
+                url "${nurl}/repository/maven-public/"
+            }
+        }
+    }
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.5.1'
+    compile 'commons-io:commons-io:2.4'
+    compile "org.treasureboat.libraries:woproject:$tbVersion"
+}
+
+ext {
+    nexusUsername = System.properties['nexusUsername'] ?: System.properties.containsKey("nexusUsername") ? nexusUsername : ''
+    nexusPassword = System.properties['nexusPassword'] ?: System.properties.containsKey("nexusPassword") ? nexusPassword : ''
+    if (System.properties.containsKey('nexusUrl')) {
+        nexusUrl = "${System.properties['nexusUrl']}"
+    }
+}
+
+//wrapper {
+//    gradleVersion = '4.10.2'
+//    distributionType = 'all'
+//}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId 'gradle-tb-plugin'
+            from components.java
+        }
+    }
+
+    if (project.hasProperty('nexusUrl')) {
+        uploadArchives {
+            repositories {
+                mavenDeployer {
+                    repository(url: "${nexusUrl}/repository/maven-releases/") {
+                        authentication(userName: nexusUsername, password: nexusPassword)
+                    }
+                    snapshotRepository(url: "${nexusUrl}/repository/maven-snapshots") {
+                        authentication(userName: nexusUsername, password: nexusPassword)
+                    }
+
+                    pom.setArtifactId(project.name)
+                    pom.withXml {
+                        //asNode().appendNode('description', TBHashCode.toString()) // TBHashCode added
+                        def orgNode = asNode().appendNode('organization')
+                        orgNode.appendNode('name', 'TreasureBoat')
+                        orgNode.appendNode('url', 'http://treasureboat.org')
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+buildscript {
+    repositories {
+	    mavenLocal()
+    }
+}
+
+
