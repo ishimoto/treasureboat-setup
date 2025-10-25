@@ -14,7 +14,7 @@
 	<name>TreasureBoat.org Maven Super POM</name>
 	
 	<properties>
-		<tb.lastmodified>2025/10/13</tb.lastmodified>
+		<tb.lastmodified>2025/10/25</tb.lastmodified>
 
 		<tb.java10.snapshot>10.99.99-SNAPSHOT</tb.java10.snapshot>
 		<tb.java11.snapshot>11.99.99-SNAPSHOT</tb.java11.snapshot>
@@ -27,7 +27,7 @@
 		<tb.fw.features>10.1.10</tb.fw.features>
 		<tb.fw.extra>10.1.2</tb.fw.extra>
 		<tb.fw.sangria>10.1.5</tb.fw.sangria>
-		<tb.fw.pro>10.2.5</tb.fw.pro>
+		<tb.fw.pro>10.2.6</tb.fw.pro>
 		<tb.fw.prox>10.2.2</tb.fw.prox>
 		<tb.fw.template>11.0.2</tb.fw.template>
 		<tb.fw.elastic>10.5.1</tb.fw.elastic>
@@ -66,7 +66,7 @@
 		<tb.version.maven.lifecycle-mapping>1.0.0</tb.version.maven.lifecycle-mapping>
 		
 		<!-- Core Utillities -->
-        <tb.logback>1.5.18</tb.logback>
+        <tb.logback>1.5.19</tb.logback>
         <tb.slf4j-api>2.0.17</tb.slf4j-api>
         <tb.lombok>1.18.42</tb.lombok>
 
