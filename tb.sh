@@ -38,10 +38,10 @@ echo "[INFO] Executing Gradle PlugIn Installation"
 echo "[INFO] ------------------------------------------------------------------------"
 echo "[INFO] "
 cd GradleDev/gradle-tb-plugin
-./gradlew wrapper
-./gradlew clean
-./gradlew build
-./gradlew publishToMavenLocal
+../gradlew wrapper
+../gradlew clean
+../gradlew build
+../gradlew publishToMavenLocal
 ls -l ~/.m2/repository/org/treasureboat/gradle/gradle-tb-plugin/
 cd ../..
 
