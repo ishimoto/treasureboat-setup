@@ -20,20 +20,20 @@
 		<tb.java11.snapshot>11.99.99-SNAPSHOT</tb.java11.snapshot>
 
 		<tb.fw.content>10.1.4</tb.fw.content>
-		<tb.fw.core>10.1.10</tb.fw.core>
-		<tb.fw.db>10.1.7</tb.fw.db>
-		<tb.fw.inout>10.1.9</tb.fw.inout>
-		<tb.fw.archive>10.1.9</tb.fw.archive>
-		<tb.fw.features>10.1.10</tb.fw.features>
-		<tb.fw.extra>10.1.2</tb.fw.extra>
-		<tb.fw.sangria>10.1.5</tb.fw.sangria>
-		<tb.fw.pro>10.2.6</tb.fw.pro>
-		<tb.fw.prox>10.2.2</tb.fw.prox>
-		<tb.fw.template>11.0.2</tb.fw.template>
-		<tb.fw.elastic>10.5.1</tb.fw.elastic>
-		<tb.fw.opensearch>10.6.1</tb.fw.opensearch>
-		<tb.fw.ultra>10.1.5</tb.fw.ultra>
-		<tb.fw.elemental>10.0.7</tb.fw.elemental>
+		<tb.fw.core>10.1.11</tb.fw.core>
+		<tb.fw.db>10.1.8</tb.fw.db>
+		<tb.fw.inout>10.1.10</tb.fw.inout>
+		<tb.fw.archive>10.1.10</tb.fw.archive>
+		<tb.fw.features>10.1.11</tb.fw.features>
+		<tb.fw.extra>10.1.3</tb.fw.extra>
+		<tb.fw.sangria>10.1.6</tb.fw.sangria><!-- Dirty -->
+		<tb.fw.pro>10.2.8</tb.fw.pro><!-- Dirty -->
+		<tb.fw.prox>10.2.3</tb.fw.prox>
+		<tb.fw.template>11.0.3</tb.fw.template>
+		<tb.fw.elastic>10.5.2</tb.fw.elastic>
+		<tb.fw.opensearch>10.6.2</tb.fw.opensearch>
+		<tb.fw.ultra>10.1.6</tb.fw.ultra>
+		<tb.fw.elemental>10.0.8</tb.fw.elemental>
 
 		<tb.showDependencies>false</tb.showDependencies>
 	
@@ -1408,6 +1408,11 @@
 			<dependency>
 				<groupId>org.treasureboat</groupId>
 				<artifactId>tb-sangria-main</artifactId>
+				<version>${tb.fw.sangria}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-sangria-gumby-pages</artifactId>
 				<version>${tb.fw.sangria}</version>
 			</dependency>
 
