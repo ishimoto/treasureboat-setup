@@ -33,6 +33,7 @@
 		<tb.fw.elastic>10.5.1</tb.fw.elastic>
 		<tb.fw.opensearch>10.6.1</tb.fw.opensearch>
 		<tb.fw.ultra>10.1.5</tb.fw.ultra>
+		<tb.fw.elemental>10.0.7</tb.fw.elemental>
 
 		<tb.showDependencies>false</tb.showDependencies>
 	
@@ -100,6 +101,7 @@
 				<tb.fw.elastic>${tb.java10.snapshot}</tb.fw.elastic>
 				<tb.fw.opensearch>${tb.java10.snapshot}</tb.fw.opensearch>
 				<tb.fw.ultra>${tb.java10.snapshot}</tb.fw.ultra>
+				<tb.fw.elemental>${tb.java10.snapshot}</tb.fw.elemental>
 			</properties>
 		</profile>
 	    <profile>
@@ -586,10 +588,10 @@
 				<artifactId>reflections</artifactId>
 				<version>0.10.2</version>
 				<exclusions>
-	            		<exclusion>
-	                		<groupId>xml-apis</groupId>
-	                		<artifactId>xml-apis</artifactId>
-	            		</exclusion>
+            		<exclusion>
+                		<groupId>xml-apis</groupId>
+                		<artifactId>xml-apis</artifactId>
+            		</exclusion>
 				</exclusions>
 			</dependency>
 	
