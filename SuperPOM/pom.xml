@@ -20,7 +20,7 @@
 		<tb.java11.snapshot>11.99.99-SNAPSHOT</tb.java11.snapshot>
 
 		<tb.fw.content>10.1.5</tb.fw.content>
-		<tb.fw.core>10.1.12</tb.fw.core>
+		<tb.fw.core>10.1.12</tb.fw.core><!-- Dirty  : Sample-->
 		<tb.fw.db>10.1.9</tb.fw.db>
 		<tb.fw.inout>10.1.11</tb.fw.inout>
 		<tb.fw.archive>10.1.11</tb.fw.archive>
@@ -33,7 +33,7 @@
 		<tb.fw.elastic>10.5.3</tb.fw.elastic>
 		<tb.fw.opensearch>10.6.3</tb.fw.opensearch>
 		<tb.fw.ultra>10.1.7</tb.fw.ultra>
-		<tb.fw.elemental>10.0.9</tb.fw.elemental>
+		<tb.fw.elemental>10.0.11</tb.fw.elemental>
 
 		<tb.showDependencies>false</tb.showDependencies>
 	
@@ -80,7 +80,7 @@
         <org.apache.avalon.framework.version>4.3.1</org.apache.avalon.framework.version>
 		
 		<!-- TB Build Information -->
-		<tb.maven>1.0.5</tb.maven>
+		<tb.maven>1.0.6</tb.maven>
 	</properties>
 
     <profiles>
@@ -771,11 +771,11 @@
 				<artifactId>batik-all</artifactId>
 				<version>1.19</version>
 				<exclusions>
-		            	<exclusion>
-		                	<groupId>xml-apis</groupId>
-		                	<artifactId>xml-apis</artifactId>
-		            	</exclusion>
-		        	</exclusions>
+	            	<exclusion>
+	                	<groupId>xml-apis</groupId>
+	                	<artifactId>xml-apis</artifactId>
+	            	</exclusion>
+	        	</exclusions>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/org.olap4j/olap4j -->
@@ -784,11 +784,11 @@
 				<artifactId>olap4j</artifactId>
 				<version>1.2.0</version>
 				<exclusions>
-		            	<exclusion>
-		                	<groupId>xerces</groupId>
-		                	<artifactId>xercesImpl</artifactId>
-		            	</exclusion>
-		        	</exclusions>
+		            <exclusion>
+		               	<groupId>xerces</groupId>
+		               	<artifactId>xercesImpl</artifactId>
+		            </exclusion>
+		        </exclusions>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
@@ -924,11 +924,11 @@
 				<artifactId>fop</artifactId>
 				<version>2.11</version>
 				<exclusions>
-	            		<exclusion>
-	                		<groupId>xml-apis</groupId>
-	                		<artifactId>xml-apis</artifactId>
-	            		</exclusion>
-		        	</exclusions>
+            		<exclusion>
+                		<groupId>xml-apis</groupId>
+                		<artifactId>xml-apis</artifactId>
+            		</exclusion>
+		        </exclusions>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/com.github.iarellano/org.everit.json.schema -->
