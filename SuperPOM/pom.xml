@@ -20,9 +20,9 @@
 		<tb.java11.snapshot>11.99.99-SNAPSHOT</tb.java11.snapshot>
 
 		<tb.fw.content>10.1.5</tb.fw.content>
-		<tb.fw.core>10.1.12</tb.fw.core><!-- Dirty  : Sample-->
+		<tb.fw.core>10.1.13</tb.fw.core><!-- Dirty  : Sample-->
 		<tb.fw.db>10.1.9</tb.fw.db>
-		<tb.fw.inout>10.1.11</tb.fw.inout>
+		<tb.fw.inout>10.1.12</tb.fw.inout>
 		<tb.fw.archive>10.1.11</tb.fw.archive>
 		<tb.fw.features>10.1.12</tb.fw.features>
 		<tb.fw.extra>10.1.4</tb.fw.extra>
@@ -30,10 +30,10 @@
 		<tb.fw.pro>10.2.9</tb.fw.pro><!-- Dirty -->
 		<tb.fw.prox>10.2.4</tb.fw.prox>
 		<tb.fw.template>11.0.4</tb.fw.template>
-		<tb.fw.elastic>10.5.3</tb.fw.elastic>
-		<tb.fw.opensearch>10.6.3</tb.fw.opensearch>
-		<tb.fw.ultra>10.1.7</tb.fw.ultra>
-		<tb.fw.elemental>10.0.11</tb.fw.elemental>
+		<tb.fw.elastic>10.5.4</tb.fw.elastic>
+		<tb.fw.opensearch>10.6.4</tb.fw.opensearch>
+		<tb.fw.ultra>10.1.8</tb.fw.ultra>
+		<tb.fw.elemental>10.0.12</tb.fw.elemental>
 
 		<tb.showDependencies>false</tb.showDependencies>
 	
