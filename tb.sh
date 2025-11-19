@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "**********************************************************************"
-echo "***** starting 'tb.sh' script version : 2025/10/14"
+echo "***** starting 'tb.sh' script version : 2025/11/19"
 echo "***** TB Gradle/Maven Setup"
 echo "**********************************************************************"
 echo ""
@@ -20,9 +20,9 @@ echo "[INFO] Executing EO Template Installation"
 echo "[INFO] ------------------------------------------------------------------------"
 echo "[INFO] "
 cd TBEOTemplates/
-sudo mkdir -p /usr/local/TreasureBoat
-sudo chmod 777 /usr/local/TreasureBoat
-cp *.vm /usr/local/TreasureBoat/.
+mkdir -p /Users/Shared/TreasureBoat
+chmod 777 /Users/Shared/TreasureBoat
+cp *.vm /Users/Shared/TreasureBoat/.
 cd ..
 
 echo "[INFO] ------------------------------------------------------------------------"
