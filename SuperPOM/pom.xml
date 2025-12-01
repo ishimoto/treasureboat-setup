@@ -32,7 +32,7 @@
 		<tb.fw.template>11.0.4</tb.fw.template>
 		<tb.fw.elastic>10.5.4</tb.fw.elastic>
 		<tb.fw.opensearch>10.6.4</tb.fw.opensearch>
-		<tb.fw.ultra>10.1.8</tb.fw.ultra>
+		<tb.fw.ultra>10.1.9</tb.fw.ultra>
 		<tb.fw.elemental>10.0.13</tb.fw.elemental>
 
 		<tb.showDependencies>false</tb.showDependencies>
