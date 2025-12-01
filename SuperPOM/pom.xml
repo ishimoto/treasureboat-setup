@@ -80,7 +80,7 @@
         <org.apache.avalon.framework.version>4.3.1</org.apache.avalon.framework.version>
 		
 		<!-- TB Build Information -->
-		<tb.maven>1.0.6</tb.maven>
+		<tb.maven>1.0.7</tb.maven>
 	</properties>
 
     <profiles>
