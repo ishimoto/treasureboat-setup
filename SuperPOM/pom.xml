@@ -24,7 +24,7 @@
 		<tb.fw.db>10.1.9</tb.fw.db>
 		<tb.fw.inout>10.1.12</tb.fw.inout>
 		<tb.fw.archive>10.1.11</tb.fw.archive>
-		<tb.fw.features>10.1.12</tb.fw.features>
+		<tb.fw.features>10.1.13</tb.fw.features>
 		<tb.fw.extra>10.1.4</tb.fw.extra>
 		<tb.fw.sangria>10.1.7</tb.fw.sangria><!-- Dirty -->
 		<tb.fw.pro>10.2.10</tb.fw.pro>
