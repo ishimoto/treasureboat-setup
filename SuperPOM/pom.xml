@@ -16,8 +16,17 @@
 	<properties>
 		<tb.lastmodified>2025/10/25</tb.lastmodified>
 
+		<!-- Deprecated -->
 		<tb.java10.snapshot>10.99.99-SNAPSHOT</tb.java10.snapshot>
 		<tb.java11.snapshot>11.99.99-SNAPSHOT</tb.java11.snapshot>
+
+		<!-- New Naming Convention withiout dot so Gradle can read it -->
+	    <tbJava10Snapshot>10.99.99-SNAPSHOT</tbJava10Snapshot>
+	    <tbJava11Snapshot>11.99.99-SNAPSHOT</tbJava11Snapshot>
+	    <tbJava12Snapshot>12.99.99-SNAPSHOT</tbJava12Snapshot>
+	    <tbJava13Snapshot>13.99.99-SNAPSHOT</tbJava13Snapshot>
+	    <tbJava14Snapshot>14.99.99-SNAPSHOT</tbJava14Snapshot>
+	    <tbJava15Snapshot>15.99.99-SNAPSHOT</tbJava15Snapshot>
 
 		<tb.fw.content>10.1.5</tb.fw.content>
 		<tb.fw.core>10.1.15</tb.fw.core><!-- Dirty  : Sample-->
@@ -85,23 +94,24 @@
 
     <profiles>
 	    <profile>
+	    	<!-- This is needed for Eclipse-Dev whe the Components are installed for TreasureBoat Development -->
 	        <id>eclipse-dev</id>
 			<properties>
-				<tb.fw.content>${tb.java10.snapshot}</tb.fw.content>
-				<tb.fw.core>${tb.java10.snapshot}</tb.fw.core>
-				<tb.fw.db>${tb.java10.snapshot}</tb.fw.db>
-				<tb.fw.inout>${tb.java10.snapshot}</tb.fw.inout>
-				<tb.fw.archive>${tb.java10.snapshot}</tb.fw.archive>
-				<tb.fw.features>${tb.java10.snapshot}</tb.fw.features>
-				<tb.fw.extra>${tb.java10.snapshot}</tb.fw.extra>
-				<tb.fw.template>${tb.java11.snapshot>}</tb.fw.template>
-				<tb.fw.sangria>${tb.java10.snapshot}</tb.fw.sangria>
-				<tb.fw.pro>${tb.java10.snapshot}</tb.fw.pro>
-				<tb.fw.prox>${tb.java10.snapshot}</tb.fw.prox>
-				<tb.fw.elastic>${tb.java10.snapshot}</tb.fw.elastic>
-				<tb.fw.opensearch>${tb.java10.snapshot}</tb.fw.opensearch>
-				<tb.fw.ultra>${tb.java10.snapshot}</tb.fw.ultra>
-				<tb.fw.elemental>${tb.java10.snapshot}</tb.fw.elemental>
+				<tb.fw.content>${tbJava10Snapshot}</tb.fw.content>
+				<tb.fw.core>${tbJava10Snapshot}</tb.fw.core>
+				<tb.fw.db>${tbJava10Snapshot}</tb.fw.db>
+				<tb.fw.inout>${tbJava10Snapshot}</tb.fw.inout>
+				<tb.fw.archive>${tbJava10Snapshot}</tb.fw.archive>
+				<tb.fw.features>${tbJava10Snapshot}</tb.fw.features>
+				<tb.fw.extra>${tbJava10Snapshot}</tb.fw.extra>
+				<tb.fw.template>${tbJava11Snapshot>}</tb.fw.template>
+				<tb.fw.sangria>${tbJava10Snapshot}</tb.fw.sangria>
+				<tb.fw.pro>${tbJava10Snapshot}</tb.fw.pro>
+				<tb.fw.prox>${tbJava10Snapshot}</tb.fw.prox>
+				<tb.fw.elastic>${tbJava10Snapshot}</tb.fw.elastic>
+				<tb.fw.opensearch>${tbJava10Snapshot}</tb.fw.opensearch>
+				<tb.fw.ultra>${tbJava10Snapshot}</tb.fw.ultra>
+				<tb.fw.elemental>${tbJava10Snapshot}</tb.fw.elemental>
 			</properties>
 		</profile>
 	    <profile>
