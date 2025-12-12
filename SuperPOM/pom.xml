@@ -42,7 +42,7 @@
 		<tb.fw.elastic>10.5.4</tb.fw.elastic>
 		<tb.fw.opensearch>10.6.4</tb.fw.opensearch>
 		<tb.fw.ultra>10.1.10</tb.fw.ultra>
-		<tb.fw.elemental>10.0.14</tb.fw.elemental><!-- Dirty => Elemental -->
+		<tb.fw.elemental>10.0.15</tb.fw.elemental><!-- Dirty => Elemental -->
 
 		<tb.showDependencies>false</tb.showDependencies>
 	
