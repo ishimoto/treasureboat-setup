@@ -29,7 +29,7 @@
 	    <tbJava15Snapshot>15.99.99-SNAPSHOT</tbJava15Snapshot>
 
 		<tb.fw.content>10.1.5</tb.fw.content>
-		<tb.fw.core>10.1.15</tb.fw.core><!-- Dirty  : Sample-->
+		<tb.fw.core>10.1.16</tb.fw.core><!-- Dirty  : Sample, Pro, Template -->
 		<tb.fw.db>10.1.9</tb.fw.db>
 		<tb.fw.inout>10.1.12</tb.fw.inout>
 		<tb.fw.archive>10.1.11</tb.fw.archive>
