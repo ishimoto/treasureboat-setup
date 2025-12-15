@@ -1,13 +1,13 @@
 <project 	xmlns="http://maven.apache.org/POM/4.0.0" 
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         	http://maven.apache.org/maven-v4_0_0.xsd">
+         	https://maven.apache.org/maven-v4_0_0.xsd">
          
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.treasureboat</groupId>
 	<artifactId>super-pom</artifactId>
-    <!-- status code: 422, reason phrase: Unprocessable Entity (422)  Looks like the artifactId has to be all lowercase -->
+    <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
 	<version>0.1</version>
 
 	<packaging>pom</packaging>
@@ -21,7 +21,7 @@
 		<tb.java10.snapshot>10.99.99-SNAPSHOT</tb.java10.snapshot>
 		<tb.java11.snapshot>11.99.99-SNAPSHOT</tb.java11.snapshot>
 
-		<!-- New Naming Convention withiout dot so Gradle can read it -->
+		<!-- New Naming Convention without dot so Gradle can read it -->
 	    <tbJava10Snapshot>10.99.99-SNAPSHOT</tbJava10Snapshot>
 	    <tbJava11Snapshot>11.99.99-SNAPSHOT</tbJava11Snapshot>
 	    <tbJava12Snapshot>12.99.99-SNAPSHOT</tbJava12Snapshot>
@@ -30,7 +30,7 @@
 	    <tbJava15Snapshot>15.99.99-SNAPSHOT</tbJava15Snapshot>
 
 		<tb.fw.content>10.1.5</tb.fw.content>
-		<tb.fw.core>10.1.16</tb.fw.core><!-- Dirty  : Sample, Pro, Template -->
+		<tb.fw.core>10.1.16</tb.fw.core><!-- Dirty: Sample, Pro, Template -->
 		<tb.fw.db>10.1.9</tb.fw.db>
 		<tb.fw.inout>10.1.12</tb.fw.inout>
 		<tb.fw.archive>10.1.11</tb.fw.archive>
@@ -54,7 +54,7 @@
 
 		<github.global.server>github</github.global.server>
 
-		<!-- your Maven Build setup : Not used yet -->
+		<!-- your Maven Build setup: Not used yet -->
 		<tb.version.maven.gpg>3.2.8</tb.version.maven.gpg>
 
 		<!-- your Maven Build setup -->
@@ -78,7 +78,7 @@
 		<tb.version.maven.site>3.21.0</tb.version.maven.site>
 		<tb.version.maven.source>3.4.0</tb.version.maven.source>
 		
-		<!-- Core Utillities -->
+		<!-- Core Utilities -->
         <tb.logback>1.5.19</tb.logback>
         <tb.slf4j-api>2.0.17</tb.slf4j-api>
         <tb.lombok>1.18.42</tb.lombok>
@@ -192,7 +192,7 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- 3th party Libraries -->
+			<!-- 3 th party Libraries -->
 			
 			<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
 			<dependency>
@@ -892,7 +892,7 @@
 			<dependency>
 				<groupId>com.github.librepdf</groupId>
 				<artifactId>openpdf</artifactId>
-<!-- The 2.1.x Branch requires Java 21 or later : We have to be sure that Dev / Compile and Runtime is Java21 : 2.2.3 -->
+<!-- The 2.1.x Branch requires Java 21 or later: We have to be sure that Dev / Compile and Runtime is Java21: 2.2.3 -->
 				<version>2.0.5</version>
 			</dependency>
 
@@ -1580,19 +1580,19 @@
 						[ Checking for new versions of specified by properties ]
 							mvn versions:display-property-updates : Display which properties have newer versions
 						[ Create a report of new versions of dependencies ]
-                            mvn versions:dependency-updates-report : Generate a report and check `/target/reports` html result file
+                            mvn versions:dependency-updates-report : Generate a report and check `/target/reports` HTML result file
 					
 					Note: modifies pom.xml files
-						[ To restore your pom.xml files to their initial state, before you started modifying it with the versions-maven-plugin, invoke the revert goal. ]
+						[ To restore your pom.xml files to their initial state, before you start modifying it with the versions-maven-plugin, invoke the revert goal]
                         	mvn versions:revert : Revert changes made by the versions plugin to the pom.xml file
                         	
-                        [ To update the versions of dependencies and plugins in your pom.xml files, invoke one of the use or update goals. ]
-                        	mvn -N versions:update-child-modules : Update the versions of child modules to match the parent
+                        [ To update the versions of dependencies and plugins in your pom.xml files, invoke one of the use or update goals]
+                        	mvn -N versions:update-child-modules: Update the versions of child modules to match the parent
                         	
                         [ To set the project version to a specific version, just invoke the set goal.]	
-                        	mvn versions:set -DnewVersion=10.1.5 : Set the project version to a specific value
+                        	mvn versions:set -DnewVersion=10.1.5: Set the project version to a specific value
                         	
-						[ To accept the modifications made to your pom.xml files by the versions-maven-plugin invoke the commit goal. ]
+						[ To accept the modifications made to your pom.xml files by the `versions-maven-plugin` invoke the commit goal]
                             mvn versions:commit : Commit changes made by the versions plugin to the pom.xml file
 
 				-->
@@ -1610,8 +1610,8 @@
 
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-help-plugin -->
 				<!-- 
-					Display the current active profile : mvn help:active-profiles
-					Make an profile active : mvn compile -P integration-tests 
+					Display the current active profile: mvn help:active-profiles
+					Make a profile active: mvn compile -P integration-tests
 				-->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -1927,7 +1927,7 @@
 				</configuration>
 			</plugin>
 
-<!-- Generate checksums for all JAR files : Not used in Github -->
+<!-- Generate checksums for all JAR files: Not used in GitHub -->
 <!--
 			<plugin>
 				<groupId>net.nicoulaj.maven.plugins</groupId>
@@ -1965,7 +1965,7 @@
 				</executions>
 			</plugin>
 -->
-<!-- : Not used in Github 
+<!-- : Not used in GitHub
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
@@ -2012,7 +2012,7 @@
 						<configuration>
 							<resources>
 								<resource> 
-									<!-- This will create that folder but we have to NOT copy the components-->
+									<!-- This will create that folder, but we have to NOT copy the components -->
 									<directory>src/main/webapp</directory>
 									<targetPath>${project.build.outputDirectory}/tmp</targetPath>
 									<excludes>
@@ -2036,7 +2036,7 @@
 
 <!-- Temporary Start -->							
 								<resource> 
-									<!-- This will create that folder but we have to NOT copy the components-->
+									<!-- This will create that folder, but we have to NOT copy the components-->
 									<directory>src/main/components</directory>
 									<targetPath>${project.build.outputDirectory}/tmp</targetPath>
 									<excludes>
@@ -2182,7 +2182,7 @@
 	</developers>
 
 	<licenses>
-		<!-- For deploy this is needed FIXME for TB what kind of Licensess ? -->
+		<!-- For deploy this is needed FIXME for TB what kind of Licenses ? -->
 		<license>
 			<name>Apache License, Version 2.0</name>
 			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
@@ -2217,8 +2217,8 @@
 	<distributionManagement>
 		<repository>
 			<!- https://www.baeldung.com/maven-publish-artifacts-github-packages ->
-			<!- `id` – set to `github` ->
-			<id>github</id>
+			<!- `id` – set to `GitHub` ->
+			<id>GitHub</id>
 			<!- `name` – the name of the personal account or organization that owns the repository ->
 			<name>ishimoto</name>
 			<!- `url` – the URL for publishing packages, typically in the format `https://maven.pkg.github.com/{owner}/{repository}` ->
@@ -2235,7 +2235,7 @@
 -->
 
 	<!-- 
-			Build Lifecycle :
+			Build Lifecycle:
 			https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
 			
 			* clean - remove all files generated by the previous build
@@ -2259,7 +2259,7 @@
             Common Causes of Invalid Names
 				Invalid Characters: Module names must be valid Java identifiers. This means they cannot contain characters like dashes (-). For example, serenity-core is invalid because of the dash.
 				Java Keywords: Names cannot be Java keywords. For instance, using enum or default in a module name is not allowed.
-				Improper Naming Conventions: Module names should follow reverse-DNS naming conventions, similar to package names. For example, org.example.module is valid, while org.example..module is not.
+				Improper Naming Conventions: Module names should follow reverse-DNS naming conventions, similar to package names. For example, org.example.module is valid, while org.example.module is not.
 	-->
 
 </project>
