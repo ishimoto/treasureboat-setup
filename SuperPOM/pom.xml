@@ -1,6 +1,7 @@
 <project 	xmlns="http://maven.apache.org/POM/4.0.0" 
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         	http://maven.apache.org/maven-v4_0_0.xsd">
          
     <modelVersion>4.0.0</modelVersion>
 
@@ -14,7 +15,7 @@
 	<name>TreasureBoat.org Maven Super POM</name>
 	
 	<properties>
-		<tb.lastmodified>2025/10/25</tb.lastmodified>
+		<tb.lastmodified>2025/12/15</tb.lastmodified>
 
 		<!-- Deprecated -->
 		<tb.java10.snapshot>10.99.99-SNAPSHOT</tb.java10.snapshot>
@@ -53,27 +54,29 @@
 
 		<github.global.server>github</github.global.server>
 
-		<!-- your Maven Build setup -->
-		<tb.version.maven.clean>3.5.0</tb.version.maven.clean>
-		<tb.version.maven.build-helper>3.6.1</tb.version.maven.build-helper>
-		<tb.version.maven.git-commit>9.0.2</tb.version.maven.git-commit>
-		<tb.version.maven.compiler>3.14.1</tb.version.maven.compiler>
-		<tb.version.maven.source>3.3.1</tb.version.maven.source>
-		<tb.version.maven.resources>3.3.1</tb.version.maven.resources>
-		<tb.version.maven.javadoc>3.12.0</tb.version.maven.javadoc>
-		<tb.version.maven.jar>3.4.2</tb.version.maven.jar>
-		<tb.version.maven.site>3.21.0</tb.version.maven.site>
-		<tb.version.maven.install>3.1.4</tb.version.maven.install>
-		<tb.version.maven.deploy>3.1.4</tb.version.maven.deploy>
-		<tb.version.maven.plugin>2.19.1</tb.version.maven.plugin>
-		<tb.version.maven.profile>3.5.1</tb.version.maven.profile>
-		<tb.version.maven.findbugs>3.0.5</tb.version.maven.findbugs>
-		<tb.version.maven.dependency>3.8.1</tb.version.maven.dependency>
-		<tb.version.maven.release>3.1.1</tb.version.maven.release>
-		<tb.version.maven.enforcer>3.6.1</tb.version.maven.enforcer>
-		<tb.version.maven.checksum>1.11</tb.version.maven.checksum>
+		<!-- your Maven Build setup : Not used yet -->
 		<tb.version.maven.gpg>3.2.8</tb.version.maven.gpg>
+
+		<!-- your Maven Build setup -->
+		<tb.version.maven.build-helper>3.6.1</tb.version.maven.build-helper>
+		<tb.version.maven.checksum>1.11</tb.version.maven.checksum>
+		<tb.version.maven.clean>3.5.0</tb.version.maven.clean>
+		<tb.version.maven.compiler>3.14.1</tb.version.maven.compiler>
+		<tb.version.maven.dependency>3.9.0</tb.version.maven.dependency>
+		<tb.version.maven.deploy>3.1.4</tb.version.maven.deploy>
+		<tb.version.maven.enforcer>3.6.2</tb.version.maven.enforcer>
+		<tb.version.maven.findbugs>3.0.5</tb.version.maven.findbugs>
+		<tb.version.maven.git-commit>9.0.2</tb.version.maven.git-commit>
+		<tb.version.maven.install>3.1.4</tb.version.maven.install>
+		<tb.version.maven.jar>3.4.2</tb.version.maven.jar><!-- https://github.com/eclipse-m2e/m2e-core/issues/2084 -->
+		<tb.version.maven.javadoc>3.12.0</tb.version.maven.javadoc>
 		<tb.version.maven.lifecycle-mapping>1.0.0</tb.version.maven.lifecycle-mapping>
+		<tb.version.maven.plugin>2.20.1</tb.version.maven.plugin>
+		<tb.version.maven.profile>3.5.1</tb.version.maven.profile>
+		<tb.version.maven.release>3.2.0</tb.version.maven.release>
+		<tb.version.maven.resources>3.4.0</tb.version.maven.resources>
+		<tb.version.maven.site>3.21.0</tb.version.maven.site>
+		<tb.version.maven.source>3.4.0</tb.version.maven.source>
 		
 		<!-- Core Utillities -->
         <tb.logback>1.5.19</tb.logback>
@@ -89,7 +92,7 @@
         <org.apache.avalon.framework.version>4.3.1</org.apache.avalon.framework.version>
 		
 		<!-- TB Build Information -->
-		<tb.maven>1.0.7</tb.maven>
+		<tb.maven>1.0.8</tb.maven>
 	</properties>
 
     <profiles>
@@ -104,7 +107,7 @@
 				<tb.fw.archive>${tbJava10Snapshot}</tb.fw.archive>
 				<tb.fw.features>${tbJava10Snapshot}</tb.fw.features>
 				<tb.fw.extra>${tbJava10Snapshot}</tb.fw.extra>
-				<tb.fw.template>${tbJava11Snapshot>}</tb.fw.template>
+				<tb.fw.template>${tbJava11Snapshot}</tb.fw.template>
 				<tb.fw.sangria>${tbJava10Snapshot}</tb.fw.sangria>
 				<tb.fw.pro>${tbJava10Snapshot}</tb.fw.pro>
 				<tb.fw.prox>${tbJava10Snapshot}</tb.fw.prox>
@@ -1511,7 +1514,10 @@
 		<directory>${project.basedir}/target</directory>
 		<outputDirectory>${project.build.directory}/classes</outputDirectory>
 		<testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
-		
+
+    	<sourceDirectory>src/main/java</sourceDirectory>
+    	<testSourceDirectory>src/test/java</testSourceDirectory>
+    	
 		<finalName>${project.artifactId}-${project.version}</finalName>
  
  		<resources>
@@ -1987,8 +1993,9 @@
 						</goals>
 						<configuration>
 							<sources>
+								<source>src/generated/java</source>
+<!-- Temporary Start -->
 								<source>src/main/generated</source>
-<!-- Temporary Start -->							
 								<source>Sources</source>
 								<source>GeneratedEOs</source>
 <!-- Temporary End -->							
@@ -2006,7 +2013,7 @@
 							<resources>
 								<resource> 
 									<!-- This will create that folder but we have to NOT copy the components-->
-									<directory>src/main/components</directory>
+									<directory>src/main/webapp</directory>
 									<targetPath>${project.build.outputDirectory}/tmp</targetPath>
 									<excludes>
 										<exclude>**/*.html</exclude>
@@ -2026,7 +2033,21 @@
 										<exclude>**/.*/</exclude>
 									</excludes>                                		
 								</resource>
+
 <!-- Temporary Start -->							
+								<resource> 
+									<!-- This will create that folder but we have to NOT copy the components-->
+									<directory>src/main/components</directory>
+									<targetPath>${project.build.outputDirectory}/tmp</targetPath>
+									<excludes>
+										<exclude>**/*.html</exclude>
+										<exclude>**/*.wod</exclude>
+										<exclude>**/*.api</exclude>
+										<exclude>.*</exclude>
+										<exclude>**/.*</exclude>
+										<exclude>**/.*/</exclude>
+									</excludes>                                		
+								</resource>
 								<resource> 
 									<directory>WebServerResources</directory>
 									<targetPath>${project.build.outputDirectory}/WebServerResources</targetPath>
@@ -2036,7 +2057,8 @@
 										<exclude>**/.*/</exclude>
 									</excludes>                                		
 								</resource>
-<!-- Temporary End -->				
+<!-- Temporary End -->
+
 							</resources>
 						</configuration>
 					</execution>
@@ -2068,8 +2090,11 @@
 							<debug>false</debug>
 							<isApplication>false</isApplication>
 							<directories>
+								<directory>src/main/webapp</directory>
+<!-- Temporary Start -->							
 								<directory>src/main/components</directory>
 								<directory>Components</directory>
+<!-- Temporary End -->							
 							</directories>
 						</configuration>
 					</execution>
@@ -2122,9 +2147,9 @@
 			
 			<plugin>
 				<!-- mvn findbugs:gui -->
-            		<groupId>org.codehaus.mojo</groupId>
-           		<artifactId>findbugs-maven-plugin</artifactId>
-            		<version>${tb.version.maven.findbugs}</version>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>${tb.version.maven.findbugs}</version>
 			</plugin>
 			
 		</plugins>
@@ -2222,6 +2247,19 @@
 			* install - install the package into the local repository, for use as a dependency in other projects locally
 			* deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
             * site - generate site documentation for this project
+	-->
+
+	<!-- 
+		Error Codes :
+		
+		* Error assembling JAR: Invalid automatic module name
+            An Automatic Module Name is a feature in Java that allows traditional JAR files to be used as modules in the Java Platform Module System (JPMS). 
+            This name is specified in the JAR's manifest file using the Automatic-Module-Name attribute. If this attribute is missing or invalid, it can lead to errors.
+            
+            Common Causes of Invalid Names
+				Invalid Characters: Module names must be valid Java identifiers. This means they cannot contain characters like dashes (-). For example, serenity-core is invalid because of the dash.
+				Java Keywords: Names cannot be Java keywords. For instance, using enum or default in a module name is not allowed.
+				Improper Naming Conventions: Module names should follow reverse-DNS naming conventions, similar to package names. For example, org.example.module is valid, while org.example..module is not.
 	-->
 
 </project>
