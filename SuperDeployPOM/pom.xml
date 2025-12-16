@@ -1,0 +1,724 @@
+<project 	xmlns="http://maven.apache.org/POM/4.0.0"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         	https://maven.apache.org/maven-v4_0_0.xsd">
+         
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.treasureboat</groupId>
+	<artifactId>super-deploy-pom</artifactId>
+	<version>0.1</version>
+
+	<packaging>pom</packaging>
+
+	<name>TreasureBoat.org Maven Super Deploy POM</name>
+	
+	<properties>
+		<tb.lastmodified>2025/12/16</tb.lastmodified>
+
+		<tb.showDependencies>false</tb.showDependencies>
+	
+ 		<maven.compiler.source>10</maven.compiler.source>
+		<maven.compiler.target>10</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<github.global.server>github</github.global.server>
+
+		<!-- your Maven Build setup -->
+		<tb.version.maven.clean>3.5.0</tb.version.maven.clean>
+		<tb.version.maven.build-helper>3.6.1</tb.version.maven.build-helper>
+		<tb.version.maven.git-commit>9.0.2</tb.version.maven.git-commit>
+		<tb.version.maven.compiler>3.14.1</tb.version.maven.compiler>
+		<tb.version.maven.source>3.3.1</tb.version.maven.source>
+		<tb.version.maven.resources>3.3.1</tb.version.maven.resources>
+		<tb.version.maven.javadoc>3.12.0</tb.version.maven.javadoc>
+		<tb.version.maven.jar>3.4.2</tb.version.maven.jar>
+		<tb.version.maven.site>3.21.0</tb.version.maven.site>
+		<tb.version.maven.install>3.1.4</tb.version.maven.install>
+		<tb.version.maven.deploy>3.1.4</tb.version.maven.deploy>
+		<tb.version.maven.plugin>2.19.1</tb.version.maven.plugin>
+		<tb.version.maven.profile>3.5.1</tb.version.maven.profile>
+		<tb.version.maven.findbugs>3.0.5</tb.version.maven.findbugs>
+		<tb.version.maven.dependency>3.8.1</tb.version.maven.dependency>
+		<tb.version.maven.release>3.1.1</tb.version.maven.release>
+		<tb.version.maven.enforcer>3.6.1</tb.version.maven.enforcer>
+		<tb.version.maven.checksum>1.11</tb.version.maven.checksum>
+		<tb.version.maven.gpg>3.2.8</tb.version.maven.gpg>
+		<tb.version.maven.lifecycle-mapping>1.0.0</tb.version.maven.lifecycle-mapping>
+
+		<!-- Core Utilities -->
+		<tb.lombok>1.18.42</tb.lombok>
+
+		<!-- TB Build Information -->
+		<tb.maven>1.0.8</tb.maven>
+	</properties>
+
+	<build>
+		<directory>${project.basedir}/target</directory>
+		<outputDirectory>${project.build.directory}/classes</outputDirectory>
+		<testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+		
+		<finalName>${project.artifactId}-${project.version}</finalName>
+ 
+ 		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<targetPath>${project.build.outputDirectory}/Resources</targetPath>
+				<includes>
+				</includes>
+				<excludes>
+					<exclude>.*</exclude>
+					<exclude>**/.*</exclude>
+					<exclude>**/.*/</exclude>
+					<exclude>**/EOTestMigration/**</exclude>
+					<exclude>**/*.eogen</exclude>
+				</excludes>
+			</resource>
+			
+<!-- Temporary Start -->							
+			<resource>
+				<directory>Resources</directory>
+				<targetPath>${project.build.outputDirectory}/Resources</targetPath>
+				<includes>
+				</includes>
+				<excludes>
+					<exclude>.*</exclude>
+					<exclude>**/.*</exclude>
+					<exclude>**/.*/</exclude>
+					<exclude>**/EOTestMigration/**</exclude>
+					<exclude>**/*.eogen</exclude>
+				</excludes>
+			</resource>				
+<!-- Temporary End -->
+
+		</resources>
+
+ 		<testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+		</testResources>
+   
+		<pluginManagement>
+			<!-- https://maven.apache.org/plugins/index.html -->
+			<plugins>
+				
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${tb.version.maven.clean}</version>
+				</plugin>
+				
+				<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/versions-maven-plugin -->
+				<!-- 
+					No change of POM : only report
+						[ Checking for new versions of plugins ]
+							mvn versions:display-plugin-updates : Display which plugins have newer versions
+						[ Checking for new versions of dependencies ]
+                            mvn versions:display-dependency-updates : Display which dependencies have newer versions
+						[ Checking for new versions of specified by properties ]
+							mvn versions:display-property-updates : Display which properties have newer versions
+						[ Create a report of new versions of dependencies ]
+                            mvn versions:dependency-updates-report : Generate a report and check `/target/reports` HTML result file
+					
+					Note: modifies pom.xml files
+						[ To restore your pom.xml files to their initial state, before you start modifying it with the versions-maven-plugin, invoke the revert goal]
+                        	mvn versions:revert : Revert changes made by the versions plugin to the pom.xml file
+                        	
+                        [ To update the versions of dependencies and plugins in your pom.xml files, invoke one of the use or update goals]
+                        	mvn -N versions:update-child-modules: Update the versions of child modules to match the parent
+                        	
+                        [ To set the project version to a specific version, just invoke the set goal.]	
+                        	mvn versions:set -DnewVersion=10.1.5: Set the project version to a specific value
+                        	
+						[ To accept the modifications made to your pom.xml files by the versions-maven-plugin, invoke the commit goal]
+                            mvn versions:commit : Commit changes made by the versions plugin to the pom.xml file
+
+				-->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>versions-maven-plugin</artifactId>
+    				<version>${tb.version.maven.plugin}</version>
+				</plugin>
+				
+				<plugin>
+        			<groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-enforcer-plugin</artifactId>
+					<version>${tb.version.maven.enforcer}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-help-plugin -->
+				<!-- 
+					Display the current active profile: mvn help:active-profiles
+					Make a profile active: mvn compile -P integration-tests
+				-->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-help-plugin</artifactId>
+            			<version>${tb.version.maven.profile}</version>
+					<executions>
+						<execution>
+							<id>show-profiles</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>active-profiles</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+								
+				<!-- https://mvnrepository.com/artifact/io.github.git-commit-id/git-commit-id-maven-plugin -->
+				<plugin>
+					<groupId>io.github.git-commit-id</groupId>
+					<artifactId>git-commit-id-maven-plugin</artifactId>
+					<version>${tb.version.maven.git-commit}</version>
+				</plugin>
+ 
+				<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/build-helper-maven-plugin -->
+				<!-- https://www.mojohaus.org/build-helper-maven-plugin/usage.html -->
+				<plugin>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${tb.version.maven.build-helper}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${tb.version.maven.compiler}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
+				<plugin>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${tb.version.maven.source}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${tb.version.maven.resources}</version>
+				</plugin>
+				
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
+				<plugin>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${tb.version.maven.javadoc}</version>
+				</plugin>
+				
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${tb.version.maven.jar}</version>
+				</plugin>
+				
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-site-plugin -->
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${tb.version.maven.site}</version>
+				</plugin>
+				
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${tb.version.maven.install}</version>
+				</plugin>
+				
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${tb.version.maven.deploy}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-dependency-plugin -->
+				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${tb.version.maven.dependency}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-release-plugin -->
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${tb.version.maven.release}</version>
+				</plugin>
+				
+				<!-- https://mvnrepository.com/artifact/net.nicoulaj.maven.plugins/checksum-maven-plugin -->
+				<plugin>
+					<groupId>net.nicoulaj.maven.plugins</groupId>
+					<artifactId>checksum-maven-plugin</artifactId>
+					<version>${tb.version.maven.checksum}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
+<!-- : Not used in Github 
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>${tb.version.maven.gpg}</version>
+				</plugin>
+-->
+
+				<plugin>
+					<groupId>org.treasureboat</groupId>
+					<artifactId>tb-maven-plugin</artifactId>
+					<version>${tb.maven}</version>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<!-- Configure the Goals of the plugin -->
+
+			<plugin>
+				<!-- This rule enforces certain Maven versions -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-maven</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>3.6.3</version>
+								</requireMavenVersion>
+							</rules>    
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+			</plugin>
+			
+ 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+          			<encoding>UTF-8</encoding>
+					<!-- 
+					<compilerArgument>-Xlint:all</compilerArgument>
+        			<showWarnings>true</showWarnings>
+        			<showDeprecation>true</showDeprecation>
+        			-->
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${tb.lombok}</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>get-the-git-infos</id>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+						<phase>initialize</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<generateGitPropertiesFile>true</generateGitPropertiesFile>
+					<generateGitPropertiesFilename>${project.build.outputDirectory}/Resources/git.properties</generateGitPropertiesFilename>
+					<commitIdGenerationMode>full</commitIdGenerationMode>
+				</configuration>
+			</plugin>
+
+ 			<plugin>
+			 	<!-- mvn package -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<outputDirectory>target/classes</outputDirectory>
+					<archive>
+						<manifestEntries>
+							<Automatic-Module-Name>${project.name}</Automatic-Module-Name>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<!-- mvn source:jar -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<excludeResources>true</excludeResources>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<!-- mvn javadoc:jar -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<show>public</show>
+					<!-- Skip all Javadoc validation and continue build even with errors -->
+					<doclint>none</doclint>
+					<failOnError>false</failOnError>
+					<failOnWarnings>false</failOnWarnings>
+					<quiet>true</quiet>
+					<additionalJOptions>
+						<additionalJOption>-J-Xmx1024m</additionalJOption>
+						<additionalJOption>-Xdoclint:none</additionalJOption>
+					</additionalJOptions>
+					<excludePackageNames>
+						*.impl.*:*.internal.*:*.test.*
+					</excludePackageNames>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<addDefaultExcludes>true</addDefaultExcludes>
+				</configuration>
+			</plugin>
+
+<!-- Generate checksums for all JAR files: Not used in GitHub -->
+<!--
+			<plugin>
+				<groupId>net.nicoulaj.maven.plugins</groupId>
+				<artifactId>checksum-maven-plugin</artifactId>
+				<version>${tb.version.maven.checksum}</version>
+
+				<executions>
+					<execution>
+						<id>checksum-maven-plugin-files</id>
+						<phase>package</phase>
+						<goals>
+							<goal>files</goal>
+						</goals>
+						<configuration>
+							<fileSets>
+								<fileSet>
+									<directory>${project.build.directory}</directory>
+									<includes>
+										<include>*.jar</include>
+									</includes>
+								</fileSet>
+							</fileSets>
+							<algorithms>
+								<algorithm>MD5</algorithm>
+								<algorithm>SHA-1</algorithm>
+							</algorithms>
+							<csvSummary>true</csvSummary>
+							<csvSummaryFile>${project.build.directory}/checksums.csv</csvSummaryFile>
+							<xmlSummary>true</xmlSummary>
+							<xmlSummaryFile>${project.build.directory}/checksums.xml</xmlSummaryFile>
+							<individualFiles>true</individualFiles>
+							<appendFilename>true</appendFilename>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+-->
+<!-- : Not used in GitHub
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+-->			
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>${tb.version.maven.build-helper}</version>
+				 <executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/main/generated</source>
+<!-- Temporary Start -->							
+								<source>Sources</source>
+								<source>GeneratedEOs</source>
+<!-- Temporary End -->							
+							</sources>
+						</configuration>
+					</execution>
+ 
+					<execution>
+						<id>add-resource</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>add-resource</goal>
+						</goals>
+						<configuration>
+							<resources>
+								<resource> 
+									<!-- This will create that folder, but we have to NOT copy the components -->
+									<directory>src/main/components</directory>
+									<targetPath>${project.build.outputDirectory}/tmp</targetPath>
+									<excludes>
+										<exclude>**/*.html</exclude>
+										<exclude>**/*.wod</exclude>
+										<exclude>**/*.api</exclude>
+										<exclude>.*</exclude>
+										<exclude>**/.*</exclude>
+										<exclude>**/.*/</exclude>
+									</excludes>                                		
+								</resource>
+								<resource> 
+									<directory>src/main/webserver-resources</directory>
+									<targetPath>${project.build.outputDirectory}/WebServerResources</targetPath>
+									<excludes>
+										<exclude>.*</exclude>
+										<exclude>**/.*</exclude>
+										<exclude>**/.*/</exclude>
+									</excludes>                                		
+								</resource>
+<!-- Temporary Start -->							
+								<resource> 
+									<directory>WebServerResources</directory>
+									<targetPath>${project.build.outputDirectory}/WebServerResources</targetPath>
+									<excludes>
+										<exclude>.*</exclude>
+										<exclude>**/.*</exclude>
+										<exclude>**/.*/</exclude>
+									</excludes>                                		
+								</resource>
+<!-- Temporary End -->				
+							</resources>
+						</configuration>
+					</execution>
+					
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>dependency-counter</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>dependency-counter</goal>
+						</goals>
+						<configuration>
+							<showDependencies>${tb.showDependencies}</showDependencies>
+						</configuration>
+					</execution>
+					<execution>
+						<id>resource-copy</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>resource-copy</goal>
+						</goals>
+						<configuration>
+							<debug>false</debug>
+							<isApplication>false</isApplication>
+							<directories>
+								<directory>src/main/components</directory>
+								<directory>Components</directory>
+							</directories>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<!-- mvn javadoc:javadoc -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${tb.version.maven.javadoc}</version>
+				<configuration>
+					<!-- 
+						これはJavaDocに公開するレベルをprotectedまで対象にする指定。
+						通常はpublicだけなので公開レベルを広げたければprotectedやprivateを指定する。
+					-->
+					<show>public</show>
+					
+					<!-- stylesheetfile>${basedir}/src/main/javadoc/stylesheet.css</stylesheetfile -->
+					
+					<!-- 
+						例ではコメントアウトしているが、コメントアウトを外すとJavaDoc生成時に doclintツールのチェックを行わないという意味になる。
+						（コメントアウトしているのでチェックが行われる）
+						Java 8以降、Javadoc ツールには doclint が導入され Javadoc コメントの HTML とドキュメント	タグに対する様々なチェックを行うが、 そのことにより標準に準拠した記載が必要となり、
+						特定のフォーマット違反があると Javadoc の生成が失敗する。標準に準拠した記載が望まれるが、どうしても準拠出来ない場合はチェックを無効にする
+					-->
+					<!-- <doclint>none</doclint> -->
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>${tb.version.maven.plugin}</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>dependency-updates-report</report>
+							<report>plugin-updates-report</report>
+							<report>property-updates-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+
+		</plugins>
+	</reporting>
+
+    <organization>
+ 		<!-- Login via Github -->
+		<name>TreasureBoat</name>
+        <url>https://treasureboat.org</url>
+    </organization>
+
+  	<developers>
+		<developer>
+			<id>ishimoto</id>
+			<name>Ken Ishimoto</name>
+			<email>k.ishimoto@treasureboat.org</email>
+			<url>https://www.treasureboat.org</url>
+			<organization>Treasureboat.org</organization>
+			<organizationUrl>https://www.treasureboat.org</organizationUrl>
+			<roles>
+				<role>architect</role>
+				<role>designer</role>
+				<role>developer</role>
+			</roles>
+			<timezone>JST</timezone>
+			<properties>
+				<discord>Ken Ishimoto#1657</discord>
+			</properties>
+		</developer>
+	</developers>
+
+	<licenses>
+		<!-- For deploy this is needed FIXME for TB what kind of Licenses ? -->
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<!-- Download Information -->
+	<repositories>
+		<repository>
+			<id>github</id>
+			<name>ishimoto</name>
+			<url>https://maven.pkg.github.com/ishimoto/*</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>github</id>
+			<name>ishimoto</name>
+			<url>https://maven.pkg.github.com/ishimoto/treasureboat-maven</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<!-- Upload Information -->
+<!--
+	<distributionManagement>
+		<repository>
+			<!- https://www.baeldung.com/maven-publish-artifacts-github-packages ->
+			<!- `id` – set to `GitHub` ->
+			<id>GitHub</id>
+			<!- `name` – the name of the personal account or organization that owns the repository ->
+			<name>ishimoto</name>
+			<!- `url` – the URL for publishing packages, typically in the format `https://maven.pkg.github.com/{owner}/{repository}` ->
+			<url>https://maven.pkg.github.com/ishimoto/treasureboat-content</url>
+		</repository>
+		
+			Example of a Snapshot Repository:
+			<snapshotRepository>
+				<id>nexus</id>
+				<name>nexus-snapshot</name>
+				<url>http://localhost:8081/repository/maven-snapshots/</url>
+			</snapshotRepository>
+	</distributionManagement>
+-->
+
+	<!-- 
+			Build Lifecycle:
+			https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
+			
+			* clean - remove all files generated by the previous build
+			* validate - validate the project is correct and all necessary information is available
+			* compile - compile the source code of the project
+			* test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+			* package - take the compiled code and package it in its distributable format, such as a JAR.
+			* verify - run any checks on results of integration tests to ensure quality criteria are met
+			* install - install the package into the local repository, for use as a dependency in other projects locally
+			* deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+            * site - generate site documentation for this project
+	-->
+
+</project>
