@@ -1592,7 +1592,7 @@
                         [ To set the project version to a specific version, just invoke the set goal.]	
                         	mvn versions:set -DnewVersion=10.1.5: Set the project version to a specific value
                         	
-						[ To accept the modifications made to your pom.xml files by the `versions-maven-plugin` invoke the commit goal]
+						[ To accept the modifications made to your pom.xml files by the versions-maven-plugin, invoke the commit goal]
                             mvn versions:commit : Commit changes made by the versions plugin to the pom.xml file
 
 				-->
