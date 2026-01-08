@@ -39,6 +39,7 @@
 		<tb.fw.sangria>10.1.7</tb.fw.sangria><!-- Dirty -->
 		<tb.fw.pro>10.2.10</tb.fw.pro>
 		<tb.fw.prox>10.2.4</tb.fw.prox>
+		<tb.fw.proy>10.10.1</tb.fw.proy>
 		<tb.fw.template>11.0.4</tb.fw.template>
 		<tb.fw.elastic>10.5.4</tb.fw.elastic>
 		<tb.fw.opensearch>10.6.4</tb.fw.opensearch>
@@ -97,7 +98,7 @@
 
     <profiles>
 	    <profile>
-	    	<!-- This is needed for Eclipse-Dev whe the Components are installed for TreasureBoat Development -->
+	    	<!-- DEPRECATED This is needed for Eclipse-Dev whe the Components are installed for TreasureBoat Development -->
 	        <id>eclipse-dev</id>
 			<properties>
 				<tb.fw.content>${tbJava10Snapshot}</tb.fw.content>
@@ -111,6 +112,29 @@
 				<tb.fw.sangria>${tbJava10Snapshot}</tb.fw.sangria>
 				<tb.fw.pro>${tbJava10Snapshot}</tb.fw.pro>
 				<tb.fw.prox>${tbJava10Snapshot}</tb.fw.prox>
+				<tb.fw.proy>${tbJava10Snapshot}</tb.fw.proy>
+				<tb.fw.elastic>${tbJava10Snapshot}</tb.fw.elastic>
+				<tb.fw.opensearch>${tbJava10Snapshot}</tb.fw.opensearch>
+				<tb.fw.ultra>${tbJava10Snapshot}</tb.fw.ultra>
+				<tb.fw.elemental>${tbJava10Snapshot}</tb.fw.elemental>
+			</properties>
+		</profile>
+		<profile>
+			<!-- This is needed for Development for using TreasureBoat Snapshot -->
+			<id>snapshot</id>
+			<properties>
+				<tb.fw.content>${tbJava10Snapshot}</tb.fw.content>
+				<tb.fw.core>${tbJava10Snapshot}</tb.fw.core>
+				<tb.fw.db>${tbJava10Snapshot}</tb.fw.db>
+				<tb.fw.inout>${tbJava10Snapshot}</tb.fw.inout>
+				<tb.fw.archive>${tbJava10Snapshot}</tb.fw.archive>
+				<tb.fw.features>${tbJava10Snapshot}</tb.fw.features>
+				<tb.fw.extra>${tbJava10Snapshot}</tb.fw.extra>
+				<tb.fw.template>${tbJava11Snapshot}</tb.fw.template>
+				<tb.fw.sangria>${tbJava10Snapshot}</tb.fw.sangria>
+				<tb.fw.pro>${tbJava10Snapshot}</tb.fw.pro>
+				<tb.fw.prox>${tbJava10Snapshot}</tb.fw.prox>
+				<tb.fw.proy>${tbJava10Snapshot}</tb.fw.proy>
 				<tb.fw.elastic>${tbJava10Snapshot}</tb.fw.elastic>
 				<tb.fw.opensearch>${tbJava10Snapshot}</tb.fw.opensearch>
 				<tb.fw.ultra>${tbJava10Snapshot}</tb.fw.ultra>
@@ -1484,6 +1508,18 @@
 				<groupId>org.treasureboat</groupId>
 				<artifactId>tb-prox-skin-gumby</artifactId>
 				<version>${tb.fw.prox}</version>
+			</dependency>
+
+			<!-- ==**== PROY ==**== -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-proy-font-awesome-pro</artifactId>
+				<version>${tb.fw.proy}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-proy-server-mobile</artifactId>
+				<version>${tb.fw.proy}</version>
 			</dependency>
 
 			<!-- ==**== ELASTIC ==**== -->
