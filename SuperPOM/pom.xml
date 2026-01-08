@@ -55,6 +55,9 @@
 
 		<github.global.server>github</github.global.server>
 
+		<!-- Modules -->
+		<name.module>${project.name}</name.module>
+
 		<!-- your Maven Build setup: Not used yet -->
 		<tb.version.maven.gpg>3.2.8</tb.version.maven.gpg>
 
@@ -1884,7 +1887,7 @@
 				<configuration>
 					<archive>
 						<manifestEntries>
-							<Automatic-Module-Name>${project.name}</Automatic-Module-Name>
+							<Automatic-Module-Name>${name.module}</Automatic-Module-Name>
 						</manifestEntries>
 					</archive>
 				</configuration>
