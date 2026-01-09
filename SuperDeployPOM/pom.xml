@@ -346,7 +346,7 @@
 					<outputDirectory>target/classes</outputDirectory>
 					<archive>
 						<manifestEntries>
-							<Automatic-Module-Name>${project.name}</Automatic-Module-Name>
+							<Automatic-Module-Name>${name.module}</Automatic-Module-Name>
 						</manifestEntries>
 					</archive>
 				</configuration>
