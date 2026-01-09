@@ -34,6 +34,14 @@ cd SuperPOM/
 cd ..
 
 echo "[INFO] ------------------------------------------------------------------------"
+echo "[INFO] Install TreasureBoat SuperDeployPOM"
+echo "[INFO] ------------------------------------------------------------------------"
+echo "[INFO] "
+cd SuperDeployPOM/
+../mvnw install
+cd ..
+
+echo "[INFO] ------------------------------------------------------------------------"
 echo "[INFO] Executing Gradle PlugIn Installation"
 echo "[INFO] ------------------------------------------------------------------------"
 echo "[INFO] "
