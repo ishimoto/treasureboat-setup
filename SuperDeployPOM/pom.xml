@@ -7,14 +7,14 @@
 
     <groupId>org.treasureboat</groupId>
 	<artifactId>super-deploy-pom</artifactId>
-	<version>0.1</version>
+	<version>0.2</version>
 
 	<packaging>pom</packaging>
 
 	<name>TreasureBoat.org Maven Super Deploy POM</name>
 	
 	<properties>
-		<tb.lastmodified>2025/12/16</tb.lastmodified>
+		<tb.lastmodified>2026/01/09</tb.lastmodified>
 
 		<tb.showDependencies>false</tb.showDependencies>
 	
@@ -43,7 +43,7 @@
 		<tb.version.maven.dependency>3.9.0</tb.version.maven.dependency>
 		<tb.version.maven.deploy>3.1.4</tb.version.maven.deploy>
 		<tb.version.maven.enforcer>3.6.2</tb.version.maven.enforcer>
-		<tb.version.maven.findbugs>3.0.5</tb.version.maven.findbugs>
+		<tb.version.maven.spotbugs>4.9.3.0</tb.version.maven.spotbugs>
 		<tb.version.maven.git-commit>9.0.2</tb.version.maven.git-commit>
 		<tb.version.maven.install>3.1.4</tb.version.maven.install>
 		<tb.version.maven.jar>3.4.2</tb.version.maven.jar><!-- https://github.com/eclipse-m2e/m2e-core/issues/2084 -->
@@ -274,6 +274,13 @@
 					<groupId>org.treasureboat</groupId>
 					<artifactId>tb-maven-plugin</artifactId>
 					<version>${tb.maven}</version>
+				</plugin>
+
+				<!-- https://spotbugs.github.io/spotbugs-maven-plugin/ -->
+				<plugin>
+					<groupId>com.github.spotbugs</groupId>
+					<artifactId>spotbugs-maven-plugin</artifactId>
+					<version>${tb.version.maven.spotbugs}</version>
 				</plugin>
 
 			</plugins>
@@ -583,8 +590,11 @@
 							<debug>false</debug>
 							<isApplication>false</isApplication>
 							<directories>
+								<directory>src/main/webapp</directory>
+								<!-- Temporary Start -->
 								<directory>src/main/components</directory>
 								<directory>Components</directory>
+								<!-- Temporary End -->
 							</directories>
 						</configuration>
 					</execution>
@@ -696,26 +706,13 @@
 	</pluginRepositories>
 
 	<!-- Upload Information -->
-<!--
 	<distributionManagement>
 		<repository>
-			<!- https://www.baeldung.com/maven-publish-artifacts-github-packages ->
-			<!- `id` – set to `GitHub` ->
-			<id>GitHub</id>
-			<!- `name` – the name of the personal account or organization that owns the repository ->
+			<id>github</id>
 			<name>ishimoto</name>
-			<!- `url` – the URL for publishing packages, typically in the format `https://maven.pkg.github.com/{owner}/{repository}` ->
-			<url>https://maven.pkg.github.com/ishimoto/treasureboat-content</url>
+			<url>https://maven.pkg.github.com/ishimoto/treasureboat-setup</url>
 		</repository>
-		
-			Example of a Snapshot Repository:
-			<snapshotRepository>
-				<id>nexus</id>
-				<name>nexus-snapshot</name>
-				<url>http://localhost:8081/repository/maven-snapshots/</url>
-			</snapshotRepository>
 	</distributionManagement>
--->
 
 	<!-- 
 			Build Lifecycle:
