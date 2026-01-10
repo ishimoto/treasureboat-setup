@@ -7,14 +7,14 @@
 
     <groupId>org.treasureboat</groupId>
 	<artifactId>super-deploy-pom</artifactId>
-	<version>0.2</version>
+	<version>0.3</version>
 
 	<packaging>pom</packaging>
 
 	<name>TreasureBoat.org Maven Super Deploy POM</name>
-	
+
 	<properties>
-		<tb.lastmodified>2026/01/09</tb.lastmodified>
+		<tb.lastmodified>2026/01/10</tb.lastmodified>
 
 		<tb.showDependencies>false</tb.showDependencies>
 	
@@ -361,7 +361,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
-					<outputDirectory>target/classes</outputDirectory>
+					<!-- Use standard Maven output directory (not target/classes which causes "zip cannot include itself" error) -->
+					<outputDirectory>${project.build.directory}</outputDirectory>
 					<archive>
 						<manifestEntries>
 							<Automatic-Module-Name>${name.module}</Automatic-Module-Name>
@@ -526,7 +527,20 @@
 						</goals>
 						<configuration>
 							<resources>
-								<resource> 
+								<resource>
+									<!-- This will create that folder, but we have to NOT copy the components -->
+									<directory>src/main/webapp</directory>
+									<targetPath>${project.build.outputDirectory}/tmp</targetPath>
+									<excludes>
+										<exclude>**/*.html</exclude>
+										<exclude>**/*.wod</exclude>
+										<exclude>**/*.api</exclude>
+										<exclude>.*</exclude>
+										<exclude>**/.*</exclude>
+										<exclude>**/.*/</exclude>
+									</excludes>
+								</resource>
+								<resource>
 									<!-- This will create that folder, but we have to NOT copy the components -->
 									<directory>src/main/components</directory>
 									<targetPath>${project.build.outputDirectory}/tmp</targetPath>

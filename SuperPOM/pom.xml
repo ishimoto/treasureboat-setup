@@ -8,12 +8,12 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-deploy-pom</artifactId>
-		<version>0.2</version>
+		<version>0.3</version>
 	</parent>
 
 	<artifactId>super-pom</artifactId>
     <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
-	<version>0.2</version>
+	<version>0.3</version>
 
 	<packaging>pom</packaging>
 
@@ -1447,46 +1447,9 @@
 
 	<build>
 		<!-- Override source directories for TreasureBoat frameworks -->
-    	<sourceDirectory>src/main/java</sourceDirectory>
-    	<testSourceDirectory>src/test/java</testSourceDirectory>
-
-		<plugins>
-			<!-- Override tb-maven-plugin to add src/main/webapp -->
-			<plugin>
-				<groupId>org.treasureboat</groupId>
-				<artifactId>tb-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>dependency-counter</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>dependency-counter</goal>
-						</goals>
-						<configuration>
-							<showDependencies>${tb.showDependencies}</showDependencies>
-						</configuration>
-					</execution>
-					<execution>
-						<id>resource-copy</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>resource-copy</goal>
-						</goals>
-						<configuration>
-							<debug>false</debug>
-							<isApplication>false</isApplication>
-							<directories>
-								<directory>src/main/webapp</directory>
-<!-- Temporary Start -->
-								<directory>src/main/components</directory>
-								<directory>Components</directory>
-<!-- Temporary End -->
-							</directories>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<!-- tb-maven-plugin configuration inherited from SuperDeployPOM -->
 	</build>
 
 	<reporting>
