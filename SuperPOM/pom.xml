@@ -24,7 +24,9 @@
 
 		<tb.fw.content>10.10.1</tb.fw.content>
 
-		<tb.fw.core>10.1.16</tb.fw.core><!-- Dirty: Sample, Pro, Template -->
+
+		
+		<tb.fw.core>10.1.17</tb.fw.core><!-- Dirty: Sample, Pro, Template -->
 		<tb.fw.db>10.1.9</tb.fw.db>
 		<tb.fw.inout>10.1.12</tb.fw.inout>
 		<tb.fw.archive>10.1.11</tb.fw.archive>
@@ -38,7 +40,7 @@
 		<tb.fw.elastic>10.5.4</tb.fw.elastic>
 		<tb.fw.opensearch>10.6.4</tb.fw.opensearch>
 		<tb.fw.ultra>10.1.10</tb.fw.ultra>
-		<tb.fw.elemental>10.0.15</tb.fw.elemental><!-- Dirty => Elemental -->
+		<tb.fw.elemental>10.0.17</tb.fw.elemental><!-- Dirty => Elemental -->
 
 		<!-- Core Utilities (override/extend from parent) -->
         <tb.logback>1.5.19</tb.logback>
