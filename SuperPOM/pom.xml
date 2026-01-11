@@ -11,36 +11,32 @@
 		<version>0.3</version>
 	</parent>
 
+	<name>TreasureBoat.org Maven Super POM</name>
 	<artifactId>super-pom</artifactId>
     <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
-	<version>0.3</version>
+	<version>0.4</version>
 
 	<packaging>pom</packaging>
 
-	<name>TreasureBoat.org Maven Super POM</name>
-
 	<properties>
-		<tb.lastmodified>2025/01/09</tb.lastmodified>
+		<tb.lastmodified>2025/01/11</tb.lastmodified>
 
 		<tb.fw.content>10.10.1</tb.fw.content>
-
-
-
-		<tb.fw.core>10.1.17</tb.fw.core><!-- Dirty: Sample, Pro, Template -->
-		<tb.fw.db>10.1.9</tb.fw.db>
-		<tb.fw.inout>10.1.12</tb.fw.inout>
-		<tb.fw.archive>10.1.11</tb.fw.archive>
-		<tb.fw.features>10.1.14</tb.fw.features>
-		<tb.fw.extra>10.1.4</tb.fw.extra>
-		<tb.fw.sangria>10.1.7</tb.fw.sangria><!-- Dirty -->
-		<tb.fw.pro>10.2.10</tb.fw.pro>
-		<tb.fw.prox>10.2.4</tb.fw.prox>
+		<tb.fw.core>10.10.1</tb.fw.core>
+		<tb.fw.db>10.10.1</tb.fw.db>
+		<tb.fw.inout>10.10.1</tb.fw.inout>
+		<tb.fw.archive>10.10.1</tb.fw.archive>
+		<tb.fw.features>10.10.1</tb.fw.features>
+		<tb.fw.extra>10.10.1</tb.fw.extra>
+		<tb.fw.sangria>10.10.1</tb.fw.sangria><!-- Dirty -->
+		<tb.fw.pro>10.10.1</tb.fw.pro>
+		<tb.fw.prox>10.10.1</tb.fw.prox>
 		<tb.fw.proy>10.10.1</tb.fw.proy>
-		<tb.fw.template>11.0.4</tb.fw.template>
-		<tb.fw.elastic>10.5.4</tb.fw.elastic>
-		<tb.fw.opensearch>10.6.4</tb.fw.opensearch>
-		<tb.fw.ultra>10.1.10</tb.fw.ultra>
-		<tb.fw.elemental>10.0.17</tb.fw.elemental><!-- Dirty => Elemental -->
+		<tb.fw.template>11.10.1</tb.fw.template>
+		<tb.fw.elastic>10.10.1</tb.fw.elastic>
+		<tb.fw.opensearch>10.10.1</tb.fw.opensearch>
+		<tb.fw.ultra>10.10.1</tb.fw.ultra>
+		<tb.fw.elemental>10.10.1</tb.fw.elemental><!-- Temporary -->
 
 		<!-- Core Utilities (override/extend from parent) -->
         <tb.logback>1.5.19</tb.logback>
