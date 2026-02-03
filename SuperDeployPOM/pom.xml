@@ -7,17 +7,21 @@
 
     <groupId>org.treasureboat</groupId>
 	<artifactId>super-deploy-pom</artifactId>
-	<version>0.4</version>
+	<version>0.5</version>
 
 	<packaging>pom</packaging>
 
 	<name>TreasureBoat.org Maven Super Deploy POM</name>
 
 	<properties>
-		<tb.lastmodified>2026/01/10</tb.lastmodified>
+		<tb.lastmodified>2026/02/02</tb.lastmodified>
 
 		<tb.showDependencies>false</tb.showDependencies>
 	
+		<!-- <release> enforces syntax + bytecode + API compatibility, catching usage
+		     of newer APIs (e.g. String.isBlank() from Java 11) at compile time.
+		     source/target are kept for tb-maven-plugin (compilerTarget parameter). -->
+		<maven.compiler.release>10</maven.compiler.release>
  		<maven.compiler.source>10</maven.compiler.source>
 		<maven.compiler.target>10</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -62,7 +66,7 @@
 		<tb.lombok>1.18.42</tb.lombok>
 
 		<!-- TB Build Information -->
-		<tb.maven>1.0.9</tb.maven>
+		<tb.maven>1.0.10</tb.maven>
 	</properties>
 
 	<build>
@@ -319,8 +323,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
+					<release>${maven.compiler.release}</release>
           			<encoding>UTF-8</encoding>
 					<!-- 
 					<compilerArgument>-Xlint:all</compilerArgument>
