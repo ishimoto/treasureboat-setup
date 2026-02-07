@@ -66,7 +66,7 @@
 		<tb.lombok>1.18.42</tb.lombok>
 
 		<!-- TB Build Information -->
-		<tb.maven>1.0.10</tb.maven>
+		<tb.maven>1.0.11</tb.maven>
 	</properties>
 
 	<build>
