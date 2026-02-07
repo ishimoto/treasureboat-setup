@@ -8,11 +8,11 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-deploy-pom</artifactId>
-		<version>0.5</version>
+		<version>0.6</version>
 	</parent>
 
 	<artifactId>super-app-pom</artifactId>
-	<version>0.4</version>
+	<version>0.5</version>
 
 	<packaging>pom</packaging>
 
@@ -32,6 +32,35 @@
 							<isApplication>true</isApplication>
 						</configuration>
 					</execution>
+
+					<!--
+                        mvn tb:legacy-build
+                        mvn tb:legacy-build -DprincipalClass=com.example.Application
+                    -->
+					<!--
+					<execution>
+						<id>legacy-build</id>
+						<phase>package</phase>
+						<goals>
+							<goal>legacy-build</goal>
+						</goals>
+						<configuration>
+							<principalClass>${principalClass}</principalClass>
+						</configuration>
+					</execution>
+					-->
+					<!--
+                         mvn tb:wsr-build
+                    -->
+					<!--
+					<execution>
+						<id>wsr-build</id>
+						<phase>package</phase>
+						<goals>
+							<goal>wsr-build</goal>
+						</goals>
+					</execution>
+					-->
 				</executions>
 			</plugin>
 		</plugins>

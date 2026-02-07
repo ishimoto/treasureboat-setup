@@ -7,7 +7,7 @@
 
     <groupId>org.treasureboat</groupId>
 	<artifactId>super-deploy-pom</artifactId>
-	<version>0.5</version>
+	<version>0.6</version>
 
 	<packaging>pom</packaging>
 
@@ -745,5 +745,24 @@
 			* deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
             * site - generate site documentation for this project
 	-->
+
+	<!-- Dependency management for embedded deployment (Legacy/Maven Embedded builds) -->
+	<dependencyManagement>
+		<dependencies>
+			<!-- Servlet/JSP APIs with compile scope for embedded deployment -->
+			<dependency>
+				<groupId>jakarta.servlet</groupId>
+				<artifactId>jakarta.servlet-api</artifactId>
+				<version>4.0.4</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>jakarta.servlet.jsp</groupId>
+				<artifactId>jakarta.servlet.jsp-api</artifactId>
+				<version>2.3.6</version>
+				<scope>compile</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 </project>

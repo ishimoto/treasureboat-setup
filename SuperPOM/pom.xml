@@ -8,15 +8,29 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-deploy-pom</artifactId>
-		<version>0.5</version>
+		<version>0.6</version>
 	</parent>
 
 	<name>TreasureBoat.org Maven Super POM</name>
 	<artifactId>super-pom</artifactId>
     <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
-	<version>0.6</version>
+	<version>0.7</version>
 
 	<packaging>pom</packaging>
+
+	<!--
+        • Go to GitHub Settings > Developer settings > Personal access tokens
+        • Create a token with these scopes:
+        • write:packages (to publish packages)
+        • read:packages (to download packages)
+        • repo (if the repository is private)
+    -->
+
+	<!--
+        • Go to GitHub Settings > Developer settings > Personal access tokens
+        • Create a token with these scopes:
+        • read:packages (to download packages)
+    -->
 
 	<properties>
 		<tb.lastmodified>2025/01/11</tb.lastmodified>
@@ -141,19 +155,21 @@
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp/jakarta.servlet.jsp-api -->
+			<!-- Note: scope=compile (not provided) so these are bundled for embedded deployment -->
 			<dependency>
 			    <groupId>jakarta.servlet.jsp</groupId>
 			    <artifactId>jakarta.servlet.jsp-api</artifactId>
 			    <version>2.3.6</version>
-			    <scope>provided</scope>
+			    <scope>compile</scope>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+			<!-- Note: scope=compile (not provided) so these are bundled for embedded deployment -->
 			<dependency>
 			    <groupId>jakarta.servlet</groupId>
 			    <artifactId>jakarta.servlet-api</artifactId>
 			    <version>4.0.4</version>
-			    <scope>provided</scope>
+			    <scope>compile</scope>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/com.sun.mail/dsn -->
