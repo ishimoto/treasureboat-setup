@@ -14,7 +14,7 @@
 	<name>TreasureBoat.org Maven Super POM</name>
 	<artifactId>super-pom</artifactId>
     <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
-	<version>0.7</version>
+	<version>0.8</version>
 
 	<packaging>pom</packaging>
 
