@@ -17,6 +17,13 @@
 		<tb.lastmodified>2026/02/02</tb.lastmodified>
 
 		<tb.showDependencies>false</tb.showDependencies>
+
+		<!--
+			Deployment blacklist: exclude development-only files from JARs.
+			Empty by default (dev mode). Set to **/Login.plist for deployment builds.
+			IntelliJ deploy actions pass: -Dtb.deploy.exclude.login=**/Login.plist
+		-->
+		<tb.deploy.exclude.login></tb.deploy.exclude.login>
 	
 		<!-- <release> enforces syntax + bytecode + API compatibility, catching usage
 		     of newer APIs (e.g. String.isBlank() from Java 11) at compile time.
@@ -371,6 +378,14 @@
 							<Automatic-Module-Name>${name.module}</Automatic-Module-Name>
 						</manifestEntries>
 					</archive>
+					<!--
+						Exclude development-only files from deployment JARs.
+						Login.plist contains quick-login shortcuts for development and should not be deployed.
+						Activated via -Dtb.deploy=true (set automatically by IntelliJ deploy actions).
+					-->
+					<excludes>
+						<exclude>${tb.deploy.exclude.login}</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 
