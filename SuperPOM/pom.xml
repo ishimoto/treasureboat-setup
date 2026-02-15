@@ -49,7 +49,7 @@
 		<tb.fw.template>11.10.1</tb.fw.template>
 		<tb.fw.elastic>10.10.2</tb.fw.elastic>
 		<tb.fw.opensearch>10.10.1</tb.fw.opensearch>
-		<tb.fw.ultra>10.10.2</tb.fw.ultra>
+		<tb.fw.ultra>10.10.3</tb.fw.ultra>
 		<tb.fw.elemental>10.10.2</tb.fw.elemental><!-- Temporary -->
 
 		<!-- Core Utilities (override/extend from parent) -->
