@@ -1,147 +1,116 @@
-<project 	xmlns="http://maven.apache.org/POM/4.0.0" 
+<project 	xmlns="http://maven.apache.org/POM/4.0.0"
 			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          	https://maven.apache.org/maven-v4_0_0.xsd">
-         
+
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.treasureboat</groupId>
-	<artifactId>super-pom</artifactId>
+	<parent>
+		<groupId>org.treasureboat</groupId>
+		<artifactId>super-deploy-pom</artifactId>
+		<version>0.7</version>
+	</parent>
+
+	<name>TreasureBoat.org Maven Super POM</name>
+	<artifactId>super-tb-pom</artifactId>
     <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
-	<version>0.1</version>
+	<version>0.9</version>
 
 	<packaging>pom</packaging>
 
-	<name>TreasureBoat.org Maven Super POM</name>
-	
+	<!--
+        • Go to GitHub Settings > Developer settings > Personal access tokens
+        • Create a token with these scopes:
+        • write:packages (to publish packages)
+        • read:packages (to download packages)
+        • repo (if the repository is private)
+    -->
+
+	<!--
+        • Go to GitHub Settings > Developer settings > Personal access tokens
+        • Create a token with these scopes:
+        • read:packages (to download packages)
+    -->
+
 	<properties>
-		<tb.lastmodified>2025/12/15</tb.lastmodified>
+		<tb.lastmodified>2026/03/10</tb.lastmodified>
 
-		<!-- Deprecated -->
-		<tb.java10.snapshot>10.99.99-SNAPSHOT</tb.java10.snapshot>
-		<tb.java11.snapshot>11.99.99-SNAPSHOT</tb.java11.snapshot>
+		<tb.fw.content>11.0.1</tb.fw.content>		<!-- 10.10.2 -->
+		<tb.fw.core>11.0.1</tb.fw.core>				<!-- 10.10.12 -->
+		<tb.fw.db>11.0.1</tb.fw.db>					<!-- 10.10.3 -->
+		<tb.fw.inout>11.0.1</tb.fw.inout>			<!-- 10.10.5 -->
+		<tb.fw.archive>11.0.1</tb.fw.archive>		<!-- 10.10.3 -->
 
-		<!-- New Naming Convention without dot so Gradle can read it -->
-	    <tbJava10Snapshot>10.99.99-SNAPSHOT</tbJava10Snapshot>
-	    <tbJava11Snapshot>11.99.99-SNAPSHOT</tbJava11Snapshot>
-	    <tbJava12Snapshot>12.99.99-SNAPSHOT</tbJava12Snapshot>
-	    <tbJava13Snapshot>13.99.99-SNAPSHOT</tbJava13Snapshot>
-	    <tbJava14Snapshot>14.99.99-SNAPSHOT</tbJava14Snapshot>
-	    <tbJava15Snapshot>15.99.99-SNAPSHOT</tbJava15Snapshot>
+		<tb.fw.features>10.10.5</tb.fw.features>
+		<tb.fw.extra>10.10.4</tb.fw.extra>
+		<tb.fw.sangria>10.10.6</tb.fw.sangria>
+		<tb.fw.pro>10.10.4</tb.fw.pro>
+		<tb.fw.prox>10.10.3</tb.fw.prox>
+		<tb.fw.proy>10.10.2</tb.fw.proy>
+		<tb.fw.template>11.10.2</tb.fw.template>
+		<tb.fw.elastic>10.10.3</tb.fw.elastic>
+		<tb.fw.opensearch>10.10.3</tb.fw.opensearch>
+		<tb.fw.elemental>10.10.4</tb.fw.elemental><!-- Temporary -->
+		<tb.fw.ultra>10.10.4</tb.fw.ultra>
 
-		<tb.fw.content>10.1.5</tb.fw.content>
-		<tb.fw.core>10.1.17</tb.fw.core><!-- Dirty: Sample, Pro, Template -->
-		<tb.fw.db>10.1.9</tb.fw.db>
-		<tb.fw.inout>10.1.12</tb.fw.inout>
-		<tb.fw.archive>10.1.11</tb.fw.archive>
-		<tb.fw.features>10.1.14</tb.fw.features>
-		<tb.fw.extra>10.1.4</tb.fw.extra>
-		<tb.fw.sangria>10.1.7</tb.fw.sangria><!-- Dirty -->
-		<tb.fw.pro>10.2.10</tb.fw.pro>
-		<tb.fw.prox>10.2.4</tb.fw.prox>
-		<tb.fw.proy>10.10.1</tb.fw.proy>
-		<tb.fw.template>11.0.4</tb.fw.template>
-		<tb.fw.elastic>10.5.4</tb.fw.elastic>
-		<tb.fw.opensearch>10.6.4</tb.fw.opensearch>
-		<tb.fw.ultra>10.1.10</tb.fw.ultra>
-		<tb.fw.elemental>10.0.17</tb.fw.elemental><!-- Dirty => Elemental -->
-
-		<tb.showDependencies>false</tb.showDependencies>
-	
- 		<maven.compiler.source>10</maven.compiler.source>
-		<maven.compiler.target>10</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-		<github.global.server>github</github.global.server>
-
-		<!-- Modules -->
-		<name.module>${project.name}</name.module>
-
-		<!-- your Maven Build setup: Not used yet -->
-		<tb.version.maven.gpg>3.2.8</tb.version.maven.gpg>
-
-		<!-- your Maven Build setup -->
-		<tb.version.maven.build-helper>3.6.1</tb.version.maven.build-helper>
-		<tb.version.maven.checksum>1.11</tb.version.maven.checksum>
-		<tb.version.maven.clean>3.5.0</tb.version.maven.clean>
-		<tb.version.maven.compiler>3.14.1</tb.version.maven.compiler>
-		<tb.version.maven.dependency>3.9.0</tb.version.maven.dependency>
-		<tb.version.maven.deploy>3.1.4</tb.version.maven.deploy>
-		<tb.version.maven.enforcer>3.6.2</tb.version.maven.enforcer>
-		<tb.version.maven.findbugs>3.0.5</tb.version.maven.findbugs>
-		<tb.version.maven.git-commit>9.0.2</tb.version.maven.git-commit>
-		<tb.version.maven.install>3.1.4</tb.version.maven.install>
-		<tb.version.maven.jar>3.4.2</tb.version.maven.jar><!-- https://github.com/eclipse-m2e/m2e-core/issues/2084 -->
-		<tb.version.maven.javadoc>3.12.0</tb.version.maven.javadoc>
-		<tb.version.maven.lifecycle-mapping>1.0.0</tb.version.maven.lifecycle-mapping>
-		<tb.version.maven.plugin>2.20.1</tb.version.maven.plugin>
-		<tb.version.maven.profile>3.5.1</tb.version.maven.profile>
-		<tb.version.maven.release>3.2.0</tb.version.maven.release>
-		<tb.version.maven.resources>3.4.0</tb.version.maven.resources>
-		<tb.version.maven.site>3.21.0</tb.version.maven.site>
-		<tb.version.maven.source>3.4.0</tb.version.maven.source>
-		
-		<!-- Core Utilities -->
+		<!-- Core Utilities (override/extend from parent) -->
         <tb.logback>1.5.19</tb.logback>
         <tb.slf4j-api>2.0.17</tb.slf4j-api>
-        <tb.lombok>1.18.42</tb.lombok>
 
         <com.rollbar.version>2.0.0</com.rollbar.version>
         <com.fasterxml.jackson.version>2.20.0</com.fasterxml.jackson.version>
         <org.bouncycastle.version>1.81</org.bouncycastle.version>
-        <org.apache.poi.version>5.4.1</org.apache.poi.version>
+        <org.apache.poi.version>5.5.1</org.apache.poi.version>
         <org.xhtmlrenderer.flying-saucer.version>9.12.1</org.xhtmlrenderer.flying-saucer.version>
         <org.apache.pdfbox.version>3.0.5</org.apache.pdfbox.version>
         <org.apache.avalon.framework.version>4.3.1</org.apache.avalon.framework.version>
-		
-		<!-- TB Build Information -->
-		<tb.maven>1.0.8</tb.maven>
 	</properties>
 
     <profiles>
 	    <profile>
-	    	<!-- DEPRECATED This is needed for Eclipse-Dev whe the Components are installed for TreasureBoat Development -->
+	    	<!-- DEPRECATED This is needed for Eclipse-Dev when the Components are installed for TreasureBoat Development -->
 	        <id>eclipse-dev</id>
 			<properties>
-				<tb.fw.content>${tbJava10Snapshot}</tb.fw.content>
-				<tb.fw.core>${tbJava10Snapshot}</tb.fw.core>
-				<tb.fw.db>${tbJava10Snapshot}</tb.fw.db>
-				<tb.fw.inout>${tbJava10Snapshot}</tb.fw.inout>
-				<tb.fw.archive>${tbJava10Snapshot}</tb.fw.archive>
-				<tb.fw.features>${tbJava10Snapshot}</tb.fw.features>
-				<tb.fw.extra>${tbJava10Snapshot}</tb.fw.extra>
-				<tb.fw.template>${tbJava11Snapshot}</tb.fw.template>
-				<tb.fw.sangria>${tbJava10Snapshot}</tb.fw.sangria>
-				<tb.fw.pro>${tbJava10Snapshot}</tb.fw.pro>
-				<tb.fw.prox>${tbJava10Snapshot}</tb.fw.prox>
-				<tb.fw.proy>${tbJava10Snapshot}</tb.fw.proy>
-				<tb.fw.elastic>${tbJava10Snapshot}</tb.fw.elastic>
-				<tb.fw.opensearch>${tbJava10Snapshot}</tb.fw.opensearch>
-				<tb.fw.ultra>${tbJava10Snapshot}</tb.fw.ultra>
-				<tb.fw.elemental>${tbJava10Snapshot}</tb.fw.elemental>
+				<tb.fw.content>${tb.java11.snapshot}</tb.fw.content>
+				<tb.fw.core>${tb.java11.snapshot}</tb.fw.core>
+				<tb.fw.db>${tb.java11.snapshot}</tb.fw.db>
+				<tb.fw.inout>${tb.java11.snapshot}</tb.fw.inout>
+				<tb.fw.archive>${tb.java11.snapshot}</tb.fw.archive>
+
+				<tb.fw.features>${tb.java10.snapshot}</tb.fw.features>
+				<tb.fw.extra>${tb.java10.snapshot}</tb.fw.extra>
+				<tb.fw.sangria>${tb.java10.snapshot}</tb.fw.sangria>
+				<tb.fw.pro>${tb.java10.snapshot}</tb.fw.pro>
+				<tb.fw.prox>${tb.java10.snapshot}</tb.fw.prox>
+				<tb.fw.proy>${tb.java10.snapshot}</tb.fw.proy>
+				<tb.fw.template>${tb.java11.snapshot}</tb.fw.template>
+				<tb.fw.elastic>${tb.java10.snapshot}</tb.fw.elastic>
+				<tb.fw.opensearch>${tb.java10.snapshot}</tb.fw.opensearch>
+				<tb.fw.ultra>${tb.java10.snapshot}</tb.fw.ultra>
+				<tb.fw.elemental>${tb.java10.snapshot}</tb.fw.elemental>
 			</properties>
 		</profile>
 		<profile>
 			<!-- This is needed for Development for using TreasureBoat Snapshot -->
 			<id>snapshot</id>
 			<properties>
-				<tb.fw.content>${tbJava10Snapshot}</tb.fw.content>
-				<tb.fw.core>${tbJava10Snapshot}</tb.fw.core>
-				<tb.fw.db>${tbJava10Snapshot}</tb.fw.db>
-				<tb.fw.inout>${tbJava10Snapshot}</tb.fw.inout>
-				<tb.fw.archive>${tbJava10Snapshot}</tb.fw.archive>
-				<tb.fw.features>${tbJava10Snapshot}</tb.fw.features>
-				<tb.fw.extra>${tbJava10Snapshot}</tb.fw.extra>
-				<tb.fw.template>${tbJava11Snapshot}</tb.fw.template>
-				<tb.fw.sangria>${tbJava10Snapshot}</tb.fw.sangria>
-				<tb.fw.pro>${tbJava10Snapshot}</tb.fw.pro>
-				<tb.fw.prox>${tbJava10Snapshot}</tb.fw.prox>
-				<tb.fw.proy>${tbJava10Snapshot}</tb.fw.proy>
-				<tb.fw.elastic>${tbJava10Snapshot}</tb.fw.elastic>
-				<tb.fw.opensearch>${tbJava10Snapshot}</tb.fw.opensearch>
-				<tb.fw.ultra>${tbJava10Snapshot}</tb.fw.ultra>
-				<tb.fw.elemental>${tbJava10Snapshot}</tb.fw.elemental>
+				<tb.fw.content>${tb.java11.snapshot}</tb.fw.content>
+				<tb.fw.core>${tb.java11.snapshot}</tb.fw.core>
+				<tb.fw.db>${tb.java11.snapshot}</tb.fw.db>
+				<tb.fw.inout>${tb.java11.snapshot}</tb.fw.inout>
+				<tb.fw.archive>${tb.java11.snapshot}</tb.fw.archive>
+
+				<tb.fw.features>${tb.java10.snapshot}</tb.fw.features>
+				<tb.fw.extra>${tb.java10.snapshot}</tb.fw.extra>
+				<tb.fw.sangria>${tb.java10.snapshot}</tb.fw.sangria>
+				<tb.fw.pro>${tb.java10.snapshot}</tb.fw.pro>
+				<tb.fw.prox>${tb.java10.snapshot}</tb.fw.prox>
+				<tb.fw.proy>${tb.java10.snapshot}</tb.fw.proy>
+				<tb.fw.template>${tb.java11.snapshot}</tb.fw.template>
+				<tb.fw.elastic>${tb.java10.snapshot}</tb.fw.elastic>
+				<tb.fw.opensearch>${tb.java10.snapshot}</tb.fw.opensearch>
+				<tb.fw.ultra>${tb.java10.snapshot}</tb.fw.ultra>
+				<tb.fw.elemental>${tb.java10.snapshot}</tb.fw.elemental>
 			</properties>
 		</profile>
 	    <profile>
@@ -152,54 +121,6 @@
 		</profile>
 	</profiles>
 
-<!--
-	<profiles>
-	    <profile>
-	        <id>frontbase</id>
-	 		<dependencies>
-				<dependency>
-					<groupId>org.treasureboat</groupId>
-					<artifactId>tb-db-frontbase</artifactId>
-					<version>${tb.fw.db}</version>
-				</dependency>
-	 		</dependencies>
-	   </profile>
-	    <profile>
-	        <id>postgresql</id>
-	        <activation>
-		        <activeByDefault>true</activeByDefault>
-	    	</activation>
-			<dependencies>
-				<dependency>
-					<groupId>org.treasureboat</groupId>
-					<artifactId>tb-db-postgresql</artifactId>
-					<version>${tb.fw.db}</version>
-				</dependency>
-	 		</dependencies>
-	    </profile>
-
-	    <profile>
-	        <id>sample</id>
-	    	<activation>
-	        		<activeByDefault>true</activeByDefault>
-	        		
-	        		<jdk>11</jdk>
-	        	
-	        		<os>
-	            		<name>windows 10</name>
-	            		<family>Windows</family>
-	            		<arch>amd64</arch>
-	            		<version>10.0</version>
-		        	</os>
-	
-	    		<file>
-	        			<missing>target/testreport.html</missing>
-			    	</file>
-	    	</activation>
-	    </profile>
-	</profiles>    
--->
-
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
@@ -207,7 +128,6 @@
             <artifactId>lombok</artifactId>
             <version>${tb.lombok}</version>
  			<scope>provided</scope>
- 			
         </dependency>
  		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
@@ -219,15 +139,17 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- 3 th party Libraries -->
-			
+			<!-- ========================================== -->
+			<!-- 3rd party Libraries                       -->
+			<!-- ========================================== -->
+
 			<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-core</artifactId>
            		<version>${tb.logback}</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
@@ -236,19 +158,21 @@
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp/jakarta.servlet.jsp-api -->
+			<!-- Note: scope=compile (not provided) so these are bundled for embedded deployment -->
 			<dependency>
 			    <groupId>jakarta.servlet.jsp</groupId>
 			    <artifactId>jakarta.servlet.jsp-api</artifactId>
 			    <version>2.3.6</version>
-			    <scope>provided</scope>
+			    <scope>compile</scope>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+			<!-- Note: scope=compile (not provided) so these are bundled for embedded deployment -->
 			<dependency>
 			    <groupId>jakarta.servlet</groupId>
 			    <artifactId>jakarta.servlet-api</artifactId>
 			    <version>4.0.4</version>
-			    <scope>provided</scope>
+			    <scope>compile</scope>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/com.sun.mail/dsn -->
@@ -271,7 +195,7 @@
 				<artifactId>metadata-extractor</artifactId>
 				<version>2.19.0</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/com.adobe.xmp/xmpcore -->
 			<dependency>
 				<groupId>com.adobe.xmp</groupId>
@@ -285,7 +209,7 @@
 				<artifactId>janino</artifactId>
 				<version>3.1.12</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/org.codehaus.janino/commons-compiler -->
 			<dependency>
 				<groupId>org.codehaus.janino</groupId>
@@ -299,14 +223,14 @@
 			    <artifactId>log4j-to-slf4j</artifactId>
 			    <version>2.25.2</version>
 			</dependency>
-					
+
 			<!-- https://mvnrepository.com/artifact/com.rollbar/rollbar-java -->
 			<dependency>
 				<groupId>com.rollbar</groupId>
 				<artifactId>rollbar-java</artifactId>
 				<version>${com.rollbar.version}</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/com.rollbar/rollbar-api -->
 			<dependency>
 				<groupId>com.rollbar</groupId>
@@ -320,42 +244,42 @@
 				<artifactId>jackson-core</artifactId>
 				<version>${com.fasterxml.jackson.version}</version>
 			</dependency>
-		
+
 			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-annotations</artifactId>
 				<version>2.20</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
 				<version>${com.fasterxml.jackson.version}</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-cbor -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.dataformat</groupId>
 				<artifactId>jackson-dataformat-cbor</artifactId>
 				<version>${com.fasterxml.jackson.version}</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-smile -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.dataformat</groupId>
 				<artifactId>jackson-dataformat-smile</artifactId>
 				<version>${com.fasterxml.jackson.version}</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.dataformat</groupId>
 				<artifactId>jackson-dataformat-yaml</artifactId>
 				<version>${com.fasterxml.jackson.version}</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
 			<dependency>
 			    <groupId>com.fasterxml.jackson.datatype</groupId>
@@ -369,28 +293,28 @@
 				<artifactId>fluent-hc</artifactId>
 				<version>4.5.14</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient-cache -->
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient-cache</artifactId>
 				<version>4.5.14</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore-nio -->
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpcore-nio</artifactId>
 				<version>4.4.16</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents.client5/httpclient5 -->
 			<dependency>
 			    <groupId>org.apache.httpcomponents.client5</groupId>
 			    <artifactId>httpclient5</artifactId>
 			    <version>5.5</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents.core5/httpcore5 -->
 			<dependency>
 			    <groupId>org.apache.httpcomponents.core5</groupId>
@@ -404,21 +328,21 @@
 			    <artifactId>commons-rng-simple</artifactId>
 			    <version>1.6</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>3.18.0</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-text -->
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-text</artifactId>
 				<version>1.14.0</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-compress -->
 			<dependency>
 				<groupId>org.apache.commons</groupId>
@@ -432,21 +356,21 @@
 				<artifactId>commons-collections4</artifactId>
 				<version>4.5.0</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
 			<dependency>
 			    <groupId>org.apache.commons</groupId>
 			    <artifactId>commons-math3</artifactId>
 			    <version>3.6.1</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
 			<dependency>
 				<groupId>commons-cli</groupId>
 				<artifactId>commons-cli</artifactId>
 				<version>1.10.0</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
 			<dependency>
 				<groupId>commons-codec</groupId>
@@ -460,7 +384,7 @@
 				<artifactId>commons-io</artifactId>
 				<version>2.20.0</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
 			<dependency>
 				<groupId>commons-logging</groupId>
@@ -474,21 +398,21 @@
 			    <artifactId>bcpg-jdk18on</artifactId>
 			    <version>${org.bouncycastle.version}</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcmail-jdk18on -->
 			<dependency>
 			    <groupId>org.bouncycastle</groupId>
 			    <artifactId>bcmail-jdk18on</artifactId>
 			    <version>${org.bouncycastle.version}</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk18on -->
 			<dependency>
 			    <groupId>org.bouncycastle</groupId>
 			    <artifactId>bcpkix-jdk18on</artifactId>
 			    <version>${org.bouncycastle.version}</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on -->
 			<dependency>
 			    <groupId>org.bouncycastle</groupId>
@@ -502,28 +426,28 @@
 				<artifactId>nimbus-jose-jwt</artifactId>
 				<version>10.4.2</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/com.nimbusds/oauth2-oidc-sdk -->
 			<dependency>
 				<groupId>com.nimbusds</groupId>
 				<artifactId>oauth2-oidc-sdk</artifactId>
 				<version>11.27.1</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/com.nimbusds/lang-tag -->
 			<dependency>
 				<groupId>com.nimbusds</groupId>
 				<artifactId>lang-tag</artifactId>
 				<version>1.7</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/com.nimbusds/content-type -->
 			<dependency>
 				<groupId>com.nimbusds</groupId>
 				<artifactId>content-type</artifactId>
 				<version>2.3</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/com.github.stephenc.jcip/jcip-annotations -->
 			<dependency>
 				<groupId>com.github.stephenc.jcip</groupId>
@@ -537,28 +461,28 @@
 				<artifactId>lib-recur</artifactId>
 				<version>0.17.1</version>
 			</dependency>
-								
+
 			<!-- https://mvnrepository.com/artifact/org.dmfs/rfc5545-datetime -->
 			<dependency>
 				<groupId>org.dmfs</groupId>
 				<artifactId>rfc5545-datetime</artifactId>
 				<version>0.3</version>
 			</dependency>
-									
+
 			<!-- https://mvnrepository.com/artifact/ognl/ognl -->
 			<dependency>
 				<groupId>ognl</groupId>
 				<artifactId>ognl</artifactId>
 				<version>3.4.7</version>
 			</dependency>
-											
+
 			<!-- https://mvnrepository.com/artifact/org.passay/passay -->
 			<dependency>
 				<groupId>org.passay</groupId>
 				<artifactId>passay</artifactId>
 				<version>1.6.6</version>
 			</dependency>
-											
+
 			<!-- https://mvnrepository.com/artifact/org.jasypt/jasypt -->
 			<dependency>
 				<groupId>org.jasypt</groupId>
@@ -572,42 +496,42 @@
 				<artifactId>two-factor-auth</artifactId>
 				<version>1.3</version>
 			</dependency>
-									
+
 			<!-- https://mvnrepository.com/artifact/net.minidev/json-smart -->
 			<dependency>
 				<groupId>net.minidev</groupId>
 				<artifactId>json-smart</artifactId>
 				<version>2.6.0</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/net.minidev/asm -->
 			<dependency>
 				<groupId>net.minidev</groupId>
 				<artifactId>asm</artifactId>
 				<version>1.0.2</version>
 			</dependency>
-								
+
 			<!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
 			<dependency>
 				<groupId>org.javassist</groupId>
 				<artifactId>javassist</artifactId>
 				<version>3.30.2-GA</version>
 			</dependency>
-							
+
 			<!-- https://mvnrepository.com/artifact/org.jgroups/jgroups -->
 			<dependency>
 				<groupId>org.jgroups</groupId>
 				<artifactId>jgroups</artifactId>
 				<version>[4.2.21.Final]</version>
 			</dependency>
-					
+
 			<!-- https://mvnrepository.com/artifact/commons-discovery/commons-discovery -->
 			<dependency>
 				<groupId>commons-discovery</groupId>
 				<artifactId>commons-discovery</artifactId>
 				<version>0.5</version>
 			</dependency>
-							
+
 			<!-- https://mvnrepository.com/artifact/org.json/json -->
 			<dependency>
 				<groupId>org.json</groupId>
@@ -621,7 +545,7 @@
 			    <artifactId>jsoup</artifactId>
 			    <version>1.21.2</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
 			<dependency>
 				<groupId>org.reflections</groupId>
@@ -634,14 +558,14 @@
             		</exclusion>
 				</exclusions>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/com.googlecode.libphonenumber/libphonenumber -->
 			<dependency>
 			    <groupId>com.googlecode.libphonenumber</groupId>
 			    <artifactId>libphonenumber</artifactId>
 			    <version>9.0.14</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/net.sourceforge.cardme/cardme -->
 			<dependency>
 			    <groupId>net.sourceforge.cardme</groupId>
@@ -650,7 +574,6 @@
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/junit/junit -->
-<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
 			<dependency>
 			    <groupId>junit</groupId>
 			    <artifactId>junit</artifactId>
@@ -664,12 +587,12 @@
 				<version>1.11.0</version>
 				<!-- still relay on : commons-collections:commons-collections:3.2.2 -->
 			</dependency>
-				<!-- OLD : https://mvnrepository.com/artifact/commons-collections/commons-collections -->
-				<dependency>
-					<groupId>commons-collections</groupId>
-					<artifactId>commons-collections</artifactId>
-					<version>3.2.2</version>
-				</dependency>
+			<!-- OLD : https://mvnrepository.com/artifact/commons-collections/commons-collections -->
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>3.2.2</version>
+			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
 			<dependency>
@@ -698,7 +621,7 @@
 				<artifactId>postgresql</artifactId>
 				<version>42.7.8</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/net.postgis/postgis-jdbc -->
 			<dependency>
 				<groupId>net.postgis</groupId>
@@ -719,7 +642,7 @@
 				<artifactId>derby</artifactId>
 				<version>10.17.1.0</version>
 			</dependency>
-					
+
 			<!-- https://mvnrepository.com/artifact/org.apache.derby/derbytools -->
 			<dependency>
 				<groupId>org.apache.derby</groupId>
@@ -734,14 +657,14 @@
 				<artifactId>acme4j-client</artifactId>
 				<version>2.16</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/org.shredzone.acme4j/acme4j-utils -->
 			<dependency>
 				<groupId>org.shredzone.acme4j</groupId>
 				<artifactId>acme4j-utils</artifactId>
 				<version>2.16</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/org.bitbucket.b_c/jose4j -->
 			<dependency>
 				<groupId>org.bitbucket.b_c</groupId>
@@ -755,21 +678,21 @@
 				<artifactId>poi</artifactId>
 				<version>${org.apache.poi.version}</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-excelant -->
 			<dependency>
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi-excelant</artifactId>
 				<version>${org.apache.poi.version}</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-scratchpad -->
 			<dependency>
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi-scratchpad</artifactId>
 				<version>${org.apache.poi.version}</version>
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
 			<dependency>
 				<groupId>org.apache.poi</groupId>
@@ -790,21 +713,21 @@
 				<artifactId>jasperreports</artifactId>
 				<version>6.20.1</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-fonts -->
 			<dependency>
 				<groupId>net.sf.jasperreports</groupId>
 				<artifactId>jasperreports-fonts</artifactId>
 				<version>6.21.3</version>
 			</dependency>
-		
+
 			<!-- https://mvnrepository.com/artifact/com.itextpdf/itext-asian -->
 			<dependency>
 				<groupId>com.itextpdf</groupId>
 				<artifactId>itext-asian</artifactId>
 				<version>5.2.0</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/batik-all -->
 			<dependency>
 				<groupId>org.apache.xmlgraphics</groupId>
@@ -837,21 +760,21 @@
 				<artifactId>jfreechart</artifactId>
 				<version>1.5.6</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/org.jfree/jcommon -->
 			<dependency>
 				<groupId>org.jfree</groupId>
 				<artifactId>jcommon</artifactId>
 				<version>1.0.24</version>
 			</dependency>
-		
+
 			<!-- https://mvnrepository.com/artifact/com.keypoint/png-encoder -->
 			<dependency>
 				<groupId>com.keypoint</groupId>
 				<artifactId>png-encoder</artifactId>
 				<version>1.5</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
 			<dependency>
 				<groupId>joda-time</groupId>
@@ -865,35 +788,35 @@
 				<artifactId>flying-saucer-core</artifactId>
 				<version>${org.xhtmlrenderer.flying-saucer.version}</version>
 			</dependency>
-		
+
 			<!-- https://mvnrepository.com/artifact/org.xhtmlrenderer/flying-saucer-pdf -->
 			<dependency>
 				<groupId>org.xhtmlrenderer</groupId>
 				<artifactId>flying-saucer-pdf</artifactId>
 				<version>${org.xhtmlrenderer.flying-saucer.version}</version>
 			</dependency>
-		
+
 			<!-- https://mvnrepository.com/artifact/org.xhtmlrenderer/flying-saucer-swt -->
 			<dependency>
 				<groupId>org.xhtmlrenderer</groupId>
 				<artifactId>flying-saucer-swt</artifactId>
 				<version>${org.xhtmlrenderer.flying-saucer.version}</version>
 			</dependency>
-		
+
 			<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
 			<dependency>
 			    <groupId>org.apache.pdfbox</groupId>
 			    <artifactId>pdfbox</artifactId>
 				<version>${org.apache.pdfbox.version}</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox-app -->
 			<dependency>
 			    <groupId>org.apache.pdfbox</groupId>
 			    <artifactId>pdfbox-app</artifactId>
 				<version>${org.apache.pdfbox.version}</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox-tools -->
 			<dependency>
 			    <groupId>org.apache.pdfbox</groupId>
@@ -907,14 +830,14 @@
 			    <artifactId>fontbox</artifactId>
 				<version>${org.apache.pdfbox.version}</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/xmpbox -->
 			<dependency>
 			    <groupId>org.apache.pdfbox</groupId>
 			    <artifactId>xmpbox</artifactId>
 			    <version>${org.apache.pdfbox.version}</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/com.github.librepdf/openpdf -->
 			<dependency>
 				<groupId>com.github.librepdf</groupId>
@@ -929,14 +852,14 @@
 				<artifactId>juniversalchardet</artifactId>
 				<version>1.0.3</version>
 			</dependency>
-		
+
 			<!-- https://mvnrepository.com/artifact/net.sf.ujac/ujac -->
 			<dependency>
 				<groupId>net.sf.ujac</groupId>
 				<artifactId>ujac</artifactId>
 				<version>1.3.0</version>
 			</dependency>
-		
+
 			<!-- https://mvnrepository.com/artifact/org.apache.avalon.framework/avalon-framework-api -->
 			<dependency>
 				<groupId>org.apache.avalon.framework</groupId>
@@ -950,14 +873,14 @@
 				<artifactId>avalon-framework-impl</artifactId>
 				<version>${org.apache.avalon.framework.version}</version>
 			</dependency>
-		
+
 			<!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/xmlgraphics-commons -->
 			<dependency>
 				<groupId>org.apache.xmlgraphics</groupId>
 				<artifactId>xmlgraphics-commons</artifactId>
 				<version>2.11</version>
 			</dependency>
-		
+
 			<!-- https://mvnrepository.com/artifact/org.apache.xmlgraphics/fop -->
 			<dependency>
 				<groupId>org.apache.xmlgraphics</groupId>
@@ -978,14 +901,14 @@
 				<version>1.10.0</version>
 				<!-- still relay on : commons-collections:commons-collections:3.2.2 -->
 			</dependency>
-			
+
 			<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
 			<dependency>
 			    <groupId>com.google.guava</groupId>
 			    <artifactId>guava</artifactId>
 			    <version>33.4.8-jre</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-annotations -->
 			<dependency>
 			    <groupId>io.swagger.core.v3</groupId>
@@ -1020,37 +943,29 @@
 				<artifactId>gson</artifactId>
 				<version>2.11.0</version>
 			</dependency>
-		
+
 			<!-- SMS -->
-	
+
 			<!-- https://mvnrepository.com/artifact/com.nexmo/client -->
 			<dependency>
 				<groupId>com.nexmo</groupId>
 				<artifactId>client</artifactId>
 				<version>3.2.0</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/com.twilio.sdk/twilio -->
 			<dependency>
 				<groupId>com.twilio.sdk</groupId>
 				<artifactId>twilio</artifactId>
 				<version>7.55.3</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
 			<dependency>
 				<groupId>com.rabbitmq</groupId>
 				<artifactId>amqp-client</artifactId>
 				<version>4.12.0</version>
 			</dependency>
-
-			<!-- https://mvnrepository.com/artifact/net.interfax/api-client -->
-			<!--dependency>
-				<groupId>net.interfax</groupId>
-				<artifactId>api-client</artifactId>
-				<version>0.17</version>
-			</dependency-->
-			<!-- with JAVA 11 reimplement -->
 
 			<!-- https://mvnrepository.com/artifact/javax.xml/jaxrpc-api -->
 			<dependency>
@@ -1065,14 +980,14 @@
 				<artifactId>jdom2</artifactId>
 				<version>2.0.6.1</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/com.rometools/rome -->
 			<dependency>
 				<groupId>com.rometools</groupId>
 				<artifactId>rome</artifactId>
 				<version>2.1.0</version>
 			</dependency>
-	
+
 			<!-- https://mvnrepository.com/artifact/com.rometools/rome-opml -->
 			<dependency>
 				<groupId>com.rometools</groupId>
@@ -1086,8 +1001,10 @@
 				<artifactId>pngencoder</artifactId>
 				<version>0.14.0</version>
 			</dependency>
-							
-			<!-- treasureboat custom dependencies -->
+
+			<!-- ========================================== -->
+			<!-- TreasureBoat custom dependencies          -->
+			<!-- ========================================== -->
 			<dependency>
 				<groupId>io.github.ishimoto</groupId>
 				<artifactId>core-parser</artifactId>
@@ -1097,7 +1014,7 @@
 				<groupId>io.github.ishimoto</groupId>
 				<artifactId>db-frontbase</artifactId>
 				<version>2.5.10</version>
-			</dependency>	
+			</dependency>
 			<dependency>
 				<groupId>io.github.ishimoto</groupId>
 				<artifactId>db-maxdb</artifactId>
@@ -1128,16 +1045,12 @@
 				<groupId>org.treasureboat.libraries</groupId>
 				<artifactId>custom-fonts</artifactId>
 				<version>1.1.0</version>
-				<!-- 
-					This is the same jar as below, but hosted already on Maven Central
-					<groupId>io.github.ishimoto</groupId>
-					<artifactId>custom-fonts</artifactId>
-					<version>1.2.0</version>
-				-->
 			</dependency>
-			
-			<!-- treasureboat dependencies -->
-			
+
+			<!-- ========================================== -->
+			<!-- TreasureBoat framework dependencies       -->
+			<!-- ========================================== -->
+
 			<!-- ==**== CONTENT ==**== -->
 			<dependency>
 				<groupId>org.treasureboat</groupId>
@@ -1149,7 +1062,7 @@
 				<artifactId>tb-content-private</artifactId>
 				<version>${tb.fw.content}</version>
 			</dependency>
-			
+
 			<!-- ==**== CORE ==**== -->
 			<dependency>
 				<groupId>org.treasureboat</groupId>
@@ -1185,7 +1098,7 @@
 				<groupId>org.treasureboat</groupId>
 				<artifactId>tb-core-skin-gumby</artifactId>
 				<version>${tb.fw.core}</version>
-			</dependency>			
+			</dependency>
 			<dependency>
 				<groupId>org.treasureboat</groupId>
 				<artifactId>tb-core-web</artifactId>
@@ -1263,7 +1176,7 @@
 				<artifactId>tb-db-prototypes</artifactId>
 				<version>${tb.fw.db}</version>
 			</dependency>
-			
+
 			<!-- ==**== INOUT ==**== -->
 			<dependency>
 				<groupId>org.treasureboat</groupId>
@@ -1349,7 +1262,7 @@
     			<artifactId>tb-features-tag</artifactId>
 				<version>${tb.fw.features}</version>
 			</dependency>
-			
+
 			<!-- ==**== EXTRA ==**== -->
 			<dependency>
 				<groupId>org.treasureboat</groupId>
@@ -1544,761 +1457,68 @@
 				<groupId>org.treasureboat</groupId>
 				<artifactId>tb-maven-plugin</artifactId>
 				<version>${tb.maven}</version>
-			</dependency>			
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
 
 	<build>
-		<directory>${project.basedir}/target</directory>
-		<outputDirectory>${project.build.directory}/classes</outputDirectory>
-		<testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+		<!-- Override source directories for TreasureBoat frameworks -->
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<!-- tb-maven-plugin configuration inherited from SuperDeployPOM -->
 
-    	<sourceDirectory>src/main/java</sourceDirectory>
-    	<testSourceDirectory>src/test/java</testSourceDirectory>
-    	
-		<finalName>${project.artifactId}-${project.version}</finalName>
- 
- 		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<targetPath>${project.build.outputDirectory}/Resources</targetPath>
-				<includes>
-				</includes>
-				<excludes>
-					<exclude>.*</exclude>
-					<exclude>**/.*</exclude>
-					<exclude>**/.*/</exclude>
-					<exclude>**/EOTestMigration/**</exclude>
-					<exclude>**/*.eogen</exclude>
-				</excludes>
-			</resource>
-			
-<!-- Temporary Start -->							
-			<resource>
-				<directory>Resources</directory>
-				<targetPath>${project.build.outputDirectory}/Resources</targetPath>
-				<includes>
-				</includes>
-				<excludes>
-					<exclude>.*</exclude>
-					<exclude>**/.*</exclude>
-					<exclude>**/.*/</exclude>
-					<exclude>**/EOTestMigration/**</exclude>
-					<exclude>**/*.eogen</exclude>
-				</excludes>
-			</resource>				
-<!-- Temporary End -->
-
-		</resources>
-
- 		<testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-                <filtering>true</filtering>
-            </testResource>
-		</testResources>
-   
 		<pluginManagement>
-			<!-- https://maven.apache.org/plugins/index.html -->
 			<plugins>
-				
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin -->
-				<plugin>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>${tb.version.maven.clean}</version>
-				</plugin>
-				
-				<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/versions-maven-plugin -->
-				<!-- 
-					No change of POM : only report
-						[ Checking for new versions of plugins ]
-							mvn versions:display-plugin-updates : Display which plugins have newer versions
-						[ Checking for new versions of dependencies ]
-                            mvn versions:display-dependency-updates : Display which dependencies have newer versions
-						[ Checking for new versions of specified by properties ]
-							mvn versions:display-property-updates : Display which properties have newer versions
-						[ Create a report of new versions of dependencies ]
-                            mvn versions:dependency-updates-report : Generate a report and check `/target/reports` HTML result file
-					
-					Note: modifies pom.xml files
-						[ To restore your pom.xml files to their initial state, before you start modifying it with the versions-maven-plugin, invoke the revert goal]
-                        	mvn versions:revert : Revert changes made by the versions plugin to the pom.xml file
-                        	
-                        [ To update the versions of dependencies and plugins in your pom.xml files, invoke one of the use or update goals]
-                        	mvn -N versions:update-child-modules: Update the versions of child modules to match the parent
-                        	
-                        [ To set the project version to a specific version, just invoke the set goal.]	
-                        	mvn versions:set -DnewVersion=10.1.5: Set the project version to a specific value
-                        	
-						[ To accept the modifications made to your pom.xml files by the versions-maven-plugin, invoke the commit goal]
-                            mvn versions:commit : Commit changes made by the versions plugin to the pom.xml file
-
-				-->
+				<!-- Configure the exec plugin to no-op on framework modules (no Application class).
+				     This allows frameworks to be included in workspace aggregators without
+				     failing when running 'mvn exec:exec' from the workspace root. -->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>versions-maven-plugin</artifactId>
-    				<version>${tb.version.maven.plugin}</version>
-				</plugin>
-				
-				<plugin>
-        			<groupId>org.apache.maven.plugins</groupId>
-			        <artifactId>maven-enforcer-plugin</artifactId>
-					<version>${tb.version.maven.enforcer}</version>
-				</plugin>
-
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-help-plugin -->
-				<!-- 
-					Display the current active profile: mvn help:active-profiles
-					Make a profile active: mvn compile -P integration-tests
-				-->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-help-plugin</artifactId>
-            			<version>${tb.version.maven.profile}</version>
-					<executions>
-						<execution>
-							<id>show-profiles</id>
-							<phase>compile</phase>
-							<goals>
-								<goal>active-profiles</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-								
-				<!-- https://mvnrepository.com/artifact/io.github.git-commit-id/git-commit-id-maven-plugin -->
-				<plugin>
-					<groupId>io.github.git-commit-id</groupId>
-					<artifactId>git-commit-id-maven-plugin</artifactId>
-					<version>${tb.version.maven.git-commit}</version>
-				</plugin>
- 
-				<!-- https://mvnrepository.com/artifact/org.codehaus.mojo/build-helper-maven-plugin -->
-				<!-- https://www.mojohaus.org/build-helper-maven-plugin/usage.html -->
-				<plugin>
-					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>${tb.version.maven.build-helper}</version>
-				</plugin>
-
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-				<plugin>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${tb.version.maven.compiler}</version>
-				</plugin>
-
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
-				<plugin>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>${tb.version.maven.source}</version>
-				</plugin>
-
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
-				<plugin>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>${tb.version.maven.resources}</version>
-				</plugin>
-				
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
-				<plugin>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>${tb.version.maven.javadoc}</version>
-				</plugin>
-				
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
-				<plugin>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>${tb.version.maven.jar}</version>
-				</plugin>
-				
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-site-plugin -->
-				<plugin>
-					<artifactId>maven-site-plugin</artifactId>
-					<version>${tb.version.maven.site}</version>
-				</plugin>
-				
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
-				<plugin>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>${tb.version.maven.install}</version>
-				</plugin>
-				
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
-				<plugin>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>${tb.version.maven.deploy}</version>
-				</plugin>
-
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-dependency-plugin -->
-				<plugin>
-					<artifactId>maven-dependency-plugin</artifactId>
-					<version>${tb.version.maven.dependency}</version>
-				</plugin>
-
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-release-plugin -->
-				<plugin>
-					<artifactId>maven-release-plugin</artifactId>
-					<version>${tb.version.maven.release}</version>
-				</plugin>
-				
-				<!-- https://mvnrepository.com/artifact/net.nicoulaj.maven.plugins/checksum-maven-plugin -->
-				<plugin>
-					<groupId>net.nicoulaj.maven.plugins</groupId>
-					<artifactId>checksum-maven-plugin</artifactId>
-					<version>${tb.version.maven.checksum}</version>
-				</plugin>
-
-				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
-<!-- : Not used in Github 
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-gpg-plugin</artifactId>
-					<version>${tb.version.maven.gpg}</version>
-				</plugin>
--->
-
-				<plugin>
-					<groupId>org.treasureboat</groupId>
-					<artifactId>tb-maven-plugin</artifactId>
-					<version>${tb.maven}</version>
-				</plugin>
-
-				<!-- Eclipse m2e lifecycle mapping -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>${tb.version.maven.lifecycle-mapping}</version>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>3.6.0</version>
 					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>io.github.ishimoto</groupId>
-										<artifactId>tb-maven-plugin</artifactId>
-										<versionRange>[1.0.0,)</versionRange>
-										<goals>
-											<goal>dependency-counter</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<execute>
-											<runOnIncremental>false</runOnIncremental>
-										</execute>
-									</action>
-								</pluginExecution>
-								
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>io.github.ishimoto</groupId>
-										<artifactId>tb-maven-plugin</artifactId>
-										<versionRange>[1.0.0,)</versionRange>
-										<goals>
-											<goal>resource-copy</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<execute>
-											<runOnIncremental>false</runOnIncremental>
-										</execute>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
+						<!-- Use the 'true' command which exits immediately with success -->
+						<executable>true</executable>
+						<arguments/>
 					</configuration>
 				</plugin>
-
 			</plugins>
 		</pluginManagement>
-
 		<plugins>
-			<!-- Configure the Goals of the plugin -->
-
-			<plugin>
-				<!-- This rule enforces certain Maven versions -->
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>enforce-maven</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<requireMavenVersion>
-									<version>3.6.3</version>
-								</requireMavenVersion>
-							</rules>    
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-			</plugin>
-			
- 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
-          			<encoding>UTF-8</encoding>
-					<!-- 
-					<compilerArgument>-Xlint:all</compilerArgument>
-        			<showWarnings>true</showWarnings>
-        			<showDeprecation>true</showDeprecation>
-        			-->
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-							<version>${tb.lombok}</version>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>io.github.git-commit-id</groupId>
-				<artifactId>git-commit-id-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>get-the-git-infos</id>
-						<goals>
-							<goal>revision</goal>
-						</goals>
-						<phase>initialize</phase>
-					</execution>
-				</executions>
-				<configuration>
-					<generateGitPropertiesFile>true</generateGitPropertiesFile>
-					<generateGitPropertiesFilename>${project.build.outputDirectory}/Resources/git.properties</generateGitPropertiesFilename>
-					<commitIdGenerationMode>full</commitIdGenerationMode>
-				</configuration>
-			</plugin>
-
- 			<plugin>
-			 	<!-- mvn package -->
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<Automatic-Module-Name>${name.module}</Automatic-Module-Name>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-			</plugin>
-
-			<plugin>
-				<!-- mvn source:jar -->
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<excludeResources>true</excludeResources>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<!-- mvn javadoc:jar -->
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<phase>package</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<show>public</show>
-					<!-- Skip all Javadoc validation and continue build even with errors -->
-					<doclint>none</doclint>
-					<failOnError>false</failOnError>
-					<failOnWarnings>false</failOnWarnings>
-					<quiet>true</quiet>
-					<additionalJOptions>
-						<additionalJOption>-J-Xmx1024m</additionalJOption>
-						<additionalJOption>-Xdoclint:none</additionalJOption>
-					</additionalJOptions>
-					<excludePackageNames>
-						*.impl.*:*.internal.*:*.test.*
-					</excludePackageNames>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-resources</id>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<addDefaultExcludes>true</addDefaultExcludes>
-				</configuration>
-			</plugin>
-
-<!-- Generate checksums for all JAR files: Not used in GitHub -->
-<!--
-			<plugin>
-				<groupId>net.nicoulaj.maven.plugins</groupId>
-				<artifactId>checksum-maven-plugin</artifactId>
-				<version>${tb.version.maven.checksum}</version>
-
-				<executions>
-					<execution>
-						<id>checksum-maven-plugin-files</id>
-						<phase>package</phase>
-						<goals>
-							<goal>files</goal>
-						</goals>
-						<configuration>
-							<fileSets>
-								<fileSet>
-									<directory>${project.build.directory}</directory>
-									<includes>
-										<include>*.jar</include>
-									</includes>
-								</fileSet>
-							</fileSets>
-							<algorithms>
-								<algorithm>MD5</algorithm>
-								<algorithm>SHA-1</algorithm>
-							</algorithms>
-							<csvSummary>true</csvSummary>
-							<csvSummaryFile>${project.build.directory}/checksums.csv</csvSummaryFile>
-							<xmlSummary>true</xmlSummary>
-							<xmlSummaryFile>${project.build.directory}/checksums.xml</xmlSummaryFile>
-							<individualFiles>true</individualFiles>
-							<appendFilename>true</appendFilename>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
--->
-<!-- : Not used in GitHub
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>sign-artifacts</id>
-						<phase>package</phase>
-						<goals>
-							<goal>sign</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
--->			
-
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>${tb.version.maven.build-helper}</version>
-				 <executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>src/generated/java</source>
-<!-- Temporary Start -->
-								<source>src/main/generated</source>
-								<source>Sources</source>
-								<source>GeneratedEOs</source>
-<!-- Temporary End -->							
-							</sources>
-						</configuration>
-					</execution>
- 
-					<execution>
-						<id>add-resource</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>add-resource</goal>
-						</goals>
-						<configuration>
-							<resources>
-								<resource> 
-									<!-- This will create that folder, but we have to NOT copy the components -->
-									<directory>src/main/webapp</directory>
-									<targetPath>${project.build.outputDirectory}/tmp</targetPath>
-									<excludes>
-										<exclude>**/*.html</exclude>
-										<exclude>**/*.wod</exclude>
-										<exclude>**/*.api</exclude>
-										<exclude>.*</exclude>
-										<exclude>**/.*</exclude>
-										<exclude>**/.*/</exclude>
-									</excludes>                                		
-								</resource>
-								<resource> 
-									<directory>src/main/webserver-resources</directory>
-									<targetPath>${project.build.outputDirectory}/WebServerResources</targetPath>
-									<excludes>
-										<exclude>.*</exclude>
-										<exclude>**/.*</exclude>
-										<exclude>**/.*/</exclude>
-									</excludes>                                		
-								</resource>
-
-<!-- Temporary Start -->							
-								<resource> 
-									<!-- This will create that folder, but we have to NOT copy the components-->
-									<directory>src/main/components</directory>
-									<targetPath>${project.build.outputDirectory}/tmp</targetPath>
-									<excludes>
-										<exclude>**/*.html</exclude>
-										<exclude>**/*.wod</exclude>
-										<exclude>**/*.api</exclude>
-										<exclude>.*</exclude>
-										<exclude>**/.*</exclude>
-										<exclude>**/.*/</exclude>
-									</excludes>                                		
-								</resource>
-								<resource> 
-									<directory>WebServerResources</directory>
-									<targetPath>${project.build.outputDirectory}/WebServerResources</targetPath>
-									<excludes>
-										<exclude>.*</exclude>
-										<exclude>**/.*</exclude>
-										<exclude>**/.*/</exclude>
-									</excludes>                                		
-								</resource>
-<!-- Temporary End -->
-
-							</resources>
-						</configuration>
-					</execution>
-					
-				</executions>
+				<artifactId>exec-maven-plugin</artifactId>
 			</plugin>
-
-			<plugin>
-				<groupId>org.treasureboat</groupId>
-				<artifactId>tb-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>dependency-counter</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>dependency-counter</goal>
-						</goals>
-						<configuration>
-							<showDependencies>${tb.showDependencies}</showDependencies>
-						</configuration>
-					</execution>
-					<execution>
-						<id>resource-copy</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>resource-copy</goal>
-						</goals>
-						<configuration>
-							<debug>false</debug>
-							<isApplication>false</isApplication>
-							<directories>
-								<directory>src/main/webapp</directory>
-<!-- Temporary Start -->							
-								<directory>src/main/components</directory>
-								<directory>Components</directory>
-<!-- Temporary End -->							
-							</directories>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
 		</plugins>
 	</build>
 
 	<reporting>
 		<plugins>
 			<plugin>
-				<!-- mvn javadoc:javadoc -->
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${tb.version.maven.javadoc}</version>
-				<configuration>
-					<!-- 
-						これはJavaDocに公開するレベルをprotectedまで対象にする指定。
-						通常はpublicだけなので公開レベルを広げたければprotectedやprivateを指定する。
-					-->
-					<show>public</show>
-					
-					<!-- stylesheetfile>${basedir}/src/main/javadoc/stylesheet.css</stylesheetfile -->
-					
-					<!-- 
-						例ではコメントアウトしているが、コメントアウトを外すとJavaDoc生成時に doclintツールのチェックを行わないという意味になる。
-						（コメントアウトしているのでチェックが行われる）
-						Java 8以降、Javadoc ツールには doclint が導入され Javadoc コメントの HTML とドキュメント	タグに対する様々なチェックを行うが、 そのことにより標準に準拠した記載が必要となり、
-						特定のフォーマット違反があると Javadoc の生成が失敗する。標準に準拠した記載が望まれるが、どうしても準拠出来ない場合はチェックを無効にする
-					-->
-					<!-- <doclint>none</doclint> -->
-				</configuration>
+				<!--
+					SpotBugs - Static analysis to find bugs in Java code
+					Commands:
+						mvn spotbugs:check - Fail build if bugs found
+						mvn spotbugs:spotbugs - Generate an XML report
+						mvn spotbugs:gui - Open GUI to view bugs
+
+					https://spotbugs.github.io/spotbugs-maven-plugin/
+				-->
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+				<version>4.9.3.0</version>
 			</plugin>
-			
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>versions-maven-plugin</artifactId>
-				<version>${tb.version.maven.plugin}</version>
-				<reportSets>
-					<reportSet>
-						<reports>
-							<report>dependency-updates-report</report>
-							<report>plugin-updates-report</report>
-							<report>property-updates-report</report>
-						</reports>
-					</reportSet>
-				</reportSets>
-			</plugin>
-			
-			<plugin>
-				<!-- mvn findbugs:gui -->
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>${tb.version.maven.findbugs}</version>
-			</plugin>
-			
 		</plugins>
 	</reporting>
 
-    <organization>
- 		<!-- Login via Github -->
-		<name>TreasureBoat</name>
-        <url>https://treasureboat.org</url>
-    </organization>
-
-  	<developers>
-		<developer>
-			<id>ishimoto</id>
-			<name>Ken Ishimoto</name>
-			<email>k.ishimoto@treasureboat.org</email>
-			<url>https://www.treasureboat.org</url>
-			<organization>Treasureboat.org</organization>
-			<organizationUrl>https://www.treasureboat.org</organizationUrl>
-			<roles>
-				<role>architect</role>
-				<role>designer</role>
-				<role>developer</role>
-			</roles>
-			<timezone>JST</timezone>
-			<properties>
-				<discord>Ken Ishimoto#1657</discord>
-			</properties>
-		</developer>
-	</developers>
-
-	<licenses>
-		<!-- For deploy this is needed FIXME for TB what kind of Licenses ? -->
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-
-	<!-- Download Information -->
-	<repositories>
-		<repository>
-			<id>github</id>
-			<name>ishimoto</name>
-			<url>https://maven.pkg.github.com/ishimoto/*</url>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>github</id>
-			<name>ishimoto</name>
-			<url>https://maven.pkg.github.com/ishimoto/treasureboat-maven</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>central</id>
-			<name>Central Repository</name>
-			<url>https://repo.maven.apache.org/maven2</url>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<!-- Upload Information -->
-<!--
 	<distributionManagement>
 		<repository>
-			<!- https://www.baeldung.com/maven-publish-artifacts-github-packages ->
-			<!- `id` – set to `GitHub` ->
-			<id>GitHub</id>
-			<!- `name` – the name of the personal account or organization that owns the repository ->
+			<id>github</id>
 			<name>ishimoto</name>
-			<!- `url` – the URL for publishing packages, typically in the format `https://maven.pkg.github.com/{owner}/{repository}` ->
-			<url>https://maven.pkg.github.com/ishimoto/treasureboat-content</url>
+			<url>https://maven.pkg.github.com/ishimoto/treasureboat-setup</url>
 		</repository>
-		
-			Example of a Snapshot Repository:
-			<snapshotRepository>
-				<id>nexus</id>
-				<name>nexus-snapshot</name>
-				<url>http://localhost:8081/repository/maven-snapshots/</url>
-			</snapshotRepository>
 	</distributionManagement>
--->
-
-	<!-- 
-			Build Lifecycle:
-			https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
-			
-			* clean - remove all files generated by the previous build
-			* validate - validate the project is correct and all necessary information is available
-			* compile - compile the source code of the project
-			* test - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
-			* package - take the compiled code and package it in its distributable format, such as a JAR.
-			* verify - run any checks on results of integration tests to ensure quality criteria are met
-			* install - install the package into the local repository, for use as a dependency in other projects locally
-			* deploy - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
-            * site - generate site documentation for this project
-	-->
-
-	<!-- 
-		Error Codes :
-		
-		* Error assembling JAR: Invalid automatic module name
-            An Automatic Module Name is a feature in Java that allows traditional JAR files to be used as modules in the Java Platform Module System (JPMS). 
-            This name is specified in the JAR's manifest file using the Automatic-Module-Name attribute. If this attribute is missing or invalid, it can lead to errors.
-            
-            Common Causes of Invalid Names
-				Invalid Characters: Module names must be valid Java identifiers. This means they cannot contain characters like dashes (-). For example, serenity-core is invalid because of the dash.
-				Java Keywords: Names cannot be Java keywords. For instance, using enum or default in a module name is not allowed.
-				Improper Naming Conventions: Module names should follow reverse-DNS naming conventions, similar to package names. For example, org.example.module is valid, while org.example.module is not.
-	-->
 
 </project>
