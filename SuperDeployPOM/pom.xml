@@ -7,14 +7,14 @@
 
     <groupId>org.treasureboat</groupId>
 	<artifactId>super-deploy-pom</artifactId>
-	<version>0.6</version>
+	<version>0.7</version>
 
 	<packaging>pom</packaging>
 
 	<name>TreasureBoat.org Maven Super Deploy POM</name>
 
 	<properties>
-		<tb.lastmodified>2026/02/02</tb.lastmodified>
+		<tb.lastmodified>2026/03/10</tb.lastmodified>
 
 		<tb.showDependencies>false</tb.showDependencies>
 
@@ -69,7 +69,7 @@
 		<tb.lombok>1.18.42</tb.lombok>
 
 		<!-- TB Build Information -->
-		<tb.maven>1.0.11</tb.maven>
+		<tb.maven>1.0.12</tb.maven>
 	</properties>
 
 	<build>
