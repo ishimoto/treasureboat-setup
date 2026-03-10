@@ -367,7 +367,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
-					<!-- Use standard Maven output directory (not target/classes which causes "zip cannot include itself" error) -->
+					<!-- Use the standard Maven output directory (not target/classes which causes the "zip cannot include itself" error) -->
 					<outputDirectory>${project.build.directory}</outputDirectory>
 					<archive>
 						<manifestEntries>
@@ -766,7 +766,7 @@
 	<!-- Dependency management for embedded deployment (Legacy/Maven Embedded builds) -->
 	<dependencyManagement>
 		<dependencies>
-			<!-- Servlet/JSP APIs with compile scope for embedded deployment -->
+			<!-- Servlet/JSP APIs with compiler scope for embedded deployment -->
 			<dependency>
 				<groupId>jakarta.servlet</groupId>
 				<artifactId>jakarta.servlet-api</artifactId>
