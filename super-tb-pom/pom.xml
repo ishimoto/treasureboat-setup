@@ -35,22 +35,21 @@
 	<properties>
 		<tb.lastmodified>2026/03/10</tb.lastmodified>
 
-		<tb.fw.content>11.0.1</tb.fw.content>		<!-- 10.10.2 -->
-		<tb.fw.core>11.0.1</tb.fw.core>				<!-- 10.10.12 -->
-		<tb.fw.db>11.0.1</tb.fw.db>					<!-- 10.10.3 -->
-		<tb.fw.inout>11.0.1</tb.fw.inout>			<!-- 10.10.5 -->
-		<tb.fw.archive>11.0.1</tb.fw.archive>		<!-- 10.10.3 -->
-
-		<tb.fw.features>10.10.5</tb.fw.features>
-		<tb.fw.extra>10.10.4</tb.fw.extra>
-		<tb.fw.sangria>10.10.6</tb.fw.sangria>
-		<tb.fw.pro>10.10.4</tb.fw.pro>
-		<tb.fw.prox>10.10.3</tb.fw.prox>
+		<tb.fw.content>11.0.1</tb.fw.content>
+		<tb.fw.core>11.0.2</tb.fw.core>
+		<tb.fw.db>11.0.2</tb.fw.db>
+		<tb.fw.inout>11.0.1</tb.fw.inout>
+		<tb.fw.archive>11.0.1</tb.fw.archive>
+		<tb.fw.features>11.0.1</tb.fw.features>
+		<tb.fw.extra>11.0.1</tb.fw.extra>
+		<tb.fw.sangria>11.0.1</tb.fw.sangria>
+		<tb.fw.pro>11.0.1</tb.fw.pro>
+		<tb.fw.prox>10.10.1</tb.fw.prox>
 		<tb.fw.proy>10.10.2</tb.fw.proy>
 		<tb.fw.template>11.10.2</tb.fw.template>
-		<tb.fw.elastic>10.10.3</tb.fw.elastic>
-		<tb.fw.opensearch>10.10.3</tb.fw.opensearch>
-		<tb.fw.elemental>10.10.4</tb.fw.elemental><!-- Temporary -->
+		<tb.fw.elastic>10.10.4</tb.fw.elastic>
+		<tb.fw.opensearch>10.10.4</tb.fw.opensearch>
+		<tb.fw.elemental>10.10.5</tb.fw.elemental><!-- Temporary -->
 		<tb.fw.ultra>10.10.4</tb.fw.ultra>
 
 		<!-- Core Utilities (override/extend from parent) -->
@@ -76,11 +75,11 @@
 				<tb.fw.db>${tb.java11.snapshot}</tb.fw.db>
 				<tb.fw.inout>${tb.java11.snapshot}</tb.fw.inout>
 				<tb.fw.archive>${tb.java11.snapshot}</tb.fw.archive>
+				<tb.fw.features>${tb.java11.snapshot}</tb.fw.features>
+				<tb.fw.extra>${tb.java11.snapshot}</tb.fw.extra>
+				<tb.fw.sangria>${tb.java11.snapshot}</tb.fw.sangria>
+				<tb.fw.pro>${tb.java11.snapshot}</tb.fw.pro>
 
-				<tb.fw.features>${tb.java10.snapshot}</tb.fw.features>
-				<tb.fw.extra>${tb.java10.snapshot}</tb.fw.extra>
-				<tb.fw.sangria>${tb.java10.snapshot}</tb.fw.sangria>
-				<tb.fw.pro>${tb.java10.snapshot}</tb.fw.pro>
 				<tb.fw.prox>${tb.java10.snapshot}</tb.fw.prox>
 				<tb.fw.proy>${tb.java10.snapshot}</tb.fw.proy>
 				<tb.fw.template>${tb.java11.snapshot}</tb.fw.template>
@@ -99,11 +98,11 @@
 				<tb.fw.db>${tb.java11.snapshot}</tb.fw.db>
 				<tb.fw.inout>${tb.java11.snapshot}</tb.fw.inout>
 				<tb.fw.archive>${tb.java11.snapshot}</tb.fw.archive>
+				<tb.fw.features>${tb.java11.snapshot}</tb.fw.features>
+				<tb.fw.extra>${tb.java11.snapshot}</tb.fw.extra>
+				<tb.fw.sangria>${tb.java11.snapshot}</tb.fw.sangria>
+				<tb.fw.pro>${tb.java11.snapshot}</tb.fw.pro>
 
-				<tb.fw.features>${tb.java10.snapshot}</tb.fw.features>
-				<tb.fw.extra>${tb.java10.snapshot}</tb.fw.extra>
-				<tb.fw.sangria>${tb.java10.snapshot}</tb.fw.sangria>
-				<tb.fw.pro>${tb.java10.snapshot}</tb.fw.pro>
 				<tb.fw.prox>${tb.java10.snapshot}</tb.fw.prox>
 				<tb.fw.proy>${tb.java10.snapshot}</tb.fw.proy>
 				<tb.fw.template>${tb.java11.snapshot}</tb.fw.template>
