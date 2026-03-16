@@ -36,21 +36,21 @@
 		<tb.lastmodified>2026/03/10</tb.lastmodified>
 
 		<tb.fw.content>11.0.1</tb.fw.content>
-		<tb.fw.core>11.0.2</tb.fw.core>
+		<tb.fw.core>11.0.4</tb.fw.core>
 		<tb.fw.db>11.0.2</tb.fw.db>
 		<tb.fw.inout>11.0.1</tb.fw.inout>
 		<tb.fw.archive>11.0.1</tb.fw.archive>
-		<tb.fw.features>11.0.1</tb.fw.features>
+		<tb.fw.features>11.0.2</tb.fw.features>
 		<tb.fw.extra>11.0.1</tb.fw.extra>
 		<tb.fw.sangria>11.0.1</tb.fw.sangria>
-		<tb.fw.pro>11.0.1</tb.fw.pro>
-		<tb.fw.prox>10.10.1</tb.fw.prox>
+		<tb.fw.pro>11.0.2</tb.fw.pro>
+		<tb.fw.prox>10.10.3</tb.fw.prox>
 		<tb.fw.proy>10.10.2</tb.fw.proy>
 		<tb.fw.template>11.10.2</tb.fw.template>
 		<tb.fw.elastic>10.10.4</tb.fw.elastic>
 		<tb.fw.opensearch>10.10.4</tb.fw.opensearch>
 		<tb.fw.elemental>10.10.5</tb.fw.elemental><!-- Temporary -->
-		<tb.fw.ultra>10.10.4</tb.fw.ultra>
+		<tb.fw.ultra>10.10.5</tb.fw.ultra>
 
 		<!-- Core Utilities (override/extend from parent) -->
         <tb.logback>1.5.19</tb.logback>
