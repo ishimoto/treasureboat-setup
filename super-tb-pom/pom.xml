@@ -50,7 +50,7 @@
 		<tb.fw.elastic>11.0.1</tb.fw.elastic>
 		<tb.fw.opensearch>11.0.2</tb.fw.opensearch>
 		<tb.fw.elemental>11.0.1</tb.fw.elemental><!-- Temporary -->
-		<tb.fw.ultra>11.0.2</tb.fw.ultra>
+		<tb.fw.ultra>11.0.3</tb.fw.ultra>
 
 		<!-- Core Utilities (override/extend from parent) -->
         <tb.logback>1.5.19</tb.logback>
