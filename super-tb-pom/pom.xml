@@ -58,7 +58,7 @@
 
         <com.rollbar.version>2.2.0</com.rollbar.version>
         <com.fasterxml.jackson.version>2.21.2</com.fasterxml.jackson.version>
-        <org.bouncycastle.version>1.81</org.bouncycastle.version>
+        <org.bouncycastle.version>1.84</org.bouncycastle.version>
         <org.apache.poi.version>5.5.1</org.apache.poi.version>
         <org.xhtmlrenderer.flying-saucer.version>9.13.3</org.xhtmlrenderer.flying-saucer.version>
         <org.apache.pdfbox.version>3.0.7</org.apache.pdfbox.version>
