@@ -7,14 +7,14 @@
 
     <groupId>org.treasureboat</groupId>
 	<artifactId>super-deploy-pom</artifactId>
-	<version>0.7</version>
+	<version>0.8</version>
 
 	<packaging>pom</packaging>
 
 	<name>TreasureBoat.org Maven Super Deploy POM</name>
 
 	<properties>
-		<tb.lastmodified>2026/03/10</tb.lastmodified>
+		<tb.lastmodified>2026/04/16</tb.lastmodified>
 
 		<tb.showDependencies>false</tb.showDependencies>
 
@@ -66,7 +66,7 @@
 		<tb.version.maven.gpg>3.2.8</tb.version.maven.gpg>
 
 		<!-- Core Utilities -->
-		<tb.lombok>1.18.42</tb.lombok>
+		<tb.lombok>1.18.44</tb.lombok>
 
 		<!-- TB Build Information -->
 		<tb.maven>1.0.13</tb.maven>
@@ -143,7 +143,7 @@
 					
 					Note: modifies pom.xml files
 						[ To restore your pom.xml files to their initial state, before you start modifying it with the versions-maven-plugin, invoke the revert goal]
-                        	mvn versions:revert : Revert changes made by the versions plugin to the pom.xml file
+                        	mvn versions:revert : Revert changes made by the version plugin to the pom.xml file
                         	
                         [ To update the versions of dependencies and plugins in your pom.xml files, invoke one of the use or update goals]
                         	mvn -N versions:update-child-modules: Update the versions of child modules to match the parent
@@ -152,7 +152,7 @@
                         	mvn versions:set -DnewVersion=10.1.5: Set the project version to a specific value
                         	
 						[ To accept the modifications made to your pom.xml files by the versions-maven-plugin, invoke the commit goal]
-                            mvn versions:commit : Commit changes made by the versions plugin to the pom.xml file
+                            mvn versions:commit : Commit changes made by the version plugin to the pom.xml file
 
 				-->
 				<plugin>
@@ -270,7 +270,7 @@
 				</plugin>
 
 				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
-<!-- : Not used in Github 
+<!-- : Not used in GitHub
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-gpg-plugin</artifactId>
