@@ -14,7 +14,7 @@
 	<name>TreasureBoat.org Maven Super Deploy POM</name>
 
 	<properties>
-		<tb.lastmodified>2026/04/16</tb.lastmodified>
+		<tb.lastmodified>2026/04/17</tb.lastmodified>
 
 		<tb.showDependencies>false</tb.showDependencies>
 
@@ -38,6 +38,12 @@
 		<tb.java13.snapshot>13.99.99-SNAPSHOT</tb.java13.snapshot>
 		<tb.java14.snapshot>14.99.99-SNAPSHOT</tb.java14.snapshot>
 		<tb.java15.snapshot>15.99.99-SNAPSHOT</tb.java15.snapshot>
+		<tb.java16.snapshot>16.99.99-SNAPSHOT</tb.java16.snapshot>
+		<tb.java17.snapshot>17.99.99-SNAPSHOT</tb.java17.snapshot>
+		<tb.java18.snapshot>18.99.99-SNAPSHOT</tb.java18.snapshot>
+		<tb.java19.snapshot>19.99.99-SNAPSHOT</tb.java19.snapshot>
+		<tb.java20.snapshot>20.99.99-SNAPSHOT</tb.java20.snapshot>
+		<tb.java21.snapshot>21.99.99-SNAPSHOT</tb.java21.snapshot>
 
 		<!-- Modules -->
 		<name.module>${project.name}</name.module>
@@ -50,6 +56,8 @@
 		<tb.version.maven.dependency>3.10.0</tb.version.maven.dependency>
 		<tb.version.maven.deploy>3.1.4</tb.version.maven.deploy>
 		<tb.version.maven.enforcer>3.6.2</tb.version.maven.enforcer>
+		<tb.version.maven.antrun>3.2.0</tb.version.maven.antrun>
+		<tb.version.maven.assembly>3.8.0</tb.version.maven.assembly>
 		<tb.version.maven.spotbugs>4.9.8.3</tb.version.maven.spotbugs>
 		<tb.version.maven.git-commit>9.2.0</tb.version.maven.git-commit>
 		<tb.version.maven.install>3.1.4</tb.version.maven.install>
@@ -282,6 +290,18 @@
 					<groupId>org.treasureboat</groupId>
 					<artifactId>tb-maven-plugin</artifactId>
 					<version>${tb.maven}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-antrun-plugin -->
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>${tb.version.maven.antrun}</version>
+				</plugin>
+
+				<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${tb.version.maven.assembly}</version>
 				</plugin>
 
 				<!-- https://spotbugs.github.io/spotbugs-maven-plugin/ -->
