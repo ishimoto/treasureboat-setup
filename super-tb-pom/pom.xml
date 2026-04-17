@@ -994,6 +994,13 @@
 				<version>2.1.0</version>
 			</dependency>
 
+			<!-- https://mvnrepository.com/artifact/com.pngencoder/pngencoder -->
+			<dependency>
+				<groupId>com.pngencoder</groupId>
+				<artifactId>pngencoder</artifactId>
+				<version>0.14.0</version>
+			</dependency>
+
 			<!-- ========================================== -->
 			<!-- TreasureBoat custom dependencies          -->
 			<!-- ========================================== -->
