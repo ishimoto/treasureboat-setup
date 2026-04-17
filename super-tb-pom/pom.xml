@@ -61,7 +61,7 @@
         <org.bouncycastle.version>1.81</org.bouncycastle.version>
         <org.apache.poi.version>5.5.1</org.apache.poi.version>
         <org.xhtmlrenderer.flying-saucer.version>9.12.1</org.xhtmlrenderer.flying-saucer.version>
-        <org.apache.pdfbox.version>3.0.5</org.apache.pdfbox.version>
+        <org.apache.pdfbox.version>3.0.7</org.apache.pdfbox.version>
         <org.apache.avalon.framework.version>4.3.1</org.apache.avalon.framework.version>
 	</properties>
 
