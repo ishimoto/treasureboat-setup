@@ -33,7 +33,7 @@
     -->
 
 	<properties>
-		<tb.lastmodified>2026/03/29</tb.lastmodified>
+		<tb.lastmodified>2026/04/17</tb.lastmodified>
 
 		<tb.fw.content>11.0.1</tb.fw.content>
 		<tb.fw.core>11.0.6</tb.fw.core>
@@ -918,7 +918,7 @@
 			<dependency>
 				<groupId>org.quartz-scheduler</groupId>
 				<artifactId>quartz</artifactId>
-				<version>2.5.0</version>
+				<version>2.5.2</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
