@@ -46,20 +46,20 @@
 		<tb.version.maven.build-helper>3.6.1</tb.version.maven.build-helper>
 		<tb.version.maven.checksum>1.11</tb.version.maven.checksum>
 		<tb.version.maven.clean>3.5.0</tb.version.maven.clean>
-		<tb.version.maven.compiler>3.14.1</tb.version.maven.compiler>
-		<tb.version.maven.dependency>3.9.0</tb.version.maven.dependency>
+		<tb.version.maven.compiler>3.15.0</tb.version.maven.compiler>
+		<tb.version.maven.dependency>3.10.0</tb.version.maven.dependency>
 		<tb.version.maven.deploy>3.1.4</tb.version.maven.deploy>
 		<tb.version.maven.enforcer>3.6.2</tb.version.maven.enforcer>
-		<tb.version.maven.spotbugs>4.9.3.0</tb.version.maven.spotbugs>
-		<tb.version.maven.git-commit>9.0.2</tb.version.maven.git-commit>
+		<tb.version.maven.spotbugs>4.9.8.3</tb.version.maven.spotbugs>
+		<tb.version.maven.git-commit>9.2.0</tb.version.maven.git-commit>
 		<tb.version.maven.install>3.1.4</tb.version.maven.install>
-		<tb.version.maven.jar>3.4.2</tb.version.maven.jar><!-- https://github.com/eclipse-m2e/m2e-core/issues/2084 -->
+		<tb.version.maven.jar>3.5.0</tb.version.maven.jar>
 		<tb.version.maven.javadoc>3.12.0</tb.version.maven.javadoc>
 		<tb.version.maven.lifecycle-mapping>1.0.0</tb.version.maven.lifecycle-mapping>
-		<tb.version.maven.plugin>2.20.1</tb.version.maven.plugin>
+		<tb.version.maven.plugin>2.21.0</tb.version.maven.plugin>
 		<tb.version.maven.profile>3.5.1</tb.version.maven.profile>
-		<tb.version.maven.release>3.2.0</tb.version.maven.release>
-		<tb.version.maven.resources>3.4.0</tb.version.maven.resources>
+		<tb.version.maven.release>3.3.1</tb.version.maven.release>
+		<tb.version.maven.resources>3.5.0</tb.version.maven.resources>
 		<tb.version.maven.site>3.21.0</tb.version.maven.site>
 		<tb.version.maven.source>3.4.0</tb.version.maven.source>
 
