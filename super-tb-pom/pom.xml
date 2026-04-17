@@ -17,6 +17,7 @@
 	<version>1.0</version>
 
 	<packaging>pom</packaging>
+	<url>https://treasureboat.org</url>
 
 	<!--
         • Go to GitHub Settings > Developer settings > Personal access tokens
