@@ -53,7 +53,7 @@
 		<tb.fw.ultra>11.0.3</tb.fw.ultra>
 
 		<!-- Core Utilities (override/extend from parent) -->
-        <tb.logback>1.5.19</tb.logback>
+        <tb.logback>1.5.32</tb.logback>
         <tb.slf4j-api>2.0.17</tb.slf4j-api>
 
         <com.rollbar.version>2.0.0</com.rollbar.version>
