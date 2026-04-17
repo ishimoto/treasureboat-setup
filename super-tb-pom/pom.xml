@@ -561,7 +561,7 @@
 			<dependency>
 			    <groupId>com.googlecode.libphonenumber</groupId>
 			    <artifactId>libphonenumber</artifactId>
-			    <version>9.0.14</version>
+			    <version>9.0.28</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/net.sourceforge.cardme/cardme -->
