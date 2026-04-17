@@ -56,7 +56,7 @@
         <tb.logback>1.5.32</tb.logback>
         <tb.slf4j-api>2.0.17</tb.slf4j-api>
 
-        <com.rollbar.version>2.0.0</com.rollbar.version>
+        <com.rollbar.version>2.2.0</com.rollbar.version>
         <com.fasterxml.jackson.version>2.21.2</com.fasterxml.jackson.version>
         <org.bouncycastle.version>1.81</org.bouncycastle.version>
         <org.apache.poi.version>5.5.1</org.apache.poi.version>
