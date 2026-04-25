@@ -8,13 +8,13 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-deploy-pom</artifactId>
-		<version>0.10</version>
+		<version>0.11</version>
 	</parent>
 
 	<name>TreasureBoat.org Maven Super POM</name>
 	<artifactId>super-tb-pom</artifactId>
     <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
-	<version>1.2</version>
+	<version>1.3</version>
 
 	<packaging>pom</packaging>
 	<url>https://treasureboat.org</url>
@@ -37,9 +37,9 @@
 		<tb.lastmodified>2026/04/17</tb.lastmodified>
 
 		<!--
-			super-deploy-pom			0.10
+			super-deploy-pom			0.11
 	   		super-app-pom				0.7
-	    	super-tb-pom				1.2
+	    	super-tb-pom				1.3
 		-->
 		<tb.fw.content>12.0.1</tb.fw.content>
 		<tb.fw.core>12.0.1</tb.fw.core>
