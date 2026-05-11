@@ -14,7 +14,7 @@
 	<name>TreasureBoat.org Maven Super POM</name>
 	<artifactId>super-tb-pom</artifactId>
     <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
-	<version>1.4</version>
+	<version>1.5</version>
 
 	<packaging>pom</packaging>
 	<url>https://treasureboat.org</url>
@@ -291,10 +291,11 @@
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents.client5/httpclient5 -->
+			<!-- 5.6.1 patches CVE-2026-40542 (CVSS 7.3) flagged by IntelliJ on 5.6 -->
 			<dependency>
 			    <groupId>org.apache.httpcomponents.client5</groupId>
 			    <artifactId>httpclient5</artifactId>
-			    <version>5.6</version>
+			    <version>5.6.1</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents.core5/httpcore5 -->
