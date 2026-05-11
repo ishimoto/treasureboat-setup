@@ -42,21 +42,23 @@
 	    	super-tb-pom				1.4
 		-->
 		<tb.fw.content>12.0.1</tb.fw.content>
-		<tb.fw.core>12.0.2</tb.fw.core>
+		<tb.fw.core>12.0.3</tb.fw.core>
 		<tb.fw.db>12.0.1</tb.fw.db>
 		<tb.fw.inout>12.0.1</tb.fw.inout>
 		<tb.fw.archive>12.0.1</tb.fw.archive>
 		<tb.fw.features>12.0.1</tb.fw.features>
 		<tb.fw.extra>12.0.1</tb.fw.extra>
-		<tb.fw.sangria>12.0.1</tb.fw.sangria>
-		<tb.fw.pro>12.0.1</tb.fw.pro>
+		<tb.fw.sangria>12.0.2</tb.fw.sangria>
+		<tb.fw.pro>12.1.0</tb.fw.pro>
 		<tb.fw.prox>12.0.1</tb.fw.prox>
 		<tb.fw.proy>12.0.1</tb.fw.proy>
+
+		<!-- DEPRECATED -->
 		<tb.fw.template>12.0.1</tb.fw.template>
 		<tb.fw.elastic>12.0.1</tb.fw.elastic>
 		<tb.fw.opensearch>12.0.1</tb.fw.opensearch>
 		<tb.fw.elemental>12.0.1</tb.fw.elemental><!-- Temporary -->
-		<tb.fw.ultra>12.0.1</tb.fw.ultra>
+		<tb.fw.ultra>12.0.2</tb.fw.ultra>
 
 		<!-- Core Utilities (override/extend from parent) -->
         <tb.logback>1.5.32</tb.logback>
@@ -731,7 +733,7 @@
 				<artifactId>xercesImpl</artifactId>
 				<version>2.12.2</version>
 				<exclusions>
-					<!-- JDK provides org.w3c.dom/javax.xml via java.xml module.
+					<!-- JDK provides org.w3c.dom/javax.xml via the java.xml module.
 					     xml-apis JAR causes split-package conflicts in Eclipse. -->
 					<exclusion>
 						<groupId>xml-apis</groupId>
