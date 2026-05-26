@@ -77,7 +77,7 @@
 				<tb.fw.content>${tb.java14.snapshot}</tb.fw.content>
 				<tb.fw.core>${tb.java14.snapshot}</tb.fw.core>
 				<tb.fw.db>${tb.java14.snapshot}</tb.fw.db>
-				<tb.fw.inout>${tb.java13.snapshot}</tb.fw.inout>
+				<tb.fw.inout>${tb.java14.snapshot}</tb.fw.inout>
 				<tb.fw.archive>${tb.java13.snapshot}</tb.fw.archive>
 				<tb.fw.features>${tb.java13.snapshot}</tb.fw.features>
 				<tb.fw.extra>${tb.java13.snapshot}</tb.fw.extra>
