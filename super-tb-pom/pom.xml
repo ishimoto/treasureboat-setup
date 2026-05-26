@@ -39,26 +39,23 @@
 		<!--
 			super-deploy-pom			0.11
 	   		super-app-pom				0.7
-	    	super-tb-pom				1.4
+	    	super-tb-pom				1.5
 		-->
-		<tb.fw.content>12.0.1</tb.fw.content>
-		<tb.fw.core>12.0.3</tb.fw.core>
-		<tb.fw.db>12.0.1</tb.fw.db>
-		<tb.fw.inout>12.0.1</tb.fw.inout>
-		<tb.fw.archive>12.0.1</tb.fw.archive>
-		<tb.fw.features>12.0.1</tb.fw.features>
-		<tb.fw.extra>12.0.1</tb.fw.extra>
-		<tb.fw.sangria>12.0.2</tb.fw.sangria>
-		<tb.fw.pro>12.1.0</tb.fw.pro>
-		<tb.fw.prox>12.0.1</tb.fw.prox>
-		<tb.fw.proy>12.0.1</tb.fw.proy>
-
-		<!-- DEPRECATED -->
-		<tb.fw.template>12.0.1</tb.fw.template>
-		<tb.fw.elastic>12.0.1</tb.fw.elastic>
-		<tb.fw.opensearch>12.0.1</tb.fw.opensearch>
-		<tb.fw.elemental>12.0.1</tb.fw.elemental><!-- Temporary -->
-		<tb.fw.ultra>12.0.2</tb.fw.ultra>
+		<tb.fw.content>13.0.1</tb.fw.content>
+		<tb.fw.core>13.0.1</tb.fw.core>
+		<tb.fw.db>13.0.1</tb.fw.db>
+		<tb.fw.inout>13.0.1</tb.fw.inout>
+		<tb.fw.archive>13.0.1</tb.fw.archive>
+		<tb.fw.features>13.0.1</tb.fw.features>
+		<tb.fw.extra>13.0.1</tb.fw.extra>
+		<tb.fw.sangria>13.0.1</tb.fw.sangria>
+		<tb.fw.pro>13.0.2</tb.fw.pro>
+		<tb.fw.prox>13.0.1</tb.fw.prox>
+		<tb.fw.proy>13.0.1</tb.fw.proy>
+		<tb.fw.elastic>13.0.1</tb.fw.elastic>
+		<tb.fw.opensearch>13.0.1</tb.fw.opensearch>
+		<tb.fw.elemental>13.0.1</tb.fw.elemental><!-- Temporary -->
+		<tb.fw.ultra>13.0.1</tb.fw.ultra>
 
 		<!-- Core Utilities (override/extend from parent) -->
         <tb.logback>1.5.32</tb.logback>
@@ -77,22 +74,21 @@
 		<profile>
 			<id>snapshot</id>
 			<properties>
-				<tb.fw.content>${tb.java12.snapshot}</tb.fw.content>
-				<tb.fw.core>${tb.java12.snapshot}</tb.fw.core>
-				<tb.fw.db>${tb.java12.snapshot}</tb.fw.db>
-				<tb.fw.inout>${tb.java12.snapshot}</tb.fw.inout>
-				<tb.fw.archive>${tb.java12.snapshot}</tb.fw.archive>
-				<tb.fw.features>${tb.java12.snapshot}</tb.fw.features>
-				<tb.fw.extra>${tb.java12.snapshot}</tb.fw.extra>
-				<tb.fw.sangria>${tb.java12.snapshot}</tb.fw.sangria>
-				<tb.fw.pro>${tb.java12.snapshot}</tb.fw.pro>
-				<tb.fw.prox>${tb.java12.snapshot}</tb.fw.prox>
-				<tb.fw.proy>${tb.java12.snapshot}</tb.fw.proy>
-				<tb.fw.template>${tb.java12.snapshot}</tb.fw.template>
-				<tb.fw.elastic>${tb.java12.snapshot}</tb.fw.elastic>
-				<tb.fw.opensearch>${tb.java12.snapshot}</tb.fw.opensearch>
-				<tb.fw.elemental>${tb.java12.snapshot}</tb.fw.elemental>
-				<tb.fw.ultra>${tb.java12.snapshot}</tb.fw.ultra>
+				<tb.fw.content>${tb.java13.snapshot}</tb.fw.content>
+				<tb.fw.core>${tb.java13.snapshot}</tb.fw.core>
+				<tb.fw.db>${tb.java13.snapshot}</tb.fw.db>
+				<tb.fw.inout>${tb.java13.snapshot}</tb.fw.inout>
+				<tb.fw.archive>${tb.java13.snapshot}</tb.fw.archive>
+				<tb.fw.features>${tb.java13.snapshot}</tb.fw.features>
+				<tb.fw.extra>${tb.java13.snapshot}</tb.fw.extra>
+				<tb.fw.sangria>${tb.java13.snapshot}</tb.fw.sangria>
+				<tb.fw.pro>${tb.java13.snapshot}</tb.fw.pro>
+				<tb.fw.prox>${tb.java13.snapshot}</tb.fw.prox>
+				<tb.fw.proy>${tb.java13.snapshot}</tb.fw.proy>
+				<tb.fw.elastic>${tb.java13.snapshot}</tb.fw.elastic>
+				<tb.fw.opensearch>${tb.java13.snapshot}</tb.fw.opensearch>
+				<tb.fw.elemental>${tb.java13.snapshot}</tb.fw.elemental>
+				<tb.fw.ultra>${tb.java13.snapshot}</tb.fw.ultra>
 			</properties>
 		</profile>
 	    <profile>
