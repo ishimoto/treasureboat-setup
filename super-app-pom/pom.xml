@@ -8,11 +8,11 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-deploy-pom</artifactId>
-		<version>0.9</version>
+		<version>0.11</version>
 	</parent>
 
 	<artifactId>super-app-pom</artifactId>
-	<version>0.7</version>
+	<version>14.0</version>
 
 	<packaging>pom</packaging>
 
@@ -20,9 +20,9 @@
 	<description>Parent POM for TreasureBoat applications. Extends SuperDeployPOM with application-specific configurations.</description>
 
 	<properties>
-		<!-- Applications still compile with Java 10 until migration is complete -->
-		<maven.compiler.source>10</maven.compiler.source>
-		<maven.compiler.target>10</maven.compiler.target>
+		<!-- JDK target for all TB applications (super-app-pom 14.x = Java 14) -->
+		<maven.compiler.source>14</maven.compiler.source>
+		<maven.compiler.target>14</maven.compiler.target>
 	</properties>
 
 	<build>
