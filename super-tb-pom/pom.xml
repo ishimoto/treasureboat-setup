@@ -90,7 +90,7 @@
 				<tb.fw.prox>${tb.java14.snapshot}</tb.fw.prox>
 				<tb.fw.proy>${tb.java14.snapshot}</tb.fw.proy>
 				<tb.fw.elastic>${tb.java14.snapshot}</tb.fw.elastic>
-				<tb.fw.opensearch>${tb.java13.snapshot}</tb.fw.opensearch>
+				<tb.fw.opensearch>${tb.java14.snapshot}</tb.fw.opensearch>
 				<tb.fw.elemental>${tb.java13.snapshot}</tb.fw.elemental>
 				<tb.fw.ultra>${tb.java13.snapshot}</tb.fw.ultra>
 			</properties>
