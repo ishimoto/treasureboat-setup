@@ -34,7 +34,11 @@
     -->
 
 	<properties>
-		<tb.lastmodified>2026/05/26</tb.lastmodified>
+		<tb.lastmodified>2026/05/27</tb.lastmodified>
+
+		<!-- JDK target for all TB frameworks (super-tb-pom 14.x = Java 14) -->
+		<maven.compiler.source>14</maven.compiler.source>
+		<maven.compiler.target>14</maven.compiler.target>
 
 		<!--
 			super-deploy-pom			0.11
