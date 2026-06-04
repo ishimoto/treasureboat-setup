@@ -79,7 +79,7 @@
 			<id>snapshot</id>
 			<properties>
 				<tb.fw.content>${tb.java15.snapshot}</tb.fw.content>
-				<tb.fw.core>${tb.java14.snapshot}</tb.fw.core>
+				<tb.fw.core>${tb.java15.snapshot}</tb.fw.core>
 				<tb.fw.db>${tb.java14.snapshot}</tb.fw.db>
 				<tb.fw.inout>${tb.java14.snapshot}</tb.fw.inout>
 				<tb.fw.archive>${tb.java14.snapshot}</tb.fw.archive>
