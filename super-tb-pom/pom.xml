@@ -557,7 +557,7 @@
 			</dependency>
 
 			<!-- JUnit 5 BOM — manages junit-jupiter, junit-platform-* artifact versions.
-			     Pull individual artifacts (junit-jupiter, junit-platform-launcher) without specifying version. -->
+			     Pull individual artifacts (junit-jupiter, junit-platform-launcher) without specifying a version. -->
 			<dependency>
 			    <groupId>org.junit</groupId>
 			    <artifactId>junit-bom</artifactId>
