@@ -566,6 +566,15 @@
 			    <scope>import</scope>
 			</dependency>
 
+			<!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest
+			     JUnit 4 used to pull hamcrest-core transitively; JUnit 5 doesn't.
+			     Pin here so tests using hamcrest matchers (CoreMatchers, MatcherAssert) still compile. -->
+			<dependency>
+			    <groupId>org.hamcrest</groupId>
+			    <artifactId>hamcrest</artifactId>
+			    <version>2.2</version>
+			</dependency>
+
 	 		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
 			<dependency>
 				<groupId>commons-beanutils</groupId>
