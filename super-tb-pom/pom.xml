@@ -92,7 +92,7 @@
 				<tb.fw.elastic>${tb.java16.snapshot}</tb.fw.elastic>
 				<tb.fw.opensearch>${tb.java16.snapshot}</tb.fw.opensearch>
 				<tb.fw.elemental>${tb.java16.snapshot}</tb.fw.elemental>
-				<tb.fw.ultra>${tb.java15.snapshot}</tb.fw.ultra>
+				<tb.fw.ultra>${tb.java16.snapshot}</tb.fw.ultra>
 			</properties>
 		</profile>
 	    <profile>
