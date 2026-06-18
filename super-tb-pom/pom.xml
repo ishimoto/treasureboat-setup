@@ -88,7 +88,7 @@
 				<tb.fw.sangria>${tb.java16.snapshot}</tb.fw.sangria>
 				<tb.fw.pro>${tb.java16.snapshot}</tb.fw.pro>
 				<tb.fw.prox>${tb.java16.snapshot}</tb.fw.prox>
-				<tb.fw.proy>${tb.java15.snapshot}</tb.fw.proy>
+				<tb.fw.proy>${tb.java16.snapshot}</tb.fw.proy>
 				<tb.fw.elastic>${tb.java15.snapshot}</tb.fw.elastic>
 				<tb.fw.opensearch>${tb.java15.snapshot}</tb.fw.opensearch>
 				<tb.fw.elemental>${tb.java15.snapshot}</tb.fw.elemental>
