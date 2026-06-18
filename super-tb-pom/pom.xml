@@ -45,21 +45,21 @@
 	   		super-app-pom				16.0
 	    	super-tb-pom				16.0
 		-->
-		<tb.fw.content>15.0.1</tb.fw.content>
-		<tb.fw.core>15.0.1</tb.fw.core>
-		<tb.fw.db>15.0.1</tb.fw.db>
-		<tb.fw.inout>15.0.1</tb.fw.inout>
-		<tb.fw.archive>15.0.1</tb.fw.archive>
-		<tb.fw.features>15.0.1</tb.fw.features>
-		<tb.fw.extra>15.0.1</tb.fw.extra>
-		<tb.fw.sangria>15.0.1</tb.fw.sangria>
-		<tb.fw.pro>15.0.1</tb.fw.pro>
-		<tb.fw.prox>15.0.1</tb.fw.prox>
-		<tb.fw.proy>15.0.1</tb.fw.proy>
-		<tb.fw.elastic>15.0.1</tb.fw.elastic>
-		<tb.fw.opensearch>15.0.1</tb.fw.opensearch>
-		<tb.fw.elemental>15.0.1</tb.fw.elemental><!-- Temporary -->
-		<tb.fw.ultra>15.0.1</tb.fw.ultra>
+		<tb.fw.content>16.0.1</tb.fw.content>
+		<tb.fw.core>16.0.1</tb.fw.core>
+		<tb.fw.db>16.0.1</tb.fw.db>
+		<tb.fw.inout>16.0.1</tb.fw.inout>
+		<tb.fw.archive>16.0.1</tb.fw.archive>
+		<tb.fw.features>16.0.1</tb.fw.features>
+		<tb.fw.extra>16.0.1</tb.fw.extra>
+		<tb.fw.sangria>16.0.1</tb.fw.sangria>
+		<tb.fw.pro>16.0.1</tb.fw.pro>
+		<tb.fw.prox>16.0.1</tb.fw.prox>
+		<tb.fw.proy>16.0.1</tb.fw.proy>
+		<tb.fw.elastic>16.0.1</tb.fw.elastic>
+		<tb.fw.opensearch>16.0.1</tb.fw.opensearch>
+		<tb.fw.elemental>16.0.1</tb.fw.elemental><!-- Temporary -->
+		<tb.fw.ultra>16.0.1</tb.fw.ultra>
 
 		<!-- Core Utilities (override/extend from parent) -->
         <tb.logback>1.5.32</tb.logback>
