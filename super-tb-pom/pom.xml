@@ -81,8 +81,8 @@
 				<tb.fw.content>${tb.java17.snapshot}</tb.fw.content>
 				<tb.fw.core>${tb.java17.snapshot}</tb.fw.core>
 				<tb.fw.db>${tb.java17.snapshot}</tb.fw.db>
-				<tb.fw.inout>${tb.java16.snapshot}</tb.fw.inout>
-				<tb.fw.archive>${tb.java16.snapshot}</tb.fw.archive>
+				<tb.fw.inout>${tb.java17.snapshot}</tb.fw.inout>
+				<tb.fw.archive>${tb.java17.snapshot}</tb.fw.archive>
 				<tb.fw.features>${tb.java16.snapshot}</tb.fw.features>
 				<tb.fw.extra>${tb.java16.snapshot}</tb.fw.extra>
 				<tb.fw.sangria>${tb.java16.snapshot}</tb.fw.sangria>
