@@ -42,8 +42,8 @@
 
 		<!--
 			super-deploy-pom			0.11
-	   		super-app-pom				16.0
-	    	super-tb-pom				16.0
+	   		super-app-pom				17.0
+	    	super-tb-pom				17.0
 		-->
 		<tb.fw.content>16.0.1</tb.fw.content>
 		<tb.fw.core>16.0.2</tb.fw.core>
@@ -79,7 +79,7 @@
 			<id>snapshot</id>
 			<properties>
 				<tb.fw.content>${tb.java17.snapshot}</tb.fw.content>
-				<tb.fw.core>${tb.java16.snapshot}</tb.fw.core>
+				<tb.fw.core>${tb.java17.snapshot}</tb.fw.core>
 				<tb.fw.db>${tb.java16.snapshot}</tb.fw.db>
 				<tb.fw.inout>${tb.java16.snapshot}</tb.fw.inout>
 				<tb.fw.archive>${tb.java16.snapshot}</tb.fw.archive>
