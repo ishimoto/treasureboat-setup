@@ -66,7 +66,7 @@
         <tb.slf4j-api>2.0.17</tb.slf4j-api>
 
         <com.rollbar.version>2.2.0</com.rollbar.version>
-        <com.fasterxml.jackson.version>2.21.5</com.fasterxml.jackson.version>
+        <com.fasterxml.jackson.version>2.22.0</com.fasterxml.jackson.version>
         <org.bouncycastle.version>1.84</org.bouncycastle.version>
         <org.apache.poi.version>5.5.1</org.apache.poi.version>
         <org.xhtmlrenderer.flying-saucer.version>9.13.3</org.xhtmlrenderer.flying-saucer.version>
@@ -231,7 +231,7 @@
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-annotations</artifactId>
-				<version>2.21</version>
+				<version>2.22</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
