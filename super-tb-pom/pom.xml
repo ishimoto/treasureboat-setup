@@ -59,7 +59,7 @@
 		<tb.fw.elastic>16.0.1</tb.fw.elastic>
 		<tb.fw.opensearch>16.0.1</tb.fw.opensearch>
 		<tb.fw.elemental>16.0.1</tb.fw.elemental><!-- Temporary -->
-		<tb.fw.ultra>16.0.1</tb.fw.ultra>
+		<tb.fw.ultra>16.0.2</tb.fw.ultra>
 
 		<!-- Core Utilities (override/extend from parent) -->
         <tb.logback>1.5.32</tb.logback>
