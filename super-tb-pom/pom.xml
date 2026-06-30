@@ -87,11 +87,11 @@
 				<tb.fw.extra>${tb.java17.snapshot}</tb.fw.extra>
 				<tb.fw.sangria>${tb.java17.snapshot}</tb.fw.sangria>
 				<tb.fw.pro>${tb.java17.snapshot}</tb.fw.pro>
-				<tb.fw.prox>${tb.java16.snapshot}</tb.fw.prox>
-				<tb.fw.proy>${tb.java16.snapshot}</tb.fw.proy>
-				<tb.fw.elastic>${tb.java16.snapshot}</tb.fw.elastic>
-				<tb.fw.opensearch>${tb.java16.snapshot}</tb.fw.opensearch>
-				<tb.fw.elemental>${tb.java16.snapshot}</tb.fw.elemental>
+				<tb.fw.prox>${tb.java17.snapshot}</tb.fw.prox>
+				<tb.fw.proy>${tb.java17.snapshot}</tb.fw.proy>
+				<tb.fw.elastic>${tb.java17.snapshot}</tb.fw.elastic>
+				<tb.fw.opensearch>${tb.java17.snapshot}</tb.fw.opensearch>
+				<tb.fw.elemental>${tb.java17.snapshot}</tb.fw.elemental>
 				<tb.fw.ultra>${tb.java16.snapshot}</tb.fw.ultra>
 			</properties>
 		</profile>
