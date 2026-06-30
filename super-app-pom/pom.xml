@@ -12,7 +12,7 @@
 	</parent>
 
 	<artifactId>super-app-pom</artifactId>
-	<version>16.0</version>
+	<version>17.0</version>
 
 	<packaging>pom</packaging>
 
@@ -20,9 +20,9 @@
 	<description>Parent POM for TreasureBoat applications. Extends SuperDeployPOM with application-specific configurations.</description>
 
 	<properties>
-		<!-- JDK target for all TB applications (super-app-pom 16.x = Java 16) -->
-		<maven.compiler.source>16</maven.compiler.source>
-		<maven.compiler.target>16</maven.compiler.target>
+		<!-- JDK target for all TB applications (super-app-pom 17.x = Java 17) -->
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 
 	<build>
