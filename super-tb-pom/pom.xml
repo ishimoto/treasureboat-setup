@@ -63,7 +63,7 @@
 
 		<!-- Core Utilities (override/extend from parent) -->
         <tb.logback>1.5.37</tb.logback>
-        <tb.slf4j-api>2.0.17</tb.slf4j-api>
+        <tb.slf4j-api>2.0.18</tb.slf4j-api>
 
         <com.rollbar.version>2.3.0</com.rollbar.version>
         <com.fasterxml.jackson.version>2.22.0</com.fasterxml.jackson.version>
@@ -456,7 +456,7 @@
 			<dependency>
 				<groupId>ognl</groupId>
 				<artifactId>ognl</artifactId>
-				<version>3.4.7</version>
+				<version>3.4.11</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/org.passay/passay -->
