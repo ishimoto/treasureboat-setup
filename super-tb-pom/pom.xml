@@ -46,7 +46,7 @@
 	    	super-tb-pom				17.0.1
 		-->
 		<tb.fw.content>17.0.1</tb.fw.content>
-		<tb.fw.core>16.0.2</tb.fw.core>
+		<tb.fw.core>17.0.1</tb.fw.core>
 		<tb.fw.db>16.0.1</tb.fw.db>
 		<tb.fw.inout>16.0.1</tb.fw.inout>
 		<tb.fw.archive>16.0.1</tb.fw.archive>
