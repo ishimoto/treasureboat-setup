@@ -69,6 +69,7 @@
         <com.fasterxml.jackson.version>2.22.0</com.fasterxml.jackson.version>
         <org.bouncycastle.version>1.84</org.bouncycastle.version>
         <org.apache.poi.version>5.5.1</org.apache.poi.version>
+        <net.sf.jasperreports.version>7.0.6</net.sf.jasperreports.version>
         <org.xhtmlrenderer.flying-saucer.version>9.13.3</org.xhtmlrenderer.flying-saucer.version>
         <org.apache.pdfbox.version>3.0.7</org.apache.pdfbox.version>
         <org.apache.avalon.framework.version>4.3.1</org.apache.avalon.framework.version>
@@ -706,21 +707,21 @@
 			<dependency>
 				<groupId>net.sf.jasperreports</groupId>
 				<artifactId>jasperreports</artifactId>
-				<version>7.0.6</version>
+				<version>${net.sf.jasperreports.version}</version>
 			</dependency>
 
 			<!-- JR7 moved PDF export (OpenPDF) into its own module -->
 			<dependency>
 				<groupId>net.sf.jasperreports</groupId>
 				<artifactId>jasperreports-pdf</artifactId>
-				<version>7.0.6</version>
+				<version>${net.sf.jasperreports.version}</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-fonts -->
 			<dependency>
 				<groupId>net.sf.jasperreports</groupId>
 				<artifactId>jasperreports-fonts</artifactId>
-				<version>7.0.6</version>
+				<version>${net.sf.jasperreports.version}</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/com.itextpdf/itext-asian -->
