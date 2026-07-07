@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" 
+			xmlns="http://maven.apache.org/POM/4.0.0"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <modelVersion>4.0.0</modelVersion>
+
+	<name>AppTBTaskd</name>
+    <artifactId>tbapp-deploy-taskd</artifactId>
+	
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.apache.mina/mina-core -->
+		<dependency>
+			<groupId>org.apache.mina</groupId>
+			<artifactId>mina-core</artifactId>
+			<version>2.0.4</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.sshd/sshd-core -->
+		<dependency>
+			<groupId>org.apache.sshd</groupId>
+			<artifactId>sshd-core</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.sshd/sshd-pam -->
+		<dependency>
+			<groupId>org.apache.sshd</groupId>
+			<artifactId>sshd-pam</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.treasureboat</groupId>
+			<artifactId>tb-core-extensions</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.treasureboat</groupId>
+			<artifactId>tb-features-rest</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.treasureboat</groupId>
+			<artifactId>tb-extra-monitor</artifactId>
+		</dependency>
+	</dependencies>
+
+    <parent>
+	    <groupId>org.treasureboat.app</groupId>
+    	<artifactId>tbapp-deploy</artifactId>
+	    <version>10.5.0-SNAPSHOT</version>
+    </parent>
+
+</project>

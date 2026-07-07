@@ -1,0 +1,13 @@
+[Unit]
+Description=TreasureBoat Task Daemon Service (tbtaskd)
+After=network.target
+
+[Service]
+User=appserver
+Group=appserveradm
+Environment=LOGFILE=/opt/Local/Library/WebObjects/Logs/tbtaskd.log
+ExecStart=/opt/Local/Library/WebObjects/Applications/AppTBTaskd.woa/AppTBTaskd -p 1085 >> $LOGFILE
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
