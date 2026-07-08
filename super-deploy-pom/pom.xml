@@ -7,38 +7,31 @@
 
     <groupId>org.treasureboat</groupId>
 	<artifactId>super-deploy-pom</artifactId>
-	<version>0.11</version>
+	<version>17.0.12</version>
 
 	<packaging>pom</packaging>
 
 	<name>TreasureBoat.org Maven Super Deploy POM</name>
 
 	<properties>
-		<tb.lastmodified>2026/04/17</tb.lastmodified>
+		<tb.lastmodified>2026/07/08</tb.lastmodified>
 
 		<tb.showDependencies>false</tb.showDependencies>
 
 		<!--
 			Deployment blacklist: exclude development-only files from JARs.
 			Empty by default (dev mode). Set to **/Login.plist for deployment builds.
-			IntelliJ deploy actions pass: -Dtb.deploy.exclude.login=**/Login.plist
+			IntelliJ deploy actions pass: -Dtb.deploy.exclude.login=≈
 		-->
 		<tb.deploy.exclude.login></tb.deploy.exclude.login>
 	
- 		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
+ 		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<github.global.server>github</github.global.server>
 
-		<tb.java10.snapshot>10.99.99-SNAPSHOT</tb.java10.snapshot>
-		<tb.java11.snapshot>11.99.99-SNAPSHOT</tb.java11.snapshot>
-		<tb.java12.snapshot>12.99.99-SNAPSHOT</tb.java12.snapshot>
-		<tb.java13.snapshot>13.99.99-SNAPSHOT</tb.java13.snapshot>
-		<tb.java14.snapshot>14.99.99-SNAPSHOT</tb.java14.snapshot>
-		<tb.java15.snapshot>15.99.99-SNAPSHOT</tb.java15.snapshot>
-		<tb.java16.snapshot>16.99.99-SNAPSHOT</tb.java16.snapshot>
 		<tb.java17.snapshot>17.99.99-SNAPSHOT</tb.java17.snapshot>
 		<tb.java18.snapshot>18.99.99-SNAPSHOT</tb.java18.snapshot>
 		<tb.java19.snapshot>19.99.99-SNAPSHOT</tb.java19.snapshot>
@@ -77,7 +70,7 @@
 		<tb.lombok>1.18.46</tb.lombok>
 
 		<!-- TB Build Information -->
-		<tb.maven>1.0.15</tb.maven>
+		<tb.maven>21.0.16</tb.maven>
 	</properties>
 
 	<build>
@@ -99,6 +92,8 @@
 					<exclude>**/.*/</exclude>
 					<exclude>**/EOTestMigration/**</exclude>
 					<exclude>**/*.eogen</exclude>
+					<!-- .jrxml are compiled to .jasper by tb:jasper-compile; ship only the compiled form -->
+					<exclude>**/*.jrxml</exclude>
 				</excludes>
 			</resource>
 			
@@ -114,6 +109,8 @@
 					<exclude>**/.*/</exclude>
 					<exclude>**/EOTestMigration/**</exclude>
 					<exclude>**/*.eogen</exclude>
+					<!-- .jrxml are compiled to .jasper by tb:jasper-compile; ship only the compiled form -->
+					<exclude>**/*.jrxml</exclude>
 				</excludes>
 			</resource>				
 <!-- Temporary End -->
