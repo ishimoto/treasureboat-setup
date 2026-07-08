@@ -26,6 +26,16 @@
 	</properties>
 
 	<build>
+		<resources>
+			<!-- Standard resource dir, but drop .jrxml from the build output: tb:jasper-compile turns them into
+			     .jasper, and the deploy bundle should carry only the compiled form (source .jrxml stays in src). -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>**/*.jrxml</exclude>
+				</excludes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.treasureboat</groupId>
@@ -37,6 +47,17 @@
 							<!-- Applications need TBBundlePackageType=APPL in Info.plist -->
 							<isApplication>true</isApplication>
 						</configuration>
+					</execution>
+
+					<!-- Compile .jrxml -> .jasper at build (generate-resources). The .jasper are written next to the
+					     .jrxml in the source resource dir (gitignored) so dev-mode resolves them live, and are copied
+					     to target/bundle for deploy. Only .jrxml is committed. -->
+
+					<execution>
+						<id>jasper-compile</id>
+						<goals>
+							<goal>jasper-compile</goal>
+						</goals>
 					</execution>
 
 					<!--
