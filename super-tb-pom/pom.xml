@@ -41,9 +41,9 @@
 		<maven.compiler.target>17</maven.compiler.target>
 
 		<!--
-			super-deploy-pom			0.11
-	   		super-app-pom				17.0
-	    	super-tb-pom				17.0.1
+			super-deploy-pom			17.0.12
+	   		super-app-pom				17.0.1
+	    	super-tb-pom				17.0.2
 		-->
 		<tb.fw.content>17.0.1</tb.fw.content>
 		<tb.fw.core>17.0.1</tb.fw.core>
