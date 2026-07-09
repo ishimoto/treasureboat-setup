@@ -81,6 +81,10 @@ import org.treasureboat.webcore.foundation.TBWURL;
 
 import lombok.extern.slf4j.Slf4j;
 
+/*
+ * This class represents the application.
+ * org.treasureboat.app.tbtaskd.Application
+ */
 @Slf4j
 public class Application extends TBApplication {
 

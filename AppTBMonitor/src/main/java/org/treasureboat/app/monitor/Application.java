@@ -49,6 +49,10 @@ import org.treasureboat.webcore.appserver.requestHandler.TBWDirectActionRequestH
 
 import lombok.extern.slf4j.Slf4j;
 
+/*
+ * Application
+ * org.treasureboat.app.monitor.Application
+ */
 @Slf4j
 public class Application extends TBApplication {
 
