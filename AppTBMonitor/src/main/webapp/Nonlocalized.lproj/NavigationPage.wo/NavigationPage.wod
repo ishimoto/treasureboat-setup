@@ -13,7 +13,7 @@ Body : TBGenericContainer {
 }
 
 TBLogo : TBImage {
-	src = "static://TBContentsDelivery:images/logo/tb256.png";
+	src = "static://tb-content-delivery:images/logo/tb256.png";
 	height = 64;
 	width = 64;
 	align = "right";
