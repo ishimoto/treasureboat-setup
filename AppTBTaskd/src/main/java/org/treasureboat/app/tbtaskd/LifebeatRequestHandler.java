@@ -111,7 +111,7 @@ public class LifebeatRequestHandler extends TBWAbstractRequestHandler {
 		if (values == null || values.count() != 4) {
 			theApplication.siteConfig().globalErrorDictionary.takeValueForKey((myName + ": Received bad life-beat: " + aRequest.queryString()),
 					aRequest.queryString());
-			log.error("{} : Received bad lifebeat: {}", myName, aRequest.queryString());
+			log.error("{} : Received bad life-beat: {}", myName, aRequest.queryString());
 
 		} else {
 			String notificationType = values.firstObject();
@@ -121,41 +121,43 @@ public class LifebeatRequestHandler extends TBWAbstractRequestHandler {
 
 			log.trace("Received life-beat: {} from {} on {}:{}", notificationType, instanceName, host, port);
 
-			if (notificationType.equals("lifebeat")) {
-				// app is still alive - update registration
-				// if app is not yet registered, register
-				// if the instance should die, return DieResponse
-				if (!registerLifebeat(instanceName, host, port)) {
-					log.debug("Returning DIE response");
-					aResponse = DieResponse;
-				} else {
-					aResponse = GoodResponse;
-				}
-
-			} else if (notificationType.equals("hasStarted")) {
-				// app has just started - register instance
-				registerStart(instanceName, host, port);
-				aResponse = GoodResponse;
-
-			} else if (notificationType.equals("willStop")) {
-				// app will stop - mark as dead
-				registerStop(instanceName, host, port);
-				aResponse = null;
-
-			} else if (notificationType.equals("willCrash")) {
-				// app will crash - mark as dead, email notification
-				registerCrash(instanceName, host, port);
-				aResponse = null;
-
-			} else {
-				theApplication.siteConfig().globalErrorDictionary.takeValueForKey((myName + ": Received bad lifebeat: " + aRequest.queryString()),
-						aRequest.queryString());
-				log.error("{} : Received bad lifebeat: {}", myName, aRequest.queryString());
-			}
+            switch (notificationType) {
+                case "lifebeat" -> {
+                    // app is still alive - update registration
+                    // if app is not yet registered, register
+                    // if the instance should die, return DieResponse
+                    if (!registerLifebeat(instanceName, host, port)) {
+                        log.debug("Returning DIE response");
+                        aResponse = DieResponse;
+                    } else {
+                        aResponse = GoodResponse;
+                    }
+                }
+                case "hasStarted" -> {
+                    // app has just started - register instance
+                    registerStart(instanceName, host, port);
+                    aResponse = GoodResponse;
+                }
+                case "willStop" -> {
+                    // app will stop - mark as dead
+                    registerStop(instanceName, host, port);
+                    aResponse = null;
+                }
+                case "willCrash" -> {
+                    // app will crash - mark as dead, email notification
+                    registerCrash(instanceName, host, port);
+                    aResponse = null;
+                }
+                default -> {
+                    theApplication.siteConfig().globalErrorDictionary.takeValueForKey((myName + ": Received bad life-beat: " + aRequest.queryString()),
+                            aRequest.queryString());
+                    log.error("{} : Received bad life-beat: {}", myName, aRequest.queryString());
+                }
+            }
 		}
 		if ("HTTP/1.0".equals(aRequest.httpVersion())) {
 			aResponse = null;
-			log.error("Ignoring HTTP/1.0 lifebeat from {} : {}", aRequest._originatingAddress(), aRequest.queryString());
+			log.error("Ignoring HTTP/1.0 life-beat from {} : {}", aRequest._originatingAddress(), aRequest.queryString());
 		}
 
 		return aResponse;

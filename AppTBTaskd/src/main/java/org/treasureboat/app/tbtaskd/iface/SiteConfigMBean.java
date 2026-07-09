@@ -7,6 +7,6 @@ package org.treasureboat.app.tbtaskd.iface;
 
 public interface SiteConfigMBean {
 
-	public void readSiteConfigXML();
+	void readSiteConfigXML();
 
 }

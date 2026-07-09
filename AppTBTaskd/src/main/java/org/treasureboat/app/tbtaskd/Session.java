@@ -28,9 +28,12 @@ package org.treasureboat.app.tbtaskd;
 
 import org.treasureboat.webcore.appserver.TBSession;
 
+import java.io.Serial;
+
 public class Session extends TBSession {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	//********************************************************************
 	//  Constructor : コンストラクタ

@@ -57,7 +57,7 @@ public abstract class MInstanceTask extends TimerTask {
 
 	public static class Refuse extends MInstanceTask {
 
-		private int _numberOfRetriesBeforeForceQuit;
+		private final int _numberOfRetriesBeforeForceQuit;
 		private int retries = 0;
 
 		public Refuse(TBMonitor_Instance instance, int numberOfRetriesBeforeForceQuit) {
@@ -83,7 +83,7 @@ public abstract class MInstanceTask extends TimerTask {
 					//stop this task from starting again
 					cancel();
 
-				} else if (_instance.isRefusingNewSessions() == false) {
+				} else if (!_instance.isRefusingNewSessions()) {
 					//resend the REFUSE command
 					if (localMonitor.stopInstance(_instance) != null) {
 						//we got a response, let's reset the retry

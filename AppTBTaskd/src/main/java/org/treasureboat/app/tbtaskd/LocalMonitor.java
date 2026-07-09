@@ -150,7 +150,7 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 				}
 			}
 		} catch (Exception e) {
-			// Just ignore it - unregistered instances are second class citizens anyway
+			// Just ignore it - unregistered instances are second-class citizens anyway
 		} finally {
 			_unknownAppLock.endWriting();
 		}
@@ -208,7 +208,7 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 	// this actually only returns unregistered applications
 	@Override
 	public StringBuilder generateAdaptorConfigXML() {
-		StringBuilder sb = null;
+		StringBuilder sb;
 
 		_unknownAppLock.startReading();
 		try {
@@ -216,7 +216,7 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 			sb = new StringBuilder();
 
 			if ((unknownApps.count() == 0)) {
-				// we endReading in the finally block
+				// we endReading in the final block
 				return sb;
 			}
 
@@ -304,8 +304,8 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 			return _hostName + ": Path '" + pathToExecutable + "' for " + anInstance.displayName() + " is not executable";
 		}
 
-		// If the log file path is not writable, the app can't finish starting so don't even try
-		if (anInstance.outputPath() != null && anInstance.outputPath().length() > 0) {
+		// If the log file path is not writable, the app can't finish starting, so don't even try
+		if (anInstance.outputPath() != null && !anInstance.outputPath().isEmpty()) {
 			File outputPath = new File(anInstance.outputPath());
 			// First time running an instance is a special case - the file does not exist
 			if (!outputPath.exists()) {
@@ -355,14 +355,14 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 			return null;
 		}
 
-		//if WOTaskd.forceQuitTaskEnabled is true, setup a task to check
+		//if WOTaskd.forceQuitTaskEnabled is true, set up a task to check
 		//the instance, if it still doesn't die, then force a QUIT command when
-		//the timer elapses, minimum is 60 seconds, default 120 seconds
+		//the timer elapses; minimum is 60 seconds, default 120 seconds
 		if (_forceQuitTaskEnabled) {
 			if (_forceQuitDelay >= 60000) {
 				anInstance.scheduleForceQuit(new MInstanceTask.ForceQuit(anInstance), _forceQuitDelay);
 			} else {
-				log.error("WOtaskd.killTimeout: {} is too small. 60000 milliseconds is the minimum", String.valueOf(_forceQuitDelay));
+				log.error("WOtaskd.killTimeout: {} is too small. 60000 milliseconds is the minimum", _forceQuitDelay);
 			}
 		}
 
@@ -377,7 +377,7 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 			return null;
 		}
 
-		//if WOTaskd.forceQuitTaskEnabled is true, setup a task to check the instance, this will retry WOTaskd.refuseNumRetries times
+		//if WOTaskd.forceQuitTaskEnabled is true, set up a task to check the instance, this will retry WOTaskd.refuseNumRetries times
 		//the timer elapses minimum is 60 seconds, default 3600 seconds (the default session timeout)
 		//a force quit if WOTaskd.refuseNumRetries is reached and the instance is still alive
 		//an ACCEPT will cancel the monitoring
@@ -388,7 +388,7 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 						_forceQuitDelay, _forceQuitDelay);
 			} else {
 				log.error("{}: {} is too small. 60000 milliseconds is the minimum", TBFPropertiesConstants.TBMonitor_KILL_TIMEOUT,
-						String.valueOf(_forceQuitDelay));
+                        _forceQuitDelay);
 			}
 		}
 
@@ -436,7 +436,7 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 
 	protected TBResponse sendRequestToInstance(String action, TBMonitor_Instance anInstance, TBFDictionary<String, Object> xmlDict)
 			throws TBMonitor_MonitorException {
-		TBFData content = null;
+		TBFData content;
 		if (xmlDict != null) {
 			String contentXML = (new _TBWMonitorCoder()).encodeRootObjectForKey(xmlDict, "instanceRequest");
 			content = new TBFData(contentXML, StandardCharsets.UTF_8);
@@ -449,7 +449,7 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 		TBResponse aResponse = null;
 
 		try {
-			TBWHttpConnection anHTTPConnection = new TBWHttpConnection(anInstance.host().name(), anInstance.port().intValue());
+			TBWHttpConnection anHTTPConnection = new TBWHttpConnection(anInstance.host().name(), anInstance.port());
 			anHTTPConnection.setReceiveTimeout(_receiveTimeout);
 
 			anHTTPConnection.setSendTimeout(_sendTimeout);
@@ -514,7 +514,7 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 		long timeForStartup;
 		Integer tfs = anApplication.timeForStartup();
 		if (tfs != null) {
-			timeForStartup = tfs.intValue();
+			timeForStartup = tfs;
 		} else {
 			timeForStartup = TBMonitor_Instance.TIME_FOR_STARTUP;
 		}
@@ -523,7 +523,7 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 		boolean phasedStartup = false;
 		Boolean pS = anApplication.phasedStartup();
 		if (pS != null) {
-			phasedStartup = pS.booleanValue();
+			phasedStartup = pS;
 		}
 
 		for (int i = 0; i < instArrayCount; i++) {
@@ -538,6 +538,7 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 					try {
 						Thread.sleep(timeForStartup);
 					} catch (InterruptedException ie) {
+						// ...
 					}
 				} // end phased if
 			} // end instance if
@@ -550,10 +551,9 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 
 	private static boolean _testConnection(TBMonitor_Instance anInstance) {
 		try {
-			Socket aSocket = TBFSocketUtilities.getSocketWithTimeout(anInstance.host().name(), anInstance.port().intValue(), 1000);
+			Socket aSocket = TBFSocketUtilities.getSocketWithTimeout(anInstance.host().name(), anInstance.port(), 1000);
 			aSocket.close();
-			aSocket = null;
-		} catch (Exception e) {
+        } catch (Exception e) {
 			return false;
 		}
 		return true;
@@ -586,28 +586,24 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 
 			for (int i = 0; i < workers.length; i++) {
 				final int j = i;
-				Runnable work = new Runnable() {
-					@Override
-					public void run() {
-						localMonitor._autoRecoverApplication(appArray.objectAtIndex(j));
-					}
-				};
+				Runnable work = () -> localMonitor._autoRecoverApplication(appArray.objectAtIndex(j));
 				workers[j] = new Thread(work);
 				workers[j].start();
 			}
 
 			try {
-				for (int i = 0; i < workers.length; i++) {
-					workers[i].join();
-				}
-			} catch (InterruptedException ie) {
+                for (Thread worker : workers) {
+                    worker.join();
+                }
+			} catch (InterruptedException ignored) {
+				// ...
 			}
 
-			/* CheckScheduleTimer : That timer will kick off a repeating, hourly, timer for _checkSchedules every hour on the hour */
+			/* CheckScheduleTimer: That timer will kick off a repeating, hourly, timer for _checkSchedules every hour on the hour */
 			aScheduleTimer = new Timer();
 			aScheduleTimer.schedule(new CheckScheduleTimer(), calculateNearestHour().toTimestamp(), TBFConstants.ONE_HOUR_AS_MILLISECONDS);
 
-			// This is the regular timer that should do autorecovery
+			// This is the regular timer that should do auto recovery
 			anAutoRecoverTimer = new Timer();
 			anAutoRecoverTimer.schedule(new CheckAutoRecoverTimer(), 0, aConfig.autoRecoverInterval());
 
@@ -709,10 +705,11 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 				}
 
 				try {
-					for (int i = 0; i < workers.length; i++) {
-						workers[i].join();
-					}
-				} catch (InterruptedException ie) {
+                    for (Thread worker : workers) {
+                        worker.join();
+                    }
+				} catch (InterruptedException ignored) {
+					// ...
 				}
 
 			}
@@ -762,10 +759,11 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 				}
 
 				try {
-					for (int i = 0; i < workers.length; i++) {
-						workers[i].join();
-					}
-				} catch (InterruptedException ie) {
+                    for (Thread worker : workers) {
+                        worker.join();
+                    }
+				} catch (InterruptedException ignored) {
+					// ...
 				}
 			}
 		} finally {

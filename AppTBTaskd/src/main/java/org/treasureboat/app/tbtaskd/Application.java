@@ -33,7 +33,6 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.management.InstanceAlreadyExistsException;
@@ -129,14 +128,14 @@ public class Application extends TBApplication {
 		return (Application) TBApplication.application();
 	}
 
-	private LocalMonitor _localMonitor;
+	private final LocalMonitor _localMonitor;
 	private TBMonitor_SiteConfig _siteConfig;
 	private ListenThread listenThread;
-	private LifebeatRequestHandler _lifebeatRequestHandler;
+	private final LifebeatRequestHandler _lifebeatRequestHandler;
 	private Number _port;
 	private int _intPort;
 	private String _multicastAddress;
-	private boolean _shouldWriteAdaptorConfig;
+	private final boolean _shouldWriteAdaptorConfig;
 	private boolean _shouldRespondToMulticast;
 
 	public TBFCollectionReaderWriterLock readWriteLock() {
@@ -246,7 +245,7 @@ public class Application extends TBApplication {
 		// checking to see if we should save WOConfig.xml to disk for the adaptors.
 		String WOSavesAdaptorConfig = System.getProperties().getProperty(TBFPropertiesConstants.TBMonitor_Property_SavesAdaptorConfiguration);
 		if (WOSavesAdaptorConfig != null) {
-			_shouldWriteAdaptorConfig = TBFV.booleanValue(WOSavesAdaptorConfig).booleanValue();
+			_shouldWriteAdaptorConfig = TBFV.booleanValue(WOSavesAdaptorConfig);
 			if (_shouldWriteAdaptorConfig) {
 				_siteConfig.archiveAdaptorConfig();
 			}
@@ -254,11 +253,11 @@ public class Application extends TBApplication {
 			_shouldWriteAdaptorConfig = false;
 		}
 
-		// checking to see if we should respond to adaptor multicast queries
+		// checking to see if we should respond to adaptor multicast queries,
 		// we will always respond to non-multicast UDP packets
 		String shouldMC = System.getProperties().getProperty(TBFPropertiesConstants.TBMonitor_Property_RespondsToMulticastQuery);
 		if (shouldMC != null) {
-			if (!TBFV.booleanValue(shouldMC).booleanValue()) {
+			if (!TBFV.booleanValue(shouldMC)) {
 				_shouldRespondToMulticast = false;
 				log.debug("Multicast Response Disabled");
 			} else {
@@ -320,7 +319,7 @@ public class Application extends TBApplication {
 
 	/**
 	 * ============================================================================================ Methods Added for Enabling JMX in tbtaskd
-	 * ============================================================================================ This methods registers the MBean object in the
+	 * ============================================================================================ These methods registers the MBean object in the
 	 * MBeanServer
 	 * 
 	 * @param objMBean
@@ -368,8 +367,8 @@ public class Application extends TBApplication {
 
 	/**
 	 * ============================================================================================ Methods Added for Enabling JMX in tbtaskd
-	 * ============================================================================================ This methods creates the JMX Domain Name by
-	 * appending the hostname, application name and the port. This is called from method registerMBean() whenever domain name is passed as null.
+	 * ============================================================================================ These methods creates the JMX Domain Name by
+	 * appending the hostname, application name and the port. This is called from method registerMBean() whenever the domain name is passed as null.
 	 * 
 	 * @return _mbsDomain - String containing the Domain name to be used while registering the MBean
 	 */
@@ -383,7 +382,7 @@ public class Application extends TBApplication {
 
 	/**
 	 * ============================================================================================ Methods Added for Enabling JMX in tbtaskd
-	 * ============================================================================================ This methods sets up this application for remote
+	 * ============================================================================================ These methods sets up this application for remote
 	 * monitoring. This method creates a new connector server and associates it with the MBean Server. The server is started by calling the start()
 	 * method. The connector server listens for the client connection requests and creates a connection for each one.
 	 */
@@ -399,24 +398,24 @@ public class Application extends TBApplication {
 				envPwd.put("jmx.remote.x.password.file", _jmxPasswordFile);
 				envPwd.put("jmx.remote.x.access.file", _jmxAccessFile);
 
-				// setup our listener
+				// set up our listener
 				java.rmi.registry.LocateRegistry.createRegistry(intWotaskdJmxPort);
 				JMXServiceURL jsUrl = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://" + host() + ":" + intWotaskdJmxPort + "/jmxrmi");
-				log.debug("Setting up monitoring on url : " + jsUrl);
+                log.debug("Setting up monitoring on url : {}", jsUrl);
 
 				// Create an RMI Connector Server
 				JMXConnectorServer jmxCS = JMXConnectorServerFactory.newJMXConnectorServer(jsUrl, envPwd, getMBeanServer());
 
 				jmxCS.start();
 			} catch (Exception anException) {
-				log.error("Error starting remote monitoring: " + anException);
+                log.error("Error starting remote monitoring: {}", String.valueOf(anException));
 			}
 		}
 	}
 
 	/**
 	 * ============================================================================================ Methods Added for Enabling JMX in tbtaskd
-	 * ============================================================================================ This methods returns the platform MBean Server
+	 * ============================================================================================ These methods returns the platform MBean Server
 	 * from the Factory
 	 * 
 	 * @return _mbeanServer - The platform MBeanServer
@@ -489,8 +488,8 @@ public class Application extends TBApplication {
 		return super.createRequest(aMethod, aURL, anHTTPVersion, someHeaders, aContent, someInfo);
 	}
 
-	// overridden dispatch of requests, for faster lifebeat checking
-	// if it's a lifebeat, we return a null response, and that should close the socket immediately
+	// overridden dispatch of requests, for faster life-beat checking
+	// if it's a life-beat, we return a null response, and that should close the socket immediately
 	@Override
 	public TBResponse dispatchRequest(TBRequest aRequest) {
 		TBWAbstractRequestHandler aHandler = handlerForRequest(aRequest);
@@ -524,12 +523,12 @@ public class Application extends TBApplication {
 				try {
 					address = InetAddress.getByName(multicastAddress());
 				} catch (UnknownHostException exception) {
-					log.error("Error resolving address: " + multicastAddress() + ". Exiting...", exception);
+                    log.error("Error resolving address: {}. Exiting...", multicastAddress(), exception);
 					System.exit(1);
 				}
 
 				if (!address.isMulticastAddress()) {
-					log.error(address + " is not a valid multicast address.  Exiting...");
+                    log.error("{} is not a valid multicast address.  Exiting...", address);
 					System.exit(1);
 				}
 
@@ -548,7 +547,7 @@ public class Application extends TBApplication {
 				socket.leaveGroup(address);
 				log.debug("Leaving multicast group");
 			} catch (IOException exception) {
-				log.debug("Error leaving multicast group " + exception);
+                log.debug("Error leaving multicast group {}", String.valueOf(exception));
 				return;
 			}
 			log.debug("Closing request listen socket");
@@ -561,7 +560,7 @@ public class Application extends TBApplication {
 			try {
 				socket.send(outgoingPacket);
 			} catch (IOException localException) {
-				log.error("Error sending reply: " + localException + " (ignored)");
+                log.error("Error sending reply: {} (ignored)", String.valueOf(localException));
 			}
 		}
 
@@ -597,7 +596,7 @@ public class Application extends TBApplication {
 						incomingPacket.setLength(mbuffer.length);
 						socket.receive(incomingPacket);
 						if (byteArrayStartsWith(incomingPacket.getData(), multicastRequest, multicastRequestLength)) {
-							// this responds with the DirectAction URL for getting our adaptor Config XML
+							// this response with the DirectAction URL for getting our adaptor Config XML
 							sendReplyWithLengthTo(multicastReply, multicast_reply_len, incomingPacket);
 						} else if (byteArrayStartsWith(incomingPacket.getData(), versionRequest, versionRequestLength)) {
 							// This is if someone asks us what version we are
@@ -609,8 +608,7 @@ public class Application extends TBApplication {
 							siteConfig().globalErrorDictionary
 									.takeValueForKey((myName + ": Unrecognized UDP packet: " + new String(incomingPacket.getData()) + " from " + key
 											+ ". This may be an Application that conforms to an older protocol."), key);
-							log.debug(myName + ": Unrecognized UDP packet: " + new String(incomingPacket.getData()) + " from " + key
-									+ ". This may be an Application that conforms to an older protocol.");
+                            log.debug("{}: Unrecognized UDP packet: {} from {}. This may be an Application that conforms to an older protocol.", myName, new String(incomingPacket.getData()), key);
 						}
 					} catch (IOException localException) {
 						log.error("Error (ignored) receiving packet", localException);

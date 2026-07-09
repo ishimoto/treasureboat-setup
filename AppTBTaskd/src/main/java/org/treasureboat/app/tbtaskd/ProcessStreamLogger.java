@@ -35,8 +35,8 @@ import org.treasureboat.monitor.TBMonitor_Object;
 
 public class ProcessStreamLogger extends Thread {
 
-	private Logger _log;
-	private TBMonitor_Instance _instance;
+	private final Logger _log;
+	private final TBMonitor_Instance _instance;
 	BufferedReader reader;
 
 	//********************************************************************
@@ -68,11 +68,12 @@ public class ProcessStreamLogger extends Thread {
 				}
 				try {
 					Thread.sleep(100);
-				} catch (InterruptedException e) {
+				} catch (InterruptedException ignored) {
+					// ...
 				}
 			}
 			reader.close();
-			_log.debug("Instance output now going to " + TBMonitor_Object.validatedOutputPath(_instance.outputPath()));
+            _log.debug("Instance output now going to {}", TBMonitor_Object.validatedOutputPath(_instance.outputPath()));
 		} catch (Exception e) {
 			_log.error("The log reader died unexpectedly.", e);
 		}

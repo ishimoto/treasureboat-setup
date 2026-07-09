@@ -46,11 +46,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RemoteBrowse extends TBDirectAction {
 
-	private String[] fileKeys = new String[] { "file", "fileType", "fileSize" };
+	private final String[] fileKeys = new String[] { "file", "fileType", "fileSize" };
 
-	private String[] rootStrings;
+	private final String[] rootStrings;
 	private boolean singleRoot = false;
-	private String xmlRoots;
+	private final String xmlRoots;
 
 	//********************************************************************
 	//	Constructor : コンストラクタ
@@ -73,7 +73,7 @@ public class RemoteBrowse extends TBDirectAction {
 		int anArrayCount = rootStrings.length;
 		TBFMutableArray<TBFDictionary<String, Object>> rootArray = new TBFMutableArray<>(anArrayCount);
 		for (int i = 0; i < anArrayCount; i++) {
-			TBFDictionary<String, Object> aFileDict = new TBFDictionary<>(new Object[] { rootStrings[i], "NSFileTypeDirectory", Long.valueOf(0) },
+			TBFDictionary<String, Object> aFileDict = new TBFDictionary<>(new Object[] { rootStrings[i], "NSFileTypeDirectory", 0L},
 					fileKeys);
 			rootArray.addObject(aFileDict);
 		}
@@ -92,13 +92,11 @@ public class RemoteBrowse extends TBDirectAction {
 		TBFMutableArray<TBFDictionary<String, Object>> aDirectoryArray = new TBFMutableArray<>();
 		TBFMutableArray<TBFDictionary<String, Object>> aFileArray = new TBFMutableArray<>();
 
-		TBFArray<String> contentsOfStartingPath = null;
-
 		if (!(startingPathAsFile.exists())) {
 			return null;
 		}
 
-		contentsOfStartingPath = new TBFArray<>(startingPathAsFile.list());
+		TBFArray<String> contentsOfStartingPath = new TBFArray<>(startingPathAsFile.list());
 		try {
 			contentsOfStartingPath = contentsOfStartingPath.sortedArrayUsingComparator(TBFComparator.AscendingStringComparator);
 		} catch (TBFComparisonException e) {
@@ -115,13 +113,13 @@ public class RemoteBrowse extends TBDirectAction {
 			File subfile = new File(fullPath);
 
 			String aFileType;
-			Long aFileSize;
+			long aFileSize;
 			if (subfile.isDirectory()) {
 				aFileType = "NSFileTypeDirectory";
-				aFileSize = Long.valueOf(0);
+				aFileSize = 0L;
 			} else {
 				aFileType = "NSFileTypeRegular";
-				aFileSize = Long.valueOf(subfile.length());
+				aFileSize = subfile.length();
 			}
 
 			TBFDictionary<String, Object> aFileDict = new TBFDictionary<>(new Object[] { aFile, aFileType, aFileSize }, fileKeys);
@@ -150,7 +148,7 @@ public class RemoteBrowse extends TBDirectAction {
 		}
 
 		String aPath = aRequest.headerForKey("filepath");
-		boolean showFiles = (aRequest.headerForKey("showFiles") != null) ? true : false;
+		boolean showFiles = aRequest.headerForKey("showFiles") != null;
 
 		// looking for roots, or root listing of only 1 root
 		if (aPath == null && !singleRoot) {
@@ -167,8 +165,7 @@ public class RemoteBrowse extends TBDirectAction {
 				aResponse.appendContentString("ERROR");
 			} else {
 				_TBWMonitorCoder aCoder = new _TBWMonitorCoder();
-				String anXMLString = null;
-				anXMLString = aCoder.encodeRootObjectForKey(anArray, "pathArray");
+				String anXMLString = aCoder.encodeRootObjectForKey(anArray, "pathArray");
 				anXMLString = (anXMLString) + " \r\n";
 				aResponse.appendContentString(anXMLString);
 				aResponse.setHeader(aPath, "filepath");

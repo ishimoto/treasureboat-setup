@@ -80,7 +80,7 @@ public class DirectAction extends TBDirectAction {
 	private final static String[] instanceQueryKeys = new String[] { "applicationName", "id", "host", "port", "runningState", "refusingNewSessions",
 			"statistics", "deaths", "nextShutdown" };
 
-	private static boolean DISPLAY_PROPERTIES = TBFProperties.booleanValueForKey(TBFPropertiesConstants.TBMonitor_TASKD_DISPLAY_PROPERTIES);
+	private static final boolean DISPLAY_PROPERTIES = TBFProperties.booleanValueForKey(TBFPropertiesConstants.TBMonitor_TASKD_DISPLAY_PROPERTIES);
 
 	static {
 		// get the hostname for the error messages
@@ -142,7 +142,7 @@ public class DirectAction extends TBDirectAction {
 
 		} catch (TBFXMLException wxe) {
 			log.error("tbtaskd monitorRequestAction: Error parsing request");
-			log.debug("tbtaskd monitorRequestAction: " + aRequest.contentString());
+            log.debug("tbtaskd monitorRequestAction: {}", aRequest.contentString());
 			aResponse.appendContentString(ErrorConstants.invalidXML);
 			return aResponse;
 		}
@@ -207,7 +207,7 @@ public class DirectAction extends TBDirectAction {
 				break;
 
 			case "APPLICATION":
-				TBFMutableArray<TBFDictionary<String, Object>> applicationResponse = null;
+				TBFMutableArray<TBFDictionary<String, Object>> applicationResponse;
 				theApplication._lock.startReading();
 				try {
 					TBFMutableArray<TBMonitor_Application> appArray = aConfig.applicationArray();
@@ -235,7 +235,7 @@ public class DirectAction extends TBDirectAction {
 				break;
 
 			case "INSTANCE":
-				TBFMutableArray instanceResponse = null;
+				TBFMutableArray instanceResponse;
 				theApplication._lock.startReading();
 				try {
 					TBFArray<TBMonitor_Instance> instanceArray = (aConfig.localHost() != null) ? aConfig.localHost().instanceArray()
@@ -248,7 +248,7 @@ public class DirectAction extends TBDirectAction {
 					String host;
 					Integer port;
 					String runningState;
-					Boolean refusingNewSessions;
+					boolean refusingNewSessions;
 					TBFDictionary<String, Object> statistics;
 					TBFArray deaths;
 					String nextShutdown;
@@ -261,10 +261,10 @@ public class DirectAction extends TBDirectAction {
 					for (Enumeration<TBMonitor_Instance> e = instanceArray.objectEnumerator(); e.hasMoreElements();) {
 						TBMonitor_Instance anInst = e.nextElement();
 						if (anInst.isRunning_W()) {
-							log.debug("{} is sending lifebeats", anInst.displayName());
+							log.debug("{} is sending life-beats", anInst.displayName());
 							runningInstanceArray.addObject(anInst);
 						} else {
-							log.debug("{} is NOT sending lifebeats", anInst.displayName());
+							log.debug("{} is NOT sending life-beats", anInst.displayName());
 						}
 					}
 					getStatisticsForInstanceArray(runningInstanceArray, errorResponse);
@@ -355,11 +355,11 @@ public class DirectAction extends TBDirectAction {
 						log.debug("Received instance data for: {}", instance.displayName());
 
 					} catch (TBMonitor_MonitorException me) {
-						log.debug("Exception getting instance data for: " + instanceArray.objectAtIndex(j).displayName(), me);
+                        log.debug("Exception getting instance data for: {}", instanceArray.objectAtIndex(j).displayName(), me);
 						TBMonitor_Instance badInstance = (instanceArray.objectAtIndex(j));
 						//if we get an exception and the instance state is running, that could mean the app may have been too 
 						//busy to respond or may have locked up.  In either case, we need to notify 
-						//java monitor which instance its having problems with
+						//java monitor which instance it's having problems with
 						if (badInstance.isRunning_W()) {
 							badInstance.setStatisticsError(me.getMessage());
 							log.debug("{} still sending heartbeats", badInstance.displayName());
@@ -386,11 +386,7 @@ public class DirectAction extends TBDirectAction {
 			TBResponse aResponse = responses[i];
 			TBMonitor_Instance anInstance = instArray.objectAtIndex(i);
 			if (aResponse != null) {
-				if (aResponse.headerForKey("x-webobjects-refusenewsessions") != null) {
-					anInstance.setRefusingNewSessions(true);
-				} else {
-					anInstance.setRefusingNewSessions(false);
-				}
+                anInstance.setRefusingNewSessions(aResponse.headerForKey("x-webobjects-refusenewsessions") != null);
 
 				TBFDictionary instanceResponse = null;
 				TBFData responseContent = aResponse.content();
@@ -448,7 +444,7 @@ public class DirectAction extends TBDirectAction {
 
 				} catch (Exception e) {
 					// Do nothing - assume we died trying to parse the plist
-					log.error("tbtaskd getStatisticsForInstanceArray: Error parsing PList: {} from {}", queryInstanceResponse,
+					log.error("tbtaskd getStatisticsForInstanceArray: Error parsing Plist: {} from {}", queryInstanceResponse,
 							anInstance.displayName());
 				}
 			} else if (anInstance.isRunning_M() && anInstance.statisticsError() == null) {
@@ -472,7 +468,7 @@ public class DirectAction extends TBDirectAction {
 			aConfig.updateValues(siteDict);
 		}
 
-		// Look through the array of hosts, and see if we need to add/remove any - configure the rest
+		// Look through the array of hosts and see if we need to add/remove any - configure the rest
 		TBFMutableArray<TBMonitor_Host> currentHosts = new TBFMutableArray<>(aConfig.hostArray());
 		if (hostArray != null) {
 			for (Enumeration<TBFDictionary> e = hostArray.objectEnumerator(); e.hasMoreElements();) {
@@ -502,7 +498,7 @@ public class DirectAction extends TBDirectAction {
 			aConfig.removeHost_W(anMHost);
 		}
 
-		// Look through the array of applications, and see if we need to add/remove any - configure the rest
+		// Look through the array of applications and see if we need to add/remove any - configure the rest
 		TBFMutableArray<TBMonitor_Application> currentApplications = new TBFMutableArray<>(aConfig.applicationArray());
 		if (applicationArray != null) {
 			for (Enumeration<TBFDictionary> e = applicationArray.objectEnumerator(); e.hasMoreElements();) {
@@ -530,7 +526,7 @@ public class DirectAction extends TBDirectAction {
 			aConfig.removeApplication_W(e.nextElement());
 		}
 
-		// Look through the array of instances, and see if we need to add/remove any - configure the rest
+		// Look through the array of instances and see if we need to add/remove any - configure the rest
 		TBFMutableArray<TBMonitor_Instance> currentInstances = new TBFMutableArray<>(aConfig.instanceArray());
 		if (instanceArray != null) {
 			for (Enumeration<TBFDictionary> e = instanceArray.objectEnumerator(); e.hasMoreElements();) {
@@ -560,7 +556,7 @@ public class DirectAction extends TBDirectAction {
 	}
 
 	/*
-	 *  This will stop all instances in parallel, and return after each stopInstance call has returned.
+	 *  This will stop all instances in parallel and return after each stopInstance call has returned.
 	 */
 	void stopAllInstances() {
 		Application theApplication = (Application) TBApplication.application();
@@ -583,7 +579,7 @@ public class DirectAction extends TBDirectAction {
 				public void run() {
 					try {
 						localMonitor.stopInstance(instanceArray.objectAtIndex(j));
-					} catch (TBMonitor_MonitorException me) {
+					} catch (TBMonitor_MonitorException ignored) {
 					}
 				}
 			};
@@ -595,7 +591,7 @@ public class DirectAction extends TBDirectAction {
 			for (int i = 0; i < theCount; i++) {
 				workers[i].join();
 			}
-		} catch (InterruptedException ie) {
+		} catch (InterruptedException ignored) {
 		}
 	}
 
@@ -625,7 +621,7 @@ public class DirectAction extends TBDirectAction {
 
 				aResponse.setStatus(HttpStatus.SC_FORBIDDEN);
 				aResponse.appendContentString("Attempt to call Direct Action: standard on tbtaskd with incorrect password.");
-				// we endReading at the finally block
+				// we endReading at the final block
 				return aResponse;
 			}
 
