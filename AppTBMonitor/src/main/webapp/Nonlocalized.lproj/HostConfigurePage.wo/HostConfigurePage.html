@@ -1,0 +1,38 @@
+<treasureboat name = "NavPage">
+
+	<div class="row">
+		<h2>Configuring Host "<treasureboat name = "HostName" />"</h2>
+		<div class = "primary alert">
+			<treasureboat name = "HostSettingsForm">
+				<p>
+					The Host Type  determines the Path and OutputPath settings for an instance.<br />
+					The defaults are set at the application level. Changing the Type of this host will not automatically cause instances to update their Path and OutputPath settings.<br />
+					The new settings can be pushed from the Applications page.
+				</p>
+				<p>
+					Select the new Host Type: 
+					<treasureboat name = "HostTypePopup" /><br />
+					Select the TBTaskD Version: 
+					<treasureboat name = "VersionPopup" /><br />
+				</p>
+				<p class = "text-center">
+					<treasureboat name = "HostConfigureButton" />
+				</p>
+			</treasureboat>
+		</div>
+	</div>
+
+	<div class = "row">
+		<h2>Synchronize Host "<treasureboat name = "HostName" />"</h2>
+		<div class = "primary alert">
+			<treasureboat name = "HostSyncForm">
+				<p>
+					If this host is behaving strangely, it is possible that the host's configuration information is out of sync with the rest of your site or Monitor.<br />
+					Click the button to try to resync configuration information.
+				</p>
+				<p class = "text-center"><treasureboat name = "HostSyncButton" /></p>
+			</treasureboat>
+		</div>
+	</div>
+
+</treasureboat>

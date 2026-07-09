@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+			xmlns="http://maven.apache.org/POM/4.0.0"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.treasureboat</groupId>
+		<artifactId>super-app-pom</artifactId>
+		<version>17.0.1</version>
+		<relativePath/>
+	</parent>
+
+    <artifactId>tbapp-deploy-monitor</artifactId>
+	<version>2.0</version>
+
+	<packaging>jar</packaging>
+
+	<name>TBMonitor</name>
+	<description>TBMonitor ...</description>
+	<url>https://treasureboat.org</url>
+	<!-- FIXME -->
+	<inceptionYear>2014</inceptionYear>
+
+	<properties>
+		<tb.lastmodified>2026/07/04</tb.lastmodified>
+		<principalClass>org.treasureboat.app.monitor.Application</principalClass>
+
+		<!-- App-specific framework versions -->
+		<tb.fw.content>17.0.1</tb.fw.content>
+		<tb.fw.core>17.0.1</tb.fw.core>
+		<tb.fw.db>17.0.1</tb.fw.db>
+		<tb.fw.inout>17.0.2</tb.fw.inout>
+		<tb.fw.archive>17.0.1</tb.fw.archive>
+		<tb.fw.features>17.0.1</tb.fw.features>
+		<tb.fw.extra>17.0.1</tb.fw.extra>
+		<tb.fw.sangria>17.0.1</tb.fw.sangria>
+		<tb.fw.pro>17.0.1</tb.fw.pro>
+		<tb.fw.prox>17.0.1</tb.fw.prox>
+		<tb.fw.proy>17.0.1</tb.fw.proy>
+		<tb.fw.elastic>17.0.1</tb.fw.elastic>
+		<tb.fw.opensearch>17.0.1</tb.fw.opensearch>
+		<tb.fw.ultra>17.0.1</tb.fw.ultra>
+
+		<tb.showDependencies>false</tb.showDependencies>
+
+		<!-- Modules -->
+		<name.module>${project.name}</name.module>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>snapshot</id>
+			<properties>
+				<tb.fw.content>${tb.java17.snapshot}</tb.fw.content>
+				<tb.fw.core>${tb.java17.snapshot}</tb.fw.core>
+				<tb.fw.db>${tb.java17.snapshot}</tb.fw.db>
+				<tb.fw.inout>${tb.java17.snapshot}</tb.fw.inout>
+				<tb.fw.archive>${tb.java17.snapshot}</tb.fw.archive>
+				<tb.fw.features>${tb.java17.snapshot}</tb.fw.features>
+				<tb.fw.extra>${tb.java17.snapshot}</tb.fw.extra>
+				<tb.fw.sangria>${tb.java17.snapshot}</tb.fw.sangria>
+				<tb.fw.pro>${tb.java17.snapshot}</tb.fw.pro>
+				<tb.fw.prox>${tb.java17.snapshot}</tb.fw.prox>
+				<tb.fw.proy>${tb.java17.snapshot}</tb.fw.proy>
+				<tb.fw.elastic>${tb.java17.snapshot}</tb.fw.elastic>
+				<tb.fw.opensearch>${tb.java17.snapshot}</tb.fw.opensearch>
+				<tb.fw.ultra>${tb.java17.snapshot}</tb.fw.ultra>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>private</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.treasureboat</groupId>
+					<artifactId>tb-content-private</artifactId>
+					<version>${tb.fw.content}</version>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${tb.lombok}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.treasureboat</groupId>
+			<artifactId>tb-core-extensions</artifactId>
+			<version>${tb.fw.core}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.treasureboat</groupId>
+			<artifactId>tb-core-mail</artifactId>
+			<version>${tb.fw.core}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.treasureboat</groupId>
+			<artifactId>tb-core-ajax</artifactId>
+			<version>${tb.fw.core}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.treasureboat</groupId>
+			<artifactId>tb-features-rest</artifactId>
+			<version>${tb.fw.features}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.treasureboat</groupId>
+			<artifactId>tb-extra-monitor</artifactId>
+			<version>${tb.fw.extra}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.treasureboat</groupId>
+			<artifactId>tb-extra-acme</artifactId>
+			<version>${tb.fw.extra}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.treasureboat</groupId>
+			<artifactId>tb-archive-ajax</artifactId>
+			<version>${tb.fw.archive}</version>
+		</dependency>
+	</dependencies>
+
+	<!-- Build configuration (except legacy directories) fully inherited from SuperDeployPOM -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<!--
+							mvn tb:legacy-build
+							mvn tb:legacy-build -DprincipalClass=com.example.Application
+						-->
+						<id>legacy-build</id>
+						<phase>package</phase>
+						<goals>
+							<goal>legacy-build</goal>
+						</goals>
+						<configuration>
+							<principalClass>${principalClass}</principalClass>
+						</configuration>
+					</execution>
+					<execution>
+						<!--
+							 mvn tb:wsr-build
+						-->
+						<id>wsr-build</id>
+						<phase>package</phase>
+						<goals>
+							<goal>wsr-build</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

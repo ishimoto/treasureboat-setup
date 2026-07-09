@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# chkconfig: 2345 90 20
+# description: Provides tbmonitor service (CentOS 6 and Older)
+
+### BEGIN INIT INFO
+# Provides:          tbmonitor
+# Required-Start:    $all
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Starts the TreasureBoat Monitor
+# Description:       Starts the TreasureBoat Monitor which is necessary to run
+#                    TreasureBoat Applications and control them via multiple hosts.
+### END INIT INFO
+
+USER=appserver
+TIME="[`date +%d.%m.%Y\ %H:%M:%S`]:"
+LOGFILE=/opt/TreasureBoat/Logs/tbmonitor.log
+
+###############################################################################
+
+# Create Logfile if not already exists and setup permissions.
+if [ ! -e "$LOGFILE" ]; then
+    touch "$LOGFILE"
+    chown appserver "$LOGFILE"
+    chgrp appserveradm "$LOGFILE"
+    chmod 640 "$LOGFILE"
+fi
+
+# Create Logroate Job if available.
+if [ -e "/etc/logrotate.d" ] && [ ! -e "/etc/logrotate.d/tbmonitor" ]; then
+    echo '$LOGFILE {' >> /etc/logrotate.d/tbmonitor
+    echo '    daily'                >> /etc/logrotate.d/tbmonitor
+    echo '    rotate 5'             >> /etc/logrotate.d/tbmonitor
+    echo '    compress'             >> /etc/logrotate.d/tbmonitor
+    echo '    delaycompress'        >> /etc/logrotate.d/tbmonitor
+    echo '    missingok'            >> /etc/logrotate.d/tbmonitor
+    echo '    notifempty'           >> /etc/logrotate.d/tbmonitor
+    echo '}'                        >> /etc/logrotate.d/tbmonitor
+fi
+
+###############################################################################
+
+# See how we were called.
+case "$1" in
+    status)
+        TBMONITOR_PID=`ps aux | awk '/TBPort 56789/ && !/awk/ {print $2}'`
+        if [ "$TBMONITOR_PID" != "" ]; then
+            echo "$TIME Service is running with PID $TBMONITOR_PID" 2>&1 | tee -a $LOGFILE
+        else
+            echo "$TIME Service is not running" 2>&1 | tee -a $LOGFILE
+        fi
+        ;;
+    start)
+        echo "$TIME Starting tbmonitor: " 2>&1 | tee -a $LOGFILE
+        su appserver -c -l "/opt/TreasureBoat/Applications/tbmonitor.woa/tbmonitor -p 56789 2>&1 | tee -ai $LOGFILE &"
+#       su appserver -c -l "/opt/TreasureBoat/Applications/tbmonitor.woa/tbmonitor -p 56789 -h [myhost_name] 2>&1 | tee -ai $LOGFILE &"
+        ;;
+    stop)
+        echo "$TIME Shutting down tbmonitor: " 2>&1 | tee -a $LOGFILE
+        TBMONITOR_PID=`ps aux | awk '/TBPort 56789/ && !/awk/ {print $2}'`
+        kill $TBMONITOR_PID
+        ;;
+    restart)
+        $0 stop
+        $0 start
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 1
+esac
+
+if [ $# -gt 1 ]; then
+    shift
+    $0 $*
+fi
+
+exit 0

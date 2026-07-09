@@ -1,0 +1,4 @@
+tbtaskdContent : TBString {
+	value = tbtaskdText;
+	escapeHTML = false;
+}

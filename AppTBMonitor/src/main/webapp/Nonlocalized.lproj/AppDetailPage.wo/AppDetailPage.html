@@ -1,0 +1,281 @@
+<treasureboat name = "IsRefreshEnabled"> <treasureboat name = "Refresh" /> </treasureboat>
+
+<treasureboat name = "NavPage">
+
+	<treasureboat name = "AddHasNOHostsConditional">
+		<div class = "Box ErrorBox">
+			<h3>There are no hosts configured.</h3>
+			<p>Please <treasureboat name = "AddHostsLink">add hosts</treasureboat> before adding instances.</p>
+		</div>
+	</treasureboat>
+  
+	<div class = "Box ApplicationDetailsBox">
+		<h2>
+			<treasureboat name = "AppIsRunning"><treasureboat name = "AppLink"> <treasureboat name = "AppName" /> </treasureboat></treasureboat>
+			<treasureboat name = "AppIsNOTRunning"> <treasureboat name = "AppName" /> </treasureboat>
+		</h2>
+		<treasureboat name = "IsRefreshEnabled"><p>This page automatically updates every <treasureboat name = "RefreshRate" /> seconds.</p></treasureboat>
+    
+		<treasureboat name = "HasBouncer">
+			<div>Bouncer: <treasureboat name = "Bouncer" /></div>
+		</treasureboat>
+		
+		<p>
+			<treasureboat name = "RefreshLink">Refresh</treasureboat> | <treasureboat name = "ShowDetailStatistics"><treasureboat name = "ShowStatistics">Hide Stats</treasureboat><treasureboat name = "NotShowStatistics">Show Stats</treasureboat>
+			</treasureboat>
+		</p>
+    	<span class = "error"><treasureboat name = "MessageString" /> </span>
+    
+		<table class = "rounded striped">
+			<tr>
+				<th class = "text-center">Select</th>
+				<th class = "text-center">Name</th>
+				<th class = "text-center">Host: Port</th>
+				<th class = "text-center">Version</th>
+				<th class = "text-center">Status</th>
+				<th class = "text-center">Start - Stop</th>
+				<th class = "text-center">Auto- Recover</th>
+				<th class = "text-center">Refuse New Sessions</th>
+				<th class = "text-center">Scheduled</th>
+				<th class = "text-center">Next shutdown</th>
+				<th class = "text-center">Deaths</th>
+				<treasureboat name = "ShowStatistics">
+					<th class = "text-center">Transactions</th>
+					<th class = "text-center">Active Sessions</th>
+					<th class = "text-center">Average Transactions</th>
+					<th class = "text-center">Average Idle Period</th>
+				</treasureboat>
+				
+				<treasureboat name = "ShowWOStats">
+					<th class = "text-center">TBStats</th>
+				</treasureboat>
+				<th class = "text-center">Configure</th>
+				<th class = "text-center">Delete</th>
+			</tr>
+		
+			<treasureboat name = "InstanceRepetition">
+				<treasureboat name = "InstanceRow">
+				
+					<!-- Selection -->
+					<td class = "InstanceSelect">
+						<treasureboat name = "SelectOneForm">
+							<treasureboat name = "Observer"><treasureboat name = "IsSelected" /></treasureboat>
+						</treasureboat>
+					</td>
+	      
+					<!--       Application & Instance Number       -->
+					<td>
+						<treasureboat name = "InstanceRunningConditional"><treasureboat name = "InstAdaptorLink"> <treasureboat name = "InstIndex" /> </treasureboat></treasureboat>
+						<treasureboat name = "InstanceNOTRunningConditional"> <treasureboat name = "InstIndex" /> </treasureboat>
+					</td>
+	      
+					<!--       Host - Port       -->
+					<td class = "InstanceHostPort">
+						<treasureboat name = "InstanceRunningConditional">
+							<treasureboat name = "InstDirectLink"> <treasureboat name = "InstRunningOnHost" /> </treasureboat>
+						</treasureboat>
+						<treasureboat name = "InstanceNOTRunningConditional"> <treasureboat name = "InstRunningOnHost" /> </treasureboat>
+						<br />
+						<span class="instanceDescription"><treasureboat name="Memo" /><tb:TBString value = "$buildNumber" /></span>
+					</td>
+					
+	      			<td>
+	      				<treasureboat name = "Version" />
+	      			</td>
+	      			
+					<!--       Status (On/Off/Starting/Stopping)       -->
+					<td class = "text-center"> <treasureboat name = "InstStatusImage" /> </td>
+					
+					<!--       Start/Stop Buttons       -->
+					<td class = "InstanceStartStop">
+						<div class = "Balls">
+							<treasureboat name = "StartInstanceLink"><span style="font-size: 1.2em; color: Green;"><i class="fas fa-play-circle"></i></span></treasureboat>
+							&nbsp; 
+							<treasureboat name = "StopInstanceLink"><span style="font-size: 1.2em; color: Red;"<i class="fas fa-stop-circle"></i></span></treasureboat>
+						</div>
+					</td>
+	      
+					<!--       Auto-Recover       -->
+					<td class = "InstanceAutoRecover">
+						<treasureboat name = "IFSchedulingIsOn">
+							<div class = "AppControl AppControlAutoRecoverSchedulingOn">On</div>
+						</treasureboat>
+						<treasureboat name = "IFSchedulingIsOff">
+							<treasureboat name = "ToggleAutoRecoverLink">
+								<treasureboat name = "AutoRecoverDiv"><treasureboat name = "AutoRecoverLabel" /></treasureboat>
+							</treasureboat>
+						</treasureboat>
+					</td>
+          
+					<!--       Refuse New Sessions       -->
+					<td class = "InstanceRefuseNewSessions">
+						<treasureboat name = "IFSchedulingIsOn">
+							<treasureboat name = "RefuseNewSessionsDiv"><treasureboat name = "RefuseNewSessionsLabel" /></treasureboat>
+						</treasureboat>
+						<treasureboat name = "IFSchedulingIsOff">
+							<treasureboat name = "InstanceRunningConditional">
+								<treasureboat name = "ToggleRefuseNewSessionsLink">
+									<treasureboat name = "RefuseNewSessionsDiv"><treasureboat name = "RefuseNewSessionsLabel" /></treasureboat>
+								</treasureboat>
+							</treasureboat>
+							<treasureboat name = "InstanceNOTRunningConditional"><div class = "AppControl AppControlOff">Off</div></treasureboat>
+						</treasureboat>
+					</td>
+          
+					<!--       Schedule       -->
+					<td class = "InstanceSchedule">
+						<treasureboat name = "ToggleSchedulingLink">
+							<treasureboat name = "ScheduleDiv"><treasureboat name = "ScheduleLabel" /></treasureboat>
+						</treasureboat>
+					</td>
+          
+					<!--       Next Scheduled Shutdown       -->
+					<td class = "NextShutDown"> <treasureboat name = "NextShutdown" /> </td>
+					<td class = "DeathCount">
+						<treasureboat name = "ShouldDisplayDeathDetailLink">
+							<span class = "Deaths"><treasureboat name = "InstDeathCount" /></span>
+							<treasureboat name = "InstDeathDetailLink"> (Details) </treasureboat>
+						</treasureboat>
+						<treasureboat name = "ShouldNOTDisplayDeathDetailLink">-</treasureboat>
+					</td>
+          
+					<!--       Statistics       -->
+					<treasureboat name = "ShowStatistics">
+						<td class = "TransactionsCount"> <treasureboat name = "InstTransactions" /> </td>
+						<td class = "ActiveSessionCount"> <treasureboat name = "InstActiveSessions" /> </td>
+						<td class = "AverageTransactionsCount"> <treasureboat name = "InstAverageTransaction" /> </td>
+						<td class = "AverageIdlePeriod"> <treasureboat name = "InstAverageIdle" /> </td>
+					</treasureboat>
+					
+					<treasureboat name = "ShowWOStats">
+						<td class = "InstanceWOStats">
+							<treasureboat name = "InstanceRunningConditional"><treasureboat name = "LinkToWOStats"><span>WOStats</span></treasureboat></treasureboat>
+							<treasureboat name = "InstanceNOTRunningConditional"><div class = "text-center">Off</div></treasureboat>
+						</td>
+					</treasureboat>
+          
+					<!--       Configure       -->
+					<td><treasureboat name = "InstConfigureLink" /></td>
+					
+					<!--       Delete       -->
+					<td><treasureboat name = "InstDeleteLink" /></td>
+          
+				</treasureboat>
+			</treasureboat>
+			
+			<treasureboat name = "HasInstancesConditional">
+			
+				<treasureboat name = "ShowStatistics">
+					<tr class = "SpacerTableRow"><td colSpan = "17">&nbsp;</td></tr>
+				</treasureboat><treasureboat name = "NotShowStatistics">
+					<tr class = "SpacerTableRow"><td colSpan = "13">&nbsp;</td></tr>
+				</treasureboat>
+				
+				<tr>
+					<td class = "AllSelect">
+						<strong>Select</strong><br />
+						<treasureboat name = "SelectAllLink">All</treasureboat> | <treasureboat name = "SelectNoneLink">None</treasureboat>
+					</td>
+					
+					<td class = "AllFilter" colSpan = "4">
+						<b>Select all instances that are:</b><br />
+						<treasureboat name = "SelectRunning">Running</treasureboat> | <treasureboat name = "SelectNotRunning">Not Running</treasureboat>
+						
+				      	<div id = "FilterByInstanceName" >
+				      		<treasureboat name="FormToFilter">
+				      			Named: <treasureboat name="FilterByInstanceName" /><treasureboat name="FilterButton" />
+				      		</treasureboat>
+				      		<div id="FilterByInstanceName__error"><treasureboat name="FilterByInstanceNameError" /></div>
+				      	</div>
+						
+					</td>
+          
+					<!--       Start / Stop All       -->
+					<td class = "AllStartStop">
+						<div class = "Balls">
+						  <treasureboat name = "StartAllLink"><span style="font-size: 1.2em; color: Green;"><i class="fas fa-play-circle"></i></span></treasureboat>
+						  &nbsp; 
+						  <treasureboat name = "StopAllLink"><span style="font-size: 1.2em; color: Red;"<i class="fas fa-stop-circle"></i></span></treasureboat>
+						</div>
+					</td>
+					
+					<!--       AutoRecover All      -->
+					<td class = "AllAutoRecover">
+						<div class = "Balls">
+						  <treasureboat name = "AutoRecoverEnableAllLink"><span style="font-size: 1.2em; color: Green;"><i class="fas fa-play-circle"></i></span></treasureboat>
+						  &nbsp; 
+						  <treasureboat name = "AutoRecoverDisableAllLink"><span style="font-size: 1.2em; color: Red;"<i class="fas fa-stop-circle"></i></span></treasureboat>
+						</div>
+					</td>
+					  
+					<!--       Refuse New Sessions All       -->
+					<td class = "AllRefuseNewSessions">
+						<div class = "Balls">
+						  <treasureboat name = "RefuseNewSessionsAllLink"><span style="font-size: 1.2em; color: Green;"><i class="fas fa-play-circle"></i></span></treasureboat>
+						  &nbsp; 
+						  <treasureboat name = "AcceptNewSessionsAllLink"><span style="font-size: 1.2em; color: Red;"<i class="fas fa-stop-circle"></i></span></treasureboat>
+						</div>
+					</td>
+          
+					<!--       Scheduling All       -->
+					<td class = "AllScheduling">
+						<div class = "Balls">
+							<treasureboat name = "SchedulingEnableAllLink"><span style="font-size: 1.2em; color: Green;"><i class="fas fa-play-circle"></i></span></treasureboat>
+							  &nbsp; 
+							<treasureboat name = "SchedulingDisableAllLink"><span style="font-size: 1.2em; color: Red;"<i class="fas fa-stop-circle"></i></span></treasureboat>
+						</div>
+					</td>
+					  
+					<!--       Next Scheduled Shutdown       -->
+					<td class = "AllBounce">
+						<treasureboat name = "BounceLink">Bounce</treasureboat>&nbsp;<treasureboat name = "BounceHelpLink"><span style="font-size: 1.5em; color: Blue;"<i class="fas fa-question-circle"></i></span></treasureboat>
+					</td>
+					<td class = "AllClearDeaths">
+						<treasureboat name = "ClearDeathsLink">Clear Deaths</treasureboat>
+					</td>
+          
+					<!--       Statistics All       -->
+					<treasureboat name = "ShowStatistics">
+						<td class = "TotalTransactionCount"> <treasureboat name = "TotalTransactions" /> </td>
+						<td class = "TotalActiveSessions"> <treasureboat name = "TotalActiveSessions" /> </td>
+						<td class = "TotalAverageTransaction"> <treasureboat name = "TotalAverageTransaction" /> </td>
+						<td class = "TotalAverageIdleTime"> <treasureboat name = "TotalAverageIdleTime" /> </td>
+					</treasureboat>
+
+					<treasureboat name = "ShowWOStats">
+						<td> <treasureboat name = "ActualRatePerMinute" /> TPM </td>
+					</treasureboat>
+					
+          <!--       Configure       -->
+          <td><treasureboat name = "ConfigureLink" /></td>
+          <td><treasureboat name = "InstDeleteAllLink" /></td>
+        </tr>
+        <tb:if condition = "$showDetailStatistics">
+          <tr class = "TotalsForRunningInstances">
+            <td colspan = "10" class = "label">Running Sessions</td>
+            <td class = "TotalTransactionCount"><treasureboat name = "TotalTransactionsForActiveInstances" /></td>
+            <td class = "TotalActiveSessions"><treasureboat name = "ActiveSessionsForActiveInstances" /></td>
+            <td class = "TotalAverageTransaction"></td>
+            <td class = "TotalAverageIdleTime"></td>
+            <td colspan = "2"></td>
+          </tr>
+        </tb:if>
+      </treasureboat>
+    </table>
+  </div>
+  
+  
+  
+	<treasureboat name = "AddHasHostsConditional">
+	    <div class = "row">
+	    	<div class = "primary alert">
+	      		<treasureboat name = "AddInstanceForm">
+	      			<br />
+	        		Add: <treasureboat name = "AddNumInstances" /> instance(s) on host: <treasureboat name = "AddHostPopUp" />
+	        		<treasureboat name = "AddInstanceSubmitButton" />
+	     		 </treasureboat>
+	    	</div>
+	    </div>
+	</treasureboat>
+	
+</treasureboat>

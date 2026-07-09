@@ -1,0 +1,49 @@
+<treasureboat name="LoginRequired">
+  <html>
+    <head>
+ 		<meta charset="UTF-8" />
+		<meta name="robots" content="noindex,nofollow">
+
+	  	<!-- Use the .htaccess and remove these lines to avoid edge case issues. More info: h5bp.com/b/378 -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+      	<title>TBMonitor 2 for TreasureBoat 4.0+ Apps</title>
+      	
+		<tb:TBWFavicon2020 />
+		
+		<tb:TBFontAwesome />
+		<treasureboat name="TBStyleSheet" />
+    </head>
+    <body id="LoginPage" onload="document.getElementById('password').focus()">
+      <h1 style="text-align: center;">TreasureBoat Monitor</h1>
+      <br />
+      <br />
+      <h2 style="text-align: center;"><treasureboat name="TBLogo" /></h2>
+      <br />
+      <br />
+      <br />
+      <br />
+      <treasureboat name="HasLoginError">
+        <p class="Box ErrorBox LoginErrorBox"><treasureboat name="ErrorMsg" /></p>
+      </treasureboat>
+      <div class="Box LoginBox">
+        <treasureboat name="LoginForm">
+          <h4>A password is required to access this application</h4>
+          <treasureboat name="HasUserName">
+            <p>
+              <label for="username">Username:</label>
+              <treasureboat name="UserNameField" />
+            </p>
+          </treasureboat>
+          <p>
+            <label for="password">Password:</label>
+            <treasureboat name="PasswordField" />
+          </p>
+          <p class="button_bar"><treasureboat name="SubmitPasswordButton" /></p>
+        </treasureboat>
+        <!-- LoginForm -->
+      </div>
+    </body>
+  </html>
+</treasureboat>
+<treasureboat name="LoginSucceeded"> <treasureboat name="Refresh" /> </treasureboat>

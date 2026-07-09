@@ -1,0 +1,97 @@
+NavPage : NavigationPage {
+	currentPage = HOST_PAGE;
+	title = "Hosts";
+	pageId = "Hosts";
+}
+
+HostsRepetition : TBRepetition {
+    list = theApplication.siteConfig.hostArray;
+    item = currentHost;
+}
+
+HostName : TBString {
+    value = currentHost.name;
+}
+
+HostAddress : TBString {
+    value = currentHost.addressAsString;
+}
+
+HostIsAvailable : TBConditional {
+    condition = currentHost.isAvailable;
+}
+
+tbtaskdLink : TBHyperlink {
+	action = displayTBtaskdInfoClicked;
+	string = "View Config";
+	target = "_blank";
+}
+
+HostIsNOTAvailable : TBConditional {
+    condition = currentHost.isAvailable;
+    negate = true;
+}
+
+HostType : TBString {
+	value = currentHost.osType;
+}
+
+InstanceCount : TBString {
+    value = currentHost.runningInstances;
+}
+
+ProcessorDescription : TBString {
+    value = currentHost.processorType;
+}
+
+HostOSName : TBString {
+    value = currentHost.operatingSystem;
+}
+
+HostVersion : TBString {
+    value = currentHost.version;
+}
+
+ConfigureHostLink : TBHyperlink {
+    action = configureHostClicked;
+    string = "Configure";
+    buttonStyle = buttonStyle.editS;
+}
+
+RemoveHostLink : TBHyperlink {
+    action = removeHostClicked;
+    string = "Delete";
+    buttonStyle = buttonStyle.deleteS;
+}
+
+LocalHost : TBConditional {
+	condition = localhostOrLoopbackHostExists;
+	negate = true;
+}
+
+AddHostForm: TBForm {}
+
+HostNameTextField : TBTextField {
+    size = "40";
+    value = newHostName;
+    automatic = true;
+    class = "narrow input";
+}
+
+HostTypesPopUpButton : TBPopUp {
+	list = hostTypeList;
+	selection = hostTypeSelection;
+	automatic = true;
+}
+
+VersionPopup : TBPopUp {
+	list = versionList;
+	selection = versionSelection;
+	automatic = true;
+}
+
+AddHostSubmitButton : TBSubmitButton {
+    action = addHostClicked;
+    value = "Add Host";
+	buttonStyle = buttonStyle.submitSaveM;
+}

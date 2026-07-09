@@ -1,0 +1,24 @@
+NavPage : NavigationPage {
+	currentPage = pageType;
+	title = "Confirmation Request";
+}
+
+Question : TBString {
+    value = question;
+    escapeHTML = false;
+}
+
+Explaination: TBString {
+    value = explaination;
+    escapeHTML = false;
+}
+
+CancelClicked : TBHyperlink {
+    action = cancel;
+    class = "Button CancelButton";
+}
+
+ConfirmClicked : TBHyperlink {
+    action = confirm;
+    class = "Button ConfirmButton";
+}

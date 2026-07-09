@@ -1,0 +1,52 @@
+NavPage : NavigationPage {
+	currentPage = MOD_PROXY_PAGE;
+	title = "Apache 2.4";
+	pageId = "ModProxy";
+}
+
+ParamForm : TBForm {
+	action = reload;
+}
+
+TFTimeout : TBNumberField {
+	value = timeout;
+	numberformat = "0";
+	automatic = true;
+	class = "narrow input"
+}
+
+AdaptorURL : TBTextField {
+	value = adaptorUrl;
+	placeholder = "/TB";
+	size = 60;
+	automatic = true;
+	diabled = "$true";
+}
+
+PBLoadBalancer : TBPopUp {
+	list = loadBalencers;
+	item = loadBalancerItem;
+	selection = loadBalancer;
+	automatic = true;
+}
+
+BtnSubmit : TBSubmitButton {
+	action = reload;
+	value = "Update Settings";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+adaptorConfigContent : TBString {
+	value = modProxyContent;
+}
+
+adaptorRewriteContent: TBString {
+	value = modRewriteContent;
+}
+
+VIDEO : TBVideo {
+	mp4 = "https://www.dropbox.com/s/dew1gz3we1wwqrb/mod_proxy.mp4?dl=0";
+	height = "315";
+	width = "560";
+	autoplay = false;
+}

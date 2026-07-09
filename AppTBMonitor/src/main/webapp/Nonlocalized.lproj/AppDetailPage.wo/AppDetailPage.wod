@@ -1,0 +1,420 @@
+ActualRatePerMinute: TBString {
+	numberformat = "0.00";
+	value = actualRatePerMinute;
+}
+
+AppLink: TBHyperlink {
+	href = hrefToApp;
+	target = "new";
+}
+
+AppName: TBString {
+	value = myApplication.name;
+}
+
+AppIsNOTRunning: TBConditional {
+	condition = myApplication.isRunning_M;
+	negate = true;
+}
+
+AppIsRunning: TBConditional {
+	condition = myApplication.isRunning_M;
+}
+
+ClearDeathsLink: TBHyperlink {
+	action = clearAllDeathsClicked;
+}
+
+ConfigureLink: TBHyperlink {
+    action = configureApplicationClicked;
+    string = "Configure";
+    buttonStyle = buttonStyle.plainPrimaryS;
+}
+
+StartAllLink: TBHyperlink {
+	action = startAllClicked;
+}
+
+StopAllLink: TBHyperlink {
+	action = stopAllClicked;
+}
+
+AutoRecoverEnableAllLink: TBHyperlink {
+	action = autoRecoverEnableAllClicked;
+}
+
+AutoRecoverDisableAllLink: TBHyperlink {
+	action = autoRecoverDisableAllClicked;
+}
+
+AcceptNewSessionsAllLink: TBHyperlink {
+	action = acceptNewSessionsAllClicked;
+}
+
+RefuseNewSessionsAllLink: TBHyperlink {
+	action = refuseNewSessionsAllClicked;
+}
+
+SchedulingEnableAllLink: TBHyperlink {
+	action = schedulingEnableAllClicked;
+}
+
+SchedulingDisableAllLink: TBHyperlink {
+	action = schedulingDisableAllClicked;
+}
+
+HasInstancesConditional: TBConditional {
+	condition = hasInstances;
+}
+
+IFSchedulingIsOff: TBConditional {
+	condition = currentInstance.schedulingEnabled;
+	negate = true;
+}
+
+IFSchedulingIsOn: TBConditional {
+	condition = currentInstance.schedulingEnabled;
+}
+
+InstActiveSessions: TBString {
+	value = currentInstance.activeSessions;
+}
+
+InstAverageIdle: TBString {
+	value = currentInstance.averageIdlePeriod;
+}
+
+InstAverageTransaction: TBString {
+	value = currentInstance.avgTransactionTime;
+}
+
+InstConfigureLink: TBHyperlink {
+	action = configureInstanceClicked;
+	string = "Configure";
+	buttonStyle = buttonStyle.plainPrimaryS;
+}
+
+InstDeathCount: TBString {
+	numberformat = "0";
+	value = currentInstance.deathCount;
+}
+
+InstDeathDetailLink: TBHyperlink {
+	action = instanceDeathDetailClicked;
+}
+
+InstDeleteLink: TBHyperlink {
+	action = deleteInstanceClicked;
+	string = "Delete";
+	buttonStyle = buttonStyle.plainDangerS;
+}
+
+InstDeleteAllLink: TBHyperlink {
+	action = deleteAllInstancesClicked;
+	string = "Delete";
+	buttonStyle = buttonStyle.plainDangerS;
+}
+
+InstIndex: TBString {
+	value = currentInstance.displayName;
+}
+
+InstDirectLink: TBHyperlink {
+	href = hrefToInstDirect;
+	target = "new";
+}
+
+InstAdaptorLink: TBHyperlink {
+	href = hrefToInst;
+	target = "new";
+}
+
+InstRunningOnHost: TBString {
+	value = currentInstance.displayHostAndPort;
+}
+
+Version : TBString {
+	value = currentInstance.host.version;
+}
+
+Memo: TBString {
+	value = currentInstance.description;
+}
+
+InstStatusImage: TBImage {
+	alt = instanceStatusImageText;
+	border = "0";
+	filename = instanceStatusImage;
+	height = "35";
+	width = "49";
+}
+
+InstTransactions: TBString {
+	value = currentInstance.transactions;
+}
+
+InstanceRepetition: TBRepetition {
+	item = currentInstance;
+	list = displayGroup.allObjects;
+	index = instanceRowIndex;
+}
+
+InstanceRow : TBETRowAlternateColor {
+	index = instanceRowIndex;
+}
+
+InstanceRunningConditional: TBConditional {
+	condition = currentInstance.isRunning_M;
+}
+
+InstanceNOTRunningConditional: TBConditional {
+	condition = currentInstance.isRunning_M;
+	negate = true;
+}
+
+IsRefreshEnabled: TBConditional {
+	condition = isRefreshEnabled;
+}
+
+LinkToWOStats: TBHyperlink {
+	href = linkToWOStats;
+	target = "_blank";
+	class="Button WOStatsButton";
+}
+
+MessageString: TBString {
+	value = session.message;
+}
+
+NavPage: NavigationPage {
+	currentPage = APP_PAGE;
+	title = myApplication.name;
+	pageId = "Applications";
+}
+
+NextShutdown: TBString {
+    value = nextShutdown;
+//    dateformat = "%m/%d/%Y %H:%M:%S %Z";
+}
+
+Refresh: TBMetaRefresh {
+	action = refreshClicked;
+	seconds = theApplication.siteConfig.viewRefreshRate;
+}
+
+RefreshLink: TBHyperlink {
+	action = refreshClicked;
+}
+
+RefreshRate: TBString {
+	value = theApplication.siteConfig.viewRefreshRate;
+}
+
+RefuseNewSessionsDiv : TBGenericContainer {
+	elementName = "div";
+	class = refuseNewSessionsClass;
+}
+
+RefuseNewSessionsLabel : TBString {
+	value = refuseNewSessionsLabel;
+	escapeHTML = false;
+}
+
+ScheduleDiv : TBGenericContainer {
+	elementName = "div";
+	class = schedulingDivClass;
+}
+
+ScheduleLabel : TBString {
+	value = schedulingLabel;
+	escapeHTML = false;
+}
+
+ShouldDisplayDeathDetailLink: TBConditional {
+	condition = shouldDisplayDeathDetailLink;
+}
+
+ShouldNOTDisplayDeathDetailLink: TBConditional {
+	condition = shouldDisplayDeathDetailLink;
+	negate = true;
+}
+
+StartInstanceLink: TBHyperlink {
+	action = startInstance;
+}
+StopInstanceLink: TBHyperlink {
+	action = stopInstance;
+}
+
+AutoRecoverLabel : TBString {
+	value = autoRecoverLabel;
+}
+
+AutoRecoverDiv : TBGenericContainer {
+	elementName = "div";
+	class = autoRecoverDivClass;
+}
+
+ToggleAutoRecoverLink: TBHyperlink {
+	action = toggleAutoRecover;
+	class = "AppControlLink";
+}
+
+ToggleRefuseNewSessionsLink: TBHyperlink {
+	action = toggleRefuseNewSessions;
+	class = "AppControlLink";
+}
+
+ToggleSchedulingLink: TBHyperlink {
+	action = toggleScheduling;
+	class = "AppControlLink";
+}
+
+TotalActiveSessions: TBString {
+	numberformat = "0";
+	value = totalActiveSessions;
+}
+
+TotalAverageIdleTime: TBString {
+	numberformat = "0.000";
+	value = totalAverageIdleTime;
+}
+
+TotalAverageTransaction: TBString {
+	numberformat = "0.000";
+	value = totalAverageTransaction;
+}
+
+TotalTransactions: TBString {
+	numberformat = "0";
+	value = totalTransactions;
+}
+
+TotalTransactionsForActiveInstances: TBString {
+	value = totalTransactionsForActiveInstances;
+	numberformat = "#,##0";
+}
+
+ActiveSessionsForActiveInstances: TBString {
+	value = totalActiveSessionsForActiveInstances;
+	numberformat = "#,##0";	
+}
+
+// Start of Add Instance Stuff
+
+AddHostsLink : TBHyperlink {
+    action = hostsPageClicked;
+}
+
+AddInstanceForm: TBForm {}
+
+AddInstanceSubmitButton: TBSubmitButton {
+    action = addInstanceClicked;
+    value = "Add ";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+AddHasHostsConditional: TBConditional {
+    condition = hasHosts;
+}
+
+AddHasNOHostsConditional : TBConditional {
+    condition = hasHosts;
+    negate = YES;
+}
+
+AddHostPopUp: TBPopUp {
+    list = theApplication.siteConfig.hostArray;
+    item = aHost;
+    displayString = aHost.name;
+    selection = selectedHost;
+    automatic = true;
+}
+
+AddNumInstances: TBTextField {
+    value = numberToAdd;
+    size = "3";
+    numberformat = "0";
+    automatic = true;
+    class = "xnarrow input";
+} 
+
+SelectOneForm : TBForm {
+	action = selectOne;
+} 
+
+IsSelected : TBCheckBox {
+	checked = isSelectedInstance;
+}
+
+SelectNotRunning : TBHyperlink {
+	action = selectNotRunning;
+}
+
+SelectRunning : TBHyperlink {
+	action = selectRunning;
+}
+
+ShowStatistics : TBConditional {
+  condition = showDetailStatistics;
+}
+
+NotShowStatistics : TBConditional {
+  condition = showDetailStatistics;
+  negate = true;
+}
+
+ShowWOStats : TBConditional {
+  condition = myApplication.woStats;
+}
+
+ShowDetailStatistics : TBHyperlink {
+	action = showStatisticsClicked;
+}
+
+BounceLink : TBHyperlink {
+	action = bounceClicked;
+}
+
+HasBouncer: TBConditional {
+	condition = currentBouncer;
+}
+
+Bouncer : TBString {
+  value = currentBouncer.status;
+}
+
+BounceHelpLink : TBHyperlink {
+	pageName = "HelpPage";
+	fragmentIdentifier = "18";
+}
+
+Observer : AjaxObserveField {
+	action = selectOne;
+}
+
+SelectAllLink : TBHyperlink {
+  action = selectAllAction;
+}
+
+SelectNoneLink : TBHyperlink {
+	action = selectNoneAction;
+}
+
+FilterByInstanceName: TBTextField {
+	value = instanceNameFilterValue;
+	placeholder = "regular expression";
+}
+
+FilterButton: TBSubmitButton {
+	action = selectInstanceNamesMatchingFilter; 
+	value = "Select";
+}
+
+FormToFilter: TBForm {
+	multipleSubmit = true;
+}
+
+FilterByInstanceNameError: TBString {
+	value = filterErrorMessage;
+}

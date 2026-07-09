@@ -1,0 +1,56 @@
+LoginRequired : TBConditional {
+    condition = loginRequired;
+}
+
+LoginSucceeded : TBConditional {
+    condition = loginRequired;
+    negate = true;
+}
+
+Refresh : TBMetaRefresh {
+	action = doGoToApplicationsPageAction;
+	seconds = 0;
+}
+
+ErrorMsg: TBString {
+      value = message;
+      escapeHTML = NO;
+}
+
+LoginForm: TBForm {}
+
+HasUserName: TBConditional {
+	condition = hasSavedUserName;
+}
+
+UserNameField: TBTextField {
+    value = userName;
+    id = "username";
+    placeholder = "username";
+}
+
+PasswordField: TBPasswordField {
+    value = password;
+    id = "password";
+}
+
+SubmitPasswordButton: TBSubmitButton {
+    action = loginClicked;
+    value = "Login";
+}
+
+HasLoginError : TBConditional {
+  condition = message;
+}
+
+TBStyleSheet : TBStyleSheet {
+  filename = "css/javamonitor.css";
+  framework = "app";
+}
+
+TBLogo : TBImage {
+	src = "static://TBContentsDelivery:images/logo/currentLogo.png";
+	height = 200;
+	width = 646;
+	border = 0;
+}

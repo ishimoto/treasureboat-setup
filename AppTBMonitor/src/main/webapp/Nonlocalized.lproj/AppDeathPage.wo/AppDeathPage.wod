@@ -1,0 +1,26 @@
+NavPage: NavigationPage {
+	currentPage = APP_PAGE;
+}
+
+ClearDeaths: TBHyperlink {
+    action = clearDeathsClicked;
+}
+
+ReturnLink: TBHyperlink {
+    action = returnClicked;
+}
+
+DeathRepetition: TBRepetition {
+    list = myInstance.deaths;
+    item = aDeath;
+    index = anIndex;
+}
+
+DeathIndex: TBString {
+    value = anIndexPlusOne;
+}
+
+DeathDescription: TBString {
+    value = aDeath;
+//    dateformat = "%m/%d/%Y %H:%M:%S %Z";
+}

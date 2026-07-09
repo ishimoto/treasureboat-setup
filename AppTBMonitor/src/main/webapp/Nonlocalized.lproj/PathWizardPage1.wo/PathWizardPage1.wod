@@ -1,0 +1,37 @@
+NavPage: NavigationPage {
+	currentPage = APP_PAGE;
+}
+
+HostRepetition : TBRepetition {
+    list = hostList;
+    item = aCurrentHost;
+}
+
+HostLink : TBHyperlink {
+    action = hostClicked;
+}
+
+HostName : TBString {
+    value = aCurrentHost.name;
+}
+
+SingleHostConditional : TBConditional {
+    condition = onlyOneHost;
+}
+
+MultipleHostsConditional : TBConditional {
+    condition = multipleHosts;
+}
+
+NoHostsConditional : TBConditional {
+    condition = noHosts;
+}
+
+AddHostsLink : TBHyperlink {
+    pageName = "HostsPage";
+}
+
+Refresh: TBMetaRefresh {
+	action = onlyHostClicked;
+	seconds = 0;
+}

@@ -1,0 +1,59 @@
+Title : TBString {
+  value = pageTitle;
+}
+
+TBStyleSheet : TBStyleSheet {
+  framework = "app";
+  filename = "css/javamonitor.css";
+}
+
+Body : TBGenericContainer {
+  elementName = "body";
+  id = pageId;
+}
+
+TBLogo : TBImage {
+	src = "static://TBContentsDelivery:images/logo/tb256.png";
+	height = 64;
+	width = 64;
+	align = "right";
+	border = 0;
+}
+
+Content : TBComponentContent {
+	
+}
+
+ModProxyLink: TBHyperlink {
+	action = modProxyPageClicked;
+}
+
+SslLink: TBHyperlink {
+	action = sslPageClicked;
+}
+
+Apache22Link: TBHyperlink {
+	action = apache22PageClicked;
+}
+
+SiteLink: TBHyperlink {
+	action = configurePageClicked;
+}
+
+ErrorMsg: TBString {
+	value = message;
+	escapeHTML = false;
+}
+
+HasError : TBNonNullConditional {
+	condition = message;
+}
+
+ShouldOfferLogout: TBConditional {
+	condition = logoutRequired;
+}
+
+LogoutLink: TBHyperlink {
+	action = logoutClicked;
+	class = "LogoutButton";
+}

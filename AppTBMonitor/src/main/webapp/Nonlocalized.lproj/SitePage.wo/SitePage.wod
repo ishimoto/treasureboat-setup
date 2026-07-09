@@ -1,0 +1,101 @@
+NavPage : NavigationPage {
+	currentPage = SITE_PAGE;
+	title = "Configure";
+	pageId = "Site";
+}
+
+EmailNotificationAjaxExpansion : TBCollapsibleComponentContent {
+	closedLabel = "Email Notifications";
+	openedLabel = "Email Notifications";
+	fontAwesome = "true";
+}
+
+EmailForm : TBForm {}
+
+SMTPHost : TBTextField {
+	size = "40";
+    value = theApplication.siteConfig.SMTPhost;
+    automatic = true;
+    class = "narrow input";
+}
+
+SMTPAccount : TBTextField {
+	size = "40";
+    value = theApplication.siteConfig.SMTPaccount;
+    automatic = true;
+    class = "narrow input";
+}
+
+SMTPPassword : TBPasswordField {
+	size = "40";
+    value = theApplication.siteConfig.SMTPpassword;
+    automatic = true;
+    class = "narrow input";
+}
+
+SMTPEmailReturn : TBTextField {
+	size = "40";
+    value = theApplication.siteConfig.emailReturnAddr;
+    automatic = true;
+    class = "narrow input";
+}
+
+SMTPEmailTo : TBTextField {
+	size = "40";
+    value = theApplication.siteConfig.emailToAddr;
+    automatic = true;
+    class = "narrow input";
+}
+
+UpdateEmailButton : TBSubmitButton {
+    value = "Update Email Notification Settings";
+    action = emailUpdateClicked;
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+BackupAjaxExpansion : TBCollapsibleComponentContent {
+	closedLabel = "Backup Site Configuration";
+	openedLabel = "Backup Site Configuration";
+	fontAwesome = "true";
+}
+
+FilePath : TBString {
+	value = fileForSiteConfig;
+}
+
+BackupForm : TBForm {}
+
+BackupNote : TBTextField {
+	value = backupNote;
+	automatic = true;
+	class = "narrow input";
+}
+	
+BackupButton : TBSubmitButton {
+    value = "Backup Now";
+    action = backupConfiguration;
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+SiteConfigLink : TBHyperlink {
+	string = "SiteConfig.xml";
+	action = displaySiteConfigXMLClicked;
+	target = "_blank";
+}
+
+OldBackupList : TBRepetition {
+	list = backupFileList;
+	item = oneBackupFile;
+}
+
+OneBackupFile : TBHyperlink {
+	action = displayOneBackupFileClicked;
+	string = oneBackupFile.getPath;
+	target = "_blank";
+}
+
+RemoveOldBackup : TBHyperlink {
+	action = removeOneBackupFileClicked;
+	string = "Delete";
+	buttonStyle = buttonStyle.plainDangerS;
+}

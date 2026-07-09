@@ -1,0 +1,67 @@
+<treasureboat name = "NavPage">
+
+	<div class="Box HostListBox">
+		<h2>Hosts</h2>
+		<table class = "rounded striped">
+			<thead>
+				<tr>
+					<th>Host name</th>
+					<th>TBTaskd Version</th>
+					<th>Available*</th>
+					<th>Host Type</th>
+					<th>Running Instances</th>
+					<th>Processor Description</th>
+					<th>OS / Platform</th>
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<treasureboat name = "HostsRepetition">
+					<tr>
+						<td>
+							<treasureboat name = "HostName" /> / <treasureboat name = "HostAddress" />
+						</td>
+		    			<td><treasureboat name = "HostVersion" /></td>
+						<td class="HostAvailability">
+							<treasureboat name = "HostIsAvailable">YES | <treasureboat name = "tbtaskdLink" /></treasureboat>
+		      				<treasureboat name = "HostIsNOTAvailable"><span class="HostNotAvailable">NO</span></treasureboat>
+						</td>
+		    			<td><treasureboat name = "HostType" /></td>
+		    			<td><treasureboat name = "InstanceCount" /></td>
+		    			<td><treasureboat name = "ProcessorDescription" /></td>
+		    			<td><treasureboat name = "HostOSName" /></td>
+				        <td><treasureboat name = "ConfigureHostLink" /></td>
+				        <td><treasureboat name = "RemoveHostLink" /></td>
+					</tr>
+				</treasureboat>
+			</tbody>			
+		</table>
+	</div>
+
+	<div class="row">
+		<div class = "primary alert">
+			<treasureboat name="LocalHost">
+				<treasureboat name = "AddHostForm">
+					<br />
+					<p class = "text-center">Add Host: <treasureboat name = "HostNameTextField" /> of type: <treasureboat name = "HostTypesPopUpButton" /> with TBTaskd version: <treasureboat name = "VersionPopup" /></p>
+					<p class = "text-center"><treasureboat name = "AddHostSubmitButton" /></p>
+				</treasureboat>
+			</treasureboat>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class = "warning alert">
+			<h4>Notes</h4>
+			<ul>
+				<li>Hosts may be added as either hostnames or IP addresses**</li>
+				<li>* A host is available if it is running the <b>tbtaskd</b> service/daemon.</li>
+				<li>** If <strong>"localhost"</strong> or <strong>"127.0.0.1"</strong> is a host, it must be the <b>only</b> host.</li>
+				<li><strong>Select Version 2 of URL.  Make sure your tbmonitor and tbtaskd script were the -url 2</strong> </li>
+				<li><strong>setsebool -P httpd_unified 1 or setsebool -P httpd_can_network_connect 1</strong> to allow loop back </li>
+			</ul>
+		</div>
+	</div>
+</treasureboat>

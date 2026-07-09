@@ -1,0 +1,40 @@
+NavPage : NavigationPage {
+	currentPage = SSL_PAGE;
+	title = "SSL Configuration";
+	pageId = "Ssl";
+}
+
+DomainsField: TBText {
+	cols = "65";
+	rows = "5";
+	value = theApplication.siteConfig.sslDomains;
+	wrap = "virtual";
+    automatic = true;
+    class = "wide input;"
+}
+
+DocRootPath : TBTextField {
+	size = 70;
+	value = theApplication.siteConfig.sslDocRoot;
+	automatic = true;
+	class = "wide input";
+}
+
+DocRootPicker : TBSubmitButton {
+	action = pathPickerWizardClickedDocRoot;
+	value = "Pick ...";
+	buttonStyle = buttonStyle.selectM;	
+}
+
+CertPath : TBTextField {
+	size = 70;
+	value = theApplication.siteConfig.sslCertFilePath;
+	automatic = true;
+	class = "wide input";
+}
+
+CertPathPicker : TBSubmitButton {
+	action = pathPickerWizardClickedCertFile;
+	value = "Pick ...";
+	buttonStyle = buttonStyle.selectM;	
+}

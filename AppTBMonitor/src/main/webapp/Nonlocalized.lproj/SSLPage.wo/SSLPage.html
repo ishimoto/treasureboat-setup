@@ -1,0 +1,116 @@
+<treasureboat name = "NavPage">
+
+	<div class = "row">
+		<h2>Certificate</h2>
+		<p>Create SLL certificate using  <a href = "https://letsencrypt.org" target = "_blank">Let's encrypt</a></p>
+		<tb:TBForm name = "SSLForm">
+ 			<table class = "rounded striped">
+ 				<thead>
+ 					<tr>
+ 						<th colspan = "2">Certificate Information</th>
+ 					</tr>
+ 				</thead>
+				<tbody>
+					<tr>
+						<th width = "30%" class = "text-right">Domain names :&nbsp;&nbsp;&nbsp;</th>
+						<td>
+							&nbsp;&nbsp;<treasureboat name = "DomainsField" />
+							<br />
+							<p>&nbsp;&nbsp;Use one line for each domain name</p>
+						</td>
+					</tr>
+					<tr>
+						<th width = "30%" class = "text-right">Webserver doc root :&nbsp;&nbsp;&nbsp;</th>
+						<td>
+							<label>Path</label>&nbsp;&nbsp;
+							<treasureboat name = "DocRootPath" />
+							<treasureboat name = "DocRootPicker" />
+						</td>
+					</tr>
+					<tr>
+						<th width = "30%" class = "text-right">Webserver cert file folder :&nbsp;&nbsp;&nbsp;</th>
+						<td>
+							<label>Path</label>&nbsp;&nbsp;
+							<treasureboat name = "CertPath" />
+							<treasureboat name = "CertPathPicker" />
+					 	</td>
+					</tr>
+					<tr>
+						<th width = "30%" class = "text-right">Key size :&nbsp;&nbsp;&nbsp;</th>
+						<td>&nbsp;&nbsp;<tb:TBString value = "$theApplication.siteConfig.sslKeySize" /></td>
+					</tr>
+					<tr>
+						<th width = "30%" class = "text-right">Renew Certificate in Background :&nbsp;&nbsp;&nbsp;</th>
+						<td>&nbsp;&nbsp;<tb:TBCheckBox checked = "$theApplication.siteConfig.sslAutoRenewal" /> ( you will receive an email after renewal ) </td>
+					</tr>
+					<tr>
+						<th width = "30%" class = "text-right">Test with staging server :&nbsp;&nbsp;&nbsp;</th>
+						<td>&nbsp;&nbsp;<tb:TBCheckBox checked = "$theApplication.siteConfig.sslStaging" /> </td>
+					</tr>
+					<tr>
+						<th width = "30%" class = "text-right">Subscriber Agreement :&nbsp;&nbsp;&nbsp;</th>
+						<td>&nbsp;&nbsp;<tb:TBHyperlink href = "$theApplication.siteConfig.sslAgreement" string = "$theApplication.siteConfig.sslAgreement" target = "_blank" /> </td>
+					</tr>
+					<tr>
+						<th width = "30%" class = "text-right">Certificate location :&nbsp;&nbsp;&nbsp;</th>
+						<td>&nbsp;&nbsp;<tb:TBString value = "$theApplication.siteConfig.sslCertLocation" /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<tb:TBSubmitButton value = "Save" action = "$saveSslConfiguration" buttonStyle = "$buttonStyle.submitSaveM" />
+							<tb:TBSubmitButton value = "Create" action = "$executeSslConfiguration" buttonStyle = "$buttonStyle.submitSaveM" />
+							<tb:TBSubmitButton value = "Test" action = "$testSslConfiguration" buttonStyle = "$buttonStyle.submitSaveM" />
+						</td>
+					</tr>
+					<tb:if condition = "$resutText">
+						<tr>
+							<td></td>
+							<td><pre><tb:TBString value = "$resutText"></tb:TBString></pre></td>
+						</tr>
+					</tb:if>
+				</tbody>
+			</table>
+		</tb:TBForm>
+	</div>
+  
+	<div class = "row">
+		<h2>Prepare</h2>
+		<div class = "primary alert">
+			<p>TBMonitor need write access to:</p>
+			<ul>
+				<li>Webserver cert file folder</li>
+				<li>Webserver doc root<br />
+					<ul style = "font-size:smaller;">
+						<li>You can create &quot;&lt;docroot&gt;/.well-known/acme-challenge&quot; and add write acces only to this folder</li>
+						<li>If you have more than one domain with differnt docroots you can add an alias, e.q.:<br />Alias "/.well-known/acme-challenge" "/var/www/domain01/.well-known/acme-challenge"</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+  
+	<div class = "row">
+		<h2>Required modules</h2>
+		<div class = "primary alert">
+			<ul>
+				<li>mod_log_config</li>
+				<li>mod_setenvif</li>
+				<li>mod_ssl</li>
+				<li>socache_shmcb_module</li>
+			</ul>
+		</div>
+	</div>
+  
+	<tb:if condition = "$theApplication.siteConfig.sslCertFilePath">
+		<div class = "row">
+			<h2>SSL Configuration</h2>
+			<div class = "primary alert">
+				<p>SSLCertificateFile &quot;<tb:TBString value = "$theApplication.siteConfig.sslCertFilePath" />/chain.crt&quot;</p>
+				<p>SSLCertificateKeyFile &quot;<tb:TBString value = "$theApplication.siteConfig.sslCertFilePath" />/domain.key&quot;</p>
+				<p>SSLCertificateChainFile &quot;<tb:TBString value = "$theApplication.siteConfig.sslCertFilePath" />/chain.crt&quot;</p>
+			</div>
+		</div>
+	</tb:if>
+	<br /><br /><br />
+</treasureboat>

@@ -1,0 +1,76 @@
+BackLink : TBHyperlink {
+    action = backClicked;
+}
+
+CurrentFilePath: TBString {
+    value = startingPath;
+}
+
+DirectoryLink : TBHyperlink {
+    action = directoryClicked;
+}
+
+FileSizeString : TBString {
+    value = aCurrentFile.fileSize;//VALID
+}
+
+FileString : TBString {
+    value = aCurrentFile.file;//VALID
+}
+
+IsDirectory : TBConditional {
+    condition = isCurrentFileDirectory;
+}
+
+IsNOTDirectory : TBConditional {
+    condition = isCurrentFileDirectory;
+    negate = true;
+}
+
+JumpToForm : TBForm {
+    action = directoryClicked;
+}
+
+JumpToTextField : TBTextField {
+    value = startingPath;
+    class = "wide input";
+    automatic = true;
+ 
+}
+
+RowRepetition : TBRepetition {
+    list = fileList;
+    item = aCurrentFile;
+}
+
+SelectCurrentDirectoryLink : TBHyperlink {
+    action = selectCurrentDirClicked;
+    string = "Select Current";
+    buttonStyle = buttonStyle.plainDefaultM;
+}
+
+SelectThisLink : TBHyperlink {
+    action = selectClicked;
+    string = "Select";
+    buttonStyle = buttonStyle.selectOnePageM;
+}
+
+SpacerImage : TBImage {
+    filename = "TransparentPixel.gif";
+    width = "12";
+    height = "1";
+}
+
+SubmitJumpTo : TBSubmitButton {
+    action = jumpToClicked;
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+MessageString: TBString {
+    value = errorMsg;
+}
+
+ShowFileBrowser: TBConditional {
+    condition = hasErrorMsg;
+    negate = true;
+}

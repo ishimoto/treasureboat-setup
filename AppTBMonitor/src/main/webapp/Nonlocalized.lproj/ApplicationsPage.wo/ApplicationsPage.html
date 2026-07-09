@@ -1,0 +1,66 @@
+<treasureboat name = "NavPage">
+	<div class="Box ApplicationsListBox">
+		<h2>Applications</h2>
+		<table class = "rounded striped">
+			<thead>
+				<tr>
+					<th>Application</th>
+					<th>Instances Running</th>
+					<th>Instances Configured</th>
+					<th>View Instances</th>
+					<th>Configuration</th>
+				</tr>
+			</thead>
+			<tbody>
+				<treasureboat name = "ApplicationsRepetition">
+					<treasureboat name = "ApplicationRow">    
+						<td class="applicationName">
+							<treasureboat name = "AppIsRunning"><treasureboat name = "ApplicationNameLink" /></treasureboat>
+							<treasureboat name = "AppIsNOTRunning"><treasureboat name = "ApplicationName" /></treasureboat>
+						</td>
+						<td class="text-center"><strong><treasureboat name = "RunningInstancesCount" /></strong></td>
+						<td class="text-center"><strong><treasureboat name = "ConfiguredInstanceCount" /></strong></td>
+						<td width = "12%" class = "text-center">
+							<treasureboat name = "AppDetailsLink" />
+						</td>
+						<td width = "20%" class = "text-center">
+							<treasureboat name = "ConfigureLink" />
+							<treasureboat name = "DeleteLink" />
+							<treasureboat name = "BounceLink" />
+						</td>
+					</treasureboat>
+				</treasureboat>
+    
+				<tr class="Totals">
+					<td class="text-right"><strong>Totals</strong></td>
+					<td class="text-center"><strong><treasureboat name = "TotalsRunningInstanceCount" /></strong></td>
+					<td class="text-center"><strong><treasureboat name = "TotalsConfiguredInstanceCount" /></strong></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="row">
+		<div class="primary alert">
+			<treasureboat name = "AddApplicationForm">
+				<br />
+				<p class = "text-center">Add Application Named: <treasureboat name = "ApplicationNameTextField" /></p>
+				<p class = "text-center"><treasureboat name = "AddApplicationSubmitButton" /></p>
+			</treasureboat>
+		</div>
+	</div>
+		
+	<div class="row">
+		<div class="warning alert">
+			<h4>Notes:</h4>
+			<ul>
+				<li>Application names may only contain alpha-numeric or '-'.</li>
+		    	<li>Application names do not need to match the Application executable's filename.</li>
+		    	<li>Application names are used by the adaptor for load-balancing.</li>
+		    </ul>
+		</div>
+	</div>
+
+</treasureboat>

@@ -1,0 +1,94 @@
+NavPage : NavigationPage {
+	currentPage = APP_PAGE;
+	title = "Applications";
+	pageId = "Applications";
+}
+
+AddApplicationForm: TBForm {
+    action = addApplicationClicked;
+}
+
+AddApplicationSubmitButton: TBSubmitButton {
+    action = addApplicationClicked;
+    value = "Add Application";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+AppDetailsLink: TBHyperlink {
+    action = appDetailsClicked;
+    string = "View Details";
+    buttonStyle = buttonStyle.plainPrimaryS;
+}
+
+AppIsNOTRunning: TBConditional {
+    condition = currentApplication.isRunning;
+    negate = YES;
+}
+
+AppIsRunning: TBConditional {
+    condition = currentApplication.isRunning;
+}
+
+ApplicationName: TBString {
+    value = currentApplication.name;
+}
+
+ApplicationNameLink: TBHyperlink {
+    string = currentApplication.name;
+    href = hrefToApp;
+    target = "new";
+}
+
+ApplicationNameTextField: TBTextField {
+    size = "40";
+    value = newApplicationName;
+    automatic = true;
+    class = "narrow input";
+}
+
+ApplicationsRepetition: TBRepetition {
+    list = applications;
+    item = currentApplication;
+    index = applicationRowIndex;
+}
+
+ApplicationRow : TBETRowAlternateColor {
+	index = applicationRowIndex;
+	class = "applicationName";
+}
+
+ConfigureLink: TBHyperlink {
+    action = configureClicked;
+    string = "Configure";
+    buttonStyle = buttonStyle.plainPrimaryS;
+}
+
+DeleteLink: TBHyperlink {
+    action = deleteClicked;
+    string = "Delete";
+    buttonStyle = buttonStyle.plainDangerS;
+}
+
+BounceLink: TBHyperlink {
+    action = bounceClicked;
+    string = "Bounce";
+    buttonStyle = buttonStyle.plainInfoS;
+}
+
+RunningInstancesCount: TBString {
+    value = currentApplication.runningInstancesCount;
+}
+
+ConfiguredInstanceCount: TBString {
+    value = currentApplication.instanceArray.count;
+}
+
+TotalsRunningInstanceCount: TBString {
+	value = totalInstancesRunning;
+	numberformat = "#,##0";
+}
+
+TotalsConfiguredInstanceCount: TBString {
+	value = totalInstancesConfigured;
+	numberformat = "#,##0";
+}

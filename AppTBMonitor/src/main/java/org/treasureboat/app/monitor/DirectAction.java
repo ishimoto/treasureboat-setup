@@ -1,0 +1,144 @@
+/*
+ * TreasureBoat Edition
+ *
+ * © Copyright 2016- 2019 TreasureBoat contributors.
+ * © Copyright 2006- 2007 Apple Computer, Inc. All rights reserved.
+ * 
+ * IMPORTANT:  This Apple software is supplied to you by Apple Computer, Inc. (“Apple”) in consideration of your agreement to the following terms, and your use, 
+ * installation, modification or redistribution of this Apple software constitutes acceptance of these terms.  
+ * If you do not agree with these terms, please do not use, install, modify or redistribute this Apple software.
+ * In consideration of your agreement to abide by the following terms, and subject to these terms, Apple grants you a personal, non-exclusive license, 
+ * under Apple’s copyrights in this original Apple software (the “Apple Software”), to use, reproduce, modify and redistribute the Apple Software, 
+ * with or without modifications, in source and/or binary forms; provided that if you redistribute the Apple Software in its entirety and without modifications, 
+ * you must retain this notice and the following text and disclaimers in all such redistributions of the Apple Software.  
+ * Neither the name, trademarks, service marks or logos of Apple Computer, Inc. may be used to endorse or promote products derived from the 
+ * Apple Software without specific prior written permission from Apple.  Except as expressly stated in this notice, no other rights or licenses, express or 
+ * implied, are granted by Apple herein, including but not limited to any patent rights that may be infringed by your derivative works or by other works in which the 
+ * Apple Software may be incorporated.
+ * 
+ * The Apple Software is provided by Apple on an "AS IS" basis.  APPLE MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION THE 
+ * IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS. 
+ * 
+ * IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION, MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED AND WHETHER 
+ * UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+package org.treasureboat.app.monitor;
+
+import org.treasureboat.app.monitor.components.Main;
+import org.treasureboat.app.monitor.components.WOTaskdHandler;
+import org.treasureboat.app.monitor.components.WOTaskdHandler.ErrorCollector;
+import org.treasureboat.foundation.TBFConstants;
+import org.treasureboat.foundation.array.TBFArray;
+import org.treasureboat.foundation.array.TBFMutableArray;
+import org.treasureboat.foundation.dic.TBFDictionary;
+import org.treasureboat.foundation.dic.TBFMutableDictionary;
+import org.treasureboat.foundation.plistserialization.TBFPropertyListSerialization;
+import org.treasureboat.monitor.TBMonitor_Application;
+import org.treasureboat.monitor.TBMonitor_Instance;
+import org.treasureboat.monitor.TBMonitor_SiteConfig;
+import org.treasureboat.webcore.annotations.TBAction;
+import org.treasureboat.webcore.appserver.TBDirectAction;
+import org.treasureboat.webcore.appserver.TBRequest;
+import org.treasureboat.webcore.appserver.TBResponse;
+import org.treasureboat.webcore.appserver.iface.ITBWActionResults;
+import org.treasureboat.webcore.components.TBComponent;
+
+public class DirectAction extends TBDirectAction {
+
+	public DirectAction(TBRequest aRequest) {
+		super(aRequest);
+	}
+
+	@TBAction
+	@Override
+	public ITBWActionResults standard() {
+		if (request().stringFormValueForKey("pw") != null) {
+			Main loginPage = pageWithName(Main.class);
+			loginPage.setPassword(request().stringFormValueForKey("pw"));
+			return loginPage.loginClicked();
+		}
+		return super.standard();
+	}
+
+	public TBComponent MainAction() {
+		return pageWithName("Main");
+	}
+
+	protected TBMonitor_SiteConfig siteConfig() {
+		return WOTaskdHandler.siteConfig();
+	}
+
+	private static Object nonNull(Object value) {
+		if (value == null) {
+			return "";
+		}
+		return value;
+	}
+
+	private static TBFDictionary<String, Object> historyEntry(TBMonitor_Application app) {
+		TBFMutableDictionary<String, Object> result = new TBFMutableDictionary<>();
+		result.setObjectForKey(app.name(), "applicationName");
+		TBFArray<TBMonitor_Instance> allInstances = app.instanceArray();
+		result.setObjectForKey(TBFConstants.integerForInt(allInstances.count()), "configuredInstances");
+
+		int runningInstances = 0;
+		int refusingInstances = 0;
+		TBFMutableArray<TBMonitor_Instance> instances = new TBFMutableArray<>();
+		for (TBMonitor_Instance instance : allInstances) {
+			if (instance.isRunning_M()) {
+				runningInstances++;
+				instances.addObject(instance);
+			}
+			if (instance.isRefusingNewSessions()) {
+				refusingInstances++;
+			}
+		}
+		result.setObjectForKey(TBFConstants.integerForInt(runningInstances), "runningInstances");
+		result.setObjectForKey(TBFConstants.integerForInt(refusingInstances), "refusingInstances");
+
+		result.setObjectForKey(nonNull(app.instanceArray().valueForKeyPath("@sum.activeSessionsValue")), "sumSessions");
+		result.setObjectForKey(nonNull(app.instanceArray().valueForKeyPath("@max.activeSessionsValue")), "maxSessions");
+		result.setObjectForKey(nonNull(app.instanceArray().valueForKeyPath("@avg.activeSessionsValue")), "avgSessions");
+
+		result.setObjectForKey(nonNull(app.instanceArray().valueForKeyPath("@sum.transactionsValue")), "sumTransactions");
+		result.setObjectForKey(nonNull(app.instanceArray().valueForKeyPath("@max.transactionsValue")), "maxTransactions");
+		result.setObjectForKey(nonNull(app.instanceArray().valueForKeyPath("@avg.transactionsValue")), "avgTransactions");
+
+		result.setObjectForKey(nonNull(app.instanceArray().valueForKeyPath("@max.avgTransactionTimeValue")), "maxAvgTransactionTime");
+		result.setObjectForKey(nonNull(app.instanceArray().valueForKeyPath("@avg.avgTransactionTimeValue")), "avgAvgTransactionTime");
+
+		result.setObjectForKey(nonNull(app.instanceArray().valueForKeyPath("@max.avgIdleTimeValue")), "maxAvgIdleTime");
+		result.setObjectForKey(nonNull(app.instanceArray().valueForKeyPath("@avg.avgIdleTimeValue")), "avgAvgIdleTime");
+
+		return result;
+	}
+
+	@TBAction
+	public TBResponse statistics() {
+		TBResponse response = new TBResponse();
+		String pw = context().request().stringFormValueForKey("pw");
+		if (siteConfig().compareStringWithPassword(pw)) {
+			WOTaskdHandler handler = new WOTaskdHandler(new ErrorCollector() {
+
+				@Override
+				public void addObjectsFromArrayIfAbsentToErrorMessageArray(TBFArray<String> aErrors) {
+
+				}
+			});
+			handler.startReading();
+			try {
+				TBFMutableArray<TBFDictionary<String, ?>> stats = new TBFMutableArray<>();
+				for (TBMonitor_Application app : siteConfig().applicationArray()) {
+					handler.getInstanceStatusForHosts(app.hostArray());
+					TBFDictionary<String, ?> appStats = historyEntry(app);
+					stats.addObject(appStats);
+				}
+				response.appendContentString(TBFPropertyListSerialization.stringFromPropertyList(stats));
+			} finally {
+				handler.endReading();
+			}
+		}
+		return response;
+	}
+}

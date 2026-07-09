@@ -1,0 +1,276 @@
+<treasureboat name = "NavPage">
+
+	<!-- Parameter settings -->
+	<div class = "row">
+    	<h3>HELPER : Parameter settings for Each Server that you are managing</h3>
+    	<div class = "primary alert">
+	    	<treasureboat name = "ParamForm">
+	 			<table class = "rounded striped">
+	 				<thead>
+	 					<tr>
+	 						<th colspan = "2"><strong>Apache 2.4 Information</strong></th>
+	 					</tr>
+	 				</thead>
+	 				<tbody>
+						<tr>
+							<th width = "30%" class = "text-right">Adaptor URL :&nbsp;&nbsp;&nbsp;</th>
+							<td>
+								<treasureboat name = "AdaptorURL" /><br />
+		          				<span class = "Comment">example : /TB/&nbsp;&nbsp;</span> (the '/TB' is mandatory)
+		          			</td>
+		        		</tr>
+		        		<tr>
+		          			<th width = "30%" class = "text-right">Timeout :&nbsp;&nbsp;&nbsp;</th>
+		          			<td><treasureboat name = "TFTimeout" /></td>
+		        		</tr>
+		        		<tr>
+		          			<th width = "30%" class = "text-right">Load Balancer :&nbsp;&nbsp;&nbsp;</th>
+		          			<td><treasureboat name = "PBLoadBalancer" /></td>
+		        		</tr>
+		        		<tr>
+		        			<td>&nbsp;</td>
+		        			<td><treasureboat name = "BtnSubmit" /></td>
+		        		</tr>
+		        	</tbody>
+	      		</table>
+			</treasureboat>
+		</div>
+	</div>
+  
+	<!-- Step 1 proxy-treasureboats.conf -->
+	<div class = "row">
+		<h2>Step 1 : Apache mod_proxy and proxy_balancer_module settings</h2>
+		<div class = "primary alert">
+			<p>Location :</p>
+			<ul>
+				<li>OSX : /Library/TreasureBoat/Configuration/proxy-treasureboats.conf</li>
+				<li>Linux : /opt/TreasureBoat/Configuration/proxy-treasureboats.conf</li>
+				<li>Windows : {Apache_home}/conf/extra/proxy-treasureboats.conf</li>
+			</ul>
+			<tb:if condition = "$adaptorUrlIsEmpty">
+				<div class = "warning alert" >WARNING:  Adaptor URL is empty.  The Apache 2.4 proxy configuration file cannot be generated.</div>
+	    	</tb:if>
+	    	<tb:else>
+	    		<p>Copy this in your <strong>proxy-treasureboats.conf</strong> file for your Apache 2.4 WebServer: </p>
+	    		<pre><code><treasureboat name="adaptorConfigContent"></treasureboat></code></pre>
+	    		<p>
+	      			<span class = "Comment">If you are monitoring multiple applications on multiple machines, <br/>
+	      			then be sure to reserve different port blocks for each machine and application, e.g. 
+		      			<ul>
+					      	<li>machine 1: [2001-2999],</li>
+					      	<li>machine 2: [3001-3999],</li>
+					      	<li> etc.</li>
+				      	</ul>
+					</span>
+				</p>
+			</tb:else>
+		</div>
+	</div>
+  
+	<!-- Step 2 Common configuration -->
+	<div class = "row">
+		<h2>Step 2 : Common configuration</h2>
+		<div class = "primary alert">
+			<h3>Needed apache modules (should be default setup)</h3>
+			<p><span class = "Comment">On CentOS 7: <br />
+			 <strong>httpd -M</strong> will dislay the list of modules being loaded by Apache 2.4<br />
+			 <strong>httpd -S</strong> will display your virtual host configuration Apache 2.4</span>
+			 </p>
+			<br />
+			<ul>
+				<li>LoadModule <strong>slotmem_shm_module</strong>
+					<ul>
+			        	<li>libexec/apache2/mod_slotmem_shm.so (OSX)</li>
+			        	<li>modules/mod_slotmem_shm.so (Linux)</li>
+			        	<li>modules/mod_slotmem_shm.so (Win)</li>
+					</ul>
+				</li>  
+				<li>LoadModule <strong>proxy_module</strong>
+			       	<ul>
+			        	<li>libexec/apache2/mod_proxy.so (OSX)</li>
+			        	<li>modules/mod_proxy.so (Linux)</li>
+			        	<li>modules/mod_proxy.so (Win)</li>
+			      	</ul>
+				</li>
+				<li>LoadModule <strong>proxy_http_module</strong>
+			       	<ul>
+			        	<li>libexec/apache2/mod_proxy_http.so (OSX)</li>
+			        	<li>modules/mod_proxy_http.so (Linux)</li>
+			        	<li>modules/mod_proxy_http.so (Win)</li>
+			      	</ul>
+				</li>
+				<li>LoadModule <strong>proxy_balancer_module</strong>
+			       	<ul>
+			        	<li>libexec/apache2/mod_proxy_balancer.so (OSX)</li>
+			        	<li>modules/mod_proxy_balancer.so (Linux)</li>
+			        	<li>modules/mod_proxy_balancer.so (Win)</li>
+			      	</ul>
+				</li>
+				<li>LoadModule <strong>lbmethod_byrequests_module</strong>
+			       	<ul>
+			        	<li>libexec/apache2/mod_lbmethod_byrequests.so (OSX)</li>
+			        	<li>modules/mod_lbmethod_byrequests.so (Linux)</li>
+			        	<li>modules/mod_lbmethod_byrequests.so (Win)</li>
+			      	</ul>
+	        		<span class = "Comment">(Or one of: mod_lbmethod_bytraffic.so, mod_lbmethod_bybusyness.so, mod_lbmethod_heartbeat.so)</span>
+				</li>
+				<li>LoadModule <strong>status_module</strong>
+			       	<ul>
+			        	<li>libexec/apache2/mod_status.so (OSX)</li>
+			        	<li>modules/mod_status.so (Linux)</li>
+			        	<li>modules/mod_status.so (Win)</li>
+			      	</ul>
+			        <span class = "Comment">(If you want to use /blancer_manager)</span>
+				</li>
+				<li>LoadModule <strong>rewrite_module</strong>
+					<ul>
+			        	<li>libexec/apache2/mod_rewrite.so (OSX)</li>
+			        	<li>modules/mod_rewrite.so (Linux)</li>
+			        	<li>modules/mod_rewrite.so (Win)</li>
+	      			</ul>
+	        		<span class = "Comment">(If you want to use url rewrite)</span>
+	      		</li>
+			</ul>
+		<br />
+    
+		<h3>Insert the following in your /opt/TreasureBoat/Configuration/proxy-common.conf file</h3>
+		<br />
+		<pre>
+########### Copied from TBMonitor #############
+
+&lt;IfModule proxy_module&gt;
+# Turn Forward Proxy off
+ProxyRequests Off
+
+# We want all previous proxy routes
+ProxyVia Full
+
+# Just in case: Deny proxy access
+&lt;Proxy *&gt;
+    Order deny,allow
+    Deny from none
+    Allow from localhost
+&lt;/Proxy&gt;
+
+# Balancer-manager: Allowed only from localhost
+&lt;Location /balancer-manager&gt;
+    SetHandler balancer-manager
+
+    Order deny,allow
+    Deny from none
+    Allow from localhost
+&lt;/Location&gt;
+
+# Mac OS X (UnComment below)
+#Include /Library/TreasureBoat/Configuration/proxy-treasureboats.conf
+# Linux (UnComment below)
+#Include /opt/TreasureBoat/Configuration/proxy-treasureboats.conf
+# Windows
+#Include  {?? Stefan ??}/Library/TreasureBoat/Configuration/proxy-treasureboats.conf
+
+&lt;/IfModule&gt;
+
+########### Copied from TBMonitor #############
+			</pre>
+		</div>
+	</div>
+  
+	<!-- Step 3 Changes in your Application class -->
+	<div class = "row">
+		<h2>Step 3 (Optional): Changes in your Application class</h2>
+		<div class = "primary alert">
+			<p>
+				TBWApplication will set the needed cookie for the stickysession used by mod_proxy balancer.<br />
+	     		 Setting 
+				<span style = "font-style:italic;">org.treasureboat.webcore.appserver.TBWApplication.useModProxy=false</span>
+				in the properties file will stop generating the cookie. 
+			</p>
+			<p>
+			    If you need the client ip you need to ask for 'x-forwarded-for'. This can be done by using the static method 
+			    <span style = "font-style:italic;">String clientIP(TBRequest request)</span>
+			    from TBWApplication. 
+			</p>
+		</div>
+	</div>
+  
+	<!-- Step 4 URL rewrite rules -->
+	<div class="row">
+		<h2>Step 4 : URL rewrite rules (can be skipped)</h2>
+		<div class = "default alert">
+			<tb:if condition = "$adaptorUrlIsEmpty">
+				<p>
+				<div class = "Warning" >WARNING:  Adaptor URL is empty.  The mod_rewrite rules cannot be generated.</div>
+				</p>
+			</tb:if>
+			<tb:else>
+				<p>If you want to rewrite your application URLs from /cgi-bin/treasureboats/YourApp.tba to /yourapp, you can set the following properties and add the apache rewrite rule</p>
+				<pre><code><treasureboat name="adaptorRewriteContent"></treasureboat></code></pre>
+			</tb:else>
+		</div>
+	</div>
+
+	<!-- Step 5 WebServer Resources -->
+	<div class="row">
+		<h2>Step 5 : WebServerResources</h2>
+		<div class = "primary alert">
+			<p>Setup symbolic link from the Apache document root to your TreasureBoat App's WebServerResources directory</p>
+			<ul>
+				<li>OSX : <code>cd /Library/WebServer/Documents</code></li>
+				<li>Windows : {?? Stefan ??}</li>
+				<li>Linux : <code>cd /var/www/html</code> or <code>cd /opt/rh/httpd24/root/var/www/html</code></li>
+			</ul>
+			<p>you can execute following command at the root of the Apache folder:</p>
+			<ul>
+				<li>OSX : <code>ln -s /Library/TreasureBoat/WebServerResource TreasureBoat</code></li>
+				<li>Windows : {?? Stefan ??}</li>
+				<li>Linux : <code>ln -s /opt/TreasureBoat/WebServerResource TreasureBoat</code></li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- Error handling -->
+	<div class="row">
+    <h2>Error handling</h2>
+    	<div class = "primary alert">
+    		<p>Example to add your own error pages</p>
+<pre>
+    # error folder
+    &lt;Location "/errors"&gt;
+        Options -Indexes
+        Order Deny,Allow
+        Allow from all
+    &lt;/Location&gt;
+    
+    # Proxy everything except for /error
+    ProxyPass /errors !
+
+    # Service unavailable
+    ErrorDocument 503 /errors/error503.html
+</pre>
+    	</div>
+	</div>
+  
+	<!-- More information -->
+	<div class = "row">
+	    <h2>More information</h2>
+	    <div class = "default alert">
+		    <h4>Basic</h4>
+		    <br />
+		    <i class="fas fa-circle"></i> <a target = "_blank" href = "http://httpd.apache.org/docs/current/mod/mod_proxy.html">proxy</a>
+		    <br />
+		    <i class="fas fa-circle"></i> <a target = "_blank" href = "http://httpd.apache.org/docs/current/mod/mod_proxy_balancer.html">balancer</a>
+		    <br />
+		    <br />
+		    <h4>Load balancing methods</h4>
+		    <br />
+		    <i class="fas fa-circle"></i> <a target = "_blank" href = "http://httpd.apache.org/docs/current/mod/mod_lbmethod_byrequests.html">requests</a>
+		    <br />
+		    <i class="fas fa-circle"></i> <a target = "_blank" href = "http://httpd.apache.org/docs/current/mod/mod_lbmethod_bytraffic.html">traffic</a>
+		    <br />
+		    <i class="fas fa-circle"></i> <a target = "_blank" href = "http://httpd.apache.org/docs/current/mod/mod_lbmethod_bybusyness.html">busyness</a>
+		    <br />
+		    <i class="fas fa-circle"></i> <a target = "_blank" href = "http://httpd.apache.org/docs/current/mod/mod_lbmethod_heartbeat.html">heartbeat</a>
+		  </div>
+	    <br /><br /><br />
+	</div>
+</treasureboat>

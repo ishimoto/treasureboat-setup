@@ -1,0 +1,37 @@
+NavPage: NavigationPage {
+	currentPage = HOST_PAGE;
+	title = myHost.name;
+	pageId = "Hosts";
+}
+
+HostName : TBString {
+	value = myHost.name;
+}
+
+HostSettingsForm : TBForm {}
+
+HostTypePopup : TBPopUp {
+	list = hostTypeList;
+	selection = hostTypeSelection;
+	automatic = true;
+}
+
+VersionPopup : TBPopUp {
+	list = versionList;
+	selection = versionSelection;
+	automatic = true;
+}
+
+HostConfigureButton : TBSubmitButton {
+    action = configureHostClicked;
+    value = "Configure Host";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+HostSyncForm : TBForm {}
+
+HostSyncButton : TBSubmitButton {
+    action = syncHostClicked;
+    value = "Synchronize Host";
+	buttonStyle = buttonStyle.submitSaveM;
+}

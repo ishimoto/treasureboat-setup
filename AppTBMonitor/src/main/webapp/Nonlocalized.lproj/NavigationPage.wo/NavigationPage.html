@@ -1,0 +1,45 @@
+<html>
+	<head>
+ 		<meta charset="UTF-8" />
+		<meta name="robots" content="noindex,nofollow">
+
+	  	<!-- Use the .htaccess and remove these lines to avoid edge case issues. More info: h5bp.com/b/378 -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title><treasureboat name="Title" /></title>
+	
+		<tb:TBWFavicon2020 />
+		
+		<tb:TBFontAwesome />
+		<tb:TBStyleSheet href="static://TBSkinGumby:css/treasureboat.css" media = "screen" />
+		<treasureboat name = "TBStyleSheet"/>
+	</head>
+	<treasureboat name = "Body">
+		<div class="Box NavigationBox">
+			<div id="NavigationLogo"><treasureboat name="TBLogo" /></div>
+			<h2>TBMonitor 2</h2>
+			
+			<ul class="NavigationTabs">
+	  			<li class="Applications"><tb:hyperlink action="$doGoToApplicationsPageAction" string="Applications" /></li>
+	            <li class="Hosts"><tb:hyperlink action="$doGoToHostsPageAction" string="Hosts" /></li>
+				<li class="Site"><treasureboat name="SiteLink">Site</treasureboat></li>
+				<li class="ModProxy"><treasureboat name="ModProxyLink">Apache 2.4</treasureboat></li>
+				<li class="Ssl"><treasureboat name="SslLink">SSL</treasureboat></li>
+				<li class="Apache22"><treasureboat name="Apache22Link">Apache 2.2</treasureboat></li>
+				<li class="Preferences"><tb:hyperlink action="$doGoToPrefsPageAction" string="Preferences" /></li>
+				<li class="Help"><tb:hyperlink action="$doGoToHelpPageAction" string="Help" /></li>
+	            <treasureboat name="ShouldOfferLogout"><li class="Logout"><treasureboat name="LogoutLink">Log Out</treasureboat></li></treasureboat>
+	        </ul>
+		</div>
+		
+		<div id="ContentWrapper">
+			<treasureboat name = "HasError">
+				<p class="Box ErrorBox LoginErrorBox"><treasureboat name="ErrorMsg" /></p>
+			</treasureboat>
+			<treasureboat name="Content" />
+		</div>
+		
+        <div id = "bottomBar"><tb:TBWCopyright /></div>
+	    <tb:if condition = "$application.isDevelopmentMode"><tb:TBWClickToOpenToolBar /></tb:if>
+	</treasureboat>
+</html>

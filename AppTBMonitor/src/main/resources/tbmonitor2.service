@@ -1,0 +1,13 @@
+[Unit]
+Description=TreasureBoat Monitor Application
+After=network.target
+
+[Service]
+User=appserver
+Group=appserveradm
+Environment=LOGFILE=/opt/TreasureBoat/Logs/tbmonitor.log
+ExecStart=/opt/TreasureBoat/Applications/tbmonitor.woa/AppTBMonitor -p 56789 >> $LOGFILE
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

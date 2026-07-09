@@ -1,0 +1,214 @@
+AdaptorSettingsForm : TBForm {}
+
+AdditionalArguments: TBText {
+    value = myInstance.additionalArgs;
+    cols = "50";
+    rows = "10";
+    wrap = "virtual";
+    automatic = true;
+}
+
+AppConfigureLink: TBHyperlink {
+	action = appConfigLinkClicked;
+}
+
+ArgumentsForm: TBForm {}
+
+Caching: TBCheckBox {
+    checked = myInstance.cachingEnabled;
+}
+
+AutoOpenInBrowser: TBCheckBox {
+	checked = myInstance.autoOpenInBrowser;
+}
+
+CommandLineString: TBString {
+    value = myInstance.commandLineArguments;
+}
+
+ConnectTimeoutField : TBTextField {
+    value = myInstance.cnctTimeout;
+    size = "4";
+    numberformat = "0";
+    automatic = true;
+    class = "xnarrow input";
+}
+
+InstName: TBString {
+    value = myInstance.id;
+    numberformat = "0";
+}
+
+NavPage: NavigationPage {
+	currentPage = APP_PAGE;
+	title = displayName;
+	pageId = "Applications";
+}
+
+Path: TBTextField {
+    value = myInstance.path;
+    size = "70";
+    automatic = true;
+    class = "xwide input";
+}
+
+PathPickerWizardLink : TBHyperlink {
+    action = pathPickerWizardClicked;
+	buttonStyle = buttonStyle.selectM;	
+    string = "Pick...";
+}
+
+PathPickerWizardLink2 : TBHyperlink {
+    action = pathPickerWizardClickedOutput;
+	buttonStyle = buttonStyle.selectM;	
+    string = "Pick...";
+}
+
+PoolsizeField : TBTextField {
+    value = myInstance.sendBufSize;
+    size = "4";
+    numberformat = "0";
+    automatic = true;
+    class = "xnarrow input";
+}
+
+Port: TBTextField {
+    value = port;
+    size = "8";
+    numberformat = "0";
+    automatic = true;
+    class = "xnarrow input";
+}
+
+ReceiveTimeoutField : TBTextField {
+    value = myInstance.recvTimeout;
+    size = "4";
+    numberformat = "0";
+    automatic = true;
+    class = "xnarrow input";
+}
+
+ReturnLink: TBHyperlink {
+    action = returnClicked;
+    string = "Detail View";
+    buttonStyle = buttonStyle.returnM;
+}
+
+SendTimeoutField : TBTextField {
+    value = myInstance.sendTimeout;
+    size = "4";
+    numberformat = "0";
+    automatic = true;
+    class = "xnarrow input";
+}
+
+String1: TBString {
+	value = myInstance.hostName;
+}
+
+InstanceSettingsSubmit: TBSubmitButton {
+    action = startupUpdateClicked;
+    value = "Update Instance Settings";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+IDField: TBTextField {
+	numberformat = "0";
+	value = id;
+    automatic = true;
+    class = "xnarrow input";
+}
+
+MinimumActiveSessionsCount: TBTextField {
+	numberformat = "0";
+	value = myInstance.minimumActiveSessionsCount;
+    automatic = true;
+    class = "xnarrow input";
+}
+
+LifebeatInterval: TBTextField {
+	value = myInstance.lifebeatInterval;
+	numberformat = "0";
+    automatic = true;
+    class = "xnarrow input";
+}
+
+Memo: TBTextField {
+	value = myInstance.description;
+	size = 60;
+    automatic = true;
+    class = "xwide input";
+}
+
+TextField4: TBTextField {
+	size = "4";
+	value = myInstance.recvBufSize;
+	numberformat = "0";
+    automatic = true;
+    class = "xnarrow input";
+}
+
+UpdateAdaptorButton: TBSubmitButton {
+    action = adaptorSettingsUpdateClicked;
+    value = "Update Adaptor Settings";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+OutputPath: TBTextField {
+    value = myInstance.outputPath;
+    size = "70";
+    automatic = true;
+    class = "xwide input";
+}
+
+isWindowsHost: TBConditional { 
+     condition = isWindowsHost;  
+}
+
+pathDiff: TBString {
+    value = pathDiff;
+    escapeHTML = false;
+}
+
+minDiff: TBString {
+    value = minDiff;
+    escapeHTML = false;
+}
+
+cachingDiff: TBString {
+    value = cachingDiff;
+    escapeHTML = false;
+}
+
+outputDiff: TBString {
+    value = outputDiff;
+    escapeHTML = false;
+}
+
+browserDiff: TBString {
+    value = browserDiff;
+    escapeHTML = false;
+}
+
+lifebeatDiff: TBString {
+    value = lifebeatDiff;
+    escapeHTML = false;
+    log = true;
+}
+
+argsDiff: TBString {
+    value = argsDiff;
+    escapeHTML = false;
+}
+
+ForceQuitForm: TBForm {}
+
+ForceQuitButton: TBSubmitButton {
+    action = forceQuitClicked;
+    value = "Force Quit This Instance";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+lifebeatIntervalString: TBString {
+    value = instanceLifebeatInterval;
+}

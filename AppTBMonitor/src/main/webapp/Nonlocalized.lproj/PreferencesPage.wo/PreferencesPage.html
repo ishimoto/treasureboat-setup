@@ -1,0 +1,51 @@
+<treasureboat name = "NavPage">
+	
+	<div class = "row">
+		<h2>TBMonitor Password</h2>
+		<p>
+			<treasureboat name = "AdminPasswordIsSet">The password is currently set.</treasureboat>
+			<treasureboat name = "AdminPasswordIsNotSet">The password is currently <strong>NOT</strong> set. </treasureboat>
+		</p>
+		
+		<treasureboat name = "PasswordChangeForm">
+ 			<table class = "rounded striped">
+ 				<thead>
+ 					<tr><th colspan = "2"><strong>TBMonitor Password Information</strong></th></tr>
+ 				</thead>
+				<tbody>
+					<tr>
+						<th width = "30%" class = "text-right">Enter Username :&nbsp;&nbsp;&nbsp;</th>
+						<td><treasureboat name = "UserName" /></td>
+					</tr>
+					<tr>
+						<th width = "30%" class = "text-right">Enter New Password :&nbsp;&nbsp;&nbsp;</th>
+						<td><treasureboat name = "AdminPassword1" /></td>
+					</tr>
+					<tr>
+						<th width = "30%" class = "text-right">Confirm New Password :&nbsp;&nbsp;&nbsp;</th>
+						<td><treasureboat name = "AdminPassword2" /></td>
+					</tr>
+					<tr>
+						<td width = "30%" class = "text-right">&nbsp;</td>
+						<td>
+							<treasureboat name = "PasswordChangeFormSubmit" />&nbsp; <treasureboat name = "PasswordReserFormSubmit" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</treasureboat>
+	</div>
+
+	<div class = "row">
+		<h2>Detail View Refesh Settings</h2>
+		<p>The Detail View page can be configured to automatically refresh itself in your browser's window.</p>
+		<treasureboat name = "DetailViewForm">
+			<div class = "primary alert">
+			<p><treasureboat name = "AutoRefreshCheckbox" /> Auto-Refresh the Detail View</p>
+			<p><treasureboat name = "AutoRefreshTimeIntervalField" /> second delay before refreshing.</p>
+			<p><treasureboat name = "DetailViewSubmitButton" /></p>
+			</div>
+		</treasureboat>
+	</div>
+
+</treasureboat>

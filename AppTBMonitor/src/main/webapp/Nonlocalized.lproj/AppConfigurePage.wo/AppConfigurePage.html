@@ -1,0 +1,309 @@
+<treasureboat name="NavPage">
+
+	<div class = "row">
+		<h2>Configuring Application &quot;<treasureboat name="AppName" />&quot;</h2>
+		<treasureboat name="ReturnLink" />
+	</div>
+
+	<div class="row">
+		<treasureboat name = "NewInstanceConfigAjaxExpansion">
+			<h2>New Instance Defaults</h2>
+			<p>New Instances will be automatically configured to have the following settings. Defaults may be pushed individually (or together) to existing instances using the &quot;Push&quot; buttons in the far right column. 
+			To only set defaults for new instances (existing instances remain unchanged), use the &quot;Update for New Instances Only&quot; button at the bottom.</p>
+			
+			<treasureboat name="InstDefaultsForm">
+				<table class="rounded striped">
+					<thead>
+						<tr><th colspan = "3"><strong>New Instance Defaults</strong></th></tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class = "text-right" width = "20%">Path* :&nbsp;&nbsp;&nbsp;</th>
+							<td>
+								<div>
+									<label>Unix :</label>&nbsp;
+									<treasureboat name="UnixPath" />
+									<treasureboat name="UnixPathPicker" />
+								</div>
+								<div>
+									<label>Mac OS :</label>&nbsp;
+									<treasureboat name="MacPath" />
+									<treasureboat name="MacPathPicker" />
+								</div>
+								<div>
+									<label>Windows :</label>&nbsp;
+									<treasureboat name="WinPath" />
+									<treasureboat name="WinPathPicker" />
+								</div>
+							</td>
+							<td class="PushButtonWrapper"><treasureboat name="PathOnlyButton" /></td>
+						</tr>
+                
+						<tr>
+							<th class = "text-right">Auto Recover :&nbsp;&nbsp;&nbsp;</th>
+							<td><treasureboat name="AutoRecoverCheckbox" /> <span class="Comment">(Does not apply to scheduled instances)</span></td>
+							<td class="PushButtonWrapper"><treasureboat name="AutoRecoverOnlyButton" /></td>
+						</tr>
+		                <tr>
+		                	<th class = "text-right">Minimum Active Sessions :&nbsp;&nbsp;&nbsp;</th>
+		                	<td><treasureboat name="MinimumActiveSessionField" /></td>
+		                	<td class="PushButtonWrapper"><treasureboat name="MinimumOnlyButton" /></td>
+		                </tr>
+		                <tr>
+		                	<th class = "text-right">Caching enabled :&nbsp;&nbsp;&nbsp;</th>
+		                	<td><treasureboat name="CachingEnabledCheckbox" /></td>
+		                	<td class="PushButtonWrapper"><treasureboat name="CachingOnlyButton" /></td>
+		                </tr>
+						<tr>
+							<th class = "text-right">Output Path** :&nbsp;&nbsp;&nbsp;</th>
+							<td class="PathPickWrapper">
+								<div>
+									<label>Unix :</label>&nbsp;
+									<treasureboat name="TextFieldUnixOutputPath" />
+									<treasureboat name="PathPickerWizard2" />
+								</div>
+								<div>
+									<label>Mac OS :</label>&nbsp;
+									<treasureboat name="TextFieldMacOutputPath" />
+									<treasureboat name="PathPickerWizard6" />
+								</div>
+								<div>
+									<label>Windows :</label>&nbsp;
+									<treasureboat name="TextFieldWinOutputPath" />
+									<treasureboat name="PathPickerWizard3" />
+								</div>
+							</td>
+							<td class="PushButtonWrapper"><treasureboat name="OutputOnlyButton" /></td>
+						</tr>
+						<tr>
+							<th class = "text-right">Auto Open In Browser :&nbsp;&nbsp;&nbsp;</th>
+							<td><treasureboat name="AutoOpen" /></td>
+							<td class="PushButtonWrapper"><treasureboat name="AutoOpenOnlyButton" /></td>
+						</tr>
+						<tr>
+							<th class = "text-right">Lifebeat Interval :&nbsp;&nbsp;&nbsp;</th>
+							<td><treasureboat name="Lifebeat" /></td>
+							<td class="PushButtonWrapper"><treasureboat name="LifebeatOnlyButton" /></td>
+						</tr>
+						<tr>
+							<th class = "text-right">Additional Arguments :&nbsp;&nbsp;&nbsp;</th>
+							<td><treasureboat name="ArgsField" /></td>
+							<td class="PushButtonWrapper"><treasureboat name="AddArgsOnlyButton" /></td>
+						</tr>
+						<tr>
+							<th class = "text-right">Domain :&nbsp;&nbsp;&nbsp;</th>
+							<td><treasureboat name="DomainField" /></td>
+							<td class="PushButtonWrapper"><treasureboat name="DomainOnlyButton" /></td>
+						</tr>
+		                <tr>
+		                	<th class = "text-right">WOStats enabled (old) :&nbsp;&nbsp;&nbsp;</th>
+		                	<td><treasureboat name="WOStatsCheckbox" /></td>
+		                	<td class="PushButtonWrapper"><treasureboat name="DebuggingOnlyButton" /></td>
+		                </tr>
+	
+						<tr>
+							<td>&nbsp;</td>
+							<td><treasureboat name="SaveChangesSubmitButton" /></td>
+							<td class="PushButtonWrapper"><treasureboat name="PushSubmitButton" /></td>
+						</tr>
+						
+					</tbody>
+				</table>
+				<div class = "warning alert">
+					<br />
+					<p>* The path of the executable (inside the '.woa' directory).</p>
+					<p>** This should be a directory - the path should end with a file separator (instance logs will be saved as &lt;ApplicationName&gt;-&lt;ID&gt;)</p>
+				</div>
+			</treasureboat>
+		</treasureboat>
+	</div>
+	
+	
+	<div class="row">
+		<treasureboat name="ApplicationConfigAjaxExpansion">
+			<h2>Application Settings</h2>
+	        <treasureboat name="AppSettingsForm">
+	        	<table class="rounded striped">
+	        		<thead><tr><th colspan = "2"><strong>Application Settings</strong></th></tr></thead>
+	        		<tbody>
+		                <tr><th class = "text-right">Name :&nbsp;&nbsp;&nbsp;</th>
+		                  <td><treasureboat name="RealNameField" /><br />
+		                  <span class="Comment">(All instances of this application must be off to change the name)</span></td>
+		                </tr>
+		                <tr><th class = "text-right">Starting Port :&nbsp;&nbsp;&nbsp;</th>
+		                  <td><treasureboat name="StartingPort" /></td>
+		                </tr>
+		                <tr><th class = "text-right">Time Allowed For Startup :&nbsp;&nbsp;&nbsp;</th>
+		                  <td><treasureboat name="TimeForStartup" /></td>
+		                </tr>
+		                <tr><th class = "text-right">Phased Startup :&nbsp;&nbsp;&nbsp;</th>
+		                  <td><treasureboat name="PhasedStartup" /></td>
+		                </tr>
+		                <tr><th class = "text-right">Adaptor :&nbsp;&nbsp;&nbsp;</th>
+		                  <td><treasureboat name="AdaptorField" /> <span class="Comment">('TBWDefaultAdaptor' is the default)</span></td>
+		                </tr>
+		                <tr><th class = "text-right">Minimum Adaptor threads :&nbsp;&nbsp;&nbsp;</th>
+		                  <td><treasureboat name="AdaptorThreadsMinField" /> <span class="Comment">(Applies only to the TBWDefaultAdaptor)</span></td>
+		                </tr>
+		                <tr><th class = "text-right">Maximum Adaptor threads :&nbsp;&nbsp;&nbsp;</th>
+		                  <td><treasureboat name="AdaptorThreadsMaxField" /> <span class="Comment">(Applies only to the TBWDefaultAdaptor)</span></td>
+		                </tr>
+		                <tr><th class = "text-right">Listen Queue Size :&nbsp;&nbsp;&nbsp;</th>
+		                  <td><treasureboat name="ListenQueueSizeField" /></td>
+		                </tr>
+		                <tr><th class = "text-right">Project Search Path :&nbsp;&nbsp;&nbsp;</th>
+		                  <td><treasureboat name="ProjectSearchPathField" /></td>
+		                </tr>
+		                <tr><th class = "text-right">Session TimeOut (sec) :&nbsp;&nbsp;&nbsp;</th>
+		                  <td><treasureboat name="SessionTimeOutField" /></td>
+		                </tr>
+		                <tr><th class = "text-right">Statistics Page Password :&nbsp;&nbsp;&nbsp;</th>
+		                  <td><treasureboat name="StatisticsPasswordField" /></td>
+		                </tr>
+		                <tr><td>&nbsp;</td><td><treasureboat name="AppDefaultsOnlyButton" /></td></tr>
+		              </tbody>
+	              </table>
+	          </treasureboat>
+	  </treasureboat>
+	</div>
+
+	<div class="row">
+		<treasureboat name="SchedulingConfigAjaxExpansion">
+			<h2>Scheduling</h2>
+			<p>With this feature you can have Monitor schedule your instances to restart instances at regular intervals.</p>
+			<p>Note that all scheduled instances automatically act as if they are AutoRecovering.</p>
+	        <treasureboat name="ShouldNotSchedule">
+	        	<p>There are no Instances configured for this Application.</p>
+	        </treasureboat>
+			<treasureboat name="ShouldSchedule">
+            	<treasureboat name="Option3Form">
+              		<table class = "rounded striped">
+              			<thead>
+			                <tr>
+			                		<th>ID</th>
+			                		<th>Host : Port</th>
+			                 	<th>Is<br />Scheduled</th>
+			                  	<th>Graceful<br />Scheduling</th>
+			                  	<th>Scheduling Type</th>
+			                </tr>
+              			</thead>
+              			<tbody>
+                			<treasureboat name="Repetition1">
+                  				<tr>
+                    				<td><treasureboat name="ID" /></td>
+                    				<td><treasureboat name="HostAndPort" /></td>
+                    				<td><treasureboat name="SchedulingEnabled" /></td>
+                    				<td><treasureboat name="GracefulScheduling" /></td>
+                    				<td>
+                    					<div class="ControlColOne"><treasureboat name="RadioButton1" /></div><div class="ControlColTwo">Every <treasureboat name="PopUpButton6" /> hours,<br />
+                      					starting at <treasureboat name="PopUpButtonH" /> hours.</div>
+                      					<hr />
+                    					<treasureboat name="RadioButton2" /> Every day at <treasureboat name="PopUpButtonD" /> hours.
+                    					<hr />
+                    					<div class="ControlColOne"><treasureboat name="RadioButton3" /></div><div class="ControlColTwo">Every week on  <treasureboat name="PopUpButton8" />,<br />
+                     					 at <treasureboat name="PopUpButtonW" /> hours.</div>
+                     				</td>
+                  				</tr>
+               				</treasureboat>
+               				<tr>
+               					<td colspan = "5" class = "text-center"><treasureboat name="SubmitButton2" /></td>
+               				</tr>
+              			</tbody>
+              		</table>
+              		<br />
+            	</treasureboat>
+        	</treasureboat>
+		</treasureboat>
+	</div>
+
+	<div class="row">
+		<treasureboat name="EmailConfigAjaxExpansion">
+			<h2>Email notifications</h2>
+			<div class = "primary alert">
+				<treasureboat name="NOSmtpHostConfigured">
+			        <p>Monitor needs an SMTP host and a Return Address configured in order to send email notifications.</p>
+			        <p>Go to the <treasureboat name="ConfigurePageLink">Configure Page</treasureboat> to setup an SMTP host and specify a Return Address.</p>
+			      </treasureboat>
+			      <treasureboat name="SmtpHostConfigured">
+			        <p>When instances of this application terminate unexpectedly, Monitor will send an email notification to the email addresses below.</p>
+			        <p>Instance terminations from manual shutdowns (through Monitor) or scheduling are not counted as unexpected terminations.</p>
+			        <treasureboat name="EmailForm">
+			            <p><treasureboat name="NotificationEmail" /> <strong>Email Notifications are Enabled</strong></p>
+			            <p>Enter multiple email addresses separated by commas: <treasureboat name="EmailAddressesField" /></p>
+			            <br />
+			            <p><treasureboat name="SubmitButton1" /></p>
+			        </treasureboat>
+				</treasureboat>
+			</div>
+		</treasureboat>
+	</div>
+
+	<div class="row">
+		<treasureboat name="AdaptorSpecificConfigAjaxExpansion">
+		 	<h2>Load Balancing and Adaptor Settings</h2>
+		    	<treasureboat name="AdaptorSettingsForm">
+		        	<table class="rounded striped">
+		            	<thead>
+		            		<tr><th colspan = "2"><strong>Load Balancing and Adaptor Settings</strong></th></tr>
+		            	</thead>
+		            	<tbody>
+			                <tr><th class = "text-right">Load balancing scheme :&nbsp;&nbsp;&nbsp;</th>
+			                  <td><treasureboat name="LoadBalancingScheme" /><br />
+			                    Custom Scheduler Name: <treasureboat name="CustomSchedulerName" /> (optional)</td>
+			                </tr>
+			                <tr><th class = "text-right">Retries :&nbsp;&nbsp;&nbsp;</th>
+			                  <td><treasureboat name="RetriesField" /></td>
+			                </tr>
+			                <tr><th class = "text-right">Redirection URL :&nbsp;&nbsp;&nbsp;</th>
+			                  <td><treasureboat name="RedirectionURLField" /></td>
+			                </tr>
+			                <tr><th class = "text-right">Dormant :&nbsp;&nbsp;&nbsp;</th>
+			                  <td><treasureboat name="TimeoutField" /></td>
+			                </tr>
+			                <tr><th class = "text-right">Send timeout :&nbsp;&nbsp;&nbsp;</th>
+			                  <td><treasureboat name="SendTimeoutField" /></td>
+			                </tr>
+			                <tr><th class = "text-right">Receive timeout :&nbsp;&nbsp;&nbsp;</th>
+			                  <td><treasureboat name="ReceiveTimeoutField" /></td>
+			                </tr>
+			                <tr><th class = "text-right">Connect timeout :&nbsp;&nbsp;&nbsp;</th>
+			                  <td><treasureboat name="ConnectTimeoutField" /></td>
+			                </tr>
+			                <tr><th class = "text-right">Send Buffer Size :&nbsp;&nbsp;&nbsp;</th>
+			                  <td><treasureboat name="ConnectTimeoutField2" /></td>
+			                </tr>
+			                <tr><th class = "text-right">Receive Buffer Size :&nbsp;&nbsp;&nbsp;</th>
+			                  <td><treasureboat name="ConnectTimeoutField3" /></td>
+			                </tr>
+			                <tr><th class = "text-right">Connection pool size :&nbsp;&nbsp;&nbsp;</th>
+			                  <td><treasureboat name="PoolsizeField" /></td>
+			                </tr>
+			                <tr><th class = "text-right">URL Version :&nbsp;&nbsp;&nbsp;</th>
+			                  <td><treasureboat name="PopUpButton1" /></td>
+			                </tr>
+			                <tr><td>&nbsp;</td>
+			                  <td><treasureboat name="UpdateAdaptorButton" /></td>
+			                </tr>
+			           </tbody>
+				</table>
+			</treasureboat>
+		</treasureboat>
+	</div>
+
+	<script type="text/javascript">
+	document.getElementById('appSettingsForm').onsubmit = function(event) {
+		var statsPassword = document.getElementById('statsPassword').value;
+		if (statsPassword && statsPassword.length != 0) {
+			var badChars = ['$', '&', '+', ',' ,'/' ,':', ';', '=', '?', '@', ' ', '<', '>', '#', '%'];
+			for (var i=0; i<badChars.length; i++) {
+				if (statsPassword.indexOf(badChars[i]) != -1) {
+					alert('WARNING: "Statistics Page Password" should not contain characters and have special meaning in URLs.');
+					break;
+				}
+			}
+		}
+		return true;
+	}
+	</script>
+	<br /><br /><br />
+</treasureboat>

@@ -1,0 +1,126 @@
+<treasureboat name = "NavPage">
+
+	<div class = "row">
+		<h2>Configuring Instance "<treasureboat name = "InstName" />" on <strong><treasureboat name = "String1" /></strong></h2>
+		<treasureboat name="ReturnLink" />
+	</div>
+
+	<div class="row">
+		<p>The Instance must be restarted for changes to take effect.</p>
+		<p class="Comment">(Changes to these settings only affect this instance; for all instances, use the <treasureboat name = "AppConfigureLink">Application Configure Page</treasureboat>)</p>
+	</div>
+
+	<div class="row">
+		<h2>Instance Settings</h2>
+		<treasureboat name = "ArgumentsForm">
+			<table class="rounded striped">
+				<thead>
+					<tr><th colspan = "2"><strong>Instance Settings</strong></th></tr>
+				</thead>
+				<tr>
+            		<th width = "30%" class = "text-right">Port :&nbsp;&nbsp;&nbsp;</th>
+					<td><treasureboat name = "Port" /> <span class="Comment">(The instance must be off to change this setting)</span></td>
+				</tr>
+				<tr>
+					<th width = "30%" class = "text-right">ID :&nbsp;&nbsp;&nbsp;</th>
+					<td><treasureboat name = "IDField" /></td>
+				</tr>
+				
+				<treasureboat name = "isWindowsHost">
+					<tr>
+						<th width = "30%" class = "text-right">&nbsp;</th>
+						<td><p class="Comment"><b>Note:</b> This instance is on a Microsoft Windows host. A drive letter (e.g. "D:") may be required to create a valid path.</p></td>
+					</tr>
+				</treasureboat>
+				
+				<tr>
+					<th width = "30%" class = "text-right"><treasureboat name = "pathDiff" />Path* :&nbsp;&nbsp;&nbsp;</th>
+					<td><treasureboat name = "Path" /><treasureboat name = "PathPickerWizardLink" /></td>
+				</tr>
+				<tr>
+					<th width = "30%" class = "text-right"><treasureboat name = "minDiff" />Minimum Active Sessions :&nbsp;&nbsp;&nbsp;</th>
+					<td><treasureboat name = "MinimumActiveSessionsCount" /></td>
+				</tr>
+				<tr>
+					<th width = "30%" class = "text-right"><treasureboat name = "cachingDiff" />Caching enabled :&nbsp;&nbsp;&nbsp;</th>
+					<td><treasureboat name = "Caching" /></td>
+				</tr>
+				<tr>
+					<th width = "30%" class = "text-right"><treasureboat name = "outputDiff" />Output Path :&nbsp;&nbsp;&nbsp;</th>
+					<td><treasureboat name = "OutputPath" /><treasureboat name = "PathPickerWizardLink2" /></td>
+				</tr>
+				<tr>
+					<th width = "30%" class = "text-right"><treasureboat name = "browserDiff" />Auto Open In Browser :&nbsp;&nbsp;&nbsp;</th>
+					<td><treasureboat name = "AutoOpenInBrowser" /></td>
+				</tr>
+				<tr>
+					<th width = "30%" class = "text-right"><treasureboat name = "lifebeatDiff" />Lifebeat Interval :&nbsp;&nbsp;&nbsp;</th>
+					<td><treasureboat name = "LifebeatInterval" /></td>
+				</tr>
+				<tr>
+					<th width = "30%" class = "text-right"><treasureboat name = "argsDiff" />Additional Arguments :&nbsp;&nbsp;&nbsp;</th>
+					<td>
+						<treasureboat name = "AdditionalArguments" />
+					</td>
+				</tr>
+				<tr>
+					<th width = "30%" class = "text-right">Description :&nbsp;&nbsp;&nbsp;</th>
+					<td><treasureboat name = "Memo" /></td>
+				</tr>
+          </table>
+          <br />
+          <p>* The path of the executable (inside the '.woa' directory). <span  class = "Warning">**</span> Setting differs from the Application level setting.</p>
+          <p><treasureboat name = "InstanceSettingsSubmit" /></p>
+          <p>With the current settings, this instance will be started with the following arguments:</p>
+		  <div class="secondary alert"><code><treasureboat name = "CommandLineString" /></code></div>
+        </treasureboat>
+</div>
+
+	<div class="row">
+		<h2>Adaptor Settings</h2>
+        <treasureboat name = "AdaptorSettingsForm">
+          <table class="rounded striped">
+            <tr>
+            	<th colspan = "2"><strong>Adaptor Settings</strong></th>
+            </tr>
+            <tr>
+            	<th width = "30%" class = "text-right">Send timeout :&nbsp;&nbsp;&nbsp;</th>
+              <td><treasureboat name = "SendTimeoutField" /></td>
+            </tr>
+            <tr>
+              <th width = "30%" class = "text-right">Receive timeout :&nbsp;&nbsp;&nbsp;</th>
+              <td><treasureboat name = "ReceiveTimeoutField" /></td>
+            </tr>
+            <tr>
+              <th width = "30%" class = "text-right">Connect timeout :&nbsp;&nbsp;&nbsp;</th>
+              <td><treasureboat name = "ConnectTimeoutField" /></td>
+            </tr>
+            <tr>
+              <th width = "30%" class = "text-right">Send Buffer Size :&nbsp;&nbsp;&nbsp;</th>
+              <td><treasureboat name = "PoolsizeField" /></td>
+            </tr>
+            <tr>
+              <th width = "30%" class = "text-right">Receive Buffer Size :&nbsp;&nbsp;&nbsp;</th>
+              <td><treasureboat name = "TextField4" /></td>
+            </tr>
+            <tr>
+            	<td>&nbsp;</td>
+            	<td><treasureboat name = "UpdateAdaptorButton" /></td>
+            </tr>
+          </table>
+        </treasureboat>
+	</div>
+
+	<div class="row">
+		<h2 class="SectionHeading">Force Quit</h2>
+		<div class = "danger alert">
+	    	<p>Clicking this button will force quit this instance.</p>
+			<p>The instance will do no error handling, nor will it attempt to finish processing requests in progress.</p>
+			<p>The instance should exit within <treasureboat name = "lifebeatIntervalString" /> seconds.</p>
+			<treasureboat name = "ForceQuitForm">
+				<p class = "text-center"><treasureboat name = "ForceQuitButton" /></p>
+	        </treasureboat>
+		</div>
+	</div>
+	<br /><br /><br />
+</treasureboat>

@@ -1,0 +1,40 @@
+<h2>Choose a path:</h2>
+<treasureboat name="JumpToForm">
+	<p>Jump to: <treasureboat name="JumpToTextField" /> <treasureboat name="SubmitJumpTo" /></p>
+	<p class="warning alert"><treasureboat name="MessageString" /></p>
+</treasureboat>
+
+<treasureboat name="ShowFileBrowser">
+	<p>
+		Current directory: <strong><code><treasureboat name="CurrentFilePath" /></code></strong>
+		<treasureboat name="SelectCurrentDirectoryLink" />
+	</p>
+ 		<table class="rounded striped">
+ 			<thead>
+		    <tr>
+		      <th>Name</th>
+		      <th>Size</th>
+		      <th>Selection</th>
+		    </tr>
+	    </thead>
+	    <tbody>
+		    <tr>
+		      <td colspan="3"><treasureboat name="BackLink">.. Back (Up one directory level)</treasureboat></td>
+		    </tr>
+		    <treasureboat name="RowRepetition">
+		      <tr>
+		        <td class="FileNameWrapper">
+		            <treasureboat name="IsDirectory">
+		              <treasureboat name="DirectoryLink"><i class="fas fa-folder"></i>&nbsp;<treasureboat name="FileString" /></treasureboat>
+		            </treasureboat>
+		            <treasureboat name="IsNOTDirectory">
+		              <treasureboat name="SpacerImage" />&nbsp;<treasureboat name="FileString" />
+		            </treasureboat>
+		        </td>
+		        <td class="FileSizeWrapper"><treasureboat name="FileSizeString" /></td>
+		        <td class="SelectDirectoryWrapper"><treasureboat name="SelectThisLink" /></td>
+		      </tr>
+		    </treasureboat>
+	    </tbody>
+	</table>
+</treasureboat>

@@ -1,0 +1,70 @@
+NavPage : NavigationPage {
+	currentPage = PREF_PAGE;
+	title = "Preferences";
+	pageId = "Preferences";
+}
+
+AdminPasswordIsNotSet : TBConditional {
+    condition = theApplication.siteConfig.isPasswordRequired;
+    negate = true;
+}
+
+AdminPasswordIsSet : TBConditional {
+    condition = theApplication.siteConfig.isPasswordRequired;
+}
+
+PasswordChangeForm : TBForm {
+	multipleSubmit = true;
+}
+
+UserName : TBTextField {
+	value = userName;
+	placeholder = "userName";
+    automatic = true;
+    class = "narrow input;"
+}
+
+AdminPassword1 : TBPasswordField {
+    value = adminPassword1;
+    placeholder = "password1";
+    automatic = true;
+    class = "narrow input;"
+}
+
+AdminPassword2 : TBPasswordField {
+    value = adminPassword2;
+    placeholder = "match password1";
+    automatic = true;
+    class = "narrow input;"
+}
+
+PasswordChangeFormSubmit : TBSubmitButton {
+    value = "Change Password";
+    action = passwordChangeClicked;
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+PasswordReserFormSubmit : TBSubmitButton {
+    value = "Reset Password";
+    action = passwordResetClicked;
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+DetailViewForm: TBForm {}
+
+AutoRefreshCheckbox : TBCheckBox {
+    checked = theApplication.siteConfig.viewRefreshEnabled;
+}
+
+AutoRefreshTimeIntervalField : TBNumberField {
+    value = theApplication.siteConfig.viewRefreshRate;
+    size = "3";
+    automatic = true;
+    class = "narrow input;"
+}
+
+DetailViewSubmitButton : TBSubmitButton {
+    value = "Update Settings";
+    action = detailViewUpdateClicked;
+	buttonStyle = buttonStyle.submitSaveM;
+}

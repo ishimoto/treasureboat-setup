@@ -1,0 +1,558 @@
+NavPage : NavigationPage {
+	currentPage = APP_PAGE;
+	title = appDefaults.name;
+	pageId = "Applications";
+}
+
+InstDefaultsForm : TBForm {
+	multipleSubmit = true;
+}
+
+MacPath : TBTextField {
+	size = 70;
+	value = appDefaults.macPath;
+	automatic = true;
+	class = "wide input";
+}
+
+WinPath : TBTextField {
+	size = 70;
+	value = appDefaults.winPath;
+	automatic = true;
+	class = "wide input";
+}
+
+UnixPath : TBTextField {
+	size = "90";
+	value = appDefaults.unixPath;
+	automatic = true;
+	class = "wide input";
+}
+
+MacPathPicker : TBHyperlink {
+	action = pathPickerWizardClickedMac;
+	string = "Pick...";
+	buttonStyle = buttonStyle.selectM;	
+}
+
+WinPathPicker : TBHyperlink {
+	action = pathPickerWizardClickedWindows;
+	string = "Pick...";
+	buttonStyle = buttonStyle.selectM;	
+}
+
+UnixPathPicker : TBHyperlink {
+	action = pathPickerWizardClickedUnix;
+	string = "Pick...";
+	buttonStyle = buttonStyle.selectM;	
+}
+
+PathOnlyButton : TBSubmitButton {
+	action = updatePathOnly;
+	value = "Push";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+AutoRecoverCheckbox : TBCheckBox {
+	checked = appDefaults.autoRecover;
+}
+
+AutoRecoverOnlyButton : TBSubmitButton {
+	action = updateAutoRecoverOnly;
+	value = "Push";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+AdaptorField: TBTextField {
+	size = "25";
+	value = myApplication.adaptor;
+	automatic = true;
+	class = "wide input";
+}
+
+AdaptorSettingsForm: TBForm {
+}
+
+AdaptorThreadsMinField: TBTextField {
+	size = "5";
+	value = appDefaults.adaptorThreadsMin;
+    numberformat = "0";
+	automatic = true;
+	class = "xnarrow input";
+}
+
+AdaptorThreadsMaxField: TBTextField {
+	size = "5";
+	value = appDefaults.adaptorThreadsMax;
+    numberformat = "0";
+	automatic = true;
+	class = "xnarrow input";
+}
+
+AppSettingsForm: TBForm {
+	multipleSubmit = true;
+	id = "appSettingsForm";
+}
+
+AppName: TBString {
+	value = appDefaults.name;
+}
+
+ArgsField: TBText {
+	cols = "65";
+	rows = "10";
+	value = appDefaults.additionalArgs;
+	wrap = "virtual";
+	automatic = true;
+}
+
+CachingEnabledCheckbox: TBCheckBox {
+	checked = appDefaults.cachingEnabled;
+}
+
+PhasedStartup: TBCheckBox {
+	checked = appDefaults.phasedStartup;
+}
+
+SchedulingEnabled: TBCheckBox {
+	checked = currentScheduledInstance.schedulingEnabled;
+}
+
+NotificationEmail: TBCheckBox {
+	checked = myApplication.notificationEmailEnabled;
+}
+
+AutoOpen: TBCheckBox {
+	checked = appDefaults.autoOpenInBrowser;
+}
+
+GracefulScheduling: TBCheckBox {
+	checked = currentScheduledInstance.gracefulScheduling;
+}
+
+ShouldNotSchedule: TBConditional {
+	negate = true;
+	condition = shouldSchedule;
+}
+
+ShouldSchedule: TBConditional {
+	condition = shouldSchedule;
+}
+
+ConfigurePageLink: TBHyperlink {
+	action = configurePageClicked;
+}
+
+ConnectTimeoutField: TBTextField {
+	numberformat = "0";
+	size = "4";
+	value = myApplication.cnctTimeout;
+	automatic = true;
+	class = "xnarrow input";
+}
+
+ConnectTimeoutField2: TBTextField {
+	numberformat = "0";
+	size = 4;
+	value = myApplication.sendBufSize;
+	automatic = true;
+	class = "xnarrow input";
+}
+
+ConnectTimeoutField3: TBTextField {
+	numberformat = "0";
+	size = 4;
+	value = myApplication.recvBufSize;
+	automatic = true;
+	class = "xnarrow input";
+}
+
+WOStatsCheckbox: TBCheckBox {
+	checked = appDefaults.woStats;
+}
+
+EmailAddressesField: TBTextField {
+	size = "60";
+	value = myApplication.notificationEmailAddr;
+}
+
+EmailForm: TBForm {
+}
+
+ListenQueueSizeField: TBTextField {
+	size = "5";
+	value = appDefaults.listenQueueSize;
+	numberformat = "0";
+	automatic = true;
+	class = "xnarrow input";
+}
+
+LoadBalancingScheme: TBPopUp {
+	item = loadSchedulerItem;
+	list = loadSchedulerList;
+	selection = loadSchedulerSelection;
+	automatic = true;
+}
+
+MinimumActiveSessionField: TBTextField {
+	size = "5";
+	value = appDefaults.minimumActiveSessionsCount;
+    numberformat = "0";
+    automatic = true;
+    class = "xnarrow input";
+}
+
+NOSmtpHostConfigured: TBConditional {
+	condition = isMailingConfigured;
+	negate = true;
+}
+
+ApplicationConfigAjaxExpansion: TBCollapsibleComponentContent {
+	closedLabel = "Application Settings";
+	openedLabel = "Application Settings";
+	fontAwesome = "true";
+}
+
+NewInstanceConfigAjaxExpansion : TBCollapsibleComponentContent {
+	closedLabel = "New Instance Defaults";
+	openedLabel = "New Instance Defaults";
+	fontAwesome = "true";
+	condition = true;
+}
+
+SchedulingConfigAjaxExpansion : TBCollapsibleComponentContent {
+	closedLabel = "Scheduling";
+	openedLabel = "Scheduling";
+	fontAwesome = "true";
+}
+
+EmailConfigAjaxExpansion : TBCollapsibleComponentContent {
+	closedLabel = "Email Notifications";
+	openedLabel = "Email Notifications";
+	fontAwesome = "true";
+}
+
+AdaptorSpecificConfigAjaxExpansion : TBCollapsibleComponentContent {
+	closedLabel = "Load Balancing and Adaptor Settings";
+	openedLabel = "Load Balancing and Adaptor Settings";
+	fontAwesome = "true";
+}
+
+Option3Form: TBForm {
+	multipleSubmit = true;
+}
+
+PathPickerWizard2: TBHyperlink {
+	action = pathPickerWizardClickedUnixOutput;
+	string = "Pick...";
+	buttonStyle = buttonStyle.selectM;	
+}
+
+PathPickerWizard3: TBHyperlink {
+	action = pathPickerWizardClickedWindowsOutput;
+	string = "Pick...";
+	buttonStyle = buttonStyle.selectM;	
+}
+
+PathPickerWizard6: TBHyperlink {
+	action = pathPickerWizardClickedMacOutput;
+	string = "Pick...";
+	buttonStyle = buttonStyle.selectM;	
+}
+
+PoolsizeField: TBTextField {
+	numberformat = "0";
+	size = "4";
+	value = myApplication.poolsize;
+	automatic = true;
+	class = "xnarrow input";
+}
+
+PopUpButton1: TBPopUp {
+	item = urlVersionItem;
+	list = urlVersionList;
+	selection = urlVersionSelection;
+	automatic = true;
+}
+
+PopUpButton6: TBPopUp {
+	list = schedulingIntervalList;
+	selection = currentScheduledInstance.schedulingInterval;
+	automatic = true;
+}
+
+PopUpButton8: TBPopUp {
+	list = weekList;
+	selection = weekSelection;
+	automatic = true;
+}
+
+PopUpButtonD: TBPopUp {
+	list = timeOfDayList;
+	selection = timeDailySelection;
+	automatic = true;
+}
+
+PopUpButtonH: TBPopUp {
+	list = timeOfDayList;
+	selection = timeHourlySelection;
+	automatic = true;
+}
+
+PopUpButtonW: TBPopUp {
+	list = timeOfDayList;
+	selection = timeWeeklySelection;
+	automatic = true;
+}
+
+ProjectSearchPathField: TBTextField {
+	size = "40";
+	value = appDefaults.projectSearchPath;
+	automatic = true;
+	class = "wide input";
+}
+
+PushSubmitButton: TBSubmitButton {
+	action = defaultsPushClicked;
+	value = "Push All";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+RadioButton1: TBRadioButton {
+    name = currentScheduledInstance.id;
+    value = "HOURLY";
+    selection = currentScheduledInstance.schedulingType;
+}
+
+RadioButton2: TBRadioButton {
+    name = currentScheduledInstance.id;
+    value = "DAILY";
+    selection = currentScheduledInstance.schedulingType;
+}
+
+RadioButton3: TBRadioButton {
+    name = currentScheduledInstance.id;
+    value = "WEEKLY";
+    selection = currentScheduledInstance.schedulingType;
+}
+
+RealNameField: TBTextField {
+	size = "25";
+	value = appDefaults.name;
+	automatic = true;
+	class = "wide input";
+}
+
+ReceiveTimeoutField: TBTextField {
+	numberformat = "0";
+	size = "4";
+	value = myApplication.recvTimeout;
+	automatic = true;
+	class = "xnarrow input";
+}
+
+RedirectionURLField: TBTextField {
+	size = "60";
+	value = myApplication.redir;
+	automatic = true;
+	class = "wide input";
+}
+
+Repetition1: TBRepetition {
+	item = currentScheduledInstance;
+	list = myApplication.instanceArray;
+}
+
+RetriesField : TBTextField {
+    value = myApplication.retries;
+    size = "4";
+    numberformat = "0";
+	automatic = true;
+	class = "xnarrow input";
+}
+
+ReturnLink: TBHyperlink {
+	action = detailPageClicked;
+	string = "Detail View";
+	buttonStyle = buttonStyle.returnM;
+}
+
+SaveChangesSubmitButton: TBSubmitButton {
+	action = defaultsUpdateClicked;
+	value = "Update for New Instances Only";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+SendTimeoutField: TBTextField {
+	numberformat = "0";
+	size = "4";
+	value = myApplication.sendTimeout;
+	automatic = true;
+	class = "xnarrow input";
+}
+
+SessionTimeOutField: TBTextField {
+	size = "5";
+	value = appDefaults.sessionTimeOut;
+	numberformat = "0";
+	automatic = true;
+	class = "xnarrow input";
+}
+
+SmtpHostConfigured: TBConditional {
+	condition = isMailingConfigured;
+}
+
+StatisticsPasswordField: TBTextField {
+	size = "20";
+	value = appDefaults.statisticsPassword;
+	id = "statsPassword";
+	automatic = true;
+	class = "wide input";
+}
+
+ID: TBString {
+	value = currentScheduledInstance.id;
+}
+
+HostAndPort: TBString {
+	value = currentScheduledInstance.displayHostAndPort;
+}
+
+SubmitButton1: TBSubmitButton {
+	action = emailUpdateClicked;
+	value = "Update Settings";
+}
+
+SubmitButton2: TBSubmitButton {
+	action = schedulingUpdateClicked;
+	value = "Update Scheduling";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+TextFieldMacOutputPath: TBTextField {
+	size = 70;
+	value = appDefaults.macOutputPath;
+	automatic = true;
+	class = "wide input";
+}
+
+TextFieldWinOutputPath: TBTextField {
+	size = 70;
+	value = appDefaults.winOutputPath;
+	automatic = true;
+	class = "wide input";
+}
+
+TextFieldUnixOutputPath: TBTextField {
+	size = 70;
+	value = appDefaults.unixOutputPath;
+	automatic = true;
+	class = "wide input";
+}
+
+StartingPort: TBTextField {
+	size = "5";
+	value = appDefaults.startingPort;
+	numberformat = "0";
+	automatic = true;
+	class = "xnarrow input";
+}
+
+TimeForStartup: TBTextField {
+	size = "5";
+	value = appDefaults.timeForStartup;
+	numberformat = "0";
+	automatic = true;
+	class = "xnarrow input";
+}
+
+Lifebeat: TBTextField {
+	value = appDefaults.lifebeatInterval;
+	numberformat = "0";
+	automatic = true;
+	class = "xnarrow input";
+}
+
+DomainField: TBTextField {
+	value = appDefaults.domainLink;
+	size = 50;
+	placeholder = "http://192.168.1.25/TB";
+	automatic = true;
+	class = "wide input";
+}
+
+CustomSchedulerName: TBTextField {
+	value = customSchedulerName;
+	automatic = true;
+	class = "wide input";
+}
+
+TimeoutField: TBTextField {
+	numberformat = "0";
+	size = "4";
+	value = myApplication.dormant;
+	automatic = true;
+	class = "xnarrow input";
+}
+
+UpdateAdaptorButton: TBSubmitButton {
+	action = adaptorUpdateClicked;
+	value = "Change Adaptor Settings";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+// Begin "Only" Buttons
+AppDefaultsOnlyButton: TBSubmitButton {
+	action = updateAppDefaultsOnly;
+	value = "Update Application Settings";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+MinimumOnlyButton: TBSubmitButton {
+	action = updateMinimumOnly;
+	value = "Push";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+CachingOnlyButton: TBSubmitButton {
+	action = updateCachingOnly;
+	value = "Push";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+DebuggingOnlyButton: TBSubmitButton {
+	action = updateWoStatsOnly;
+	value = "Push";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+OutputOnlyButton: TBSubmitButton {
+	action = updateOutputOnly;
+	value = "Push";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+AutoOpenOnlyButton: TBSubmitButton {
+	action = updateAutoOpenOnly;
+	value = "Push";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+LifebeatOnlyButton: TBSubmitButton {
+	action = updateLifebeatOnly;
+	value = "Push";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+AddArgsOnlyButton: TBSubmitButton {
+	action = updateAddArgsOnly;
+	value = "Push";
+	buttonStyle = buttonStyle.submitSaveM;
+}
+
+DomainOnlyButton: TBSubmitButton {
+	action = updateDomainOnly;
+	value = "Push";
+	buttonStyle = buttonStyle.submitSaveM;
+}

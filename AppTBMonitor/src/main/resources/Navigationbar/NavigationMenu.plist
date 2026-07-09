@@ -1,0 +1,8 @@
+(
+	{
+		name = Root;
+		children = (
+			// Nothing here
+		);
+	}
+)

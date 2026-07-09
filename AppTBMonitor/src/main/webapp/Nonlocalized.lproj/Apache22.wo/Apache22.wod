@@ -1,0 +1,109 @@
+NavPage : NavigationPage {
+	currentPage = APACHE22_PAGE;
+	title = "Apache 2.2";
+	pageId = "Apache22";
+}
+
+AdaptorSettingsForm : TBForm {}
+
+AdaptorURLField : TBTextField {
+    value = theApplication.siteConfig.woAdaptor;
+	placeholder = "http://www.domain.com/TB";
+    size = "60";
+}
+
+SubmitAdaptorButton : TBSubmitButton {
+    value = "Update HTTP Adaptor URL";
+    action = HTTPServerUpdateClicked;
+}
+
+AdaptorInfoForm : TBForm {
+	target = "_blank";
+}
+
+AdaptorInfoUsername: TBTextField {
+	value = adaptorInfoUsername;
+}
+
+AdaptorInfoPassword: TBTextField {
+	value = adaptorInfoPassword;
+}
+
+AdaptorInfoSubmit: TBSubmitButton {
+	value = "Log In";
+	action = adaptorInfoLoginClicked;
+}
+
+LoadBalancingScheme : TBPopUp {
+	list = loadSchedulerList;
+	item = loadSchedulerItem;
+	selection = loadSchedulerSelection;
+}
+
+SchedulerName : TBTextField {
+	value = customSchedulerName;
+}
+
+RetriesField : TBTextField {
+    value = theApplication.siteConfig.retries;
+    size = "4";
+    numberformat = "0";
+}
+
+RedirectionURLField : TBTextField {
+	size = "60";
+	value = theApplication.siteConfig.redir;
+}
+
+TimeoutField : TBTextField {
+	numberformat = "0";
+	size = "4";
+	value = theApplication.siteConfig.dormant;
+}
+
+SendTimeoutField : TBTextField {
+	numberformat = "0";
+	size = "4";
+	value = theApplication.siteConfig.sendTimeout;
+}
+
+ReceiveTimeoutField : TBTextField {
+	numberformat = "0";
+	size = "4";
+	value = theApplication.siteConfig.recvTimeout;
+}
+
+ConnectTimeoutField : TBTextField {
+	numberformat = "0";
+	size = "4";
+	value = theApplication.siteConfig.cnctTimeout;
+}
+
+ConnectTimeoutField2 : TBTextField {
+	numberformat = "0";
+	size = 4;
+	value = theApplication.siteConfig.sendBufSize;
+}
+
+ConnectTimeoutField3 : TBTextField {
+	numberformat = "0";
+	size = 4;
+	value = theApplication.siteConfig.recvBufSize;
+}
+
+PoolsizeField : TBTextField {
+	numberformat = "0";
+	size = "4";
+	value = theApplication.siteConfig.poolsize;
+}
+
+UrlVersionPopUpButton : TBPopUp {
+	item = urlVersionItem;
+	list = urlVersionList;
+	selection = urlVersionSelection;
+}
+
+UpdateAdaptorButton: TBSubmitButton {
+	value = "Update Adaptor Settings";
+	action = adaptorUpdateClicked;
+}

@@ -1,0 +1,77 @@
+<treasureboat name="NavPage">
+
+	<div class="row">
+		<treasureboat name="EmailNotificationAjaxExpansion">
+			<h2>Email Notification</h2>
+			<div class = "default alert">
+				<p>Monitor can send email notifications if an SMTP host is supplied.<br />
+				To use email notifications add a default address. You can also go to the application configuration page and set differnt email addresses for each of your applications.</p>
+				<treasureboat name="EmailForm">
+		 			<table class = "rounded striped">
+		 				<thead>
+		 					<tr><th colspan = "2"><strong>Email Information</strong></th></tr>
+		 				</thead>
+		 				<tbody>
+							<tr>
+								<th width = "30%" class = "text-right">SMTP host :&nbsp;&nbsp;&nbsp;</th>
+								<td><treasureboat name="SMTPHost" /></td>
+							</tr>
+							<tr>
+								<th width = "30%" class = "text-right">SMTP host account name :&nbsp;&nbsp;&nbsp;</th>
+								<td><treasureboat name="SMTPAccount" /></td>
+							</tr>
+							<tr>
+								<th width = "30%" class = "text-right">SMTP host password :&nbsp;&nbsp;&nbsp;</th>
+								<td><treasureboat name="SMTPPassword" /></td>
+							</tr>
+							<tr>
+								<th width = "30%" class = "text-right">Return address :&nbsp;&nbsp;&nbsp;</th>
+								<td><treasureboat name="SMTPEmailReturn" /></td>
+							</tr>
+							<tr>
+								<th width = "30%" class = "text-right">Send Email to :&nbsp;&nbsp;&nbsp;</th>
+								<td><treasureboat name="SMTPEmailTo" /></td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td><treasureboat name="UpdateEmailButton" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</treasureboat>
+			</div>
+		</treasureboat>
+	</div>
+
+	<!-- Backup Site Configuration -->
+	<div class="row">
+		<treasureboat name="BackupAjaxExpansion">
+			<h2>Backup Configuration</h2>
+			<div class = "default alert">
+				<p>Makes a timestamped backup of '<strong><treasureboat name="FilePath" /></strong>' <br />
+				and appends an optional short note to the file name.</p>
+				<treasureboat name="BackupForm">
+					<p>Note: <treasureboat name="BackupNote" /> (optional) <treasureboat name="BackupButton" /></p>
+				</treasureboat>
+				<hr />
+				View current : <treasureboat name="SiteConfigLink" />
+				<hr />
+			
+				<table class="rounded striped">
+					<thead>
+						<tr><th colspan = "2"><strong>History</strong></th></tr>
+					</thead>
+					<tbody></tbody>
+					<treasureboat name="OldBackupList">
+						<tr>
+							<td><treasureboat name="OneBackupFile" /></td>
+							<td><treasureboat name="RemoveOldBackup" /></td>
+						</tr>
+					</treasureboat>
+				</table>
+			</div>
+				
+		</treasureboat>
+	</div>
+	<br /><br /><br />
+</treasureboat>
