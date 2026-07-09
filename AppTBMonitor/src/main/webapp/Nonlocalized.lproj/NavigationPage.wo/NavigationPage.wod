@@ -32,10 +32,6 @@ SslLink: TBHyperlink {
 	action = sslPageClicked;
 }
 
-Apache22Link: TBHyperlink {
-	action = apache22PageClicked;
-}
-
 SiteLink: TBHyperlink {
 	action = configurePageClicked;
 }

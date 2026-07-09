@@ -28,7 +28,6 @@ import org.treasureboat.app.monitor.Application;
 import org.treasureboat.app.monitor.Session;
 import org.treasureboat.app.monitor.components.ApplicationsPage;
 import org.treasureboat.app.monitor.components.WOTaskdHandler;
-import org.treasureboat.app.monitor.components.page.Apache22;
 import org.treasureboat.app.monitor.components.help.HelpPage;
 import org.treasureboat.app.monitor.components.page.HostsPage;
 import org.treasureboat.app.monitor.components.page.ModProxyPage;
@@ -55,7 +54,6 @@ public class MonitorComponent extends TBComponent {
 	public final int PREF_PAGE = 3;
 	public final int HELP_PAGE = 4;
 	public final int MOD_PROXY_PAGE = 5;
-	public final int APACHE22_PAGE = 6;
 	public final int SSL_PAGE = 7;
 	public final int SERVER_SETUP_PAGE = 8;
 
@@ -168,10 +166,6 @@ public class MonitorComponent extends TBComponent {
 
 	public ITBWActionResults doGoToHelpPageAction() {
 		return pageWithName(HelpPage.class);
-	}
-
-	public ITBWActionResults apache22PageClicked() {
-		return pageWithName(Apache22.class);
 	}
 
 	public ITBWActionResults configurePageClicked() {
