@@ -28,6 +28,7 @@ package org.treasureboat.app.monitor.components.page;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.io.Serial;
 
 import org.treasureboat.app.monitor.components.sub.MonitorComponent;
 import org.treasureboat.foundation.TBFConstants;
@@ -49,7 +50,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SitePage extends MonitorComponent {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	public TBFArray<String> loadSchedulerList = TBMonitor_Object.loadSchedulerArray;
 	public String loadSchedulerItem;
@@ -67,8 +69,8 @@ public class SitePage extends MonitorComponent {
 	//	Constructor : コンストラクタ
 	//********************************************************************
 
-	public SitePage(TBContext aWocontext) {
-		super(aWocontext);
+	public SitePage(TBContext context) {
+		super(context);
 	}
 
 	//********************************************************************
@@ -115,8 +117,6 @@ public class SitePage extends MonitorComponent {
 
 	/**
 	 * this is the backup file list
-	 * 
-	 * @return
 	 */
 	public File[] backupFileList() {
 		File parent = TBMonitor_SiteConfig.fileForSiteConfig().getParentFile();
@@ -155,8 +155,6 @@ public class SitePage extends MonitorComponent {
 
 	/**
 	 * backup the configuration
-	 * 
-	 * @return
 	 */
 	public TBComponent backupConfiguration() {
 		siteConfig().forceBackup(backupNote);
@@ -167,9 +165,7 @@ public class SitePage extends MonitorComponent {
 	public String backupNote;
 
 	/**
-	 * display a backuped siteConfig XML
-	 * 
-	 * @return
+	 * display a backed siteConfig XML
 	 */
 	public TBComponent displayOneBackupFileClicked() {
 		TBWStringHolder stringHolder = new TBWStringHolder(context());
@@ -189,9 +185,7 @@ public class SitePage extends MonitorComponent {
 	}
 
 	/**
-	 * this remove one old backup File
-	 * 
-	 * @return
+	 * this removes one old backup File
 	 */
 	public TBComponent removeOneBackupFileClicked() {
 		File file = oneBackupFile;
@@ -205,8 +199,6 @@ public class SitePage extends MonitorComponent {
 
 	/**
 	 * display the siteConfig XML
-	 * 
-	 * @return
 	 */
 	public TBComponent displaySiteConfigXMLClicked() {
 		TBWStringHolder stringHolder = new TBWStringHolder(context());
@@ -226,35 +218,35 @@ public class SitePage extends MonitorComponent {
 		return stringHolder;
 	}
 
-	public TBComponent adaptorUpdateClicked() {
-		String newValue;
+//	public TBComponent adaptorUpdateClicked() {
+//		String newValue;
+//
+//		int i = loadSchedulerList.indexOfObject(_loadSchedulerSelection);
+//		if (i == 0) {
+//			newValue = null;
+//		} else if (i == (loadSchedulerList.count() - 1)) {
+//			newValue = customSchedulerName;
+//			if (!TBFString.isValidXMLString(newValue)) {
+//				newValue = null;
+//			}
+//		} else {
+//			newValue = TBMonitor_Object.loadSchedulerArrayValues.objectAtIndex(i);
+//		}
+//		siteConfig().setScheduler(newValue);
+//
+//		handler().sendUpdateSiteToWotaskds();
+//
+//		return pageWithName(SitePage.class);
+//	}
 
-		int i = loadSchedulerList.indexOfObject(_loadSchedulerSelection);
-		if (i == 0) {
-			newValue = null;
-		} else if (i == (loadSchedulerList.count() - 1)) {
-			newValue = customSchedulerName;
-			if (!TBFString.isValidXMLString(newValue)) {
-				newValue = null;
-			}
-		} else {
-			newValue = TBMonitor_Object.loadSchedulerArrayValues.objectAtIndex(i);
-		}
-		siteConfig().setScheduler(newValue);
-
-		handler().sendUpdateSiteToWotaskds();
-
-		return pageWithName(SitePage.class);
-	}
-
-	public ITBWActionResults adaptorInfoLoginClicked() {
-		String url = siteConfig().woAdaptor() + "/WOAdaptorInfo?" + adaptorInfoUsername + "+" + adaptorInfoPassword;
-		if (url.startsWith(ETBFUriSchema.Http.schema())) {
-			url = url.replaceFirst(ETBFUriSchema.Http.schema(), ETBFUriSchema.Https.schema());
-		}
-		TBWRedirect redirect = pageWithName(TBWRedirect.class);
-		redirect.setUrl(url);
-		return redirect;
-	}
+//	public ITBWActionResults adaptorInfoLoginClicked() {
+//		String url = siteConfig().woAdaptor() + "/WOAdaptorInfo?" + adaptorInfoUsername + "+" + adaptorInfoPassword;
+//		if (url.startsWith(ETBFUriSchema.Http.schema())) {
+//			url = url.replaceFirst(ETBFUriSchema.Http.schema(), ETBFUriSchema.Https.schema());
+//		}
+//		TBWRedirect redirect = pageWithName(TBWRedirect.class);
+//		redirect.setUrl(url);
+//		return redirect;
+//	}
 
 }
