@@ -14,3 +14,4 @@ build
 out/
 docs/
 *.iws
+/AppTBTaskd/tbapp-deploy-taskd.iml
