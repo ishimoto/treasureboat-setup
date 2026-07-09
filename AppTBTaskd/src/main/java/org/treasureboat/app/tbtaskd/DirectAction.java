@@ -102,7 +102,7 @@ public class DirectAction extends TBDirectAction {
 	/*
 	 *  This is the biggie - this processes all requests from Monitor
 	 */
-	@TBAction
+	@TBAction(securePost = false)
 	public ITBWActionResults monitorRequest() {
 		Application theApplication = (Application) TBApplication.application();
 
