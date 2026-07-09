@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-app-pom</artifactId>
-		<version>17.0</version>
+		<version>17.0.1</version>
 		<relativePath/>
 	</parent>
 
@@ -26,7 +26,7 @@
 		<tb.fw.content>17.0.1</tb.fw.content>
 		<tb.fw.core>17.0.1</tb.fw.core>
 		<tb.fw.db>17.0.1</tb.fw.db>
-		<tb.fw.inout>17.0.1</tb.fw.inout>
+		<tb.fw.inout>17.0.2</tb.fw.inout>
 		<tb.fw.archive>17.0.1</tb.fw.archive>
 		<tb.fw.features>17.0.1</tb.fw.features>
 		<tb.fw.extra>17.0.1</tb.fw.extra>
@@ -73,6 +73,11 @@
 			<version>0.7.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.treasureboat</groupId>
+			<artifactId>tb-core-foundation</artifactId>
+			<version>${tb.fw.core}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.treasureboat</groupId>
 			<artifactId>tb-core-extensions</artifactId>
