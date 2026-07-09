@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="true" type="TBApplicationConfiguration" factoryName="TBApplicationConfiguration">
+    <option name="host" />
+    <option name="mainClassName" />
+    <option name="mavenProfile" />
+    <option name="moduleName" value="tbapp-deploy-monitor" />
+    <option name="port" value="56789" />
+    <option name="programArguments" />
+    <option name="vmOptions" />
+    <option name="workingDirectory" value="$PROJECT_DIR$" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

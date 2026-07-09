@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="TBTaskd" type="TBApplicationConfiguration" factoryName="TBApplicationConfiguration">
+    <option name="host" />
+    <option name="mainClassName" />
+    <option name="mavenProfile" />
+    <option name="moduleName" value="tbapp-deploy-taskd" />
+    <option name="openBrowser" value="false" />
+    <option name="programArguments" />
+    <option name="tbSnapshot" value="true" />
+    <option name="vmOptions" />
+    <option name="workingDirectory" value="$PROJECT_DIR$" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
