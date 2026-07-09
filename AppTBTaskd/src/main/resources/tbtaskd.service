@@ -1,12 +1,25 @@
 [Unit]
-Description=TreasureBoat Task Daemon Service (tbtaskd)
-After=network.target
+Description=TreasureBoat Task Daemon (tbtaskd)
+After=network-online.target
+Wants=network-online.target
 
 [Service]
+Type=simple
 User=appserver
 Group=appserveradm
-Environment=LOGFILE=/opt/Local/Library/WebObjects/Logs/tbtaskd.log
-ExecStart=/opt/Local/Library/WebObjects/Applications/AppTBTaskd.woa/AppTBTaskd -p 1085 >> $LOGFILE
+WorkingDirectory=/opt/TreasureBoat/Applications
+
+# systemd runs ExecStart directly (no shell), so shell redirection like '>> file' is NOT allowed here.
+ExecStart=/opt/TreasureBoat/Applications/AppTBTaskd.woa/AppTBTaskd -n tbtaskd -p 1085 -newPath -url
+
+# stdout/stderr -> a log file. (You can also just use journald: `journalctl -u tbtaskd -f`.)
+StandardOutput=append:/opt/TreasureBoat/Logs/tbtaskd.log
+StandardError=append:/opt/TreasureBoat/Logs/tbtaskd.log
+
+Restart=on-failure
+RestartSec=5
+
+# A clean stop via `systemctl stop` sends SIGTERM; the JVM exits 143 (128+15) — treat as success.
 SuccessExitStatus=143
 
 [Install]
