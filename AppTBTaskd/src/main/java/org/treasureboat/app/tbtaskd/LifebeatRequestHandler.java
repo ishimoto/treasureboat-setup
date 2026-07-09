@@ -81,7 +81,7 @@ public class LifebeatRequestHandler extends TBWAbstractRequestHandler {
 	@Override
 	public TBResponse handleRequest(TBRequest aRequest) {
 
-		// Sadly, we do regenerate in the case of random lifebeats. Hopefully this won't be too often.
+		// Sadly, we do regenerate in the case of random life-beats. Hopefully this won't be too frequent.
 		// Didn't pull this out so that we can rely on isUsingWebServer to catch some bad requests
 		if (!aRequest.isUsingWebServer() && (TBWURL.isLocalInetAddress(aRequest._originatingAddress(), true))) {
 			Object lock = TBApplication.application().requestHandlingLock();
@@ -93,7 +93,7 @@ public class LifebeatRequestHandler extends TBWAbstractRequestHandler {
 			return _handleRequest(aRequest);
 		}
 
-		log.error("Ignoring lifebeat from {} : {}", aRequest._originatingAddress(), aRequest.queryString());
+		log.error("Ignoring life-beat from {} : {}", aRequest._originatingAddress(), aRequest.queryString());
 
 		return null;
 	}
@@ -106,10 +106,10 @@ public class LifebeatRequestHandler extends TBWAbstractRequestHandler {
 
 		TBFArray<String> values = TBFArray.componentsSeparatedByString(aRequest.queryString(), "&");
 
-		log.debug("lifebeat is comming for : {}", values);
+		log.debug("life-beat is coming for : {}", values);
 
 		if (values == null || values.count() != 4) {
-			theApplication.siteConfig().globalErrorDictionary.takeValueForKey((myName + ": Received bad lifebeat: " + aRequest.queryString()),
+			theApplication.siteConfig().globalErrorDictionary.takeValueForKey((myName + ": Received bad life-beat: " + aRequest.queryString()),
 					aRequest.queryString());
 			log.error("{} : Received bad lifebeat: {}", myName, aRequest.queryString());
 
@@ -119,13 +119,13 @@ public class LifebeatRequestHandler extends TBWAbstractRequestHandler {
 			String host = values.objectAtIndex(2);
 			String port = values.objectAtIndex(3);
 
-			log.trace("Received Lifebeat: {} from {} on {}:{}", notificationType, instanceName, host, port);
+			log.trace("Received life-beat: {} from {} on {}:{}", notificationType, instanceName, host, port);
 
 			if (notificationType.equals("lifebeat")) {
 				// app is still alive - update registration
 				// if app is not yet registered, register
 				// if the instance should die, return DieResponse
-				if (registerLifebeat(instanceName, host, port) == false) {
+				if (!registerLifebeat(instanceName, host, port)) {
 					log.debug("Returning DIE response");
 					aResponse = DieResponse;
 				} else {

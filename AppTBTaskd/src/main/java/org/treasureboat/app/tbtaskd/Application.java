@@ -46,18 +46,11 @@ import javax.management.remote.JMXConnectorServer;
 import javax.management.remote.JMXConnectorServerFactory;
 import javax.management.remote.JMXServiceURL;
 
-import org.apache.sshd.SshServer;
-import org.apache.sshd.common.NamedFactory;
-import org.apache.sshd.server.Command;
-import org.apache.sshd.server.PasswordAuthenticator;
-import org.apache.sshd.server.command.ScpCommandFactory;
-import org.apache.sshd.server.keyprovider.SimpleGeneratorHostKeyProvider;
-import org.apache.sshd.server.session.ServerSession;
-import org.apache.sshd.server.sftp.SftpSubsystem;
-import org.apache.sshd.server.shell.ProcessShellFactory;
-import org.treasureboat.app.tbtaskd.rest.controllers.MApplicationController;
-import org.treasureboat.app.tbtaskd.rest.controllers.MHostController;
-import org.treasureboat.app.tbtaskd.rest.controllers.MSiteConfigController;
+// SSH server removed 2026-07-09 — file upload is IntelliJ auto-deploy (SFTP) now; the sshd 0.7.0 / mina 2.0.4 stack was 2012-era.
+// REST controllers moved to /oldsrc 2026-07-09 (confirmed dead in the Monitor<->taskd loop); imports disabled:
+//import org.treasureboat.app.tbtaskd.rest.controllers.MApplicationController;
+//import org.treasureboat.app.tbtaskd.rest.controllers.MHostController;
+//import org.treasureboat.app.tbtaskd.rest.controllers.MSiteConfigController;
 import org.treasureboat.foundation.TBFConstants;
 import org.treasureboat.foundation.TBFData;
 import org.treasureboat.foundation.TBFV;
@@ -68,9 +61,10 @@ import org.treasureboat.foundation.enums.ETBFUriSchema;
 import org.treasureboat.foundation.properties.TBFProperties;
 import org.treasureboat.monitor.TBMonitor_Object;
 import org.treasureboat.monitor.TBMonitor_SiteConfig;
-import org.treasureboat.rest.enums.ETBRestMethod;
-import org.treasureboat.rest.routes.TBRoute;
-import org.treasureboat.rest.routes.TBRouteRequestHandler;
+// tb-features-rest removed 2026-07-09 (REST controllers moved to /oldsrc); imports disabled:
+//import org.treasureboat.rest.enums.ETBRestMethod;
+//import org.treasureboat.rest.routes.TBRoute;
+//import org.treasureboat.rest.routes.TBRouteRequestHandler;
 import org.treasureboat.webcore.appserver.TBApplication;
 import org.treasureboat.webcore.appserver.TBRequest;
 import org.treasureboat.webcore.appserver.TBResponse;
@@ -107,7 +101,6 @@ public class Application extends TBApplication {
 	public static final String WO_Request_KEY = "wo";
 	public static final String WR_Request_KEY = "wr";
 	public static final String WOMP_Request_KEY = "womp";
-	public static final String TBTASKD_SSHD_PORT = "er.wotaskd.sshd.port";
 
 	// REST Statics
 	public static final String MApplication = "MApplication";
@@ -286,6 +279,8 @@ public class Application extends TBApplication {
 		// Set up multicast listen thread
 		createRequestListenerThread();
 
+		/* REST routes disabled 2026-07-09: controllers moved to /oldsrc (confirmed dead — never hit during the
+		 * Monitor<->taskd wotaskd loop). Restore from /oldsrc + git if S2M reuses them.
 		TBRouteRequestHandler restHandler = new TBRouteRequestHandler(TBRouteRequestHandler.TB);
 		restHandler.addDefaultCustomRoutes(MApplication, MApplicationController.class);
 		restHandler.insertRoute(new TBRoute(MApplication, "/mApplications/{name:MApplication}/addInstance", ETBRestMethod.Get,
@@ -315,23 +310,9 @@ public class Application extends TBApplication {
 		restHandler.insertRoute(new TBRoute(MSiteConfig, "/mSiteConfig", ETBRestMethod.Put, MSiteConfigController.class, Update));
 
 		TBRouteRequestHandler.register(restHandler);
+		*/
 
-		boolean isSSHServerEnabled = TBFProperties.booleanValueForKey("er.wotaskd.sshd.enabled");
-
-		if (isSSHServerEnabled) {
-			SshServer sshd = SshServer.setUpDefaultServer();
-			sshd.setPort(TBFProperties.intValueForKey(TBTASKD_SSHD_PORT, 6022));
-			sshd.setPasswordAuthenticator(new SshPasswordAuthenticator());
-			sshd.setKeyPairProvider(new SimpleGeneratorHostKeyProvider("hostkey.ser"));
-			sshd.setCommandFactory(new ScpCommandFactory());
-			sshd.setSubsystemFactories(Arrays.<NamedFactory<Command>> asList(new SftpSubsystem.Factory()));
-			sshd.setShellFactory(new ProcessShellFactory(new String[] { "/bin/bash", "-i", "-l" }));
-			try {
-				sshd.start();
-			} catch (IOException e) {
-				log.error("Failed starting SSH server", e);
-			}
-		}
+		// SSH server removed 2026-07-09 — file upload is IntelliJ auto-deploy (SFTP); RemoteBrowse (host path browse) is web, not SSH.
 
 		log.info("tbtaskd accepting lifebeats from these hosts: {}", TBWURL.getLocalHosts());
 		log.info("tbtask is listening on {}:{}", hostAddress(), port());
@@ -367,7 +348,7 @@ public class Application extends TBApplication {
 			objName = new ObjectName(strDomainName + ": name=" + strMBeanName);
 
 		} catch (MalformedObjectNameException | NullPointerException e) {
-			e.printStackTrace();
+			log.error("Failed to create MBean ObjectName for '{}'", strMBeanName, e);
 		}
 
 		// Register the MBean
@@ -654,12 +635,4 @@ public class Application extends TBApplication {
 		}
 	}
 
-	public class SshPasswordAuthenticator implements PasswordAuthenticator {
-
-		@Override
-		public boolean authenticate(String username, String password, ServerSession serversession) {
-			return (siteConfig().compareStringWithPassword(password)) ? true : false;
-		}
-
-	}
 }

@@ -52,26 +52,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Source: https://mvnrepository.com/artifact/org.apache.mina/mina-core : 2.2.9-->
-		<dependency>
-			<groupId>org.apache.mina</groupId>
-			<artifactId>mina-core</artifactId>
-			<version>2.0.4</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.sshd/sshd-core 2:18:0 -->
-		<dependency>
-			<groupId>org.apache.sshd</groupId>
-			<artifactId>sshd-core</artifactId>
-			<version>0.7.0</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.apache.sshd/sshd-pam 0.11.0-->
-		<dependency>
-			<groupId>org.apache.sshd</groupId>
-			<artifactId>sshd-pam</artifactId>
-			<version>0.7.0</version>
-		</dependency>
+		<!-- SSH stack (mina-core / sshd-core / sshd-pam) removed 2026-07-09 — embedded SSH server deleted; file upload is IntelliJ auto-deploy (SFTP). -->
 
 		<dependency>
 			<groupId>org.treasureboat</groupId>
@@ -83,11 +64,7 @@
 			<artifactId>tb-core-extensions</artifactId>
 			<version>${tb.fw.core}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.treasureboat</groupId>
-			<artifactId>tb-features-rest</artifactId>
-			<version>${tb.fw.features}</version>
-		</dependency>
+		<!-- tb-features-rest removed 2026-07-09 — only the (now /oldsrc) REST controllers used it. -->
 		<dependency>
 			<groupId>org.treasureboat</groupId>
 			<artifactId>tb-extra-monitor</artifactId>

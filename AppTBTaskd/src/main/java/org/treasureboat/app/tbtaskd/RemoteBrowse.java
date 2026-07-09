@@ -41,6 +41,9 @@ import org.treasureboat.webcore.appserver.TBRequest;
 import org.treasureboat.webcore.appserver.TBResponse;
 import org.treasureboat.webcore.appserver.xml.monitor._TBWMonitorCoder;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class RemoteBrowse extends TBDirectAction {
 
 	private String[] fileKeys = new String[] { "file", "fileType", "fileSize" };
@@ -55,6 +58,8 @@ public class RemoteBrowse extends TBDirectAction {
 
 	public RemoteBrowse(TBRequest aRequest) {
 		super(aRequest);
+		// OBSERVABILITY (temporary): confirm the Monitor's file-browser path uses this DirectAction (web, not SSH).
+		log.info("[TASKD-DA] RemoteBrowse invoked for {}", aRequest.uri());
 
 		File[] roots = File.listRoots();
 		if (roots.length <= 1) {

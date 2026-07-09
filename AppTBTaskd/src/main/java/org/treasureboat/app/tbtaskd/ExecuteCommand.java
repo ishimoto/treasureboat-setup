@@ -21,7 +21,7 @@ public class ExecuteCommand {
 
 		TBMonitor_SiteConfig aConfig = theApplication.siteConfig();
 
-		// How many info has the command ?
+		// How much info has the command?
 		int instArrayCount = commandArray.count();
 
 		// prepare the response
@@ -51,7 +51,8 @@ public class ExecuteCommand {
 				break;
 			}
 
-			log.info("Execute Command :'{}' with : {}", command, commandArray); // ("START", {id = 1; port = 2001; applicationName = "TestApp"; hostName = "192.168.3.45"; })
+			// ("START", {id = 1; port = 2001; applicationName = "TestApp"; hostName = "192.168.3.45"; })
+			log.info("Execute Command :'{}' with : {}", command, commandArray);
 
 			// Go through each instance and do whatever it is that we do
 			for (int i = 1; i < instArrayCount; i++) {

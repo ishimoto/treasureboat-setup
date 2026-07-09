@@ -23,7 +23,6 @@ public class UpdateCommand {
 		TBMonitor_SiteConfig aConfig = theApplication.siteConfig();
 
 		theApplication._lock.startWriting();
-		System.err.println("-monitorRequestAction 5-> try >"); // XXX
 		TBFMutableDictionary updateWotaskdResponse = new TBFMutableDictionary<>(2); // commandResponse
 		try {
 
@@ -33,12 +32,6 @@ public class UpdateCommand {
 			TBFDictionary removeDict = (TBFDictionary) updateWotaskdDict.valueForKey("remove");
 			TBFDictionary addDict = (TBFDictionary) updateWotaskdDict.valueForKey("add");
 			TBFDictionary configureDict = (TBFDictionary) updateWotaskdDict.valueForKey("configure");
-
-			System.err.println("-monitorRequestAction 6-> " + overwriteDict); // XXX
-			System.err.println("-monitorRequestAction 6-> " + syncDict); // XXX
-			System.err.println("-monitorRequestAction 6-> " + removeDict); // XXX
-			System.err.println("-monitorRequestAction 6-> " + addDict); // XXX
-			System.err.println("-monitorRequestAction 6-> " + configureDict); // XXX
 
 			if (clearString != null) {
 				caller.stopAllInstances();

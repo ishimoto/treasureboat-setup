@@ -478,8 +478,6 @@ public class DirectAction extends TBDirectAction {
 			for (Enumeration<TBFDictionary> e = hostArray.objectEnumerator(); e.hasMoreElements();) {
 				TBFDictionary aHost = e.nextElement();
 
-				System.err.println("-XXX aHost XXX-> " + aHost); // XXX
-
 				String name = aHost.stringForKey("name");
 				TBMonitor_Host anMHost = aConfig.hostWithName(name);
 				if (anMHost == null) {
@@ -608,7 +606,7 @@ public class DirectAction extends TBDirectAction {
 	 * 	http://127.0.0.1:1085
 	 * </pre>
 	 */
-	@TBAction
+	@TBAction(securePost = false)
 	@Override
 	public ITBWActionResults standard() {
 
@@ -748,7 +746,7 @@ public class DirectAction extends TBDirectAction {
 	}
 
 	// Adaptor Config Response
-	@TBAction
+	@TBAction(securePost = false)
 	public TBResponse woconfig() {
 		Application theApplication = (Application) TBApplication.application();
 		TBRequest aRequest = request();
@@ -778,7 +776,7 @@ public class DirectAction extends TBDirectAction {
 	}
 
 	// used by WOInfoCenter and perhaps others
-	@TBAction
+	@TBAction(securePost = false)
 	public ITBWActionResults findPort() {
 		Application theApplication = (Application) TBApplication.application();
 		TBResponse aResponse = theApplication.createResponseInContext(null);
