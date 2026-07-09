@@ -55,7 +55,6 @@ public class MonitorComponent extends TBComponent {
 	public final int HELP_PAGE = 4;
 	public final int MOD_PROXY_PAGE = 5;
 	public final int SSL_PAGE = 7;
-	public final int SERVER_SETUP_PAGE = 8;
 
 	//********************************************************************
 	//  Constructor : コンストラクタ

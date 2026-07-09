@@ -347,6 +347,11 @@ td.PushButtonWrapper {
 	font-weight: bold;
 }
 
+.HostDisabled {
+	color: gray;
+	font-weight: bold;
+}
+
 .AdaptorLoginHelp {
 	font-size: small;	
 }

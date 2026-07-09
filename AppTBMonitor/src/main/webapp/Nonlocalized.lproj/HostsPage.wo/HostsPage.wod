@@ -5,7 +5,7 @@ NavPage : NavigationPage {
 }
 
 HostsRepetition : TBRepetition {
-    list = theApplication.siteConfig.hostArray;
+    list = theApplication.siteConfig.hostArray;//VALID
     item = currentHost;
 }
 
@@ -15,6 +15,23 @@ HostName : TBString {
 
 HostAddress : TBString {
     value = currentHost.addressAsString;
+}
+
+HasDisplayName : TBConditional {
+    condition = currentHost.hasDisplayName;
+}
+
+DisplayName : TBString {
+    value = currentHost.displayName;
+}
+
+HostIsDisabled : TBConditional {
+    condition = currentHost.disabled;
+}
+
+HostIsNOTDisabled : TBConditional {
+    condition = currentHost.disabled;
+    negate = true;
 }
 
 HostIsAvailable : TBConditional {

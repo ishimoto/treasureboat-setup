@@ -145,28 +145,37 @@ public class WOTaskdHandler {
 		startReading();
 		try {
 			aName = TBFKeyPath.lastPropertyKeyInKeyPath(aName);
-			if (siteConfig.hostArray().count() != 0) {
+			// Only poll enabled hosts; if every host is disabled, skip the poll entirely (an empty taskd array otherwise trips sendRequest).
+			TBFArray<TBMonitor_Host> hostArray = enabledHosts(siteConfig.hostArray());
+			if (hostArray.count() != 0) {
 				if (ApplicationsPage.class.getName().endsWith(aName) && (siteConfig.applicationArray().count() != 0)) {
 
 					for (Enumeration<TBMonitor_Application> e = siteConfig.applicationArray().objectEnumerator(); e.hasMoreElements();) {
 						TBMonitor_Application anApp = e.nextElement();
 						anApp.setRunningInstancesCount(0);
 					}
-					TBFArray<TBMonitor_Host> hostArray = siteConfig.hostArray();
 					getApplicationStatusForHosts(hostArray);
 				} else if (AppDetailPage.class.getName().endsWith(aName)) {
-					TBFArray<TBMonitor_Host> hostArray = siteConfig.hostArray();
-
 					getInstanceStatusForHosts(hostArray);
 				} else if (HostsPage.class.getName().endsWith(aName)) {
-					TBFArray<TBMonitor_Host> hostArray = siteConfig.hostArray();
-
 					getHostStatusForHosts(hostArray);
 				}
 			}
 		} finally {
 			endReading();
 		}
+	}
+
+	/** Hosts NOT administratively disabled — the refresh only polls these, so an offline disabled host can't stall the whole refresh. */
+	private static TBFArray<TBMonitor_Host> enabledHosts(TBFArray<TBMonitor_Host> hosts) {
+		TBFMutableArray<TBMonitor_Host> enabled = new TBFMutableArray<>(hosts.count());
+		for (Enumeration<TBMonitor_Host> e = hosts.objectEnumerator(); e.hasMoreElements();) {
+			TBMonitor_Host h = e.nextElement();
+			if (!h.disabled()) {
+				enabled.addObject(h);
+			}
+		}
+		return enabled;
 	}
 
 	public TBResponse[] sendRequest(TBFDictionary<String, ?> monitorRequest, TBFArray<TBMonitor_Host> taskdArray, boolean willChange) {

@@ -21,12 +21,15 @@
 				<treasureboat name = "HostsRepetition">
 					<tr>
 						<td>
-							<treasureboat name = "HostName" /> / <treasureboat name = "HostAddress" />
+							<treasureboat name = "HasDisplayName"><strong><treasureboat name = "DisplayName" /></strong><br /></treasureboat><treasureboat name = "HostName" /> / <treasureboat name = "HostAddress" />
 						</td>
 		    			<td><treasureboat name = "HostVersion" /></td>
 						<td class="HostAvailability">
+							<treasureboat name = "HostIsDisabled"><span class="HostDisabled">Disabled</span></treasureboat>
+							<treasureboat name = "HostIsNOTDisabled">
 							<treasureboat name = "HostIsAvailable">YES | <treasureboat name = "tbtaskdLink" /></treasureboat>
 		      				<treasureboat name = "HostIsNOTAvailable"><span class="HostNotAvailable">NO</span></treasureboat>
+							</treasureboat>
 						</td>
 		    			<td><treasureboat name = "HostType" /></td>
 		    			<td><treasureboat name = "InstanceCount" /></td>

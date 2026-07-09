@@ -22,6 +22,17 @@ VersionPopup : TBPopUp {
 	automatic = true;
 }
 
+DisplayNameField : TBTextField {
+	value = myHost.displayName;
+	size = "30";
+	automatic = true;
+}
+
+DisabledCheckBox : TBCheckBox {
+	checked = myHost.disabled;
+	automatic = true;
+}
+
 HostConfigureButton : TBSubmitButton {
     action = configureHostClicked;
     value = "Configure Host";

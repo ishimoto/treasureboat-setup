@@ -5,7 +5,8 @@
     <option name="mavenProfile" />
     <option name="moduleName" value="tbapp-deploy-monitor" />
     <option name="port" value="56789" />
-    <option name="programArguments" value="-newPath true" />
+    <option name="programArguments" value="-DWODeploymentConfigurationDirectory=$USER_HOME$/TBMonitor/monitor" />
+    <option name="tbSnapshot" value="true" />
     <option name="vmOptions" />
     <option name="workingDirectory" value="$PROJECT_DIR$" />
     <method v="2">

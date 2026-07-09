@@ -124,6 +124,10 @@ public class HostConfigurePage extends MonitorComponent {
 				handler().sendUpdateHostToWotaskds(host, siteConfig().hostArray());
 			}
 
+			// Persist the Monitor's own SiteConfig so displayName + disabled survive a restart. They're Monitor-side
+			// (not pushed to taskd), so without this local archive they'd be lost on reload.
+			siteConfig().archiveSiteConfig();
+
 		} finally {
 			handler().endWriting();
 		}
