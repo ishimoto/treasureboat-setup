@@ -105,11 +105,7 @@
 			<artifactId>tb-core-ajax</artifactId>
 			<version>${tb.fw.core}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.treasureboat</groupId>
-			<artifactId>tb-features-rest</artifactId>
-			<version>${tb.fw.features}</version>
-		</dependency>
+		<!-- tb-features-rest removed 2026-07-09 — only the (now /oldsrc) REST controllers used it. -->
 		<dependency>
 			<groupId>org.treasureboat</groupId>
 			<artifactId>tb-extra-monitor</artifactId>

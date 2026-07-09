@@ -34,15 +34,17 @@ import java.util.Timer;
 import org.treasureboat.app.monitor.background.SSLRenewalTask;
 import org.treasureboat.app.monitor.components.AdminAction;
 import org.treasureboat.app.monitor.components.WOTaskdHandler;
-import org.treasureboat.app.monitor.rest.controllers.MApplicationController;
-import org.treasureboat.app.monitor.rest.controllers.MHostController;
-import org.treasureboat.app.monitor.rest.controllers.MSiteConfigController;
+// REST controllers moved to /oldsrc 2026-07-09 (dead — web UI makes no /ra/ calls); imports disabled:
+//import org.treasureboat.app.monitor.rest.controllers.MApplicationController;
+//import org.treasureboat.app.monitor.rest.controllers.MHostController;
+//import org.treasureboat.app.monitor.rest.controllers.MSiteConfigController;
 import org.treasureboat.foundation.array.TBFArray;
 import org.treasureboat.foundation.dic.TBFMutableDictionary;
 import org.treasureboat.monitor.TBMonitor_SiteConfig;
-import org.treasureboat.rest.enums.ETBRestMethod;
-import org.treasureboat.rest.routes.TBRoute;
-import org.treasureboat.rest.routes.TBRouteRequestHandler;
+// tb-features-rest removed 2026-07-09 (REST controllers moved to /oldsrc); imports disabled:
+//import org.treasureboat.rest.enums.ETBRestMethod;
+//import org.treasureboat.rest.routes.TBRoute;
+//import org.treasureboat.rest.routes.TBRouteRequestHandler;
 import org.treasureboat.webcore.appserver.TBApplication;
 import org.treasureboat.webcore.appserver.TBRequest;
 import org.treasureboat.webcore.appserver.requestHandler.TBWDirectActionRequestHandler;
@@ -81,6 +83,9 @@ public class Application extends TBApplication {
 
 		}, "admin");
 		setAllowsConcurrentRequestHandling(true);
+
+		/* REST routes disabled 2026-07-09: controllers moved to /oldsrc (dead — the web UI makes no /ra/ calls, and
+		 * Monitor<->taskd runs on the wotaskd protocol). Restore from /oldsrc + git if S2M reuses them.
 		TBRouteRequestHandler restHandler = new TBRouteRequestHandler(TBRouteRequestHandler.TB);
 		restHandler.addDefaultCustomRoutes("MApplication", MApplicationController.class);
 		// Old code. The two lines below are replaced by the following line.  The addInstanceOnAllHosts action throws an exception if the host is not localhost. 
@@ -96,6 +101,7 @@ public class Application extends TBApplication {
 		restHandler.insertRoute(new TBRoute("MSiteConfig", "/mSiteConfig", ETBRestMethod.Put, MSiteConfigController.class, "update"));
 
 		TBRouteRequestHandler.register(restHandler);
+		*/
 	}
 
 	@Override
