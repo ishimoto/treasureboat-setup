@@ -6,7 +6,7 @@
     <option name="moduleName" value="tbapp-deploy-taskd" />
     <option name="openBrowser" value="false" />
     <option name="port" value="1085" />
-    <option name="programArguments" value="-newPath true" />
+    <option name="programArguments" value="-DWODeploymentConfigurationDirectory=$USER_HOME$/TBMonitor/taskd" />
     <option name="tbSnapshot" value="true" />
     <option name="vmOptions" />
     <option name="workingDirectory" value="$PROJECT_DIR$" />
