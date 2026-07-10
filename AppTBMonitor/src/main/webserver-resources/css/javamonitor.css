@@ -456,32 +456,32 @@ div.ApplicationDetailsBox table tr.TotalsForRunningInstances .label
 	text-align: right;
 }
 
-/* ---- Add Host form (Hosts page) ---- */
-.AddHostBox h2 {
+/* ---- Add forms (Hosts / Applications) ---- */
+.AddForm h2 {
 	margin-top: 0;
 }
 
-.AddHostBox .AddHostFields {
+.AddForm .fields {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-end;
 	gap: 12px 18px;
 }
 
-.AddHostBox .field {
+.AddForm .field {
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
 }
 
-.AddHostBox .fieldLabel {
+.AddForm .fieldLabel {
 	font-weight: bold;
 	color: #4651A6;
 	font-size: 13px;
 }
 
-.AddHostBox input.input,
-.AddHostBox select {
+.AddForm input.input,
+.AddForm select {
 	height: 36px;
 	padding: 4px 10px;
 	box-sizing: border-box;
@@ -494,7 +494,7 @@ div.ApplicationDetailsBox table tr.TotalsForRunningInstances .label
 
 /* drop the native select chrome (whose square arrow box clashes with the
    rounded border) and draw our own chevron so the right edge stays clean */
-.AddHostBox select {
+.AddForm select {
 	min-width: 130px;
 	padding-right: 30px;
 	cursor: pointer;
@@ -507,11 +507,11 @@ div.ApplicationDetailsBox table tr.TotalsForRunningInstances .label
 	background-size: 10px 6px;
 }
 
-.AddHostBox input.narrow {
+.AddForm input.narrow {
 	min-width: 240px;
 }
 
-.AddHostBox .AddHostSubmit {
+.AddForm .submit {
 	margin-left: auto;
 }
 
