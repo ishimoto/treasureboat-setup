@@ -14,7 +14,7 @@ import org.treasureboat.monitor.TBMonitor_Instance;
  */
 public class ShutdownBouncer extends ApplicationStarter {
 
-	private long _time;
+	private final long _time;
 
 	//********************************************************************
 	//	Constructor : コンストラクタ
@@ -23,7 +23,7 @@ public class ShutdownBouncer extends ApplicationStarter {
 	public ShutdownBouncer(TBMonitor_Application app, int seconds) {
 		super(app);
 
-		_time = seconds * 1000;
+		_time = seconds * 1000L;
 	}
 
 	//********************************************************************

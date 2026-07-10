@@ -15,9 +15,10 @@ import org.treasureboat.webcore.appserver.iface.ITBWActionResults;
 import org.treasureboat.webcore.components.TBComponent;
 
 public class SSLPage extends MonitorComponent {
+
 	private static final long serialVersionUID = 1L;
 
-	public String resutText = null;
+	public String resultText = null;
 
 	public SSLPage(TBContext context) {
 		super(context);
@@ -45,15 +46,15 @@ public class SSLPage extends MonitorComponent {
 		// TODO run/stop background renewal
 		handler().sendUpdateSiteToWotaskds();
 
-		resutText = null;
+		resultText = null;
 
 		DomainConfiguration conf = domainConfiguration(theApplication());
 		TBFArray<String> validate = conf.validate();
 
 		if (validate == null || validate.count() == 0) {
-			resutText = "Configuration is valid";
+			resultText = "Configuration is valid";
 		} else {
-			resutText = validate.componentsJoinedByString("\n");
+			resultText = validate.componentsJoinedByString("\n");
 		}
 
 		return null;
@@ -63,7 +64,7 @@ public class SSLPage extends MonitorComponent {
 		// TODO run/stop background renewal
 		handler().sendUpdateSiteToWotaskds();
 
-		resutText = null;
+		resultText = null;
 
 		DomainConfiguration conf = domainConfiguration(theApplication());
 		TBFArray<String> validate = conf.validate();
@@ -72,9 +73,9 @@ public class SSLPage extends MonitorComponent {
 			TBFMutableArray<String> tmp = new TBFMutableArray<>();
 			CheckCertificate checker = new CheckCertificate(conf);
 			checker.check(tmp);
-			resutText = tmp.componentsJoinedByString("\n");
+			resultText = tmp.componentsJoinedByString("\n");
 		} else {
-			resutText = validate.componentsJoinedByString("\n");
+			resultText = validate.componentsJoinedByString("\n");
 		}
 
 		return null;
@@ -84,7 +85,7 @@ public class SSLPage extends MonitorComponent {
 		// TODO run/stop background renewal
 		handler().sendUpdateSiteToWotaskds();
 
-		resutText = null;
+		resultText = null;
 
 		DomainConfiguration conf = domainConfiguration(theApplication());
 		TBFArray<String> validate = conf.validate();
@@ -104,10 +105,10 @@ public class SSLPage extends MonitorComponent {
 
 			tmp.add("------");
 			tmp.add("Please restart your web server");
-			resutText = tmp.componentsJoinedByString("\n");
+			resultText = tmp.componentsJoinedByString("\n");
 			if (theApplication()._siteConfig().canMail()) {
 				TBMonitorMailer.sendMail(theApplication().host() + " - SSL Certificate was renewed", //
-						resutText, //
+						resultText, //
 						siteConfig.emailToAddr(), //
 						siteConfig.SMTPhost(), //
 						siteConfig.SMTPaccount(), //
@@ -117,7 +118,7 @@ public class SSLPage extends MonitorComponent {
 				);
 			}
 		} else {
-			resutText = validate.componentsJoinedByString("\n");
+			resultText = validate.componentsJoinedByString("\n");
 		}
 
 		return null;

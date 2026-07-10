@@ -50,7 +50,7 @@ public class DirectAction extends TBDirectAction {
 		super(aRequest);
 	}
 
-	@TBAction
+	@TBAction(securePost = false)
 	@Override
 	public ITBWActionResults standard() {
 		if (request().stringFormValueForKey("pw") != null) {
@@ -61,9 +61,9 @@ public class DirectAction extends TBDirectAction {
 		return super.standard();
 	}
 
-	public TBComponent MainAction() {
-		return pageWithName("Main");
-	}
+//	public TBComponent MainAction() {
+//		return pageWithName("Main");
+//	}
 
 	protected TBMonitor_SiteConfig siteConfig() {
 		return WOTaskdHandler.siteConfig();
@@ -114,7 +114,7 @@ public class DirectAction extends TBDirectAction {
 		return result;
 	}
 
-	@TBAction
+	@TBAction(securePost = false)
 	public TBResponse statistics() {
 		TBResponse response = new TBResponse();
 		String pw = context().request().stringFormValueForKey("pw");

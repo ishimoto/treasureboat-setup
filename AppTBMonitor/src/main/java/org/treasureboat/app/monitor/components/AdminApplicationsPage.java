@@ -1,5 +1,6 @@
 package org.treasureboat.app.monitor.components;
 
+import java.io.Serial;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Enumeration;
@@ -19,7 +20,8 @@ import org.treasureboat.webcore.components.TBComponent;
 
 public class AdminApplicationsPage extends ApplicationsPage {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	public static final String DISPLAY_NAME = "displayName";
 
@@ -309,11 +311,7 @@ public class AdminApplicationsPage extends ApplicationsPage {
 		handler().startReading();
 		try {
 			((Method) selectedAction.valueForKey("actionName")).invoke(this, new Object[] { allInstances() });
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
+		} catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		} finally {
 			handler().endReading();

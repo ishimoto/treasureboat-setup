@@ -9,7 +9,7 @@ import org.treasureboat.monitor.TBMonitor_Instance;
 /**
  * Bounces an application using a rolling shutdown. It does so by starting at least one inactive instance per active host (or 10 % of the total active
  * instance count), waiting until they have started, then forcefully restarting each instance one at a time until they have all been restarted. You
- * must have at least one inactive instance in order to perform this bounce.
+ * must have at least one inactive instance to perform this bounce.
  * 
  * @author johnthuss
  */
@@ -71,7 +71,7 @@ public class RollingShutdownBouncer extends ApplicationStarter {
 	protected int numInstancesToStartPerHost(TBFArray<TBMonitor_Instance> runningInstances, TBFArray<TBMonitor_Host> activeHosts) {
 		int numToStartPerHost = 1;
 		if (activeHosts.count() > 0) {
-			numToStartPerHost = (int) (runningInstances.count() / activeHosts.count() * .1);
+			numToStartPerHost = (int) ((double) runningInstances.count() / activeHosts.count() * .1);
 		}
 		if (numToStartPerHost < 1) {
 			numToStartPerHost = 1;
@@ -100,7 +100,7 @@ public class RollingShutdownBouncer extends ApplicationStarter {
 	protected boolean doAllRunningInstancesUseScheduling(TBFArray<TBMonitor_Instance> runningInstances) {
 		boolean useScheduling = true;
 		for (TBMonitor_Instance instance : runningInstances) {
-			useScheduling &= instance.schedulingEnabled() != null && instance.schedulingEnabled().booleanValue();
+			useScheduling &= instance.schedulingEnabled() != null && instance.schedulingEnabled();
 		}
 		return useScheduling;
 	}
@@ -172,7 +172,7 @@ public class RollingShutdownBouncer extends ApplicationStarter {
 		}
 		handler().sendUpdateInstancesToWotaskds(stoppingInstances, activeHosts);
 		handler().sendStopInstancesToWotaskds(stoppingInstances, activeHosts);
-		log("Stopped instances " + stoppingInstances.toString() + " successfully");
+		log("Stopped instances " + stoppingInstances + " successfully");
 	}
 
 }

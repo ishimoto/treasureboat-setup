@@ -25,6 +25,7 @@
  */
 package org.treasureboat.app.monitor.components;
 
+import java.io.Serial;
 import java.util.Enumeration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -58,7 +59,8 @@ import org.treasureboat.webcore.components.TBComponent;
 
 public class AppDetailPage extends MonitorComponent {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	public Integer instanceRowIndex;
 
@@ -67,8 +69,8 @@ public class AppDetailPage extends MonitorComponent {
 		return (Session) super.session();
 	}
 
-	public AppDetailPage(TBContext aWocontext) {
-		super(aWocontext);
+	public AppDetailPage(TBContext context) {
+		super(context);
 		handler().updateForPage(name());
 
 		displayGroup = new TBWDisplayGroup<>();
@@ -231,7 +233,7 @@ public class AppDetailPage extends MonitorComponent {
 		TBFArray<TBMonitor_Instance> instancesArray = myApplication().instanceArray();
 		if (instancesArray == null || instancesArray.count() == 0)
 			return false;
-		return siteConfig().viewRefreshEnabled().booleanValue();
+		return siteConfig().viewRefreshEnabled();
 	}
 
 	public TBComponent configureApplicationClicked() {
@@ -312,12 +314,12 @@ public class AppDetailPage extends MonitorComponent {
 
 			if (!TBFString.stringIsNullOrEmpty(adaptorURL)) {
 				// check doubles
-				adaptorURL = adaptorURL.replaceAll(TBFConstants.SLASH + TBFConstants.SLASH, TBFConstants.SLASH);
+				adaptorURL = adaptorURL.replace(TBFConstants.SLASH + TBFConstants.SLASH, TBFConstants.SLASH);
 				adaptorURL = adaptorURL.replaceFirst(TBFConstants.COLON + TBFConstants.SLASH,
 						TBFConstants.COLON + TBFConstants.SLASH + TBFConstants.SLASH);
 
 				String uriPart3 = TBFConstants.EMPTY_STRING;
-				if (myApplication().urlVersion().intValue() == 1) {
+				if (myApplication().urlVersion() == 1) {
 					uriPart3 = ".woa";
 				}
 
@@ -341,15 +343,11 @@ public class AppDetailPage extends MonitorComponent {
 
 	/* ******** Deaths ********* */
 	public boolean shouldDisplayDeathDetailLink() {
-		if (currentInstance.deathCount() > 0) {
-			return true;
-		}
-		return false;
-	}
+        return currentInstance.deathCount() > 0;
+    }
 
 	public TBComponent instanceDeathDetailClicked() {
-		AppDeathPage aPage = AppDeathPage.create(context(), currentInstance);
-		return aPage;
+        return AppDeathPage.create(context(), currentInstance);
 	}
 
 	public TBComponent clearAllDeathsClicked() {
@@ -392,7 +390,7 @@ public class AppDetailPage extends MonitorComponent {
 	}
 
 	public TBComponent toggleAutoRecover() {
-		if ((currentInstance.autoRecover() != null) && (currentInstance.autoRecover().booleanValue())) {
+		if ((currentInstance.autoRecover() != null) && (currentInstance.autoRecover())) {
 			currentInstance.setAutoRecover(Boolean.FALSE);
 		} else {
 			currentInstance.setAutoRecover(Boolean.TRUE);
@@ -684,52 +682,30 @@ public class AppDetailPage extends MonitorComponent {
 
 	/* ******** Display Methods ********* */
 	public String instanceStatusImage() {
-		switch (currentInstance.state) {
-		case TBMonitor_Object.DEAD:
-			return "PowerSwitch_Off.gif";
-
-		case TBMonitor_Object.ALIVE:
-			return "PowerSwitch_On.gif";
-
-		case TBMonitor_Object.STOPPING:
-			return "Turning_Off.gif";
-
-		case TBMonitor_Object.CRASHING:
-			return "Turning_Off.gif";
-
-		case TBMonitor_Object.STARTING:
-			return "Turning_On.gif";
-
-		default:
-			return "PowerSwitch_Off.gif";
-		}
+        return switch (currentInstance.state) {
+            case TBMonitor_Object.DEAD -> "PowerSwitch_Off.gif";
+            case TBMonitor_Object.ALIVE -> "PowerSwitch_On.gif";
+            case TBMonitor_Object.STOPPING -> "Turning_Off.gif";
+            case TBMonitor_Object.CRASHING -> "Turning_Off.gif";
+            case TBMonitor_Object.STARTING -> "Turning_On.gif";
+            default -> "PowerSwitch_Off.gif";
+        };
 	}
 
 	public String instanceStatusImageText() {
-		switch (currentInstance.state) {
-		case TBMonitor_Object.DEAD:
-			return "OFF";
-
-		case TBMonitor_Object.ALIVE:
-			return "ON";
-
-		case TBMonitor_Object.STOPPING:
-			return "STOPPING";
-
-		case TBMonitor_Object.CRASHING:
-			return "CRASHING";
-
-		case TBMonitor_Object.STARTING:
-			return "STARTING";
-
-		default:
-			return "UNKNOWN";
-		}
+        return switch (currentInstance.state) {
+            case TBMonitor_Object.DEAD -> "OFF";
+            case TBMonitor_Object.ALIVE -> "ON";
+            case TBMonitor_Object.STOPPING -> "STOPPING";
+            case TBMonitor_Object.CRASHING -> "CRASHING";
+            case TBMonitor_Object.STARTING -> "STARTING";
+            default -> "UNKNOWN";
+        };
 	}
 
 	public String autoRecoverLabel() {
 		String results = "Off";
-		if ((currentInstance.autoRecover() != null) && (currentInstance.autoRecover().booleanValue())) {
+		if ((currentInstance.autoRecover() != null) && (currentInstance.autoRecover())) {
 			results = "On";
 		}
 		return results;
@@ -738,7 +714,7 @@ public class AppDetailPage extends MonitorComponent {
 	public String autoRecoverDivClass() {
 		String base = "AppControl";
 		String results = base + " " + base + "AutoRecoverOff";
-		if ((currentInstance.autoRecover() != null) && (currentInstance.autoRecover().booleanValue())) {
+		if ((currentInstance.autoRecover() != null) && (currentInstance.autoRecover())) {
 			results = base + " " + base + "AutoRecoverOn";
 		}
 		return results;
@@ -747,7 +723,7 @@ public class AppDetailPage extends MonitorComponent {
 	public String refuseNewSessionsClass() {
 		String base = "AppControl";
 		String result = base + " " + base + "NotRefusingNewSessions";
-		if ((currentInstance.schedulingEnabled() != null) && (currentInstance.schedulingEnabled().booleanValue())) {
+		if ((currentInstance.schedulingEnabled() != null) && (currentInstance.schedulingEnabled())) {
 			if (currentInstance.isRefusingNewSessions()) {
 				result = base + " " + base + "ScheduleEnabledRefusingNewSessions";
 			} else {
@@ -771,7 +747,7 @@ public class AppDetailPage extends MonitorComponent {
 
 	public String schedulingLabel() {
 		String result = "Off";
-		if ((currentInstance.schedulingEnabled() != null) && (currentInstance.schedulingEnabled().booleanValue())) {
+		if ((currentInstance.schedulingEnabled() != null) && (currentInstance.schedulingEnabled())) {
 			result = "On";
 		}
 		return result;
@@ -780,7 +756,7 @@ public class AppDetailPage extends MonitorComponent {
 	public String schedulingDivClass() {
 		String base = "AppControl";
 		String result = base + " " + base + "ScheduleOff";
-		if ((currentInstance.schedulingEnabled() != null) && (currentInstance.schedulingEnabled().booleanValue())) {
+		if ((currentInstance.schedulingEnabled() != null) && (currentInstance.schedulingEnabled())) {
 			result = base + " " + base + "ScheduleOn";
 		}
 		return result;
@@ -788,7 +764,7 @@ public class AppDetailPage extends MonitorComponent {
 
 	public String nextShutdown() {
 		String result = "N/A";
-		if ((currentInstance.schedulingEnabled() != null) && (currentInstance.schedulingEnabled().booleanValue())) {
+		if ((currentInstance.schedulingEnabled() != null) && (currentInstance.schedulingEnabled())) {
 			result = currentInstance.nextScheduledShutdownString();
 		}
 		return result;
@@ -827,7 +803,7 @@ public class AppDetailPage extends MonitorComponent {
 
 	public Float actualRatePerMinute() {
 		Float aNumber = TBMonitor_StatsUtilities.actualTransactionsPerSecondForApplication(myApplication());
-		return Float.valueOf((aNumber.floatValue() * 60));
+		return aNumber * 60;
 	}
 
 	/** ******* */

@@ -7,9 +7,12 @@ import org.treasureboat.app.monitor.components.sub.MonitorComponent;
 import org.treasureboat.webcore.appserver.TBContext;
 import org.treasureboat.webcore.components.TBComponent;
 
+import java.io.Serial;
+
 public class ConfirmationPage extends MonitorComponent {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	//********************************************************************
 	//	Interface

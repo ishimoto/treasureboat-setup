@@ -14,7 +14,7 @@ Refresh : TBMetaRefresh {
 
 ErrorMsg: TBString {
       value = message;
-      escapeHTML = NO;
+      escapeHTML = false;
 }
 
 LoginForm: TBForm {}

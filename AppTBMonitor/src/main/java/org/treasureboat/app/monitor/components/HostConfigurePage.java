@@ -36,16 +36,19 @@ import org.treasureboat.webcore.components.TBComponent;
 
 import lombok.Setter;
 
+import java.io.Serial;
+
 public class HostConfigurePage extends MonitorComponent {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	//********************************************************************
 	//	Constructor : コンストラクタ
 	//********************************************************************
 
-	public HostConfigurePage(TBContext aWocontext) {
-		super(aWocontext);
+	public HostConfigurePage(TBContext context) {
+		super(context);
 	}
 
 	//********************************************************************

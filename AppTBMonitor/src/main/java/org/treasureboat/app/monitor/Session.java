@@ -26,8 +26,6 @@
 package org.treasureboat.app.monitor;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.treasureboat.app.monitor.components.Main;
 import org.treasureboat.app.monitor.components.WOTaskdHandler;
 import org.treasureboat.app.monitor.components.WOTaskdHandler.ErrorCollector;
@@ -41,10 +39,13 @@ import org.treasureboat.webcore.appserver.TBContext;
 import org.treasureboat.webcore.appserver.TBResponse;
 import org.treasureboat.webcore.appserver.TBSession;
 
+import java.io.Serial;
+
 @Slf4j
 public class Session extends TBSession implements ErrorCollector {
 
-	private static final long serialVersionUID = 8067267944038698356L;
+	@Serial
+    private static final long serialVersionUID = 1;
 
 	public boolean _isLoggedIn;
 
@@ -77,7 +78,7 @@ public class Session extends TBSession implements ErrorCollector {
 				super.appendToResponse(aResponse, aContext);
 			} else {
 				if (aContext.page().getClass().getName().equals(Main.class.getName())) {
-					// needs to login on Main page.
+					// needs to log in on Main page.
 					super.appendToResponse(aResponse, aContext);
 				} else {
 					log.error("Tried to access {} while not logged in.", (aContext.page()));

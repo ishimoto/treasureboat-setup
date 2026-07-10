@@ -7,7 +7,7 @@ NavPage : NavigationPage {
 DomainsField: TBText {
 	cols = "65";
 	rows = "5";
-	value = theApplication.siteConfig.sslDomains;
+	value = theApplication.siteConfig.sslDomains; //VALID
 	wrap = "virtual";
     automatic = true;
     class = "wide input;"
@@ -15,7 +15,7 @@ DomainsField: TBText {
 
 DocRootPath : TBTextField {
 	size = 70;
-	value = theApplication.siteConfig.sslDocRoot;
+	value = theApplication.siteConfig.sslDocRoot; //VALID
 	automatic = true;
 	class = "wide input";
 }
@@ -28,7 +28,7 @@ DocRootPicker : TBSubmitButton {
 
 CertPath : TBTextField {
 	size = 70;
-	value = theApplication.siteConfig.sslCertFilePath;
+	value = theApplication.siteConfig.sslCertFilePath; //VALID
 	automatic = true;
 	class = "wide input";
 }

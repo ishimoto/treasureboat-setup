@@ -30,16 +30,19 @@ import org.treasureboat.foundation.TBFString;
 import org.treasureboat.webcore.appserver.TBContext;
 import org.treasureboat.webcore.components.TBComponent;
 
+import java.io.Serial;
+
 public class Main extends MonitorComponent {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	//********************************************************************
 	//  Constructor : コンストラクタ
 	//********************************************************************
 
-	public Main(TBContext aWocontext) {
-		super(aWocontext);
+	public Main(TBContext context) {
+		super(context);
 	}
 
 	//********************************************************************

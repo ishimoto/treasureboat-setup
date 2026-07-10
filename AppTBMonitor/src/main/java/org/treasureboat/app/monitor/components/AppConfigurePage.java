@@ -36,9 +36,12 @@ import org.treasureboat.monitor.TBMonitor_SiteConfig;
 import org.treasureboat.webcore.appserver.TBContext;
 import org.treasureboat.webcore.components.TBComponent;
 
+import java.io.Serial;
+
 public class AppConfigurePage extends MonitorComponent {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	public TBMonitor_Application appDefaults;
 
@@ -54,7 +57,7 @@ public class AppConfigurePage extends MonitorComponent {
 	//	Methods : メソッド
 	//********************************************************************
 
-	private static TBMonitor_SiteConfig _sc = new TBMonitor_SiteConfig(null);
+	private static final TBMonitor_SiteConfig _sc = new TBMonitor_SiteConfig(null);
 
 	public boolean isNewInstanceSectionVisible = false;
 
@@ -345,11 +348,8 @@ public class AppConfigurePage extends MonitorComponent {
 	public boolean isMailingConfigured() {
 		String aHost = siteConfig().SMTPhost();
 		String anAddress = siteConfig().emailReturnAddr();
-		if (aHost != null && aHost.length() > 0 && anAddress != null && anAddress.length() > 0) {
-			return true;
-		}
-		return false;
-	}
+        return aHost != null && !aHost.isEmpty() && anAddress != null && !anAddress.isEmpty();
+    }
 
 	public TBComponent emailUpdateClicked() {
 		handler().startReading();
@@ -368,10 +368,8 @@ public class AppConfigurePage extends MonitorComponent {
 
 	/* ******** Scheduling Section ******** */
 	public boolean shouldSchedule() {
-		if (myApplication().instanceArray().count() != 0)
-			return true;
-		return false;
-	}
+        return myApplication().instanceArray().count() != 0;
+    }
 
 	public TBMonitor_Instance currentScheduledInstance;
 
@@ -429,8 +427,6 @@ public class AppConfigurePage extends MonitorComponent {
 		aPage.isSchedulingSectionVisible = true;
 		return aPage;
 	}
-
-	/** ******* */
 
 	/** ******** Adaptor Settings Section ******** */
 	public String _loadSchedulerSelection = null;
@@ -520,8 +516,6 @@ public class AppConfigurePage extends MonitorComponent {
 
 	/**
 	 * only the Path updated Action
-	 * 
-	 * @return
 	 */
 	public TBComponent updatePathOnly() {
 		handler().startReading();
@@ -547,8 +541,6 @@ public class AppConfigurePage extends MonitorComponent {
 
 	/**
 	 * only the AutoRecover update Action
-	 * 
-	 * @return
 	 */
 	public TBComponent updateAutoRecoverOnly() {
 		handler().startReading();

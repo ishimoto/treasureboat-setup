@@ -36,9 +36,12 @@ import org.treasureboat.webcore.appserver.TBApplication;
 import org.treasureboat.webcore.appserver.TBContext;
 import org.treasureboat.webcore.components.TBComponent;
 
+import java.io.Serial;
+
 public class ApplicationsPage extends MonitorComponent {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	public TBMonitor_Application currentApplication;
 
@@ -50,8 +53,8 @@ public class ApplicationsPage extends MonitorComponent {
 	//	Constructor : コンストラクタ
 	//********************************************************************
 
-	public ApplicationsPage(TBContext aWocontext) {
-		super(aWocontext);
+	public ApplicationsPage(TBContext context) {
+		super(context);
 
 		handler().updateForPage(name());
 	}
@@ -81,11 +84,11 @@ public class ApplicationsPage extends MonitorComponent {
 
 		if (!TBFString.stringIsNullOrEmpty(aURL)) {
 			// check doubles
-			aURL = aURL.replaceAll(TBFConstants.SLASH + TBFConstants.SLASH, TBFConstants.SLASH);
+			aURL = aURL.replace(TBFConstants.SLASH + TBFConstants.SLASH, TBFConstants.SLASH);
 			aURL = aURL.replaceFirst(TBFConstants.COLON + TBFConstants.SLASH, TBFConstants.COLON + TBFConstants.SLASH + TBFConstants.SLASH);
 
 			String uriPart3 = TBFConstants.EMPTY_STRING;
-			if (currentApplication.urlVersion().intValue() == 1) {
+			if (currentApplication.urlVersion() == 1) {
 				uriPart3 = ".woa";
 			}
 
@@ -97,9 +100,8 @@ public class ApplicationsPage extends MonitorComponent {
 
 	/**
 	 * Sets the total number of instances configured for all applications
-	 * 
-	 * @param totalInstancesConfigured
-	 */
+	 *
+     */
 	public void setTotalInstancesConfigured(int totalInstancesConfigured) {
 		_totalInstancesConfigured = totalInstancesConfigured;
 	}
@@ -115,9 +117,8 @@ public class ApplicationsPage extends MonitorComponent {
 
 	/**
 	 * Sets the total number of running instances for all applications
-	 * 
-	 * @param totalInstancesRunning
-	 */
+	 *
+     */
 	public void setTotalInstancesRunning(int totalInstancesRunning) {
 		_totalInstancesRunning = totalInstancesRunning;
 	}
@@ -133,9 +134,8 @@ public class ApplicationsPage extends MonitorComponent {
 
 	/**
 	 * Calculates and sets the {@link #totalInstancesConfigured()} and {@link #totalInstancesRunning()} for the given array of applications
-	 * 
-	 * @param applications
-	 */
+	 *
+     */
 	public void calculateTotals(TBFMutableArray<TBMonitor_Application> applications) {
 		int totalRunningInstances = 0;
 		int totalConfiguredInstances = 0;

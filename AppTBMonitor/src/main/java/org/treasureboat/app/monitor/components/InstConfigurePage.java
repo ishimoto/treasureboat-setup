@@ -34,16 +34,16 @@ import org.treasureboat.monitor.TBMonitor_Object;
 import org.treasureboat.webcore.appserver.TBContext;
 import org.treasureboat.webcore.components.TBComponent;
 
+import java.io.Serial;
+
 public class InstConfigurePage extends MonitorComponent {
 
-	public InstConfigurePage(TBContext aWocontext) {
-		super(aWocontext);
+	public InstConfigurePage(TBContext context) {
+		super(context);
 	}
 
-	/*
-	 * serialVersionUID
-	 */
-	private static final long serialVersionUID = 2930097368474314793L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	public boolean isWindowsHost() {
 		return myInstance().host().osType().equals("WINDOWS");
@@ -159,7 +159,7 @@ public class InstConfigurePage extends MonitorComponent {
 		}
 		// only 1 of the 2 is null
 		if ((a instanceof String) || (b instanceof String)) {
-			if ((a == null && b != null && ((String) b).length() == 0) || (b == null && a != null && ((String) a).length() == 0)) {
+			if ((a == null && b != null && ((String) b).isEmpty()) || (b == null && a != null && ((String) a).isEmpty())) {
 				return true;
 			}
 		}

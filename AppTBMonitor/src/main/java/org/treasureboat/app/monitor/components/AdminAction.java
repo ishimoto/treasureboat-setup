@@ -1,5 +1,6 @@
 package org.treasureboat.app.monitor.components;
 
+import java.io.Serial;
 import java.util.Enumeration;
 
 import org.apache.http.HttpStatus;
@@ -312,7 +313,8 @@ public class AdminAction extends TBDirectAction {
 
 	public class DirectActionException extends RuntimeException {
 
-		private static final long serialVersionUID = 1L;
+		@Serial
+        private static final long serialVersionUID = 1L;
 
 		public int status;
 
@@ -418,9 +420,9 @@ public class AdminAction extends TBDirectAction {
 		TBResponse response = new TBResponse("YES");
 		String num = (String) context().request().formValueForKey("num");
 		int numberOfInstancesRequested = -1;
-		if (num != null && !num.equals("") && !num.equalsIgnoreCase("all")) {
+		if (num != null && !num.isEmpty() && !num.equalsIgnoreCase("all")) {
 			try {
-				numberOfInstancesRequested = Integer.valueOf(num).intValue();
+				numberOfInstancesRequested = Integer.parseInt(num);
 				if (numberOfInstancesRequested > instances.count()) {
 					numberOfInstancesRequested = -1;
 				}
@@ -467,7 +469,7 @@ public class AdminAction extends TBDirectAction {
 			int maxwait = 30;
 			if (maxwaitString != null) {
 				try {
-					maxwait = Integer.valueOf(maxwaitString).intValue();
+					maxwait = Integer.parseInt(maxwaitString);
 				} catch (NumberFormatException e) {
 					// ignore
 				}
@@ -490,7 +492,7 @@ public class AdminAction extends TBDirectAction {
 	@TBAction
 	public void scheduleType() {
 		String scheduleType = (String) context().request().formValueForKey("scheduleType");
-		if (scheduleType != null && ("HOURLY".equals(scheduleType) || "DAILY".equals(scheduleType) || "WEEKLY".equals(scheduleType)))
+		if (("HOURLY".equals(scheduleType) || "DAILY".equals(scheduleType) || "WEEKLY".equals(scheduleType)))
 			applicationsPage().scheduleType(instances, scheduleType);
 	}
 

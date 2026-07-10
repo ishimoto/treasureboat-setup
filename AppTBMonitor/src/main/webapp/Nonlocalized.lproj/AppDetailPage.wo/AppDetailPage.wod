@@ -199,7 +199,7 @@ NextShutdown: TBString {
 
 Refresh: TBMetaRefresh {
 	action = refreshClicked;
-	seconds = theApplication.siteConfig.viewRefreshRate;
+	seconds = theApplication.siteConfig.viewRefreshRate; //VALID
 }
 
 RefreshLink: TBHyperlink {
@@ -207,7 +207,7 @@ RefreshLink: TBHyperlink {
 }
 
 RefreshRate: TBString {
-	value = theApplication.siteConfig.viewRefreshRate;
+	value = theApplication.siteConfig.viewRefreshRate; //VALID
 }
 
 RefuseNewSessionsDiv : TBGenericContainer {
@@ -320,11 +320,11 @@ AddHasHostsConditional: TBConditional {
 
 AddHasNOHostsConditional : TBConditional {
     condition = hasHosts;
-    negate = YES;
+    negate = true;
 }
 
 AddHostPopUp: TBPopUp {
-    list = theApplication.siteConfig.hostArray;
+    list = theApplication.siteConfig.hostArray; //VALID
     item = aHost;
     displayString = aHost.displayLabel;
     selection = selectedHost;

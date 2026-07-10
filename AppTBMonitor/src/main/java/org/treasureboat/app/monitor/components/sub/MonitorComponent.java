@@ -44,9 +44,12 @@ import org.treasureboat.webcore.appserver.TBContext;
 import org.treasureboat.webcore.appserver.iface.ITBWActionResults;
 import org.treasureboat.webcore.components.TBComponent;
 
+import java.io.Serial;
+
 public class MonitorComponent extends TBComponent {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	public final int APP_PAGE = 0;
 	public final int HOST_PAGE = 1;
@@ -60,8 +63,8 @@ public class MonitorComponent extends TBComponent {
 	//  Constructor : コンストラクタ
 	//********************************************************************
 
-	public MonitorComponent(TBContext aWocontext) {
-		super(aWocontext);
+	public MonitorComponent(TBContext context) {
+		super(context);
 
 		_handler = new WOTaskdHandler(mySession());
 	}
@@ -93,7 +96,7 @@ public class MonitorComponent extends TBComponent {
 		return _handler;
 	}
 
-	private WOTaskdHandler _handler;
+	private final WOTaskdHandler _handler;
 
 	protected TBMonitor_SiteConfig siteConfig() {
 		return WOTaskdHandler.siteConfig();

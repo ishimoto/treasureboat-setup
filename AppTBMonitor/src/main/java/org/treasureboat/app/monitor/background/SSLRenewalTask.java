@@ -24,7 +24,7 @@ public class SSLRenewalTask extends TimerTask {
 			TBFMutableArray<String> tmp = new TBFMutableArray<>();
 			CheckCertificate checker = new CheckCertificate(conf);
 			checker.check(tmp);
-			if (checker.needRenewal().booleanValue()) {
+			if (checker.needRenewal()) {
 				SignCertificate signer = new SignCertificate(conf);
 				signer.sign(tmp);
 

@@ -46,19 +46,22 @@ import org.treasureboat.webcore.net.TBWHttpConnection;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serial;
+
 @Slf4j
 public class RemoteBrowseClient extends MonitorComponent {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
-	static private byte[] evilHack = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>".getBytes();
+	static private final byte[] evilHack = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>".getBytes();
 
 	//********************************************************************
 	//	Constructor : コンストラクタ
 	//********************************************************************
 
-	public RemoteBrowseClient(TBContext aWocontext) {
-		super(aWocontext);
+	public RemoteBrowseClient(TBContext context) {
+		super(context);
 	}
 
 	//********************************************************************
@@ -116,7 +119,7 @@ public class RemoteBrowseClient extends MonitorComponent {
 			TBRequest aRequest = null;
 			TBResponse aResponse = null;
 			boolean requestSucceeded = false;
-			if (aString != null && aString.length() > 0) {
+			if (aString != null && !aString.isEmpty()) {
 				aHeadersDict.setObjectForKey(new TBFMutableArray<>(aString), "filepath");
 			}
 			if (showFiles) {

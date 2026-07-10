@@ -112,7 +112,7 @@
 				<div class = "warning alert">
 					<br />
 					<p>* The path of the executable (inside the '.woa' directory).</p>
-					<p>** This should be a directory - the path should end with a file separator (instance logs will be saved as &lt;ApplicationName&gt;-&lt;ID&gt;)</p>
+					<p>** This should be a directory – the path should end with a file separator (instance logs will be saved as &lt;ApplicationName&gt;-&lt;ID&gt;)</p>
 				</div>
 			</treasureboat>
 		</treasureboat>
@@ -221,8 +221,8 @@
 			<h2>Email notifications</h2>
 			<div class = "primary alert">
 				<treasureboat name="NOSmtpHostConfigured">
-			        <p>Monitor needs an SMTP host and a Return Address configured in order to send email notifications.</p>
-			        <p>Go to the <treasureboat name="ConfigurePageLink">Configure Page</treasureboat> to setup an SMTP host and specify a Return Address.</p>
+			        <p>Monitor needs an SMTP host and a Return Address configured to send email notifications.</p>
+			        <p>Go to the <treasureboat name="ConfigurePageLink">Configure Page</treasureboat> to set up an SMTP host and specify a Return Address.</p>
 			      </treasureboat>
 			      <treasureboat name="SmtpHostConfigured">
 			        <p>When instances of this application terminate unexpectedly, Monitor will send an email notification to the email addresses below.</p>
@@ -292,11 +292,11 @@
 
 	<script type="text/javascript">
 	document.getElementById('appSettingsForm').onsubmit = function(event) {
-		var statsPassword = document.getElementById('statsPassword').value;
-		if (statsPassword && statsPassword.length != 0) {
-			var badChars = ['$', '&', '+', ',' ,'/' ,':', ';', '=', '?', '@', ' ', '<', '>', '#', '%'];
-			for (var i=0; i<badChars.length; i++) {
-				if (statsPassword.indexOf(badChars[i]) != -1) {
+		const statsPassword = document.getElementById('statsPassword').value;
+		if (statsPassword && statsPassword.length !== 0) {
+			const badChars = ['$', '&', '+', ',', '/', ':', ';', '=', '?', '@', ' ', '<', '>', '#', '%'];
+			for (let i=0; i<badChars.length; i++) {
+				if (statsPassword.indexOf(badChars[i]) !== -1) {
 					alert('WARNING: "Statistics Page Password" should not contain characters and have special meaning in URLs.');
 					break;
 				}

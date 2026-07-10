@@ -34,7 +34,7 @@ public class WOTaskdHandler {
 	//********************************************************************
 
 	public interface ErrorCollector {
-		public void addObjectsFromArrayIfAbsentToErrorMessageArray(TBFArray<String> errors);
+		void addObjectsFromArrayIfAbsentToErrorMessageArray(TBFArray<String> errors);
 	}
 
 	//********************************************************************
@@ -53,7 +53,7 @@ public class WOTaskdHandler {
 		return _lock;
 	}
 
-	private static TBFCollectionReaderWriterLock _lock = new TBFCollectionReaderWriterLock();
+	private static final TBFCollectionReaderWriterLock _lock = new TBFCollectionReaderWriterLock();
 
 	private static TBMonitor_SiteConfig _siteConfig;
 
@@ -145,7 +145,7 @@ public class WOTaskdHandler {
 		startReading();
 		try {
 			aName = TBFKeyPath.lastPropertyKeyInKeyPath(aName);
-			// Only poll enabled hosts; if every host is disabled, skip the poll entirely (an empty taskd array otherwise trips sendRequest).
+			// Only poll-enabled hosts; if every host is disabled, skip the poll entirely (an empty taskd array otherwise trips sendRequest).
 			TBFArray<TBMonitor_Host> hostArray = enabledHosts(siteConfig.hostArray());
 			if (hostArray.count() != 0) {
 				if (ApplicationsPage.class.getName().endsWith(aName) && (siteConfig.applicationArray().count() != 0)) {
@@ -336,7 +336,7 @@ public class WOTaskdHandler {
 	}
 
 	protected void sendClearToWotaskd(TBMonitor_Host aHost) {
-		String data = new String("SITE");
+		String data = "SITE";
 		_sendOverwriteClearToWotaskd(aHost, "clear", data);
 	}
 
@@ -352,14 +352,14 @@ public class WOTaskdHandler {
 	/* ******* */
 
 	/* ******** COMMANDING ********* */
-	private static Object[] commandInstanceKeys = new Object[] { "applicationName", "id", "hostName", "port" };
+	private static final Object[] commandInstanceKeys = new Object[] { "applicationName", "id", "hostName", "port" };
 
 	public static void sendCommandInstancesToWotaskds(String command, TBFArray<TBMonitor_Instance> instanceArray,
 			TBFArray<TBMonitor_Host> wotaskdArray, WOTaskdHandler collector) {
 		if (instanceArray.count() > 0 && wotaskdArray.count() > 0) {
 			int instanceCount = instanceArray.count();
 
-			log.info("send command : ", command); // XXX
+			log.info("send command : {}", command); // XXX
 
 			TBFMutableDictionary<String, ?> monitorRequest = new TBFMutableDictionary<>(1);
 			TBFMutableArray<Object> commandWotaskd = new TBFMutableArray<>(instanceArray.count() + 1);
@@ -457,40 +457,39 @@ public class WOTaskdHandler {
 		if ((updateType.equals("overwrite")) || (updateType.equals("clear")))
 			clearOverwrite = true;
 
-		for (int i = 0; i < responseDicts.length; i++) {
-			if (responseDicts[i] != null) {
-				TBFDictionary responseDict = responseDicts[i];
-				getGlobalErrorFromResponse(responseDict, errorArray);
+        for (TBFDictionary responseDict : responseDicts) {
+            if (responseDict != null) {
+                getGlobalErrorFromResponse(responseDict, errorArray);
 
-				TBFDictionary updateWotaskdResponseDict = (TBFDictionary) responseDict.valueForKey("updateWotaskdResponse");
+                TBFDictionary updateWotaskdResponseDict = (TBFDictionary) responseDict.valueForKey("updateWotaskdResponse");
 
-				if (updateWotaskdResponseDict != null) {
-					TBFDictionary updateTypeResponse = (TBFDictionary) updateWotaskdResponseDict.valueForKey(updateType);
-					if (updateTypeResponse != null) {
-						if (clearOverwrite) {
-							String errorMessage = (String) updateTypeResponse.valueForKey("errorMessage");
-							if (errorMessage != null) {
-								errorArray.addObject(errorMessage);
-							}
-						} else {
-							if (hasSite) {
-								TBFDictionary aDict = (TBFDictionary) updateTypeResponse.valueForKey("site");
-								String errorMessage = (String) aDict.valueForKey("errorMessage");
-								if (errorMessage != null) {
-									errorArray.addObject(errorMessage);
-								}
-							}
-							if (hasHosts)
-								_addUpdateResponseToErrorArray(updateTypeResponse, "hostArray", errorArray);
-							if (hasApplications)
-								_addUpdateResponseToErrorArray(updateTypeResponse, "applicationArray", errorArray);
-							if (hasInstances)
-								_addUpdateResponseToErrorArray(updateTypeResponse, "instanceArray", errorArray);
-						}
-					}
-				}
-			}
-		}
+                if (updateWotaskdResponseDict != null) {
+                    TBFDictionary updateTypeResponse = (TBFDictionary) updateWotaskdResponseDict.valueForKey(updateType);
+                    if (updateTypeResponse != null) {
+                        if (clearOverwrite) {
+                            String errorMessage = (String) updateTypeResponse.valueForKey("errorMessage");
+                            if (errorMessage != null) {
+                                errorArray.addObject(errorMessage);
+                            }
+                        } else {
+                            if (hasSite) {
+                                TBFDictionary aDict = (TBFDictionary) updateTypeResponse.valueForKey("site");
+                                String errorMessage = (String) aDict.valueForKey("errorMessage");
+                                if (errorMessage != null) {
+                                    errorArray.addObject(errorMessage);
+                                }
+                            }
+                            if (hasHosts)
+                                _addUpdateResponseToErrorArray(updateTypeResponse, "hostArray", errorArray);
+                            if (hasApplications)
+                                _addUpdateResponseToErrorArray(updateTypeResponse, "applicationArray", errorArray);
+                            if (hasInstances)
+                                _addUpdateResponseToErrorArray(updateTypeResponse, "instanceArray", errorArray);
+                        }
+                    }
+                }
+            }
+        }
 		log.debug("##### getUpdateErrors: {}", errorArray);
 		mySession().addObjectsFromArrayIfAbsentToErrorMessageArray(errorArray);
 		return errorArray;
@@ -541,27 +540,27 @@ public class WOTaskdHandler {
 	protected TBFMutableArray getQueryErrors(TBFDictionary[] responseDicts) {
 		TBFMutableArray errorArray = new TBFMutableArray();
 
-		for (int i = 0; i < responseDicts.length; i++) {
-			if (responseDicts[i] != null) {
-				TBFDictionary responseDict = responseDicts[i];
-				getGlobalErrorFromResponse(responseDict, errorArray);
+        for (TBFDictionary dict : responseDicts) {
+            if (dict != null) {
+                TBFDictionary responseDict = dict;
+                getGlobalErrorFromResponse(responseDict, errorArray);
 
-				TBFArray commandWotaskdResponse = (TBFArray) responseDict.valueForKey("commandWotaskdResponse");
-				if ((commandWotaskdResponse != null) && (commandWotaskdResponse.count() > 0)) {
-					int count = commandWotaskdResponse.count();
-					for (int j = 1; j < count; j++) {
-						TBFDictionary aDict = (TBFDictionary) commandWotaskdResponse.objectAtIndex(j);
-						String errorMessage = (String) aDict.valueForKey("errorMessage");
-						if (errorMessage != null) {
-							errorArray.addObject(errorMessage);
-							if (j == 0)
-								break; // the command produced an error,
-							// parsing didn't finish
-						}
-					}
-				}
-			}
-		}
+                TBFArray commandWotaskdResponse = (TBFArray) responseDict.valueForKey("commandWotaskdResponse");
+                if ((commandWotaskdResponse != null) && (commandWotaskdResponse.count() > 0)) {
+                    int count = commandWotaskdResponse.count();
+                    for (int j = 1; j < count; j++) {
+                        TBFDictionary aDict = (TBFDictionary) commandWotaskdResponse.objectAtIndex(j);
+                        String errorMessage = (String) aDict.valueForKey("errorMessage");
+                        if (errorMessage != null) {
+                            errorArray.addObject(errorMessage);
+                            if (j == 0)
+                                break; // the command produced an error,
+                            // parsing didn't finish
+                        }
+                    }
+                }
+            }
+        }
 		log.debug("##### getQueryErrors: {}", errorArray);
 		mySession().addObjectsFromArrayIfAbsentToErrorMessageArray(errorArray);
 		return errorArray;
@@ -580,54 +579,54 @@ public class WOTaskdHandler {
 			TBResponse[] responses = sendQueryToWotaskds("INSTANCE", hostArray);
 
 			TBFMutableArray errorArray = new TBFMutableArray<>();
-			TBFArray responseArray = null;
-			TBFDictionary responseDictionary = null;
-			TBFDictionary queryResponseDictionary = null;
-			for (int i = 0; i < responses.length; i++) {
-				if ((responses[i] == null) || (responses[i].content() == null)) {
-					responseDictionary = emptyResponse;
-				} else {
-					try {
-						responseDictionary = (TBFDictionary) new _TBWMonitorDecoder().decodeRootObject(responses[i].content());
-					} catch (TBFXMLException wxe) {
-						log.error("MonitorComponent pageWithName(AppDetailPage) Error decoding response: {}", responses[i].contentString());
-						responseDictionary = responseParsingFailed;
-					}
-				}
-				getGlobalErrorFromResponse(responseDictionary, errorArray);
+			TBFArray responseArray;
+			TBFDictionary responseDictionary;
+			TBFDictionary queryResponseDictionary;
+            for (TBResponse response : responses) {
+                if ((response == null) || (response.content() == null)) {
+                    responseDictionary = emptyResponse;
+                } else {
+                    try {
+                        responseDictionary = (TBFDictionary) new _TBWMonitorDecoder().decodeRootObject(response.content());
+                    } catch (TBFXMLException wxe) {
+                        log.error("MonitorComponent pageWithName(AppDetailPage) Error decoding response: {}", response.contentString());
+                        responseDictionary = responseParsingFailed;
+                    }
+                }
+                getGlobalErrorFromResponse(responseDictionary, errorArray);
 
-				queryResponseDictionary = (TBFDictionary) responseDictionary.valueForKey("queryWotaskdResponse");
-				if (queryResponseDictionary != null) {
-					responseArray = (TBFArray) queryResponseDictionary.valueForKey("instanceResponse");
-					if (responseArray != null) {
-						for (int j = 0; j < responseArray.count(); j++) {
-							responseDictionary = (TBFDictionary) responseArray.objectAtIndex(j);
+                queryResponseDictionary = (TBFDictionary) responseDictionary.valueForKey("queryWotaskdResponse");
+                if (queryResponseDictionary != null) {
+                    responseArray = (TBFArray) queryResponseDictionary.valueForKey("instanceResponse");
+                    if (responseArray != null) {
+                        for (int j = 0; j < responseArray.count(); j++) {
+                            responseDictionary = (TBFDictionary) responseArray.objectAtIndex(j);
 
-							String host = responseDictionary.stringForKey("host");
-							Integer port = (Integer) responseDictionary.valueForKey("port");
-							String runningState = responseDictionary.stringForKey("runningState");
-							Boolean refusingNewSessions = (Boolean) responseDictionary.valueForKey("refusingNewSessions");
-							TBFDictionary statistics = (TBFDictionary) responseDictionary.valueForKey("statistics");
-							TBFArray deaths = (TBFArray) responseDictionary.valueForKey("deaths");
-							String nextShutdown = responseDictionary.stringForKey("nextShutdown");
+                            String host = responseDictionary.stringForKey("host");
+                            Integer port = (Integer) responseDictionary.valueForKey("port");
+                            String runningState = responseDictionary.stringForKey("runningState");
+                            Boolean refusingNewSessions = (Boolean) responseDictionary.valueForKey("refusingNewSessions");
+                            TBFDictionary statistics = (TBFDictionary) responseDictionary.valueForKey("statistics");
+                            TBFArray deaths = (TBFArray) responseDictionary.valueForKey("deaths");
+                            String nextShutdown = responseDictionary.stringForKey("nextShutdown");
 
-							TBMonitor_Instance anInstance = siteConfig().instanceWithHostnameAndPort(host, port);
-							if (anInstance != null) {
-								for (int k = 0; k < TBMonitor_Object.stateArray.length; k++) {
-									if (TBMonitor_Object.stateArray[k].equals(runningState)) {
-										anInstance.state = k;
-										break;
-									}
-								}
-								anInstance.setRefusingNewSessions(refusingNewSessions.booleanValue());
-								anInstance.setStatistics(statistics);
-								anInstance.setDeaths(new TBFMutableArray(deaths));
-								anInstance.setNextScheduledShutdownString_M(nextShutdown);
-							}
-						}
-					}
-				}
-			} // For Loop
+                            TBMonitor_Instance anInstance = siteConfig().instanceWithHostnameAndPort(host, port);
+                            if (anInstance != null) {
+                                for (int k = 0; k < TBMonitor_Object.stateArray.length; k++) {
+                                    if (TBMonitor_Object.stateArray[k].equals(runningState)) {
+                                        anInstance.state = k;
+                                        break;
+                                    }
+                                }
+                                anInstance.setRefusingNewSessions(refusingNewSessions.booleanValue());
+                                anInstance.setStatistics(statistics);
+                                anInstance.setDeaths(new TBFMutableArray<>(deaths));
+                                anInstance.setNextScheduledShutdownString_M(nextShutdown);
+                            }
+                        }
+                    }
+                }
+            } // For Loop
 			log.debug("##### pageWithName(AppDetailPage) errors: {}", errorArray);
 			mySession().addObjectsFromArrayIfAbsentToErrorMessageArray(errorArray);
 		}
@@ -637,8 +636,8 @@ public class WOTaskdHandler {
 	public void getHostStatusForHosts(TBFArray<TBMonitor_Host> hostArray) {
 		TBResponse[] responses = sendQueryToWotaskds("HOST", hostArray);
 
-		TBFMutableArray errorArray = new TBFMutableArray();
-		TBFDictionary responseDict = null;
+		TBFMutableArray errorArray = new TBFMutableArray<>();
+		TBFDictionary responseDict;
 		for (int i = 0; i < responses.length; i++) {
 			TBMonitor_Host aHost = siteConfig().hostArray().objectAtIndex(i);
 
@@ -675,37 +674,37 @@ public class WOTaskdHandler {
 		TBFMutableArray errorArray = new TBFMutableArray();
 		TBFDictionary applicationResponseDictionary;
 		TBFDictionary queryResponseDictionary;
-		TBFArray responseArray = null;
-		TBFDictionary responseDictionary = null;
-		for (int i = 0; i < responses.length; i++) {
-			if ((responses[i] == null) || (responses[i].content() == null)) {
-				queryResponseDictionary = emptyResponse;
-			} else {
-				try {
-					queryResponseDictionary = (TBFDictionary) new _TBWMonitorDecoder().decodeRootObject(responses[i].content());
-				} catch (TBFXMLException wxe) {
-					log.error("MonitorComponent pageWithName(ApplicationsPage) Error decoding response: {}", responses[i].contentString());
-					queryResponseDictionary = responseParsingFailed;
-				}
-			}
-			getGlobalErrorFromResponse(queryResponseDictionary, errorArray);
+		TBFArray responseArray;
+		TBFDictionary responseDictionary;
+        for (TBResponse respons : responses) {
+            if ((respons == null) || (respons.content() == null)) {
+                queryResponseDictionary = emptyResponse;
+            } else {
+                try {
+                    queryResponseDictionary = (TBFDictionary) new _TBWMonitorDecoder().decodeRootObject(respons.content());
+                } catch (TBFXMLException wxe) {
+                    log.error("MonitorComponent pageWithName(ApplicationsPage) Error decoding response: {}", respons.contentString());
+                    queryResponseDictionary = responseParsingFailed;
+                }
+            }
+            getGlobalErrorFromResponse(queryResponseDictionary, errorArray);
 
-			applicationResponseDictionary = (TBFDictionary) queryResponseDictionary.valueForKey("queryWotaskdResponse");
-			if (applicationResponseDictionary != null) {
-				responseArray = (TBFArray) applicationResponseDictionary.valueForKey("applicationResponse");
-				if (responseArray != null) {
-					for (int j = 0; j < responseArray.count(); j++) {
-						responseDictionary = (TBFDictionary) responseArray.objectAtIndex(j);
-						String appName = (String) responseDictionary.valueForKey("name");
-						Integer runningInstances = (Integer) responseDictionary.valueForKey("runningInstances");
-						TBMonitor_Application anApplication = siteConfig().applicationWithName(appName);
-						if (anApplication != null) {
-							anApplication.setRunningInstancesCount(anApplication.runningInstancesCount() + runningInstances.intValue());
-						}
-					}
-				}
-			}
-		} // for
+            applicationResponseDictionary = (TBFDictionary) queryResponseDictionary.valueForKey("queryWotaskdResponse");
+            if (applicationResponseDictionary != null) {
+                responseArray = (TBFArray) applicationResponseDictionary.valueForKey("applicationResponse");
+                if (responseArray != null) {
+                    for (int j = 0; j < responseArray.count(); j++) {
+                        responseDictionary = (TBFDictionary) responseArray.objectAtIndex(j);
+                        String appName = (String) responseDictionary.valueForKey("name");
+                        Integer runningInstances = (Integer) responseDictionary.valueForKey("runningInstances");
+                        TBMonitor_Application anApplication = siteConfig().applicationWithName(appName);
+                        if (anApplication != null) {
+                            anApplication.setRunningInstancesCount(anApplication.runningInstancesCount() + runningInstances);
+                        }
+                    }
+                }
+            }
+        } // for
 		log.debug("##### pageWithName(ApplicationsPage) errors: {}", errorArray);
 		mySession().addObjectsFromArrayIfAbsentToErrorMessageArray(errorArray);
 	}

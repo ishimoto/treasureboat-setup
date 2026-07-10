@@ -28,9 +28,12 @@ package org.treasureboat.app.monitor.components;
 import org.treasureboat.webcore.appserver.TBContext;
 import org.treasureboat.webcore.components.TBComponent;
 
+import java.io.Serial;
+
 public class TbTaskdInfoPage extends TBComponent {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	public String tbtaskdText;
 

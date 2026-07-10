@@ -26,6 +26,7 @@
 package org.treasureboat.app.monitor.components.page;
 
 import java.io.InterruptedIOException;
+import java.io.Serial;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -57,7 +58,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HostsPage extends MonitorComponent {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	private String _newHostName;
 
@@ -77,8 +79,8 @@ public class HostsPage extends MonitorComponent {
 	//	Constructor : コンストラクタ
 	//********************************************************************
 
-	public HostsPage(TBContext aWocontext) {
-		super(aWocontext);
+	public HostsPage(TBContext context) {
+		super(context);
 
 		handler().updateForPage(name());
 	}
@@ -218,8 +220,6 @@ public class HostsPage extends MonitorComponent {
 
 	/**
 	 * this is the action for removing a host.
-	 * 
-	 * @return
 	 */
 	public TBComponent removeHostClicked() {
 		final TBMonitor_Host host = currentHost;
@@ -277,9 +277,7 @@ public class HostsPage extends MonitorComponent {
 	}
 
 	/**
-	 * Hosts Page : clicking on the Hosts available 'view config' link
-	 * 
-	 * @return
+	 * Hosts Page: clicking on the Hosts available 'view config' link
 	 */
 	public TBComponent displayTBtaskdInfoClicked() {
 		log.info("!@#$!@#$ displayTBtaskdInfoClicked creates a {}", TBWHttpConnection.class.getSimpleName());

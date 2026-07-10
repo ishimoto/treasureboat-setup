@@ -1,8 +1,6 @@
 package org.treasureboat.app.monitor.application.starter;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.treasureboat.app.monitor.components.WOTaskdHandler;
 import org.treasureboat.app.monitor.components.WOTaskdHandler.ErrorCollector;
 import org.treasureboat.foundation.TBFMutableSet;
@@ -39,7 +37,7 @@ public abstract class ApplicationStarter extends Thread implements ErrorCollecto
 
 	protected void log(String msg) {
 		log.info(msg);
-		_status = msg != null ? msg.toString() : "No status";
+		_status = msg != null ? msg : "No status";
 	}
 
 	public String status() {
@@ -52,13 +50,13 @@ public abstract class ApplicationStarter extends Thread implements ErrorCollecto
 		return _app;
 	}
 
-	private TBMonitor_Application _app;
+	private final TBMonitor_Application _app;
 
 	public WOTaskdHandler handler() {
 		return _handler;
 	}
 
-	private WOTaskdHandler _handler;
+	private final WOTaskdHandler _handler;
 
 	public synchronized TBFArray<String> errors() {
 		return _errors.allObjects();

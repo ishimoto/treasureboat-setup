@@ -5,12 +5,12 @@ NavPage : NavigationPage {
 }
 
 AdminPasswordIsNotSet : TBConditional {
-    condition = theApplication.siteConfig.isPasswordRequired;
+    condition = theApplication.siteConfig.isPasswordRequired; //VALID
     negate = true;
 }
 
 AdminPasswordIsSet : TBConditional {
-    condition = theApplication.siteConfig.isPasswordRequired;
+    condition = theApplication.siteConfig.isPasswordRequired; //VALID
 }
 
 PasswordChangeForm : TBForm {
@@ -53,11 +53,11 @@ PasswordReserFormSubmit : TBSubmitButton {
 DetailViewForm: TBForm {}
 
 AutoRefreshCheckbox : TBCheckBox {
-    checked = theApplication.siteConfig.viewRefreshEnabled;
+    checked = theApplication.siteConfig.viewRefreshEnabled; //VALID
 }
 
 AutoRefreshTimeIntervalField : TBNumberField {
-    value = theApplication.siteConfig.viewRefreshRate;
+    value = theApplication.siteConfig.viewRefreshRate; //VALID
     size = "3";
     automatic = true;
     class = "narrow input;"

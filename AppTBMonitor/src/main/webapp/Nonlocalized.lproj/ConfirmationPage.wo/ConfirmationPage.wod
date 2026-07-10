@@ -8,7 +8,7 @@ Question : TBString {
     escapeHTML = false;
 }
 
-Explaination: TBString {
+Explanation: TBString {
     value = explaination;
     escapeHTML = false;
 }

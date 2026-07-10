@@ -14,35 +14,35 @@ EmailForm : TBForm {}
 
 SMTPHost : TBTextField {
 	size = "40";
-    value = theApplication.siteConfig.SMTPhost;
+    value = theApplication.siteConfig.SMTPhost; //VALID
     automatic = true;
     class = "narrow input";
 }
 
 SMTPAccount : TBTextField {
 	size = "40";
-    value = theApplication.siteConfig.SMTPaccount;
+    value = theApplication.siteConfig.SMTPaccount; //VALID
     automatic = true;
     class = "narrow input";
 }
 
 SMTPPassword : TBPasswordField {
 	size = "40";
-    value = theApplication.siteConfig.SMTPpassword;
+    value = theApplication.siteConfig.SMTPpassword; //VALID
     automatic = true;
     class = "narrow input";
 }
 
 SMTPEmailReturn : TBTextField {
 	size = "40";
-    value = theApplication.siteConfig.emailReturnAddr;
+    value = theApplication.siteConfig.emailReturnAddr; //VALID
     automatic = true;
     class = "narrow input";
 }
 
 SMTPEmailTo : TBTextField {
 	size = "40";
-    value = theApplication.siteConfig.emailToAddr;
+    value = theApplication.siteConfig.emailToAddr; //VALID
     automatic = true;
     class = "narrow input";
 }

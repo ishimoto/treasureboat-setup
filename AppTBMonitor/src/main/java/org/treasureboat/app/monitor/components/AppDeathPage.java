@@ -31,15 +31,19 @@ import org.treasureboat.monitor.TBMonitor_Instance;
 import org.treasureboat.webcore.appserver.TBContext;
 import org.treasureboat.webcore.components.TBComponent;
 
+import java.io.Serial;
+
 public class AppDeathPage extends MonitorComponent {
-	private static final long serialVersionUID = -2462045617649768062L;
+
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	public Object aDeath;
 
 	public int anIndex;
 
-	public AppDeathPage(TBContext aWocontext) {
-		super(aWocontext);
+	public AppDeathPage(TBContext context) {
+		super(context);
 	}
 
 	public TBComponent clearDeathsClicked() {

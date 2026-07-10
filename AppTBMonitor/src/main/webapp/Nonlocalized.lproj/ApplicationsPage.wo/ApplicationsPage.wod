@@ -22,7 +22,7 @@ AppDetailsLink: TBHyperlink {
 
 AppIsNOTRunning: TBConditional {
     condition = currentApplication.isRunning;
-    negate = YES;
+    negate = true;
 }
 
 AppIsRunning: TBConditional {

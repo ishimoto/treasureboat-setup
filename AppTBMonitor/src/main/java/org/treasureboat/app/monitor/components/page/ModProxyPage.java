@@ -25,6 +25,7 @@
  */
 package org.treasureboat.app.monitor.components.page;
 
+import java.io.Serial;
 import java.util.Enumeration;
 
 import org.apache.commons.lang3.StringUtils;
@@ -41,13 +42,14 @@ import org.treasureboat.webcore.appserver.iface.ITBWActionResults;
 
 public class ModProxyPage extends MonitorComponent {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	public TBFArray<String> loadBalencers = new TBFArray<>("byrequests", "bytraffic", "bybusyness");
 	public String loadBalancerItem;
 	public String loadBalancer = "byrequests";
 
-	public Integer timeout = Integer.valueOf(60); // Mod-proxy timeout is in Seconds. the Default is 60 seconds
+	public Integer timeout = 60; // Mod-proxy timeout is in Seconds. the Default is 60 seconds
 
 	public static final String HOST_NAME_KEY = "hostName";
 	public static final String PORT_KEY = "port";
@@ -58,8 +60,8 @@ public class ModProxyPage extends MonitorComponent {
 	//	Constructor : コンストラクタ
 	//********************************************************************
 
-	public ModProxyPage(TBContext aWocontext) {
-		super(aWocontext);
+	public ModProxyPage(TBContext context) {
+		super(context);
 		setAdaptorUrl(theApplication()._siteConfig().woAdaptor());
 	}
 
@@ -84,11 +86,8 @@ public class ModProxyPage extends MonitorComponent {
 
 	public boolean adaptorUrlIsEmpty() {
 		String tmpAdaptor = StringUtils.removeEnd(_adaptorUrl, TBFConstants.SLASH);
-		if (TBFString.stringIsNullOrEmpty(tmpAdaptor)) {
-			return true;
-		}
-		return false;
-	}
+        return TBFString.stringIsNullOrEmpty(tmpAdaptor);
+    }
 
 	public String modProxyContent() {
 		return _generateModProxyConfig();
@@ -137,7 +136,7 @@ public class ModProxyPage extends MonitorComponent {
 			// log.info("adaptorPath {} \n **** Why is the IP address here?", adaptorPath);
 			// adaptorPath is prefixing the IP address  pdy
 
-			result.append("<Proxy balancer://" + anApp.name() + "Cluster>\n"); // this is good  pdy
+			result.append("<Proxy balancer://").append(anApp.name()).append("Cluster>\n"); // this is good  pdy
 
 			TBFMutableArray<String> reversePathes = new TBFMutableArray<>();
 
@@ -164,7 +163,7 @@ public class ModProxyPage extends MonitorComponent {
 			}
 			result.append('\n');
 			result.append("\tProxySet ");
-			if (timeout != null && timeout.intValue() > 0) {
+			if (timeout != null && timeout > 0) {
 				result.append(" timeout=");
 				result.append(timeout);
 			}

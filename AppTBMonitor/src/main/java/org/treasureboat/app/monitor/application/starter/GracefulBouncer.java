@@ -14,10 +14,10 @@ import org.treasureboat.monitor.TBMonitor_Instance;
  * until they have started, then refusing sessions for all old instances and
  * turning scheduling on for all but the number of instances we started
  * originally. The next effect should be that the new users get the new app,
- * old instances die in due time and then restart when the sessions stop.
- * 
- * You must have at least one inactive instance in order to perform a graceful bounce.
- * 
+ * old instances die in due time, and then restart when the sessions stop.
+ * <p>
+ * You must have at least one inactive instance to perform a graceful bounce.
+ * <p>
  * You may or may not need to set ERKillTimer to prevent totally
  * long-running sessions to keep the app from dying.
  *
@@ -66,7 +66,7 @@ public class GracefulBouncer extends ApplicationStarter {
         
         int numToStartPerHost = 1;
         if (activeHosts.count() > 0) {
-            numToStartPerHost = (int) (runningInstances.count() / activeHosts.count() * .1);
+            numToStartPerHost = (int) ((double) runningInstances.count() / activeHosts.count() * .1);
         }
         if (numToStartPerHost < 1) {
             numToStartPerHost = 1;
@@ -74,7 +74,7 @@ public class GracefulBouncer extends ApplicationStarter {
         boolean useScheduling = true;
 
         for (TBMonitor_Instance instance : runningInstances) {
-            useScheduling &= instance.schedulingEnabled() != null && instance.schedulingEnabled().booleanValue();
+            useScheduling &= instance.schedulingEnabled() != null && instance.schedulingEnabled();
         }
 
         TBFMutableArray<TBMonitor_Instance> startingInstances = new TBFMutableArray<>();

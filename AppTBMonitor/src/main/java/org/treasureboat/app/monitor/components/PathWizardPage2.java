@@ -33,16 +33,19 @@ import org.treasureboat.monitor.TBMonitor_Instance;
 import org.treasureboat.webcore.appserver.TBContext;
 import org.treasureboat.webcore.components.TBComponent;
 
+import java.io.Serial;
+
 public class PathWizardPage2 extends MonitorComponent {
 
-	private static final long serialVersionUID = 1L;
+	@Serial
+    private static final long serialVersionUID = 1L;
 
 	//********************************************************************
 	//	Constructor : コンストラクタ
 	//********************************************************************
 
-	public PathWizardPage2(TBContext aWocontext) {
-		super(aWocontext);
+	public PathWizardPage2(TBContext context) {
+		super(context);
 	}
 
 	//********************************************************************
