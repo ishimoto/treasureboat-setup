@@ -456,3 +456,62 @@ div.ApplicationDetailsBox table tr.TotalsForRunningInstances .label
 	text-align: right;
 }
 
+/* ---- Add Host form (Hosts page) ---- */
+.AddHostBox h2 {
+	margin-top: 0;
+}
+
+.AddHostBox .AddHostFields {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 12px 18px;
+}
+
+.AddHostBox .field {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.AddHostBox .fieldLabel {
+	font-weight: bold;
+	color: #4651A6;
+	font-size: 13px;
+}
+
+.AddHostBox input.input,
+.AddHostBox select {
+	height: 36px;
+	padding: 4px 10px;
+	box-sizing: border-box;
+	border: 1px solid #c3c7e0;
+	border-radius: 6px;
+	background-color: #fff;
+	font-size: 14px;
+	vertical-align: middle;
+}
+
+/* drop the native select chrome (whose square arrow box clashes with the
+   rounded border) and draw our own chevron so the right edge stays clean */
+.AddHostBox select {
+	min-width: 130px;
+	padding-right: 30px;
+	cursor: pointer;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%234651A6' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 11px center;
+	background-size: 10px 6px;
+}
+
+.AddHostBox input.narrow {
+	min-width: 240px;
+}
+
+.AddHostBox .AddHostSubmit {
+	margin-left: auto;
+}
+

@@ -43,17 +43,28 @@
 		</table>
 	</div>
 
-	<div class="row">
-		<div class = "primary alert">
-			<treasureboat name="LocalHost">
-				<treasureboat name = "AddHostForm">
-					<br />
-					<p class = "text-center">Add Host: <treasureboat name = "HostNameTextField" /> of type: <treasureboat name = "HostTypesPopUpButton" /> with TBTaskd version: <treasureboat name = "VersionPopup" /></p>
-					<p class = "text-center"><treasureboat name = "AddHostSubmitButton" /></p>
-				</treasureboat>
+	<treasureboat name="LocalHost">
+		<div class="Box AddHostBox">
+			<h2>Add Host</h2>
+			<treasureboat name = "AddHostForm">
+				<div class="AddHostFields">
+					<div class="field">
+						<span class="fieldLabel">Host name / IP</span>
+						<treasureboat name = "HostNameTextField" />
+					</div>
+					<div class="field">
+						<span class="fieldLabel">Type</span>
+						<treasureboat name = "HostTypesPopUpButton" />
+					</div>
+					<div class="field">
+						<span class="fieldLabel">TBTaskd URL version</span>
+						<treasureboat name = "VersionPopup" />
+					</div>
+					<span class="AddHostSubmit"><treasureboat name = "AddHostSubmitButton" /></span>
+				</div>
 			</treasureboat>
 		</div>
-	</div>
+	</treasureboat>
 	
 	<div class="row">
 		<div class = "warning alert">
