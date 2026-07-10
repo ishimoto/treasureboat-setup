@@ -133,6 +133,14 @@ InstRunningOnHost: TBString {
 	value = currentInstance.displayLabelAndPort;
 }
 
+HostHasDisplayName: TBConditional {
+	condition = currentInstance.hostHasDisplayName;
+}
+
+InstHostAddress: TBString {
+	value = currentInstance.hostAddressForDisplay;
+}
+
 Version : TBString {
 	value = currentInstance.host.version;
 }
@@ -326,7 +334,7 @@ AddHasNOHostsConditional : TBConditional {
 AddHostPopUp: TBPopUp {
     list = theApplication.siteConfig.hostArray; //VALID
     item = aHost;
-    displayString = aHost.displayLabel;
+    displayString = aHost.displayLabelWithAddress;
     selection = selectedHost;
     automatic = true;
 }

@@ -304,6 +304,12 @@ td.PushButtonWrapper {
 	color: gray;
 }
 
+/* raw IP address shown in gray under the host display name (SSH target) */
+.hostAddressLine {
+	font-size: 85%;
+	color: gray;
+}
+
 .ControlColOne,
 .ControlColTwo {
 	float: left;
