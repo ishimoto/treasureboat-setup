@@ -103,7 +103,7 @@ SendTimeoutField : TBTextField {
 }
 
 String1: TBString {
-	value = myInstance.hostName;
+	value = myInstance.hostDisplayLabel;
 }
 
 InstanceSettingsSubmit: TBSubmitButton {

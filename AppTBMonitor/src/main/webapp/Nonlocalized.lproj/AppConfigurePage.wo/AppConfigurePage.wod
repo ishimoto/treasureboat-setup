@@ -416,7 +416,7 @@ ID: TBString {
 }
 
 HostAndPort: TBString {
-	value = currentScheduledInstance.displayHostAndPort;
+	value = currentScheduledInstance.displayLabelAndPort;
 }
 
 SubmitButton1: TBSubmitButton {

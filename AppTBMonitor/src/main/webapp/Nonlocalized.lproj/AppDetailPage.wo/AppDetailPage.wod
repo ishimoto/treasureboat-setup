@@ -130,7 +130,7 @@ InstAdaptorLink: TBHyperlink {
 }
 
 InstRunningOnHost: TBString {
-	value = currentInstance.displayHostAndPort;
+	value = currentInstance.displayLabelAndPort;
 }
 
 Version : TBString {
