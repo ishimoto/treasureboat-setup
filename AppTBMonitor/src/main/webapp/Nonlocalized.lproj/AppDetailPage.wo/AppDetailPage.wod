@@ -326,7 +326,7 @@ AddHasNOHostsConditional : TBConditional {
 AddHostPopUp: TBPopUp {
     list = theApplication.siteConfig.hostArray;
     item = aHost;
-    displayString = aHost.name;
+    displayString = aHost.displayLabel;
     selection = selectedHost;
     automatic = true;
 }

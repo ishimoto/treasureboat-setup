@@ -511,6 +511,11 @@ div.ApplicationDetailsBox table tr.TotalsForRunningInstances .label
 	min-width: 240px;
 }
 
+.AddForm input.xnarrow {
+	width: 80px;
+	text-align: center;
+}
+
 .AddForm .submit {
 	margin-left: auto;
 }

@@ -267,15 +267,22 @@
   
   
 	<treasureboat name = "AddHasHostsConditional">
-	    <div class = "row">
-	    	<div class = "primary alert">
-	      		<treasureboat name = "AddInstanceForm">
-	      			<br />
-	        		Add: <treasureboat name = "AddNumInstances" /> instance(s) on host: <treasureboat name = "AddHostPopUp" />
-	        		<treasureboat name = "AddInstanceSubmitButton" />
-	     		 </treasureboat>
-	    	</div>
-	    </div>
+		<div class = "Box AddForm">
+			<h2>Add Instances</h2>
+			<treasureboat name = "AddInstanceForm">
+				<div class="fields">
+					<div class="field">
+						<span class="fieldLabel">Number of instances to add</span>
+						<treasureboat name = "AddNumInstances" />
+					</div>
+					<div class="field">
+						<span class="fieldLabel">On host</span>
+						<treasureboat name = "AddHostPopUp" />
+					</div>
+					<span class="submit"><treasureboat name = "AddInstanceSubmitButton" /></span>
+				</div>
+			</treasureboat>
+		</div>
 	</treasureboat>
 	
 </treasureboat>
