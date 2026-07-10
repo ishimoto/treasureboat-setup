@@ -88,8 +88,8 @@ Then add this host in TBMonitor (by IP/hostname) — it should show **Available:
 - **Config location:** `-newPath` on a host resolves to `/opt/TreasureBoat/Configuration/`.
 - **Custom properties (optional):** runtime overrides can live in `/etc/TreasureBoat/tbtaskd/Properties`
   — this survives app updates, unlike the `Properties` bundled inside the `.woa`.
-- **Instance spawn:** taskd launches app instances via `SpawnOfWotaskd.sh` (Unix). A
-  rename-modernization is pending — point `LocalMonitor` at `SpawnOfTBTaskd.sh` and
-  retire the `wotaskd`-named scripts. (`SpawnOfWotaskd.exe` is Windows-only, unused on Linux.)
+- **Instance spawn:** taskd launches app instances via `SpawnOfTBTaskd.sh` (Unix);
+  `SpawnOfTBTaskd.exe` is the Windows equivalent (unused on Linux). Toggle with the
+  `TBMonitor_SHOULD_USE_SPAWN` property.
 - **Old boxes:** the SysV init scripts were removed; if a pre-systemd host ever needs one,
   recover from git history.

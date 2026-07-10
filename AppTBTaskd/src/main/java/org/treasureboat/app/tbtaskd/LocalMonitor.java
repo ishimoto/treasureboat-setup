@@ -107,9 +107,9 @@ public class LocalMonitor extends TBMonitor_ProtoLocalAbstractMonitor {
 			appDir = TBFFileUtilities.stringByAppendingPathComponent(appDir, "Contents");
 			appDir = TBFFileUtilities.stringByAppendingPathComponent(appDir, "Resources");
 			if (_isOnWindows) {
-				appDir = TBFFileUtilities.stringByAppendingPathComponent(appDir, "SpawnOfWotaskd.exe");
+				appDir = TBFFileUtilities.stringByAppendingPathComponent(appDir, "SpawnOfTBTaskd.exe");
 			} else {
-				appDir = TBFFileUtilities.stringByAppendingPathComponent(appDir, "SpawnOfWotaskd.sh");
+				appDir = TBFFileUtilities.stringByAppendingPathComponent(appDir, "SpawnOfTBTaskd.sh");
 			}
 
 			spawningGrounds = appDir + " ";
