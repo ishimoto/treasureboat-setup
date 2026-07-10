@@ -169,6 +169,10 @@ public class ApplicationsPage extends MonitorComponent {
 						handler().sendAddApplicationToWotaskds(newApplication, siteConfig().hostArray());
 					}
 
+					// Persist the master SiteConfigBackup.xml. Without this the app is only in
+					// memory + pushed to tbtaskd, so it vanishes from the Monitor on restart.
+					siteConfig().archiveSiteConfig();
+
 					AppConfigurePage aPage = AppConfigurePage.create(context(), newApplication);
 					aPage.isNewInstanceSectionVisible = true;
 
@@ -204,6 +208,8 @@ public class ApplicationsPage extends MonitorComponent {
 					if (siteConfig().hostArray().count() != 0) {
 						handler().sendRemoveApplicationToWotaskds(application, siteConfig().hostArray());
 					}
+
+					siteConfig().archiveSiteConfig();   // persist master config
 				} finally {
 					handler().endWriting();
 				}

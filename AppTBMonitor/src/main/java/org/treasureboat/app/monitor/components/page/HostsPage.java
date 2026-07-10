@@ -190,6 +190,8 @@ public class HostsPage extends MonitorComponent {
 								handler().sendAddHostToWotaskds(host, tempHostArray);
 							}
 
+							siteConfig().archiveSiteConfig();   // persist master config
+
 						} else {
 							mySession().addErrorIfAbsent("The tbtaskd on " + _newHostName + " is an older version, please upgrade before adding...");
 						}
@@ -240,6 +242,7 @@ public class HostsPage extends MonitorComponent {
 
 					handler().sendRemoveHostToWotaskds(host, tempHostArray);
 
+					siteConfig().archiveSiteConfig();   // persist master config
 				} finally {
 					handler().endWriting();
 				}

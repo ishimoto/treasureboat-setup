@@ -266,6 +266,8 @@ public class AppDetailPage extends MonitorComponent {
 					if (siteConfig().hostArray().count() != 0) {
 						handler().sendRemoveInstancesToWotaskds(new TBFArray<>(instance), siteConfig().hostArray());
 					}
+
+					siteConfig().archiveSiteConfig();   // persist master config
 				} finally {
 					handler().endWriting();
 				}
@@ -855,6 +857,8 @@ public class AppDetailPage extends MonitorComponent {
 			if (allHosts().count() != 0) {
 				handler().sendAddInstancesToWotaskds(newInstanceArray, allHosts());
 			}
+
+			siteConfig().archiveSiteConfig();   // persist master config (instances were memory + tbtaskd only)
 		} finally {
 			handler().endWriting();
 		}
