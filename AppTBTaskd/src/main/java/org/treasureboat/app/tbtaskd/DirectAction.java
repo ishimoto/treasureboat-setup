@@ -153,9 +153,24 @@ public class DirectAction extends TBDirectAction {
 		TBFMutableDictionary monitorResponse = new TBFMutableDictionary<>();
 		TBFMutableArray<String> errorResponse = new TBFMutableArray<>();
 
-		TBFDictionary updateWotaskdDict = (TBFDictionary) requestDict.valueForKey(TBMonitor_Host.UPDATE_TASKD);
-		TBFArray<?> commandWotaskdArray = (TBFArray<?>) requestDict.valueForKey("commandWotaskd");
-		String queryWotaskdString = requestDict.stringForKey("queryWotaskd");
+		// Accept both the legacy "*Wotaskd" wire keys and the modern "*TBtaskd" aliases.
+		// A newer Monitor may send the new names; the new name wins if present, else we fall
+		// back to the legacy one, so old and new peers interoperate in either direction.
+		// The new-name literals mirror TBMonitor_Host.UPDATE_TASKD_NEW etc.; kept as literals
+		// here so taskd still compiles against the released tb-extra-monitor (the constant is
+		// snapshot-only until the next extra release, and the reader only needs the string).
+		TBFDictionary updateWotaskdDict = (TBFDictionary) requestDict.valueForKey("updateTBtaskd");
+		if (updateWotaskdDict == null) {
+			updateWotaskdDict = (TBFDictionary) requestDict.valueForKey(TBMonitor_Host.UPDATE_TASKD);
+		}
+		TBFArray<?> commandWotaskdArray = (TBFArray<?>) requestDict.valueForKey("commandTBtaskd");
+		if (commandWotaskdArray == null) {
+			commandWotaskdArray = (TBFArray<?>) requestDict.valueForKey("commandWotaskd");
+		}
+		String queryWotaskdString = requestDict.stringForKey("queryTBtaskd");
+		if (queryWotaskdString == null) {
+			queryWotaskdString = requestDict.stringForKey("queryWotaskd");
+		}
 
 		//********************************************************************
 		//	Checking for Commands
