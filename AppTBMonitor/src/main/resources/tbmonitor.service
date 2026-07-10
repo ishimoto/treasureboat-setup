@@ -1,12 +1,27 @@
 [Unit]
-Description=TreasureBoat Monitor Application
-After=network.target
+Description=TreasureBoat Monitor (tbmonitor)
+After=network-online.target
+Wants=network-online.target
 
 [Service]
+Type=simple
 User=appserver
 Group=appserveradm
-Environment=LOGFILE=/opt/TreasureBoat/Logs/tbmonitor.log
-ExecStart=/opt/TreasureBoat/Applications/AppTBMonitor.woa/AppTBMonitor -p 56789 >> $LOGFILE
+WorkingDirectory=/opt/TreasureBoat/Applications
+
+# systemd runs ExecStart directly (no shell), so shell redirection like '>> file' is NOT allowed here.
+# The admin UI binds to 127.0.0.1 by default; add `-h <hostname/ip>` to expose it to admins
+# (then restrict port 56789 by firewall — see INSTALL.md).
+ExecStart=/opt/TreasureBoat/Applications/AppTBMonitor.woa/AppTBMonitor -n Monitor -p 56789 -newPath -url
+
+# stdout/stderr -> a log file. (Or use journald: `journalctl -u tbmonitor -f`.)
+StandardOutput=append:/opt/TreasureBoat/Logs/tbmonitor.log
+StandardError=append:/opt/TreasureBoat/Logs/tbmonitor.log
+
+Restart=on-failure
+RestartSec=5
+
+# A clean stop via `systemctl stop` sends SIGTERM; the JVM exits 143 (128+15) — treat as success.
 SuccessExitStatus=143
 
 [Install]
