@@ -466,16 +466,18 @@ public class Application extends TBApplication {
 	public void createRequestListenerThread() {
 		log.debug("Detaching request listen thread");
 		listenThread = new Application.ListenThread();
+		// Daemon so the JVM reaps the listener on shutdown (replaces the old Thread.stop()).
+		listenThread.setDaemon(true);
 		listenThread.start();
-	}
 
-	// cleans up after the Application (specifically the ListenThread)
-	@Override
-	public void finalize() throws Throwable {
-		listenThread.closeRequestSocket();
-		listenThread.stop();
-
-		super.finalize();
+		// Replaces the old finalize(): on JVM shutdown, unblock receive() and close the
+		// socket cleanly (leaving the multicast group) instead of relying on finalization.
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			final ListenThread t = listenThread;
+			if (t != null) {
+				t.closeRequestSocket();
+			}
+		}, "tbtaskd-listen-shutdown"));
 	}
 
 	// Overridden createRequest because WO ObjC apps send 'GET /... HTTP/1.0 ' (note extra space) which doesn't parse very well.
@@ -504,6 +506,7 @@ public class Application extends TBApplication {
 	class ListenThread extends Thread {
 		MulticastSocket socket;
 		InetAddress address;
+		private volatile boolean _stopping = false;
 
 		private void createRequestSocket() {
 			// Create a new MulticastSocket, even if we're not listening for Multicast
@@ -543,12 +546,17 @@ public class Application extends TBApplication {
 		}
 
 		public void closeRequestSocket() {
-			try {
-				socket.leaveGroup(address);
-				log.debug("Leaving multicast group");
-			} catch (IOException exception) {
-                log.debug("Error leaving multicast group {}", String.valueOf(exception));
+			_stopping = true;
+			if (socket == null) {
 				return;
+			}
+			if (address != null) {
+				try {
+					socket.leaveGroup(address);
+					log.debug("Leaving multicast group");
+				} catch (IOException exception) {
+					log.debug("Error leaving multicast group {}", String.valueOf(exception));
+				}
 			}
 			log.debug("Closing request listen socket");
 			socket.close();
@@ -611,9 +619,17 @@ public class Application extends TBApplication {
                             log.debug("{}: Unrecognized UDP packet: {} from {}. This may be an Application that conforms to an older protocol.", myName, new String(incomingPacket.getData()), key);
 						}
 					} catch (IOException localException) {
+						if (_stopping) {
+							break;
+						}
 						log.error("Error (ignored) receiving packet", localException);
 					}
 
+				}
+
+				if (_stopping) {
+					log.debug("tbtaskd listen thread stopped (socket closed for shutdown)");
+					return;
 				}
 
 				// Hari-kiri - but should never happen, of course.
