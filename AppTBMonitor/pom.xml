@@ -34,7 +34,7 @@
 		<tb.fw.inout>17.0.2</tb.fw.inout>
 		<tb.fw.archive>17.0.1</tb.fw.archive>
 		<tb.fw.features>17.0.1</tb.fw.features>
-		<tb.fw.extra>17.0.2</tb.fw.extra>
+		<tb.fw.extra>17.0.3</tb.fw.extra>
 		<tb.fw.sangria>17.0.1</tb.fw.sangria>
 		<tb.fw.pro>17.0.1</tb.fw.pro>
 		<tb.fw.prox>17.0.1</tb.fw.prox>
@@ -116,11 +116,8 @@
 			<artifactId>tb-extra-acme</artifactId>
 			<version>${tb.fw.extra}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.treasureboat</groupId>
-			<artifactId>tb-archive-ajax</artifactId>
-			<version>${tb.fw.archive}</version>
-		</dependency>
+		<!-- tb-archive-ajax removed 2026-07-11 — unused (no er.ajax refs) and it's a paid
+		     (BASIC) framework; dropping it keeps the Monitor license-free. -->
 	</dependencies>
 
 	<!-- Build configuration (except legacy directories) fully inherited from SuperDeployPOM -->
