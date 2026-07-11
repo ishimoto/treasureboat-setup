@@ -17,13 +17,14 @@ Launch scheme (baked into the unit): `-n Monitor -p 56789 -newPath -url`
 
 ## 1. Prerequisites
 
-**Java 17:**
+**Java 21** — the fleet-standard JRE. (The app is built for Java 17 bytecode, so it
+runs on any JRE ≥ 17; we standardize the fleet on the newer 21 LTS.)
 
 | Distro | Install |
 |---|---|
-| Ubuntu/Debian | `sudo apt update && sudo apt install -y openjdk-17-jre-headless` |
-| CentOS/RHEL   | `sudo dnf install -y java-17-openjdk-headless` |
-| Amazon Linux 2023 | `sudo dnf install -y java-17-amazon-corretto-headless` |
+| Ubuntu/Debian | `sudo apt update && sudo apt install -y openjdk-21-jre-headless` |
+| CentOS/RHEL   | `sudo dnf install -y java-21-openjdk-headless` |
+| Amazon Linux 2023 | `sudo dnf install -y java-21-amazon-corretto-headless` |
 
 **Service user + group:**
 ```bash
