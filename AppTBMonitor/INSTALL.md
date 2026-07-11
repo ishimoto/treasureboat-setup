@@ -38,8 +38,10 @@ sudo mkdir -p /opt/TreasureBoat/{Applications,Logs,Configuration}
 sudo chown -R appserver:appserveradm /opt/TreasureBoat
 sudo chmod -R 0775 /opt/TreasureBoat
 ```
-`Configuration/` holds the Monitor's `SiteConfigBackup.xml` (the fleet's source of
-truth — hosts, apps, instances, plus display names / disabled flags).
+`Configuration/` holds `SiteConfig.xml` — the **live** fleet config (hosts, apps,
+instances, display names / disabled flags), the source of truth — plus
+`SiteConfigBackup.xml`, a rolling last-good copy auto-restored on boot if the live
+file is ever missing or corrupt (tb-extra-monitor 17.0.4+).
 
 ## 3. Deploy the app
 

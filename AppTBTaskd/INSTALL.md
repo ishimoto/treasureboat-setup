@@ -39,8 +39,8 @@ sudo mkdir -p /opt/TreasureBoat/{Applications,Logs,Configuration}
 sudo chown -R appserver:appserveradm /opt/TreasureBoat
 sudo chmod -R 0775 /opt/TreasureBoat
 ```
-`Configuration/` holds `SiteConfigBackup.xml` (taskd's copy of the site config — the
-Monitor pushes to it); `Logs/` receives stdout via the unit.
+`Configuration/` holds `SiteConfig.xml` (taskd's copy of the site config — the Monitor
+pushes to it; `SiteConfigBackup.xml` is its rolling backup); `Logs/` receives stdout via the unit.
 
 ## 3. Deploy the app
 
