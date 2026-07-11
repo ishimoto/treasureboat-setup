@@ -51,11 +51,11 @@ symlink at the timestamped folder:
 
 ```bash
 cd /opt/TreasureBoat/Applications
-sudo -u appserver curl -fLO https://treasureboat.nyc3.digitaloceanspaces.com/TBDeploy/v17/AppTBTaskd_embedded_20260711_1134.woa.tar.gz
-sudo -u appserver tar xzf AppTBTaskd_embedded_20260711_1134.woa.tar.gz
+sudo -u appserver curl -fLO https://treasureboat.nyc3.digitaloceanspaces.com/TBDeploy/v17/AppTBTaskd_embedded_20260711_1314.woa.tar.gz
+sudo -u appserver tar xzf AppTBTaskd_embedded_20260711_1314.woa.tar.gz
 # stable name the systemd unit points at (symlink = swap-and-restart upgrades):
-sudo -u appserver ln -sfn AppTBTaskd_embedded_20260711_1134.woa AppTBTaskd.woa
-sudo chown -R appserver:appserveradm AppTBTaskd.woa AppTBTaskd_embedded_20260711_1134.woa
+sudo -u appserver ln -sfn AppTBTaskd_embedded_20260711_1314.woa AppTBTaskd.woa
+sudo chown -R appserver:appserveradm AppTBTaskd.woa AppTBTaskd_embedded_20260711_1314.woa
 sudo chmod +x AppTBTaskd.woa/run.sh
 ```
 
