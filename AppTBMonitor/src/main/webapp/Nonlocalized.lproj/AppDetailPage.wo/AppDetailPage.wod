@@ -353,6 +353,7 @@ SelectOneForm : TBForm {
 
 IsSelected : TBCheckBox {
 	checked = isSelectedInstance;
+	onClick = "this.form.submit()";
 }
 
 SelectNotRunning : TBHyperlink {
@@ -395,10 +396,6 @@ Bouncer : TBString {
 BounceHelpLink : TBHyperlink {
 	pageName = "HelpPage";
 	fragmentIdentifier = "18";
-}
-
-Observer : AjaxObserveField {
-	action = selectOne;
 }
 
 SelectAllLink : TBHyperlink {
