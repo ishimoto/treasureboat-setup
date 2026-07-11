@@ -9,8 +9,12 @@ User=appserver
 Group=appserveradm
 WorkingDirectory=/opt/TreasureBoat/Applications
 
+# The MEB bundle launches via run.sh (exec java -cp Contents:lib/* … Application "$@").
+# AppTBTaskd.woa is a symlink -> the timestamped AppTBTaskd_embedded_*.woa (see INSTALL.md);
+# to upgrade: unpack the new bundle, re-point the symlink, `systemctl restart tbtaskd`.
+# Heap/JVM opts via JAVA_OPTS (Environment=JAVA_OPTS=-Xmx512m).
 # systemd runs ExecStart directly (no shell), so shell redirection like '>> file' is NOT allowed here.
-ExecStart=/opt/TreasureBoat/Applications/AppTBTaskd.woa/AppTBTaskd -n tbtaskd -p 1085 -newPath -url
+ExecStart=/opt/TreasureBoat/Applications/AppTBTaskd.woa/run.sh -n tbtaskd -p 1085 -newPath -url
 
 # stdout/stderr -> a log file. (You can also just use journald: `journalctl -u tbtaskd -f`.)
 StandardOutput=append:/opt/TreasureBoat/Logs/tbtaskd.log

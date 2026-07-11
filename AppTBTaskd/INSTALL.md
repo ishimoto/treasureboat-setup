@@ -44,20 +44,52 @@ Monitor pushes to it); `Logs/` receives stdout via the unit.
 
 ## 3. Deploy the app
 
-Build the `.woa` from IntelliJ (Legacy or Maven-Deploy build action) and place it at:
-```
-/opt/TreasureBoat/Applications/AppTBTaskd.woa/
-```
-SFTP the built `.woa` up (same as the app-deploy flow), then:
+The **Maven Embedded (MEB)** bundle is fully self-contained (all deps in `lib/`, launches
+via `run.sh`) — nothing else to install, no Maven or GitHub token on the server. Download
+the archive from the TB download space, unpack it, and point a stable `AppTBTaskd.woa`
+symlink at the timestamped folder:
+
 ```bash
-sudo chown -R appserver:appserveradm /opt/TreasureBoat/Applications/AppTBTaskd.woa
-sudo chmod +x /opt/TreasureBoat/Applications/AppTBTaskd.woa/AppTBTaskd
+cd /opt/TreasureBoat/Applications
+sudo -u appserver curl -fLO https://treasureboat.nyc3.digitaloceanspaces.com/TBDeploy/v17/AppTBTaskd_embedded_20260711_1134.woa.tar.gz
+sudo -u appserver tar xzf AppTBTaskd_embedded_20260711_1134.woa.tar.gz
+# stable name the systemd unit points at (symlink = swap-and-restart upgrades):
+sudo -u appserver ln -sfn AppTBTaskd_embedded_20260711_1134.woa AppTBTaskd.woa
+sudo chown -R appserver:appserveradm AppTBTaskd.woa AppTBTaskd_embedded_20260711_1134.woa
+sudo chmod +x AppTBTaskd.woa/run.sh
 ```
+
+**Upgrades:** download the newer `AppTBTaskd_embedded_*.woa.tar.gz`, unpack, re-point the
+symlink (`sudo -u appserver ln -sfn <new>.woa AppTBTaskd.woa`), then `sudo systemctl restart tbtaskd`.
 
 ## 4. Install the systemd unit
 
+Write the unit (canonical MEB unit — launches `run.sh`; uncomment `JAVA_OPTS` for heap):
+
 ```bash
-sudo cp AppTBTaskd.woa/Contents/Resources/tbtaskd.service /etc/systemd/system/tbtaskd.service
+sudo tee /etc/systemd/system/tbtaskd.service > /dev/null <<'UNIT'
+[Unit]
+Description=TreasureBoat Task Daemon (tbtaskd)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=appserver
+Group=appserveradm
+WorkingDirectory=/opt/TreasureBoat/Applications
+#Environment=JAVA_OPTS=-Xmx512m
+ExecStart=/opt/TreasureBoat/Applications/AppTBTaskd.woa/run.sh -n tbtaskd -p 1085 -newPath -url
+StandardOutput=append:/opt/TreasureBoat/Logs/tbtaskd.log
+StandardError=append:/opt/TreasureBoat/Logs/tbtaskd.log
+Restart=on-failure
+RestartSec=5
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
+UNIT
+
 sudo systemctl daemon-reload
 sudo systemctl enable --now tbtaskd
 sudo systemctl status tbtaskd          # should be active (running)

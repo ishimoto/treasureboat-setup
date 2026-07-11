@@ -9,10 +9,15 @@ User=appserver
 Group=appserveradm
 WorkingDirectory=/opt/TreasureBoat/Applications
 
+# The MEB bundle launches via run.sh (exec java -cp Contents:lib/* … Application "$@").
+# AppTBMonitor.woa is a symlink -> the timestamped AppTBMonitor_embedded_*.woa (see INSTALL.md);
+# to upgrade: unpack the new bundle, re-point the symlink, `systemctl restart tbmonitor`.
+# Heap/JVM opts go via JAVA_OPTS (run.sh places it before the main class), e.g.:
+#   Environment=JAVA_OPTS=-Xmx512m
 # systemd runs ExecStart directly (no shell), so shell redirection like '>> file' is NOT allowed here.
 # The admin UI binds to 127.0.0.1 by default; add `-h <hostname/ip>` to expose it to admins
 # (then restrict port 56789 by firewall — see INSTALL.md).
-ExecStart=/opt/TreasureBoat/Applications/AppTBMonitor.woa/AppTBMonitor -n Monitor -p 56789 -newPath -url
+ExecStart=/opt/TreasureBoat/Applications/AppTBMonitor.woa/run.sh -n Monitor -p 56789 -newPath -url
 
 # stdout/stderr -> a log file. (Or use journald: `journalctl -u tbmonitor -f`.)
 StandardOutput=append:/opt/TreasureBoat/Logs/tbmonitor.log
