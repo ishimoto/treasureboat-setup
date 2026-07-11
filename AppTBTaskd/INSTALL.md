@@ -57,6 +57,8 @@ sudo -u appserver tar xzf AppTBTaskd_embedded_20260711_1314.woa.tar.gz
 sudo -u appserver ln -sfn AppTBTaskd_embedded_20260711_1314.woa AppTBTaskd.woa
 sudo chown -R appserver:appserveradm AppTBTaskd.woa AppTBTaskd_embedded_20260711_1314.woa
 sudo chmod +x AppTBTaskd.woa/run.sh
+# the taskd execs this to spawn app instances — it ships non-executable:
+sudo chmod +x AppTBTaskd.woa/Contents/Resources/SpawnOfTBTaskd.sh
 ```
 
 **Upgrades:** download the newer `AppTBTaskd_embedded_*.woa.tar.gz`, unpack, re-point the
@@ -78,6 +80,9 @@ Type=simple
 User=appserver
 Group=appserveradm
 WorkingDirectory=/opt/TreasureBoat/Applications
+# taskd spawns app instances into its own cgroup; without this, stopping/upgrading
+# the taskd would kill every app it launched. KillMode=process stops only the daemon.
+KillMode=process
 #Environment=JAVA_OPTS=-Xmx512m
 ExecStart=/opt/TreasureBoat/Applications/AppTBTaskd.woa/run.sh -n tbtaskd -p 1085 -newPath -url
 StandardOutput=append:/opt/TreasureBoat/Logs/tbtaskd.log
