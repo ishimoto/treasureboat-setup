@@ -13,6 +13,7 @@
 	</parent>
 
 	<artifactId>app-deploy-taskd</artifactId>
+	<version>17.0</version>
 
 	<packaging>jar</packaging>
 

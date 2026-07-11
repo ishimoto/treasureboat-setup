@@ -13,7 +13,7 @@
 	</parent>
 
     <artifactId>tbapp-deploy-monitor</artifactId>
-	<version>2.0</version>
+	<version>17.0</version>
 
 	<packaging>jar</packaging>
 
