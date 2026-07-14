@@ -46,7 +46,7 @@
 	    	super-tb-pom				17.0.2
 		-->
 		<tb.fw.content>17.0.1</tb.fw.content>
-		<tb.fw.core>17.0.1</tb.fw.core>
+		<tb.fw.core>17.0.2</tb.fw.core>
 		<tb.fw.db>17.0.1</tb.fw.db>
 		<tb.fw.inout>17.0.2</tb.fw.inout>
 		<tb.fw.archive>17.0.1</tb.fw.archive>
@@ -55,7 +55,7 @@
 		<tb.fw.sangria>17.0.1</tb.fw.sangria>
 		<tb.fw.pro>17.0.1</tb.fw.pro>
 		<tb.fw.prox>17.0.1</tb.fw.prox>
-		<tb.fw.proy>17.0.1</tb.fw.proy>
+		<tb.fw.proy>17.0.2</tb.fw.proy>
 		<tb.fw.elastic>17.0.1</tb.fw.elastic>
 		<tb.fw.opensearch>17.0.1</tb.fw.opensearch>
 		<tb.fw.elemental>17.0.1</tb.fw.elemental><!-- Temporary -->
