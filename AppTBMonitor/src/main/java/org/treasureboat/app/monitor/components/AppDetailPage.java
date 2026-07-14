@@ -144,18 +144,34 @@ public class AppDetailPage extends MonitorComponent {
 			return null;
 		}
 
-		String fileName = currentInstance().path().substring(0, index);
-		fileName = fileName.substring(fileName.length() - 13);
-
-		if (fileName.charAt(8) != '-') {
+		// The .woa folder name (path stripped, ".woa" dropped). Each build type names it differently:
+		//   Legacy (OLB/NLB): AppName-version-YYYYMMDD-HHmm    MEB: AppName_embedded_YYYYMMDD_HHmm    MSB: AppName_YYYYMMDD_HHmm
+		// The old code only understood the Legacy '-' shape; MSB/MEB (which use '_') fell through. Parse the
+		// trailing timestamp for all of them and show the build type, e.g. "[20210903-1335 / OLB]".
+		String woaName = currentInstance().path().substring(0, index);
+		int slash = Math.max(woaName.lastIndexOf('/'), woaName.lastIndexOf('\\'));
+		if (slash >= 0) {
+			woaName = woaName.substring(slash + 1);
+		}
+		if (woaName.length() < 13) {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
-		sb.append(" (build-");
-		sb.append(fileName);
-		sb.append(")");
-		return sb.toString();
+		String timestamp = woaName.substring(woaName.length() - 13); // YYYYMMDD[-_]HHmm
+		if (!timestamp.matches("\\d{8}[-_]\\d{4}")) {
+			return null;
+		}
+
+		String buildType;
+		if (woaName.contains("_embedded_")) {
+			buildType = "MEB";
+		} else if (timestamp.charAt(8) == '_') {
+			buildType = "MSB";
+		} else {
+			buildType = "OLB"; // dash-separated Legacy — OLB and NLB share this filename shape
+		}
+
+		return " [" + timestamp + " / " + buildType + "]";
 	}
 
 	public void selectAll() {
