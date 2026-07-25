@@ -454,10 +454,16 @@
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/ognl/ognl -->
+			<!-- HELD at 3.4.8: OGNL 3.4.9 regressed method-call bindings whose argument references the component
+			     (~posY(supportDeep()), ~meter(index), ~posX(oneXAxis * 2)) — the argument is evaluated against a
+			     null root and throws "target is null for method ...". 3.4.9/3.4.10/3.4.11 ship NO runtime security
+			     fixes (only build-tool dep bumps) and there are no CVEs for ognl:ognl, so 3.4.8 is the safe last-good.
+			     Fixed upstream in 3.5.0 ("context root preservation during nested evaluations"); revisit when 3.5.0
+			     leaves beta. See memory reference_ognl-3.4.9-method-arg-regression. -->
 			<dependency>
 				<groupId>ognl</groupId>
 				<artifactId>ognl</artifactId>
-				<version>3.4.11</version>
+				<version>3.4.8</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/org.passay/passay -->
