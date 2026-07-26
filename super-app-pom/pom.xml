@@ -8,11 +8,11 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-deploy-pom</artifactId>
-		<version>17.0.12</version>
+		<version>19.0.1</version>
 	</parent>
 
 	<artifactId>super-app-pom</artifactId>
-	<version>18.0</version>
+	<version>19.0.1</version>
 
 	<packaging>pom</packaging>
 
@@ -20,9 +20,9 @@
 	<description>Parent POM for TreasureBoat applications. Extends SuperDeployPOM with application-specific configurations.</description>
 
 	<properties>
-		<!-- JDK target for all TB applications (super-app-pom 18.x = Java 18) -->
-		<maven.compiler.source>18</maven.compiler.source>
-		<maven.compiler.target>18</maven.compiler.target>
+		<!-- JDK target for all TB applications (super-app-pom 19.x = Java 19) -->
+		<maven.compiler.source>19</maven.compiler.source>
+		<maven.compiler.target>19</maven.compiler.target>
 	</properties>
 
 	<build>
