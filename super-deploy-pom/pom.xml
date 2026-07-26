@@ -25,10 +25,11 @@
 		-->
 		<tb.deploy.exclude.login></tb.deploy.exclude.login>
 	
- 		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 
 		<github.global.server>github</github.global.server>
 
@@ -37,6 +38,11 @@
 		<tb.java19.snapshot>19.99.99-SNAPSHOT</tb.java19.snapshot>
 		<tb.java20.snapshot>20.99.99-SNAPSHOT</tb.java20.snapshot>
 		<tb.java21.snapshot>21.99.99-SNAPSHOT</tb.java21.snapshot>
+		<tb.java22.snapshot>22.99.99-SNAPSHOT</tb.java22.snapshot>
+		<tb.java23.snapshot>23.99.99-SNAPSHOT</tb.java23.snapshot>
+		<tb.java24.snapshot>24.99.99-SNAPSHOT</tb.java24.snapshot>
+		<tb.java25.snapshot>25.99.99-SNAPSHOT</tb.java25.snapshot>
+		<tb.java26.snapshot>26.99.99-SNAPSHOT</tb.java26.snapshot>
 
 		<!-- Modules -->
 		<name.module>${project.name}</name.module>
