@@ -7,14 +7,14 @@
 
     <groupId>org.treasureboat</groupId>
 	<artifactId>super-deploy-pom</artifactId>
-	<version>17.0.12</version>
+	<version>19.0.1</version>
 
 	<packaging>pom</packaging>
 
 	<name>TreasureBoat.org Maven Super Deploy POM</name>
 
 	<properties>
-		<tb.lastmodified>2026/07/08</tb.lastmodified>
+		<tb.lastmodified>2026/07/26</tb.lastmodified>
 
 		<tb.showDependencies>false</tb.showDependencies>
 
@@ -28,8 +28,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.source>19</maven.compiler.source>
+		<maven.compiler.target>19</maven.compiler.target>
 
 		<github.global.server>github</github.global.server>
 
@@ -52,22 +52,22 @@
 		<tb.version.maven.checksum>1.11</tb.version.maven.checksum>
 		<tb.version.maven.clean>3.5.0</tb.version.maven.clean>
 		<tb.version.maven.compiler>3.15.0</tb.version.maven.compiler>
-		<tb.version.maven.dependency>3.10.0</tb.version.maven.dependency>
+		<tb.version.maven.dependency>3.11.0</tb.version.maven.dependency>
 		<tb.version.maven.deploy>3.1.4</tb.version.maven.deploy>
-		<tb.version.maven.enforcer>3.6.2</tb.version.maven.enforcer>
+		<tb.version.maven.enforcer>3.6.3</tb.version.maven.enforcer>
 		<tb.version.maven.antrun>3.2.0</tb.version.maven.antrun>
 		<tb.version.maven.assembly>3.8.0</tb.version.maven.assembly>
-		<tb.version.maven.spotbugs>4.9.8.3</tb.version.maven.spotbugs>
+		<tb.version.maven.spotbugs>4.9.8.5</tb.version.maven.spotbugs>
 		<tb.version.maven.git-commit>9.2.0</tb.version.maven.git-commit>
 		<tb.version.maven.install>3.1.4</tb.version.maven.install>
-		<tb.version.maven.jar>3.5.0</tb.version.maven.jar>
+		<tb.version.maven.jar>3.5.1</tb.version.maven.jar>
 		<tb.version.maven.javadoc>3.12.0</tb.version.maven.javadoc>
 		<tb.version.maven.lifecycle-mapping>1.0.0</tb.version.maven.lifecycle-mapping>
 		<tb.version.maven.plugin>2.21.0</tb.version.maven.plugin>
-		<tb.version.maven.profile>3.5.1</tb.version.maven.profile>
+		<tb.version.maven.profile>3.5.2</tb.version.maven.profile>
 		<tb.version.maven.release>3.3.1</tb.version.maven.release>
 		<tb.version.maven.resources>3.5.0</tb.version.maven.resources>
-		<tb.version.maven.site>3.21.0</tb.version.maven.site>
+		<tb.version.maven.site>3.22.0</tb.version.maven.site>
 		<tb.version.maven.source>3.4.0</tb.version.maven.source>
 
 		<tb.version.maven.gpg>3.2.8</tb.version.maven.gpg>
