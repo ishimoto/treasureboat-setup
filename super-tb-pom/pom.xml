@@ -8,13 +8,13 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-deploy-pom</artifactId>
-		<version>19.0.1</version>
+		<version>20.0.1</version>
 	</parent>
 
 	<name>TreasureBoat.org Maven Super POM</name>
 	<artifactId>super-tb-pom</artifactId>
     <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
-	<version>19.0.2</version>
+	<version>20.0.1</version>
 
 	<packaging>pom</packaging>
 	<url>https://treasureboat.org</url>
@@ -34,16 +34,16 @@
     -->
 
 	<properties>
-		<tb.lastmodified>2026/07/27</tb.lastmodified>
+		<tb.lastmodified>2026/07/31</tb.lastmodified>
 
-		<!-- JDK target for all TB frameworks (super-tb-pom 19.x = Java 19) -->
-		<maven.compiler.source>19</maven.compiler.source>
-		<maven.compiler.target>19</maven.compiler.target>
+		<!-- JDK target for all TB frameworks (super-tb-pom 20.x = Java 20) -->
+		<maven.compiler.source>20</maven.compiler.source>
+		<maven.compiler.target>20</maven.compiler.target>
 
 		<!--
-			super-deploy-pom			19.0.1
-	   		super-app-pom				19.0.1
-	    	super-tb-pom				19.0.1
+			super-deploy-pom			20.0.1
+	   		super-app-pom				20.0.1
+	    	super-tb-pom				20.0.1
 		-->
 		<tb.fw.content>19.0.1</tb.fw.content>
 		<tb.fw.core>19.0.1</tb.fw.core>
@@ -79,21 +79,21 @@
 		<profile>
 			<id>snapshot</id>
 			<properties>
-				<tb.fw.content>${tb.java19.snapshot}</tb.fw.content>
-				<tb.fw.core>${tb.java19.snapshot}</tb.fw.core>
-				<tb.fw.db>${tb.java19.snapshot}</tb.fw.db>
-				<tb.fw.inout>${tb.java19.snapshot}</tb.fw.inout>
-				<tb.fw.archive>${tb.java19.snapshot}</tb.fw.archive>
-				<tb.fw.features>${tb.java19.snapshot}</tb.fw.features>
-				<tb.fw.extra>${tb.java19.snapshot}</tb.fw.extra>
-				<tb.fw.sangria>${tb.java19.snapshot}</tb.fw.sangria>
-				<tb.fw.pro>${tb.java19.snapshot}</tb.fw.pro>
-				<tb.fw.prox>${tb.java19.snapshot}</tb.fw.prox>
-				<tb.fw.proy>${tb.java19.snapshot}</tb.fw.proy>
-				<tb.fw.elastic>${tb.java19.snapshot}</tb.fw.elastic>
-				<tb.fw.opensearch>${tb.java19.snapshot}</tb.fw.opensearch>
-				<tb.fw.elemental>${tb.java19.snapshot}</tb.fw.elemental>
-				<tb.fw.ultra>${tb.java19.snapshot}</tb.fw.ultra>
+				<tb.fw.content>${tb.java20.snapshot}</tb.fw.content>
+				<tb.fw.core>${tb.java20.snapshot}</tb.fw.core>
+				<tb.fw.db>${tb.java20.snapshot}</tb.fw.db>
+				<tb.fw.inout>${tb.java20.snapshot}</tb.fw.inout>
+				<tb.fw.archive>${tb.java20.snapshot}</tb.fw.archive>
+				<tb.fw.features>${tb.java20.snapshot}</tb.fw.features>
+				<tb.fw.extra>${tb.java20.snapshot}</tb.fw.extra>
+				<tb.fw.sangria>${tb.java20.snapshot}</tb.fw.sangria>
+				<tb.fw.pro>${tb.java20.snapshot}</tb.fw.pro>
+				<tb.fw.prox>${tb.java20.snapshot}</tb.fw.prox>
+				<tb.fw.proy>${tb.java20.snapshot}</tb.fw.proy>
+				<tb.fw.elastic>${tb.java20.snapshot}</tb.fw.elastic>
+				<tb.fw.opensearch>${tb.java20.snapshot}</tb.fw.opensearch>
+				<tb.fw.elemental>${tb.java20.snapshot}</tb.fw.elemental>
+				<tb.fw.ultra>${tb.java20.snapshot}</tb.fw.ultra>
 			</properties>
 		</profile>
 	    <profile>
