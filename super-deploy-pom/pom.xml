@@ -7,14 +7,14 @@
 
     <groupId>org.treasureboat</groupId>
 	<artifactId>super-deploy-pom</artifactId>
-	<version>19.0.1</version>
+	<version>20.0.1</version>
 
 	<packaging>pom</packaging>
 
 	<name>TreasureBoat.org Maven Super Deploy POM</name>
 
 	<properties>
-		<tb.lastmodified>2026/07/26</tb.lastmodified>
+		<tb.lastmodified>2026/07/31</tb.lastmodified>
 
 		<tb.showDependencies>false</tb.showDependencies>
 
@@ -28,13 +28,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<maven.compiler.source>19</maven.compiler.source>
-		<maven.compiler.target>19</maven.compiler.target>
+		<maven.compiler.source>20</maven.compiler.source>
+		<maven.compiler.target>20</maven.compiler.target>
 
 		<github.global.server>github</github.global.server>
 
-		<tb.java17.snapshot>17.99.99-SNAPSHOT</tb.java17.snapshot>
-		<tb.java18.snapshot>18.99.99-SNAPSHOT</tb.java18.snapshot>
 		<tb.java19.snapshot>19.99.99-SNAPSHOT</tb.java19.snapshot>
 		<tb.java20.snapshot>20.99.99-SNAPSHOT</tb.java20.snapshot>
 		<tb.java21.snapshot>21.99.99-SNAPSHOT</tb.java21.snapshot>
