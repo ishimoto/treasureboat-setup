@@ -52,7 +52,7 @@
 		<tb.fw.archive>20.0.1</tb.fw.archive>
 		<tb.fw.features>20.0.1</tb.fw.features>
 		<tb.fw.extra>20.0.1</tb.fw.extra>
-		<tb.fw.sangria>19.0.1</tb.fw.sangria>
+		<tb.fw.sangria>20.0.1</tb.fw.sangria>
 		<!-- opensearch+elemental promoted above pro/prox: elemental depends on opensearch-main, and
 		     pro/prox have no dep on elemental — so prox's de-fork elemental variant is buildable at prox-time -->
 		<tb.fw.opensearch>19.0.1</tb.fw.opensearch>
