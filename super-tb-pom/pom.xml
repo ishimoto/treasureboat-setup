@@ -60,7 +60,7 @@
 		<!-- Temporary: mvn deploy -Pelemental -pl tb-pro-cms,tb-pro-notification-center,tb-pro-keen,tb-pro-feed -->
 		<tb.fw.pro>20.0.1</tb.fw.pro>
 		<!-- Temporary: mvn deploy -Pelemental -pl tb-prox-skin-gumby,tb-prox-skin-bootstrap -->
-		<tb.fw.prox>19.0.1</tb.fw.prox>
+		<tb.fw.prox>20.0.1</tb.fw.prox>
 		<tb.fw.proy>19.0.1</tb.fw.proy>
 		<tb.fw.elastic>19.0.1</tb.fw.elastic>
 		<tb.fw.ultra>19.0.1</tb.fw.ultra>
