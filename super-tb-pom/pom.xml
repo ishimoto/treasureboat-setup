@@ -57,24 +57,25 @@
 		     pro/prox have no dep on elemental — so prox's de-fork elemental variant is buildable at prox-time -->
 		<tb.fw.opensearch>20.0.1</tb.fw.opensearch>
 		<tb.fw.elemental>20.0.1</tb.fw.elemental><!-- Temporary -->
-		<tb.fw.pro>19.0.1</tb.fw.pro><!-- Temporary: -Pelemenatal build-->
+		<!-- Temporary: mvn deploy -Pelemental -pl tb-pro-cms,tb-pro-notification-center,tb-pro-keen,tb-pro-feed -->
+		<tb.fw.pro>19.0.1</tb.fw.pro>
 		<tb.fw.prox>19.0.1</tb.fw.prox><!-- Temporary: -Pelemenatal build-->
 		<tb.fw.proy>19.0.1</tb.fw.proy>
 		<tb.fw.elastic>19.0.1</tb.fw.elastic>
 		<tb.fw.ultra>19.0.1</tb.fw.ultra>
 
 		<!-- Core Utilities (override/extend from parent) -->
-        <tb.logback>1.5.37</tb.logback>
-        <tb.slf4j-api>2.0.18</tb.slf4j-api>
+		<tb.logback>1.5.37</tb.logback>
+		<tb.slf4j-api>2.0.18</tb.slf4j-api>
 
-        <com.rollbar.version>2.3.0</com.rollbar.version>
-        <com.fasterxml.jackson.version>2.22.0</com.fasterxml.jackson.version>
-        <org.bouncycastle.version>1.84</org.bouncycastle.version>
-        <org.apache.poi.version>5.5.1</org.apache.poi.version>
-        <net.sf.jasperreports.version>7.0.6</net.sf.jasperreports.version>
-        <org.xhtmlrenderer.flying-saucer.version>9.13.3</org.xhtmlrenderer.flying-saucer.version>
-        <org.apache.pdfbox.version>3.0.7</org.apache.pdfbox.version>
-        <org.apache.avalon.framework.version>4.3.1</org.apache.avalon.framework.version>
+		<com.rollbar.version>2.3.0</com.rollbar.version>
+		<com.fasterxml.jackson.version>2.22.0</com.fasterxml.jackson.version>
+		<org.bouncycastle.version>1.84</org.bouncycastle.version>
+		<org.apache.poi.version>5.5.1</org.apache.poi.version>
+		<net.sf.jasperreports.version>7.0.6</net.sf.jasperreports.version>
+		<org.xhtmlrenderer.flying-saucer.version>9.13.3</org.xhtmlrenderer.flying-saucer.version>
+		<org.apache.pdfbox.version>3.0.7</org.apache.pdfbox.version>
+		<org.apache.avalon.framework.version>4.3.1</org.apache.avalon.framework.version>
 	</properties>
 
     <profiles>
