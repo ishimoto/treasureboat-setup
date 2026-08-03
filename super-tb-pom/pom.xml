@@ -45,7 +45,7 @@
 	   		super-app-pom				20.0.1
 	    	super-tb-pom				20.0.1
 		-->
-		<tb.fw.content>19.0.1</tb.fw.content>
+		<tb.fw.content>20.0.1</tb.fw.content>
 		<tb.fw.core>19.0.1</tb.fw.core>
 		<tb.fw.db>19.0.2</tb.fw.db>
 		<tb.fw.inout>19.0.1</tb.fw.inout>
