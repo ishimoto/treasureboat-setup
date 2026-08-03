@@ -8,13 +8,13 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-deploy-pom</artifactId>
-		<version>20.0.1</version>
+		<version>21.0.1</version>
 	</parent>
 
 	<name>TreasureBoat.org Maven Super POM</name>
 	<artifactId>super-tb-pom</artifactId>
     <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
-	<version>20.0.1</version>
+	<version>21.0.1</version>
 
 	<packaging>pom</packaging>
 	<url>https://treasureboat.org</url>
@@ -34,16 +34,16 @@
     -->
 
 	<properties>
-		<tb.lastmodified>2026/07/31</tb.lastmodified>
+		<tb.lastmodified>2026/08/03</tb.lastmodified>
 
-		<!-- JDK target for all TB frameworks (super-tb-pom 20.x = Java 20) -->
-		<maven.compiler.source>20</maven.compiler.source>
-		<maven.compiler.target>20</maven.compiler.target>
+		<!-- JDK target for all TB frameworks (super-tb-pom 21.x = Java 21) -->
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 
 		<!--
-			super-deploy-pom			20.0.1
-	   		super-app-pom				20.0.1
-	    	super-tb-pom				20.0.1
+			super-deploy-pom			21.0.1
+	   		super-app-pom				21.0.1
+	    	super-tb-pom				21.0.1
 		-->
 		<tb.fw.content>20.0.1</tb.fw.content>
 		<tb.fw.core>20.0.1</tb.fw.core>
@@ -83,22 +83,22 @@
 		<profile>
 			<id>snapshot</id>
 			<properties>
-				<tb.fw.content>${tb.java20.snapshot}</tb.fw.content>
-				<tb.fw.core>${tb.java20.snapshot}</tb.fw.core>
-				<tb.fw.db>${tb.java20.snapshot}</tb.fw.db>
-				<tb.fw.inout>${tb.java20.snapshot}</tb.fw.inout>
-				<tb.fw.archive>${tb.java20.snapshot}</tb.fw.archive>
-				<tb.fw.features>${tb.java20.snapshot}</tb.fw.features>
-				<tb.fw.extra>${tb.java20.snapshot}</tb.fw.extra>
-				<tb.fw.sangria>${tb.java20.snapshot}</tb.fw.sangria>
+				<tb.fw.content>${tb.java21.snapshot}</tb.fw.content>
+				<tb.fw.core>${tb.java21.snapshot}</tb.fw.core>
+				<tb.fw.db>${tb.java21.snapshot}</tb.fw.db>
+				<tb.fw.inout>${tb.java21.snapshot}</tb.fw.inout>
+				<tb.fw.archive>${tb.java21.snapshot}</tb.fw.archive>
+				<tb.fw.features>${tb.java21.snapshot}</tb.fw.features>
+				<tb.fw.extra>${tb.java21.snapshot}</tb.fw.extra>
+				<tb.fw.sangria>${tb.java21.snapshot}</tb.fw.sangria>
 				<!-- install order: opensearch+elemental before pro/prox (see defaults block above) -->
-				<tb.fw.opensearch>${tb.java20.snapshot}</tb.fw.opensearch>
-				<tb.fw.elemental>${tb.java20.snapshot}</tb.fw.elemental>
-				<tb.fw.pro>${tb.java20.snapshot}</tb.fw.pro>
-				<tb.fw.prox>${tb.java20.snapshot}</tb.fw.prox>
-				<tb.fw.proy>${tb.java20.snapshot}</tb.fw.proy>
-				<tb.fw.elastic>${tb.java20.snapshot}</tb.fw.elastic>
-				<tb.fw.ultra>${tb.java20.snapshot}</tb.fw.ultra>
+				<tb.fw.opensearch>${tb.java21.snapshot}</tb.fw.opensearch>
+				<tb.fw.elemental>${tb.java21.snapshot}</tb.fw.elemental>
+				<tb.fw.pro>${tb.java21.snapshot}</tb.fw.pro>
+				<tb.fw.prox>${tb.java21.snapshot}</tb.fw.prox>
+				<tb.fw.proy>${tb.java21.snapshot}</tb.fw.proy>
+				<tb.fw.elastic>${tb.java21.snapshot}</tb.fw.elastic>
+				<tb.fw.ultra>${tb.java21.snapshot}</tb.fw.ultra>
 			</properties>
 		</profile>
 	    <profile>
