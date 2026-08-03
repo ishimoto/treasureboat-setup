@@ -58,7 +58,7 @@
 		<tb.fw.opensearch>20.0.1</tb.fw.opensearch>
 		<tb.fw.elemental>20.0.1</tb.fw.elemental><!-- Temporary -->
 		<!-- Temporary: mvn deploy -Pelemental -pl tb-pro-cms,tb-pro-notification-center,tb-pro-keen,tb-pro-feed -->
-		<tb.fw.pro>19.0.1</tb.fw.pro>
+		<tb.fw.pro>20.0.1</tb.fw.pro>
 		<tb.fw.prox>19.0.1</tb.fw.prox><!-- Temporary: -Pelemenatal build-->
 		<tb.fw.proy>19.0.1</tb.fw.proy>
 		<tb.fw.elastic>19.0.1</tb.fw.elastic>
