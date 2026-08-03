@@ -56,9 +56,9 @@
 		<!-- opensearch+elemental promoted above pro/prox: elemental depends on opensearch-main, and
 		     pro/prox have no dep on elemental — so prox's de-fork elemental variant is buildable at prox-time -->
 		<tb.fw.opensearch>19.0.1</tb.fw.opensearch>
-		<tb.fw.elemental>19.0.1</tb.fw.elemental><!-- Temporary: prepare for remove of skin -->
-		<tb.fw.pro>19.0.1</tb.fw.pro> <!-- CMS -->
-		<tb.fw.prox>19.0.1</tb.fw.prox> <!-- Skin: in sync with pro:CMS -->
+		<tb.fw.elemental>19.0.1</tb.fw.elemental><!-- Temporary -->
+		<tb.fw.pro>19.0.1</tb.fw.pro><!-- Temporary: -Pelemenatal build-->
+		<tb.fw.prox>19.0.1</tb.fw.prox><!-- Temporary: -Pelemenatal build-->
 		<tb.fw.proy>19.0.1</tb.fw.proy>
 		<tb.fw.elastic>19.0.1</tb.fw.elastic>
 		<tb.fw.ultra>19.0.1</tb.fw.ultra>
