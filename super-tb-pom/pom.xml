@@ -63,7 +63,7 @@
 		<tb.fw.prox>20.0.1</tb.fw.prox>
 		<tb.fw.proy>20.0.1</tb.fw.proy>
 		<tb.fw.elastic>20.0.1</tb.fw.elastic>
-		<tb.fw.ultra>19.0.1</tb.fw.ultra>
+		<tb.fw.ultra>20.0.1</tb.fw.ultra>
 
 		<!-- Core Utilities (override/extend from parent) -->
 		<tb.logback>1.5.37</tb.logback>
