@@ -50,7 +50,7 @@
 		<tb.fw.db>20.0.1</tb.fw.db>
 		<tb.fw.inout>20.0.1</tb.fw.inout>
 		<tb.fw.archive>20.0.1</tb.fw.archive>
-		<tb.fw.features>19.0.1</tb.fw.features>
+		<tb.fw.features>20.0.1</tb.fw.features>
 		<tb.fw.extra>19.0.1</tb.fw.extra>
 		<tb.fw.sangria>19.0.1</tb.fw.sangria>
 		<!-- opensearch+elemental promoted above pro/prox: elemental depends on opensearch-main, and
