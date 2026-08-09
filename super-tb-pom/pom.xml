@@ -55,7 +55,7 @@
 		<tb.fw.sangria>21.0.1</tb.fw.sangria>
 		<!-- opensearch+elemental promoted above pro/prox: elemental depends on opensearch-main, and
 		     pro/prox have no dep on elemental — so prox's de-fork elemental variant is buildable at prox-time -->
-		<tb.fw.opensearch>20.0.1</tb.fw.opensearch>
+		<tb.fw.opensearch>21.0.1</tb.fw.opensearch>
 		<tb.fw.elemental>20.0.1</tb.fw.elemental><!-- Temporary -->
 		<!-- Temporary: mvn deploy -Pelemental -pl tb-pro-cms,tb-pro-notification-center,tb-pro-keen,tb-pro-feed -->
 		<tb.fw.pro>20.0.1</tb.fw.pro>
