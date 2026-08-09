@@ -1065,7 +1065,7 @@
 			<dependency>
 				<groupId>io.github.ishimoto</groupId>
 				<artifactId>custom_jofc2</artifactId>
-				<version>1.0.0</version>
+				<version>1.0.1</version>
 			</dependency>
 			<!-- https://central.sonatype.com/artifact/org.treasureboat.libraries/custom-fonts -->
 			<dependency>
