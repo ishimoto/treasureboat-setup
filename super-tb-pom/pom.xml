@@ -1128,6 +1128,11 @@
 			</dependency>
 			<dependency>
 				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-core-skin-keen</artifactId>
+				<version>${tb.fw.core}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
 				<artifactId>tb-core-web</artifactId>
 				<version>${tb.fw.core}</version>
 			</dependency>
