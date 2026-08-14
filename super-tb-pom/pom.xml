@@ -56,8 +56,12 @@
 		<!-- opensearch+elemental promoted above pro/prox: elemental depends on opensearch-main, and
 		     pro/prox have no dep on elemental — so prox's de-fork elemental variant is buildable at prox-time -->
 		<tb.fw.opensearch>21.0.1</tb.fw.opensearch>
+		<!-- MUST equal tb.fw.pro whenever you cut a -Pelemental variant: tb-pro-cms:V-elemental hard-requires
+		     tb-elemental-mini-base-model:V (cms's elemental profile pins basemodel.version to the pro version).
+		     So bump elemental in lockstep with pro, and release the elemental base (mini-base-model + utilities)
+		     at that V BEFORE the tb-pro/tb-prox -Pelemental deploy. tb.fw.prox floats (it rides tb.fw.pro). -->
 		<tb.fw.elemental>21.0.1</tb.fw.elemental><!-- Temporary -->
-		<!-- Temporary: mvn deploy -Pelemental -pl tb-pro-cms,tb-pro-notification-center,tb-pro-keen,tb-pro-feed -->
+		<!-- Temporary: mvn deploy -Pelemental -pl tb-pro-cms,tb-pro-notification-center,tb-pro-feed -->
 		<tb.fw.pro>21.0.3</tb.fw.pro>
 		<!-- Temporary: mvn deploy -Pelemental -pl tb-prox-skin-gumby,tb-prox-skin-bootstrap -->
 		<tb.fw.prox>21.0.1</tb.fw.prox>
