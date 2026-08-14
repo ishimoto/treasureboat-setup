@@ -1416,11 +1416,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.treasureboat</groupId>
-				<artifactId>tb-pro-keen</artifactId>
-				<version>${tb.fw.pro}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.treasureboat</groupId>
 				<artifactId>tb-pro-news</artifactId>
 				<version>${tb.fw.pro}</version>
 			</dependency>
