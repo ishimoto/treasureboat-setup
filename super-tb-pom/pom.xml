@@ -8,13 +8,13 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-deploy-pom</artifactId>
-		<version>21.0.1</version>
+		<version>21.0.2</version>
 	</parent>
 
 	<name>TreasureBoat.org Maven Super POM</name>
 	<artifactId>super-tb-pom</artifactId>
     <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
-	<version>21.0.4</version>
+	<version>21.0.5</version>
 
 	<packaging>pom</packaging>
 	<url>https://treasureboat.org</url>
@@ -41,12 +41,12 @@
 		<maven.compiler.target>21</maven.compiler.target>
 
 		<!--
-			super-deploy-pom			21.0.1
+			super-deploy-pom			21.0.2
 	   		super-app-pom				21.0.1
-	    	super-tb-pom				21.0.4
+	    	super-tb-pom				21.0.5
 		-->
 		<tb.fw.content>21.0.2</tb.fw.content>
-		<tb.fw.core>21.0.3</tb.fw.core>
+		<tb.fw.core>21.0.4</tb.fw.core>
 		<tb.fw.db>21.0.2</tb.fw.db>
 		<tb.fw.inout>21.0.1</tb.fw.inout>
 		<tb.fw.archive>21.0.1</tb.fw.archive>
@@ -1520,6 +1520,36 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
+			</plugin>
+
+			<!--
+				Announce a framework release to Discord after a successful deploy.
+
+				Declared HERE and not in SuperDeployPOM on purpose: SuperDeployPOM is also the parent of
+				SuperAppPOM, and only frameworks are deployed. Keeping it on the framework parent means an
+				application can never inherit it, rather than relying on the mojo's isApplication guard.
+
+				Ordering is safe: SuperDeployPOM declares maven-deploy-plugin in <build><plugins>, and a
+				parent's plugins run before a child's within the same phase — so the upload always happens
+				before the announcement. That matters because GitHub Packages answers 409 for a version that
+				already exists, and we must not announce a release that then fails to publish.
+
+				The webhook URL is a credential and never lives in a POM — it comes from the <server> with id
+				'tb-discord-releases' in ~/.m2/settings.xml. With no such server, the goal logs a warning and
+				skips; it can never fail the build. -SNAPSHOT versions are skipped too.
+			-->
+			<plugin>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>announce-release</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>discord-release</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

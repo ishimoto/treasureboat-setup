@@ -7,7 +7,7 @@
 
     <groupId>org.treasureboat</groupId>
 	<artifactId>super-deploy-pom</artifactId>
-	<version>21.0.1</version>
+	<version>21.0.2</version>
 
 	<packaging>pom</packaging>
 
@@ -73,7 +73,7 @@
 		<tb.lombok>1.18.46</tb.lombok>
 
 		<!-- TB Build Information -->
-		<tb.maven>21.0.16</tb.maven>
+		<tb.maven>21.0.17</tb.maven>
 	</properties>
 
 	<build>
