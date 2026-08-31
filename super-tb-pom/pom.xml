@@ -14,7 +14,7 @@
 	<name>TreasureBoat.org Maven Super POM</name>
 	<artifactId>super-tb-pom</artifactId>
     <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
-	<version>21.0.6</version>
+	<version>21.0.7</version>
 
 	<packaging>pom</packaging>
 	<url>https://treasureboat.org</url>
@@ -46,11 +46,11 @@
 	    	super-tb-pom				21.0.6
 		-->
 		<tb.fw.content>21.0.2</tb.fw.content>
-		<tb.fw.core>21.0.6</tb.fw.core>
+		<tb.fw.core>21.0.7</tb.fw.core>
 		<tb.fw.db>21.0.2</tb.fw.db>
 		<tb.fw.inout>21.0.1</tb.fw.inout>
 		<tb.fw.archive>21.0.1</tb.fw.archive>
-		<tb.fw.features>21.0.2</tb.fw.features>
+		<tb.fw.features>21.0.7</tb.fw.features>
 		<tb.fw.extra>21.0.2</tb.fw.extra>
 		<tb.fw.sangria>21.0.3</tb.fw.sangria>
 		<!-- opensearch+elemental promoted above pro/prox: elemental depends on opensearch-main, and
@@ -65,9 +65,9 @@
 		<tb.fw.pro>21.0.4</tb.fw.pro>
 		<!-- Temporary: mvn deploy -Pelemental -pl tb-prox-skin-gumby,tb-prox-skin-bootstrap -->
 		<tb.fw.prox>21.0.1</tb.fw.prox>
-		<tb.fw.proy>21.0.1</tb.fw.proy>
+		<tb.fw.proy>21.0.7</tb.fw.proy>
 		<tb.fw.elastic>21.0.1</tb.fw.elastic>
-		<tb.fw.ultra>21.0.3</tb.fw.ultra>
+		<tb.fw.ultra>21.0.7</tb.fw.ultra>
 
 		<!-- Core Utilities (override/extend from parent) -->
 		<tb.logback>1.5.37</tb.logback>
