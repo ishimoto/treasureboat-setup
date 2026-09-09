@@ -73,7 +73,7 @@
 		<tb.lombok>1.18.46</tb.lombok>
 
 		<!-- TB Build Information -->
-		<tb.maven>21.0.17</tb.maven>
+		<tb.maven>21.0.18</tb.maven>
 	</properties>
 
 	<build>
@@ -618,6 +618,31 @@
 				<groupId>org.treasureboat</groupId>
 				<artifactId>tb-maven-plugin</artifactId>
 				<executions>
+					<!--
+						Refuses to build a deployable that still contains development-only code, and
+						reminds without failing during ordinary work. It is bound here rather than in
+						super-tb-pom or super-app-pom so that frameworks and applications are covered
+						by one decision.
+
+						What it looks for: a call to TBFDevelopment.skip(...) in code, or a DEV-ONLY
+						marker anywhere. NOT TODO or FIXME — those are in hundreds of files and a
+						build that failed on them would be switched off within a day.
+
+						It only FAILS when the build is producing something that gets deployed:
+						-Dorg.treasureboat.compile=... (Maven Embedded / Maven Deploy) or a
+						legacy-build / wsr-build goal. Every other build logs a warning and carries
+						on, which is what makes it survivable.
+
+						Escape hatches, when a skip really is meant to ship: -Dtb.devonly.skip=true
+						for one build, or <excludes> here for a file that is a permanent harness.
+					-->
+					<execution>
+						<id>dev-only-check</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>dev-only-check</goal>
+						</goals>
+					</execution>
 					<execution>
 						<id>dependency-counter</id>
 						<phase>compile</phase>
