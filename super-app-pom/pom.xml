@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-deploy-pom</artifactId>
-		<version>21.0.3</version>
+		<version>21.0.10</version>
 	</parent>
 
 	<artifactId>super-app-pom</artifactId>
