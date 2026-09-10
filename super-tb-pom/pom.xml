@@ -41,9 +41,9 @@
 		<maven.compiler.target>21</maven.compiler.target>
 
 		<!--
-			super-deploy-pom			21.0.2
+			super-deploy-pom			21.0.10
 	   		super-app-pom				21.0.1
-	    	super-tb-pom				21.0.9
+	    	super-tb-pom				21.0.10
 		-->
 		<tb.fw.content>21.0.2</tb.fw.content>
 		<tb.fw.core>21.0.10</tb.fw.core>
