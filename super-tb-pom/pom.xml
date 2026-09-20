@@ -42,7 +42,7 @@
 
 		<!--
 			super-deploy-pom			21.0.10
-	   		super-app-pom				21.0.1
+	   		super-app-pom				21.0.10
 	    	super-tb-pom				21.0.13
 		-->
 		<tb.fw.content>21.0.2</tb.fw.content>
