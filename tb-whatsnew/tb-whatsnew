@@ -1,0 +1,198 @@
+#!/usr/bin/env python3
+"""tb-whatsnew — what an application actually gains by moving its framework pins.
+
+    tb-whatsnew <app-pom>                 # every pin -> the newest release that exists for it
+    tb-whatsnew <app-pom> --target 21.0.16
+    tb-whatsnew --from 21.0.10 --to 21.0.15 --only core,sangria
+
+Answers the question you actually ask before a deploy: "if I move this pin, what do I
+get, and is any of it risky?" Everything is read from git, so it cannot drift the way a
+hand-written changelog does — if nobody updated the changelog, it lies; if nobody made a
+commit, this is right by construction.
+
+THE GAP IS NOT DISTANCE. A TreasureBoat version names the RELEASE it came from, not how
+many times that framework has been released, so a framework missing from a release simply
+keeps its old number. tb-prox going 21.0.1 -> 21.0.15 therefore means "was in neither of
+the fourteen releases in between", i.e. it did not change — the opposite of what the
+numbers suggest. Reading that jump as fourteen releases of risk is the mistake this script
+exists to stop (made, for the record, on 2026-10-04).
+
+RISK LIVES IN THE MIGRATION COLUMNS, not the version numbers. A schema migration alters
+tables and is the thing to test; a data migration edits rows. A bump with zero of both is
+a relabel, however far the number moved.
+"""
+
+import argparse
+import os
+import re
+import subprocess
+import sys
+import xml.etree.ElementTree as ET
+
+ROOT = os.path.expanduser("~/GitRoot")
+NS = {"m": "http://maven.apache.org/POM/4.0.0"}
+
+# Bookkeeping commits that are not changes to anything.
+NOISE = re.compile(r"^(Release \d|Back to |\d+\.\d+\.\d+-SNAPSHOT|21\.99\.99)", re.I)
+SOURCE = re.compile(r"\.(java|wod|html|api|plist|eomodeld|sangria|d2wmodel|properties|strings)$")
+SCHEMA_MIGRATION = re.compile(r"/migration/[A-Za-z]\w*\d+\.java$")
+DATA_MIGRATION = re.compile(r"/EOMigration/.*\.xml$")
+
+
+def sh(repo, *args):
+    r = subprocess.run(["git", "-C", repo, *args], capture_output=True, text=True)
+    return r.stdout.strip() if r.returncode == 0 else None
+
+
+def repo_for(fw):
+    d = os.path.join(ROOT, f"treasureboat-{fw}")
+    return d if os.path.isdir(os.path.join(d, ".git")) else None
+
+
+def version_key(v):
+    return tuple(int(x) for x in re.findall(r"\d+", v))
+
+
+def released_tags(repo):
+    out = sh(repo, "tag", "--list", "2[0-9].*") or ""
+    tags = [t for t in out.split("\n") if re.fullmatch(r"\d+\.\d+\.\d+", t)]
+    return sorted(tags, key=version_key)
+
+
+def resolve_target(repo, wanted):
+    """The newest release that EXISTS for this framework and is <= wanted.
+
+    Asking for 21.0.16 when a framework's newest is 21.0.15 is not an error — it is the
+    gap convention doing its job, and 21.0.15 is the right answer.
+    """
+    tags = released_tags(repo)
+    if not tags:
+        return None
+    if wanted is None:
+        return tags[-1]
+    eligible = [t for t in tags if version_key(t) <= version_key(wanted)]
+    return eligible[-1] if eligible else None
+
+
+def app_pins(pom_path):
+    """tb.fw.* from the pom's own <properties> — never from a <profile> (the snapshot block)."""
+    root = ET.parse(pom_path).getroot()
+    props = root.find("m:properties", NS)
+    if props is None:
+        return {}
+    pins = {}
+    for child in props:
+        tag = child.tag.split("}")[-1]
+        if tag.startswith("tb.fw.") and child.text and child.text[0].isdigit():
+            pins[tag[len("tb.fw."):]] = child.text.strip()
+    return pins
+
+
+def delta(repo, frm, to):
+    if frm == to:
+        return dict(same=True)
+    for t in (frm, to):
+        if sh(repo, "rev-parse", "--verify", f"{t}^{{}}") is None:
+            return dict(error=f"tag {t} not found locally")
+
+    log = sh(repo, "log", "--format=%s", f"{frm}..{to}") or ""
+    commits = [c for c in log.split("\n") if c and not NOISE.match(c)]
+
+    files = (sh(repo, "diff", "--name-only", frm, to) or "").split("\n")
+    files = [f for f in files if f]
+    source = [f for f in files if SOURCE.search(f)]
+
+    added = (sh(repo, "diff", "--name-status", frm, to) or "").split("\n")
+    added = [l.split("\t", 1)[1] for l in added if l.startswith("A\t")]
+    schema = [os.path.basename(f) for f in added if SCHEMA_MIGRATION.search(f)]
+    data = [os.path.basename(f) for f in added if DATA_MIGRATION.search(f)]
+
+    return dict(same=False, commits=commits, source=source, schema=schema, data=data)
+
+
+def main():
+    ap = argparse.ArgumentParser(description="What an app gains by moving its framework pins.")
+    ap.add_argument("pom", nargs="?", help="application pom.xml (reads its tb.fw.* pins)")
+    ap.add_argument("--target", help="release to move to; a framework without it resolves to its newest <= target")
+    ap.add_argument("--from", dest="frm", help="compare from this version instead of the pom's pins")
+    ap.add_argument("--to", dest="to", help="compare to this version")
+    ap.add_argument("--only", help="comma-separated framework keys (core,sangria,...)")
+    ap.add_argument("--fetch", action="store_true", help="git fetch --tags each repo first")
+    ap.add_argument("-v", "--verbose", action="store_true", help="list the commits, not just the count")
+    a = ap.parse_args()
+
+    if a.pom:
+        pins = app_pins(a.pom)
+        if not pins:
+            sys.exit(f"no tb.fw.* pins in {a.pom}")
+    elif a.frm:
+        keys = (a.only or "").split(",") if a.only else []
+        if not keys:
+            sys.exit("--from needs --only to say which frameworks")
+        pins = {k.strip(): a.frm for k in keys if k.strip()}
+    else:
+        sys.exit("give an app pom, or --from with --only")
+
+    if a.only:
+        want = {k.strip() for k in a.only.split(",")}
+        pins = {k: v for k, v in pins.items() if k in want}
+
+    rows, missing = [], []
+    for fw in sorted(pins):
+        repo = repo_for(fw)
+        if not repo:
+            missing.append(fw)
+            continue
+        if a.fetch:
+            sh(repo, "fetch", "--tags", "--quiet", "origin")
+        to = a.to or resolve_target(repo, a.target)
+        if to is None:
+            missing.append(f"{fw} (no release tags)")
+            continue
+        rows.append((fw, pins[fw], to, delta(repo, pins[fw], to)))
+
+    w = max([len(r[0]) for r in rows] + [len("framework")])
+    print(f"\n  {'framework'.ljust(w)}  {'from':<9} {'to':<9}  {'commits':>7}  {'src':>4}  {'schema':>6}  {'data':>4}   note")
+    print(f"  {'-' * w}  {'-'*9} {'-'*9}  {'-'*7}  {'-'*4}  {'-'*6}  {'-'*4}   {'-'*28}")
+
+    moved = relabel = risky = 0
+    for fw, frm, to, d in rows:
+        if d.get("error"):
+            print(f"  {fw.ljust(w)}  {frm:<9} {to:<9}  {'':>7}  {'':>4}  {'':>6}  {'':>4}   !! {d['error']}")
+            continue
+        if d["same"]:
+            print(f"  {fw.ljust(w)}  {frm:<9} {'=':<9}  {'-':>7}  {'-':>4}  {'-':>6}  {'-':>4}   already current")
+            continue
+        nc, ns_, nsc, nd = len(d["commits"]), len(d["source"]), len(d["schema"]), len(d["data"])
+        if nsc:
+            note, risky = "SCHEMA — test this", risky + 1
+        elif nd:
+            note = "data migration"
+        elif ns_ == 0:
+            note, relabel = "label only, no source changed", relabel + 1
+        else:
+            note = ""
+        moved += 1
+        print(f"  {fw.ljust(w)}  {frm:<9} {to:<9}  {nc:>7}  {ns_:>4}  {nsc:>6}  {nd:>4}   {note}")
+        if a.verbose:
+            for c in d["commits"][:12]:
+                print(f"  {' ' * w}      · {c}")
+            for m in d["schema"]:
+                print(f"  {' ' * w}      SCHEMA: {m}")
+            for m in d["data"]:
+                print(f"  {' ' * w}      data:   {m}")
+
+    print(f"\n  {moved} pin(s) move, {relabel} of them a relabel with no source change, "
+          f"{risky} carrying schema migrations.")
+    if risky:
+        print("  Schema migrations alter tables. Those are the ones to test, and the ones that make")
+        print("  an out-of-date database refuse to boot. Re-run with -v to see them.")
+    else:
+        print("  No schema migrations anywhere in this move.")
+    if missing:
+        print(f"\n  not checked: {', '.join(missing)}")
+    print()
+
+
+if __name__ == "__main__":
+    main()
