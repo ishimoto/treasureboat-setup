@@ -78,10 +78,10 @@
 		<tb.slf4j-api>2.0.18</tb.slf4j-api>
 
 		<com.rollbar.version>2.3.0</com.rollbar.version>
-		<com.fasterxml.jackson.version>2.22.0</com.fasterxml.jackson.version>
+		<com.fasterxml.jackson.version>2.22.1</com.fasterxml.jackson.version>
 		<org.bouncycastle.version>1.84</org.bouncycastle.version>
 		<org.apache.poi.version>5.5.1</org.apache.poi.version>
-		<net.sf.jasperreports.version>7.0.6</net.sf.jasperreports.version>
+		<net.sf.jasperreports.version>7.0.7</net.sf.jasperreports.version>
 		<org.xhtmlrenderer.flying-saucer.version>9.13.3</org.xhtmlrenderer.flying-saucer.version>
 		<org.apache.pdfbox.version>3.0.7</org.apache.pdfbox.version>
 		<org.apache.avalon.framework.version>4.3.1</org.apache.avalon.framework.version>
@@ -995,7 +995,22 @@
 				<version>7.55.3</version>
 			</dependency>
 
-			<!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
+			<!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client
+
+			     PINNED AT 4.x ON PURPOSE - do not take the 5.x bump without doing the work first.
+			     amqp-client 5.0 removed QueueingConsumer, and tb-pro-notification-center's
+			     TBNC_ReceiveMessageFromRabbitMQ is built on it (3 uses). Verified rather than
+			     assumed: the class is in the 4.12.0 jar and absent from 5.18.0, so the bump is a
+			     compile error, not a deprecation warning.
+
+			     The RabbitMQ path is also not in use at the moment, so there is nothing to gain
+			     from moving it today and a rewrite to buy: 5.x means reworking that receiver onto
+			     DefaultConsumer / basicConsume with a delivery callback, a behaviour change in a
+			     path that has already had a message-claiming bug once. Do it when the feature is
+			     picked up again, and test it then.
+
+			     Dependabot has proposed this bump before (setup#3, July 2026); it was declined for
+			     this reason, not overlooked. -->
 			<dependency>
 				<groupId>com.rabbitmq</groupId>
 				<artifactId>amqp-client</artifactId>
