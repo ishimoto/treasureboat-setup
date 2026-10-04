@@ -1,0 +1,78 @@
+# Dependabot configuration for treasureboat-setup.
+#
+# WHY THIS FILE EXISTS
+#
+# Every Dependabot pull request this repository had ever received was closed without
+# being merged: #1 (Oct 2025), #2 (Mar 2026) and #3 (Jul 2026). All three were grouped
+# PRs, and all three contained the same unmergeable item — com.rabbitmq:amqp-client
+# 4.12.0 -> 5.x. Because a grouped PR is merged or not merged as a whole, that one entry
+# took the safe bumps down with it: logback, jackson and jasperreports sat in those PRs
+# for up to 21 months and were never applied. That is most of the reason the repository
+# was carrying 24 open advisories by October 2026.
+#
+# So the bot was not wrong and nobody was ignoring it. The grouping just meant a single
+# blocked dependency could silently block everything travelling with it, and nothing in
+# the repository said why it was blocked.
+#
+# The ignore rule below is the fix: amqp-client is excluded from major-version bumps, so
+# a group can no longer be poisoned by it, and every future PR should contain only
+# changes that can actually be merged.
+
+version: 2
+
+updates:
+  # The pin table and dependencyManagement for every TreasureBoat framework.
+  # This is the file all the advisories point at.
+  - package-ecosystem: maven
+    directory: "/super-tb-pom"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "build(deps)"
+    ignore:
+      # com.rabbitmq:amqp-client is held at 4.x DELIBERATELY. amqp-client 5.0 removed
+      # QueueingConsumer, which tb-pro-notification-center's TBNC_ReceiveMessageFromRabbitMQ
+      # is built on, so a 5.x bump is a compile error rather than a deprecation warning
+      # (verified by inspecting both jars, not by reading release notes).
+      #
+      # The RabbitMQ path is also not currently in use. The connector worked for years and
+      # stays as the baseline for whenever the feature is picked up again — at which point
+      # the receiver gets rewritten onto DefaultConsumer/basicConsume and the bump comes
+      # with that work, tested. Deleting working code to quiet advisories on an uncalled
+      # path would trade a real asset for a cosmetic win.
+      #
+      # Only MAJOR updates are ignored, so a 4.x security patch would still be offered.
+      # See the matching comment above the pin in super-tb-pom/pom.xml.
+      - dependency-name: "com.rabbitmq:amqp-client"
+        update-types: ["version-update:semver-major"]
+
+  # The two applications that live in this repo. Separate entries because Dependabot
+  # treats each manifest directory independently.
+  - package-ecosystem: maven
+    directory: "/AppTBMonitor"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "build(deps)"
+
+  - package-ecosystem: maven
+    directory: "/AppTBTaskd"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "build(deps)"
+
+  # super-deploy-pom and super-app-pom carry plugin and compiler configuration rather
+  # than library dependencies, and a plugin bump there changes how every framework and
+  # application builds. Those are reviewed with a release, not on a bot's schedule, so
+  # they are deliberately not listed.
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "build(deps)"
