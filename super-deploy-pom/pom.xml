@@ -70,7 +70,7 @@
 		<tb.version.maven.gpg>3.2.8</tb.version.maven.gpg>
 
 		<!-- Core Utilities -->
-		<tb.lombok>1.18.46</tb.lombok>
+		<tb.lombok>1.18.48</tb.lombok>
 
 		<!-- TB Build Information -->
 		<tb.maven>21.0.18</tb.maven>
