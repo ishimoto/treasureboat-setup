@@ -78,8 +78,8 @@
 		<tb.slf4j-api>2.0.18</tb.slf4j-api>
 
 		<com.rollbar.version>2.3.0</com.rollbar.version>
-		<com.fasterxml.jackson.version>2.22.1</com.fasterxml.jackson.version>
-		<org.bouncycastle.version>1.84</org.bouncycastle.version>
+		<com.fasterxml.jackson.version>2.22.3</com.fasterxml.jackson.version>
+		<org.bouncycastle.version>1.85</org.bouncycastle.version>
 		<org.apache.poi.version>5.5.1</org.apache.poi.version>
 		<net.sf.jasperreports.version>7.0.7</net.sf.jasperreports.version>
 		<org.xhtmlrenderer.flying-saucer.version>9.13.3</org.xhtmlrenderer.flying-saucer.version>
@@ -309,14 +309,14 @@
 			<dependency>
 			    <groupId>org.apache.httpcomponents.client5</groupId>
 			    <artifactId>httpclient5</artifactId>
-			    <version>5.6.2</version>
+			    <version>5.6.3</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents.core5/httpcore5 -->
 			<dependency>
 			    <groupId>org.apache.httpcomponents.core5</groupId>
 			    <artifactId>httpcore5</artifactId>
-			    <version>5.3.6</version>
+			    <version>5.4.3</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-rng-simple -->
@@ -546,7 +546,7 @@
 			<dependency>
 			    <groupId>org.jsoup</groupId>
 			    <artifactId>jsoup</artifactId>
-			    <version>1.22.2</version>
+			    <version>1.23.1</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
