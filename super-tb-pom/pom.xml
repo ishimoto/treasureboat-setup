@@ -8,13 +8,13 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-deploy-pom</artifactId>
-		<version>21.0.17-SNAPSHOT</version>
+		<version>21.0.17</version>
 	</parent>
 
 	<name>TreasureBoat.org Maven Super POM</name>
 	<artifactId>super-tb-pom</artifactId>
     <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
-	<version>21.0.17-SNAPSHOT</version>
+	<version>21.0.17</version>
 
 	<packaging>pom</packaging>
 	<url>https://treasureboat.org</url>
@@ -45,6 +45,10 @@
 			the new release, the rest keep the number they were last released under. Releasing an
 			identical artifact under a new number says something changed when nothing did.
 
+			21.0.17: core only - the per-application keys (K1:/K2:/K3: .@encrypted values). No
+			dependency moved, so nothing else has anything to deliver. The build plugin moves to
+			tb-maven-plugin 21.0.19 (tb.maven in super-deploy-pom).
+
 			21.0.16: core, features, sangria and pro carry source changes. db, inout and ultra carry
 			none, but they declare the dependencies this release bumps (JDBC drivers; jasper, pdfbox,
 			joda-time; pdfbox), and a bumped dependency only reaches an app when the framework that
@@ -55,7 +59,7 @@
 			its own - and a mixed table is fine when the whole set is reviewed together, as here.
 		-->
 		<tb.fw.content>21.0.14</tb.fw.content>
-		<tb.fw.core>21.0.16</tb.fw.core>
+		<tb.fw.core>21.0.17</tb.fw.core>
 		<tb.fw.db>21.0.16</tb.fw.db>
 		<tb.fw.inout>21.0.16</tb.fw.inout>
 		<tb.fw.archive>21.0.14</tb.fw.archive>
