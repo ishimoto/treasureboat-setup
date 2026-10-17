@@ -7,7 +7,7 @@
 
     <groupId>org.treasureboat</groupId>
 	<artifactId>super-deploy-pom</artifactId>
-	<version>21.0.17</version>
+	<version>21.0.18</version>
 
 	<packaging>pom</packaging>
 
