@@ -8,13 +8,13 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-deploy-pom</artifactId>
-		<version>21.0.18</version>
+		<version>21.0.19</version>
 	</parent>
 
 	<name>TreasureBoat.org Maven Super POM</name>
 	<artifactId>super-tb-pom</artifactId>
     <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
-	<version>21.0.18</version>
+	<version>21.0.19</version>
 
 	<packaging>pom</packaging>
 	<url>https://treasureboat.org</url>
@@ -45,6 +45,12 @@
 			the new release, the rest keep the number they were last released under. Releasing an
 			identical artifact under a new number says something changed when nothing did.
 
+			21.0.19: core, db, extra, features, sangria, pro and proy carry source changes - Paul's
+			security batch (deserialization filter for sessions, database blobs and archived sessions, in
+			`log` mode; TOTP once, XML entity limits), user.sangria in Maven deploys, the Sangria confirm
+			screens, the S2M re-pair cleanup and the system-button help pages. Core also carries
+			log4j-to-slf4j 2.26.1 and nimbus-jose-jwt 10.10, both declared there.
+
 			21.0.18: core, features, sangria, pro, proy and ultra carry source changes - the feed
 			rollout (APNs push, action buttons, prune job), S2M push registration, the Lake screens,
 			the TBFSelector cache race, the time zone detector and the OAuth PKCE verifier. Core
@@ -65,13 +71,13 @@
 			its own - and a mixed table is fine when the whole set is reviewed together, as here.
 		-->
 		<tb.fw.content>21.0.14</tb.fw.content>
-		<tb.fw.core>21.0.18</tb.fw.core>
-		<tb.fw.db>21.0.16</tb.fw.db>
+		<tb.fw.core>21.0.19</tb.fw.core>
+		<tb.fw.db>21.0.19</tb.fw.db>
 		<tb.fw.inout>21.0.16</tb.fw.inout>
 		<tb.fw.archive>21.0.14</tb.fw.archive>
-		<tb.fw.features>21.0.18</tb.fw.features>
-		<tb.fw.extra>21.0.14</tb.fw.extra>
-		<tb.fw.sangria>21.0.18</tb.fw.sangria>
+		<tb.fw.features>21.0.19</tb.fw.features>
+		<tb.fw.extra>21.0.19</tb.fw.extra>
+		<tb.fw.sangria>21.0.19</tb.fw.sangria>
 		<!-- opensearch+elemental promoted above pro/prox: elemental depends on opensearch-main, and
 		     pro/prox have no dep on elemental — so prox's de-fork elemental variant is buildable at prox-time -->
 		<tb.fw.opensearch>21.0.14</tb.fw.opensearch>
@@ -81,10 +87,10 @@
 		     at that V BEFORE the tb-pro/tb-prox -Pelemental deploy. tb.fw.prox floats (it rides tb.fw.pro). -->
 		<tb.fw.elemental>21.0.14</tb.fw.elemental><!-- Temporary -->
 		<!-- Temporary: mvn deploy -Pelemental -pl tb-pro-cms,tb-pro-notification-center,tb-pro-feed -->
-		<tb.fw.pro>21.0.18</tb.fw.pro>
+		<tb.fw.pro>21.0.19</tb.fw.pro>
 		<!-- Temporary: mvn deploy -Pelemental -pl tb-prox-skin-gumby,tb-prox-skin-bootstrap -->
 		<tb.fw.prox>21.0.15</tb.fw.prox>
-		<tb.fw.proy>21.0.18</tb.fw.proy>
+		<tb.fw.proy>21.0.19</tb.fw.proy>
 		<tb.fw.elastic>21.0.14</tb.fw.elastic>
 		<tb.fw.ultra>21.0.18</tb.fw.ultra>
 
