@@ -96,7 +96,7 @@
 		<com.fasterxml.jackson.version>2.22.3</com.fasterxml.jackson.version>
 		<org.bouncycastle.version>1.86</org.bouncycastle.version>
 		<org.apache.poi.version>5.5.1</org.apache.poi.version>
-		<net.sf.jasperreports.version>7.0.8</net.sf.jasperreports.version>
+		<net.sf.jasperreports.version>7.1.0</net.sf.jasperreports.version>
 		<org.xhtmlrenderer.flying-saucer.version>9.13.3</org.xhtmlrenderer.flying-saucer.version>
 		<org.apache.pdfbox.version>3.0.8</org.apache.pdfbox.version>
 		<org.apache.avalon.framework.version>4.3.1</org.apache.avalon.framework.version>
