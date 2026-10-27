@@ -655,7 +655,7 @@
 			<dependency>
 				<groupId>org.postgresql</groupId>
 				<artifactId>postgresql</artifactId>
-				<version>42.7.13</version>
+				<version>42.7.14</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/net.postgis/postgis-jdbc -->
