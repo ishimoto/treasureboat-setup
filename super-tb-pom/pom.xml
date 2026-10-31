@@ -8,13 +8,13 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-deploy-pom</artifactId>
-		<version>21.0.20</version>
+		<version>21.0.21</version>
 	</parent>
 
 	<name>TreasureBoat.org Maven Super POM</name>
 	<artifactId>super-tb-pom</artifactId>
     <!-- status code: 422, reason phrase: Unprocessable Entity (422) Look's like the artifactId has to be all lowercase -->
-	<version>21.0.20</version>
+	<version>21.0.21</version>
 
 	<packaging>pom</packaging>
 	<url>https://treasureboat.org</url>
@@ -34,7 +34,7 @@
     -->
 
 	<properties>
-		<tb.lastmodified>2026/08/03</tb.lastmodified>
+		<tb.lastmodified>2026/10/31</tb.lastmodified>
 
 		<!-- JDK target for all TB frameworks (super-tb-pom 21.x = Java 21) -->
 		<maven.compiler.source>21</maven.compiler.source>
@@ -44,6 +44,16 @@
 			This table is deliberately mixed: only the frameworks that actually changed move to
 			the new release, the rest keep the number they were last released under. Releasing an
 			identical artifact under a new number says something changed when nothing did.
+
+			21.0.21: core, inout, extra, sangria, pro, proy and ultra carry source changes - the S2M
+			list and create delegates (per-row visibility, taps, create with a parent, badges), the
+			personModal person card and profile task, in-app feed links, the forum on the phone with a
+			per-person read marker, embedded framework URLs from the folder the application runs in,
+			the opt-in session-expiry warning, aria-* bindings, partial submit for observe fields, the
+			Actions column for per-row buttons, currency rounding half up, and XML parsing without
+			external entities in extra and inout. Dependencies: ognl 3.4.13 (fixes the 3.4.9-3.4.11
+			method-argument regression), jasperreports 7.1.0, jackson 2.22.4, postgresql 42.7.14,
+			h2 2.5.252, mysql-connector-j 26.10.0.
 
 			21.0.20: core, db, features, sangria, proy and ultra carry source changes - the sign-in
 			stack (generic OpenID Connect, SAML signature check, client-certificate sign-in, two-factor
@@ -78,13 +88,13 @@
 			its own - and a mixed table is fine when the whole set is reviewed together, as here.
 		-->
 		<tb.fw.content>21.0.14</tb.fw.content>
-		<tb.fw.core>21.0.20</tb.fw.core>
+		<tb.fw.core>21.0.21</tb.fw.core>
 		<tb.fw.db>21.0.20</tb.fw.db>
-		<tb.fw.inout>21.0.16</tb.fw.inout>
+		<tb.fw.inout>21.0.21</tb.fw.inout>
 		<tb.fw.archive>21.0.14</tb.fw.archive>
 		<tb.fw.features>21.0.20</tb.fw.features>
-		<tb.fw.extra>21.0.19</tb.fw.extra>
-		<tb.fw.sangria>21.0.20</tb.fw.sangria>
+		<tb.fw.extra>21.0.21</tb.fw.extra>
+		<tb.fw.sangria>21.0.21</tb.fw.sangria>
 		<!-- opensearch+elemental promoted above pro/prox: elemental depends on opensearch-main, and
 		     pro/prox have no dep on elemental — so prox's de-fork elemental variant is buildable at prox-time -->
 		<tb.fw.opensearch>21.0.14</tb.fw.opensearch>
@@ -94,12 +104,12 @@
 		     at that V BEFORE the tb-pro/tb-prox -Pelemental deploy. tb.fw.prox floats (it rides tb.fw.pro). -->
 		<tb.fw.elemental>21.0.14</tb.fw.elemental><!-- Temporary -->
 		<!-- Temporary: mvn deploy -Pelemental -pl tb-pro-cms,tb-pro-notification-center,tb-pro-feed -->
-		<tb.fw.pro>21.0.19</tb.fw.pro>
+		<tb.fw.pro>21.0.21</tb.fw.pro>
 		<!-- Temporary: mvn deploy -Pelemental -pl tb-prox-skin-gumby,tb-prox-skin-bootstrap -->
 		<tb.fw.prox>21.0.15</tb.fw.prox>
-		<tb.fw.proy>21.0.20</tb.fw.proy>
+		<tb.fw.proy>21.0.21</tb.fw.proy>
 		<tb.fw.elastic>21.0.14</tb.fw.elastic>
-		<tb.fw.ultra>21.0.20</tb.fw.ultra>
+		<tb.fw.ultra>21.0.21</tb.fw.ultra>
 
 		<!-- Core Utilities (override/extend from parent) -->
 		<tb.logback>1.5.37</tb.logback>
