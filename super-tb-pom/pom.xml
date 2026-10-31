@@ -36,10 +36,6 @@
 	<properties>
 		<tb.lastmodified>2026/10/31</tb.lastmodified>
 
-		<!-- JDK target for all TB frameworks (super-tb-pom 21.x = Java 21) -->
-		<maven.compiler.source>21</maven.compiler.source>
-		<maven.compiler.target>21</maven.compiler.target>
-
 		<!-- The version table (tb.fw.* pins, library versions, the snapshot profile and dependencyManagement)
 		     lives in super-deploy-pom since 21.0.22, so applications inherit it through super-app-pom too. -->
 	</properties>
