@@ -12,7 +12,6 @@
 	</parent>
 
 	<artifactId>super-app-pom</artifactId>
-	<version>21.0.22</version>
 
 	<packaging>pom</packaging>
 
