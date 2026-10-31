@@ -1425,7 +1425,7 @@
 			<dependency>
 				<groupId>org.mariadb.jdbc</groupId>
 				<artifactId>mariadb-java-client</artifactId>
-				<version>3.5.10</version>
+				<version>3.5.11</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
@@ -1826,7 +1826,7 @@
 			<dependency>
 				<groupId>com.rabbitmq</groupId>
 				<artifactId>amqp-client</artifactId>
-				<version>4.12.0</version>
+				<version>5.37.0</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/javax.xml/jaxrpc-api -->
