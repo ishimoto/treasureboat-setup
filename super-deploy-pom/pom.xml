@@ -965,24 +965,6 @@
            		<version>${tb.logback}</version>
 			</dependency>
 
-			<!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp/jakarta.servlet.jsp-api -->
-			<!-- Note: scope=compile (not provided) so these are bundled for embedded deployment -->
-			<dependency>
-			    <groupId>jakarta.servlet.jsp</groupId>
-			    <artifactId>jakarta.servlet.jsp-api</artifactId>
-			    <version>2.3.6</version>
-			    <scope>compile</scope>
-			</dependency>
-
-			<!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
-			<!-- Note: scope=compile (not provided) so these are bundled for embedded deployment -->
-			<dependency>
-			    <groupId>jakarta.servlet</groupId>
-			    <artifactId>jakarta.servlet-api</artifactId>
-			    <version>4.0.4</version>
-			    <scope>compile</scope>
-			</dependency>
-
 			<!-- https://mvnrepository.com/artifact/com.sun.mail/dsn -->
 			<dependency>
 			    <groupId>com.sun.mail</groupId>
