@@ -21,10 +21,12 @@
 version: 2
 
 updates:
-  # The pin table and dependencyManagement for every TreasureBoat framework.
-  # This is the file all the advisories point at.
+  # The pin table and dependencyManagement for every TreasureBoat framework, plus the
+  # build plugins. The library versions moved here from super-tb-pom; this is the file
+  # all the advisories point at. Plugin bumps are welcome too: once Eclipse is gone
+  # nothing holds the Maven build plugins back (Ken, 2026-11-03).
   - package-ecosystem: maven
-    directory: "/super-tb-pom"
+    directory: "/super-deploy-pom"
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
@@ -43,7 +45,7 @@ updates:
       # path would trade a real asset for a cosmetic win.
       #
       # Only MAJOR updates are ignored, so a 4.x security patch would still be offered.
-      # See the matching comment above the pin in super-tb-pom/pom.xml.
+      # See the matching comment above the pin in super-deploy-pom/pom.xml.
       - dependency-name: "com.rabbitmq:amqp-client"
         update-types: ["version-update:semver-major"]
 
@@ -65,10 +67,8 @@ updates:
     commit-message:
       prefix: "build(deps)"
 
-  # super-deploy-pom and super-app-pom carry plugin and compiler configuration rather
-  # than library dependencies, and a plugin bump there changes how every framework and
-  # application builds. Those are reviewed with a release, not on a bot's schedule, so
-  # they are deliberately not listed.
+  # super-tb-pom (now only 2 dependencies) and super-app-pom are not listed: the
+  # versions that matter live in super-deploy-pom above.
 
   - package-ecosystem: github-actions
     directory: "/"
