@@ -50,7 +50,7 @@
 		<tb.version.maven.clean>3.5.0</tb.version.maven.clean>
 		<tb.version.maven.compiler>3.15.0</tb.version.maven.compiler>
 		<tb.version.maven.dependency>3.11.0</tb.version.maven.dependency>
-		<tb.version.maven.deploy>3.1.4</tb.version.maven.deploy>
+		<tb.version.maven.deploy>3.2.0</tb.version.maven.deploy>
 		<tb.version.maven.enforcer>3.6.3</tb.version.maven.enforcer>
 		<tb.version.maven.antrun>3.2.0</tb.version.maven.antrun>
 		<tb.version.maven.assembly>3.8.0</tb.version.maven.assembly>
