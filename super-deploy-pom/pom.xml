@@ -7,14 +7,14 @@
 
     <groupId>org.treasureboat</groupId>
 	<artifactId>super-deploy-pom</artifactId>
-	<version>21.0.22</version>
+	<version>21.0.23</version>
 
 	<packaging>pom</packaging>
 
 	<name>TreasureBoat.org Maven Super Deploy POM</name>
 
 	<properties>
-		<tb.lastmodified>2026/10/31</tb.lastmodified>
+		<tb.lastmodified>2026/11/05</tb.lastmodified>
 
 		<tb.showDependencies>false</tb.showDependencies>
 
@@ -73,7 +73,7 @@
 		<tb.lombok>1.18.48</tb.lombok>
 
 		<!-- TB Build Information -->
-		<tb.maven>21.0.20</tb.maven>
+		<tb.maven>21.0.21</tb.maven>
 
 		<!--
 			The TreasureBoat version table. It lives here, in the parent of both super-tb-pom (frameworks) and
@@ -85,6 +85,18 @@
 			This table is deliberately mixed: only the frameworks that actually changed move to
 			the new release, the rest keep the number they were last released under. Releasing an
 			identical artifact under a new number says something changed when nothing did.
+
+			21.0.23: core, db, inout, archive, features, extra, sangria and elemental. Source changes: framework
+			properties merge TreasureBoat frameworks first, so an application framework's Properties win in a legacy .woa
+			(ESApp E2 keys); CSS url() rewrites go through the wr handler, so fonts load in direct connect; generated URLs
+			keep the request's adaptor prefix (/app/WebObjects behind a load balancer); TBFSecureToken; a fourth hotfix
+			version part (21.0.13.1); tb-features-ai (new module, phase 1: local engine, chunker, corpora, pgvector store,
+			Ask service); the statistics prune job can delete again (background-job delete grant); RFC 5545/7986
+			iCalendar in tb-extra-calendar, the old calendar API kept and deprecated; the Keen report dialog title;
+			jquery-validation 1.22.1 and TinyMCE 3 removed in archive; BasicAuditable.creatorTree stops at a loop.
+			Dependencies: logback 1.5.38, httpclient5 5.6.5, httpcore5 5.4.4, asm 9.11.1 (core), mariadb-java-client
+			3.5.11 (db), fop 2.12 (inout), maven-deploy-plugin 3.2.0; the duplicate servlet and JSP API entries are gone.
+			tb-maven-plugin pin 21.0.21.
 
 			21.0.22: super-poms only, no framework moves. The version table (tb.fw.* pins, library versions,
 			the snapshot profile and dependencyManagement) moves from super-tb-pom to super-deploy-pom, so
@@ -138,13 +150,13 @@
 			its own - and a mixed table is fine when the whole set is reviewed together, as here.
 		-->
 		<tb.fw.content>21.0.14</tb.fw.content>
-		<tb.fw.core>21.0.21</tb.fw.core>
-		<tb.fw.db>21.0.20</tb.fw.db>
-		<tb.fw.inout>21.0.21</tb.fw.inout>
-		<tb.fw.archive>21.0.14</tb.fw.archive>
-		<tb.fw.features>21.0.20</tb.fw.features>
-		<tb.fw.extra>21.0.21</tb.fw.extra>
-		<tb.fw.sangria>21.0.21</tb.fw.sangria>
+		<tb.fw.core>21.0.23</tb.fw.core>
+		<tb.fw.db>21.0.23</tb.fw.db>
+		<tb.fw.inout>21.0.23</tb.fw.inout>
+		<tb.fw.archive>21.0.23</tb.fw.archive>
+		<tb.fw.features>21.0.23</tb.fw.features>
+		<tb.fw.extra>21.0.23</tb.fw.extra>
+		<tb.fw.sangria>21.0.23</tb.fw.sangria>
 		<!-- opensearch+elemental promoted above pro/prox: elemental depends on opensearch-main, and
 		     pro/prox have no dep on elemental — so prox's de-fork elemental variant is buildable at prox-time -->
 		<tb.fw.opensearch>21.0.14</tb.fw.opensearch>
@@ -152,7 +164,7 @@
 		     tb-elemental-mini-base-model:V (cms's elemental profile pins basemodel.version to the pro version).
 		     So bump elemental in lockstep with pro, and release the elemental base (mini-base-model + utilities)
 		     at that V BEFORE the tb-pro/tb-prox -Pelemental deploy. tb.fw.prox floats (it rides tb.fw.pro). -->
-		<tb.fw.elemental>21.0.14</tb.fw.elemental><!-- Temporary -->
+		<tb.fw.elemental>21.0.23</tb.fw.elemental><!-- Temporary -->
 		<!-- Temporary: mvn deploy -Pelemental -pl tb-pro-cms,tb-pro-notification-center,tb-pro-feed -->
 		<tb.fw.pro>21.0.21</tb.fw.pro>
 		<!-- Temporary: mvn deploy -Pelemental -pl tb-prox-skin-gumby,tb-prox-skin-bootstrap -->
@@ -2121,6 +2133,11 @@
 			<dependency>
 				<groupId>org.treasureboat</groupId>
 				<artifactId>tb-features-container</artifactId>
+				<version>${tb.fw.features}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-features-ai</artifactId>
 				<version>${tb.fw.features}</version>
 			</dependency>
 			<dependency>
