@@ -48,7 +48,7 @@
 		<tb.version.maven.build-helper>3.6.1</tb.version.maven.build-helper>
 		<tb.version.maven.checksum>1.11</tb.version.maven.checksum>
 		<tb.version.maven.clean>3.5.0</tb.version.maven.clean>
-		<tb.version.maven.compiler>3.15.0</tb.version.maven.compiler>
+		<tb.version.maven.compiler>3.16.0</tb.version.maven.compiler>
 		<tb.version.maven.dependency>3.11.0</tb.version.maven.dependency>
 		<tb.version.maven.deploy>3.2.0</tb.version.maven.deploy>
 		<tb.version.maven.enforcer>3.6.3</tb.version.maven.enforcer>
