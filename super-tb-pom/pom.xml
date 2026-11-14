@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.treasureboat</groupId>
 		<artifactId>super-deploy-pom</artifactId>
-		<version>21.0.23</version>
+		<version>21.0.24</version>
 	</parent>
 
 	<name>TreasureBoat.org Maven Super POM</name>
@@ -33,7 +33,7 @@
     -->
 
 	<properties>
-		<tb.lastmodified>2026/10/31</tb.lastmodified>
+		<tb.lastmodified>2026/11/14</tb.lastmodified>
 
 		<!-- The version table (tb.fw.* pins, library versions, the snapshot profile and dependencyManagement)
 		     lives in super-deploy-pom since 21.0.22, so applications inherit it through super-app-pom too. -->

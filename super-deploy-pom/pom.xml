@@ -7,14 +7,14 @@
 
     <groupId>org.treasureboat</groupId>
 	<artifactId>super-deploy-pom</artifactId>
-	<version>21.0.23</version>
+	<version>21.0.24</version>
 
 	<packaging>pom</packaging>
 
 	<name>TreasureBoat.org Maven Super Deploy POM</name>
 
 	<properties>
-		<tb.lastmodified>2026/11/05</tb.lastmodified>
+		<tb.lastmodified>2026/11/14</tb.lastmodified>
 
 		<tb.showDependencies>false</tb.showDependencies>
 
@@ -73,7 +73,7 @@
 		<tb.lombok>1.18.48</tb.lombok>
 
 		<!-- TB Build Information -->
-		<tb.maven>21.0.21</tb.maven>
+		<tb.maven>21.0.24</tb.maven>
 
 		<!--
 			The TreasureBoat version table. It lives here, in the parent of both super-tb-pom (frameworks) and
@@ -85,6 +85,18 @@
 			This table is deliberately mixed: only the frameworks that actually changed move to
 			the new release, the rest keep the number they were last released under. Releasing an
 			identical artifact under a new number says something changed when nothing did.
+
+			21.0.24: core, db, features, sangria, pro, proy and ultra, with tb-maven-plugin 21.0.24 (numbered with the release).
+			Source changes: shared editing contexts back, opt-in and off by default, with EO graph serialization repaired
+			(Paul, PR #159/#160); Navigation Policy. shortcut inside OR lists; Migration isPOSTGRESQL/isMY_SQL helpers;
+			startup log noise gone (trailing '/' project path, missing classPath file); FrontBase writes fetchLimit as TOP(n)
+			and changes a required column's type around its NOT NULL constraint; TBQuartzAppStat.jdk 10 -> 50 (Ubuntu's
+			java.version 21.0.13.0.3 broke every statistics sample; TBQuartzMDC8); ETBQuartzPriority localized; tb-features-ai
+			moved to treasureboat-pro as tb-pro-ai (documentation corpora, per-corpus policy, Claude answers, data tools,
+			OCR, nightly index job); Sangria warning page, Enter no longer presses a Keen page's Return button,
+			TBD3WSmartAjaxButton honours value; S2M web access for pages the app opens (TB Mobile 1.1 price check);
+			ultra survey create button by Policy.tb-ultra-survey.survey.create, lake survey numbers as AI data tools.
+			tb-maven-plugin: legacy run script quotes launch arguments; unused plugin dependencies dropped.
 
 			21.0.23: core, db, inout, archive, features, extra, sangria and elemental. Source changes: framework
 			properties merge TreasureBoat frameworks first, so an application framework's Properties win in a legacy .woa
@@ -150,13 +162,13 @@
 			its own - and a mixed table is fine when the whole set is reviewed together, as here.
 		-->
 		<tb.fw.content>21.0.14</tb.fw.content>
-		<tb.fw.core>21.0.23</tb.fw.core>
-		<tb.fw.db>21.0.23</tb.fw.db>
+		<tb.fw.core>21.0.24</tb.fw.core>
+		<tb.fw.db>21.0.24</tb.fw.db>
 		<tb.fw.inout>21.0.23</tb.fw.inout>
 		<tb.fw.archive>21.0.23</tb.fw.archive>
-		<tb.fw.features>21.0.23</tb.fw.features>
+		<tb.fw.features>21.0.24</tb.fw.features>
 		<tb.fw.extra>21.0.23</tb.fw.extra>
-		<tb.fw.sangria>21.0.23</tb.fw.sangria>
+		<tb.fw.sangria>21.0.24</tb.fw.sangria>
 		<!-- opensearch+elemental promoted above pro/prox: elemental depends on opensearch-main, and
 		     pro/prox have no dep on elemental — so prox's de-fork elemental variant is buildable at prox-time -->
 		<tb.fw.opensearch>21.0.14</tb.fw.opensearch>
@@ -166,12 +178,12 @@
 		     at that V BEFORE the tb-pro/tb-prox -Pelemental deploy. tb.fw.prox floats (it rides tb.fw.pro). -->
 		<tb.fw.elemental>21.0.23</tb.fw.elemental><!-- Temporary -->
 		<!-- Temporary: mvn deploy -Pelemental -pl tb-pro-cms,tb-pro-notification-center,tb-pro-feed -->
-		<tb.fw.pro>21.0.21</tb.fw.pro>
+		<tb.fw.pro>21.0.24</tb.fw.pro>
 		<!-- Temporary: mvn deploy -Pelemental -pl tb-prox-skin-gumby,tb-prox-skin-bootstrap -->
 		<tb.fw.prox>21.0.15</tb.fw.prox>
-		<tb.fw.proy>21.0.21</tb.fw.proy>
+		<tb.fw.proy>21.0.24</tb.fw.proy>
 		<tb.fw.elastic>21.0.14</tb.fw.elastic>
-		<tb.fw.ultra>21.0.21</tb.fw.ultra>
+		<tb.fw.ultra>21.0.24</tb.fw.ultra>
 
 		<!-- Core Utilities (override/extend from parent) -->
 		<tb.logback>1.5.38</tb.logback>
@@ -2137,11 +2149,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.treasureboat</groupId>
-				<artifactId>tb-features-ai</artifactId>
-				<version>${tb.fw.features}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.treasureboat</groupId>
 				<artifactId>tb-features-excel</artifactId>
 				<version>${tb.fw.features}</version>
 			</dependency>
@@ -2246,6 +2253,11 @@
 			</dependency>
 
 			<!-- ==**== PRO ==**== -->
+			<dependency>
+				<groupId>org.treasureboat</groupId>
+				<artifactId>tb-pro-ai</artifactId>
+				<version>${tb.fw.pro}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.treasureboat</groupId>
 				<artifactId>tb-pro-basemodel-bridge</artifactId>
