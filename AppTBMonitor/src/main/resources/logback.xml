@@ -4,8 +4,6 @@
 
 	<!-- MAIN CONFIGURATION -->
 
-		<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
-			<!--  statusListner : will add a log entry about this file and show you any problems if there are. Has to be the first line -->
 	
 		<shutdownHook />
 			<!-- in the absence of the class attribute, assume ch.qos.logback.core.hook.DefaultShutdownHook -->
