@@ -1703,7 +1703,7 @@
 				<groupId>com.github.librepdf</groupId>
 				<artifactId>openpdf</artifactId>
 <!-- The 2.1.x Branch requires Java 21 or later: We have to be sure that Dev / Compile and Runtime is Java21: 2.2.3 -->
-				<version>2.0.5</version>
+				<version>3.0.5</version>
 			</dependency>
 
 			<!-- https://mvnrepository.com/artifact/com.googlecode.juniversalchardet/juniversalchardet -->
